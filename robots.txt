@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Keep source and tooling out of the index
+Disallow: /node_modules/
+Disallow: /temporary%20screenshots/
+
+Sitemap: https://ridetoalps.com/sitemap.xml

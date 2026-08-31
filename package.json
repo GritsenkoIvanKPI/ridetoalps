@@ -1,0 +1,13 @@
+{
+  "name": "ridetoalps",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Landing page for ridetoalps — private transfers from Munich Airport to the Alps.",
+  "scripts": {
+    "start": "node serve.mjs",
+    "screenshot": "node screenshot.mjs http://localhost:3000"
+  },
+  "devDependencies": {
+    "puppeteer": "^25.2.1"
+  }
+}

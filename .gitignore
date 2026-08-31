@@ -1,0 +1,18 @@
+# dependencies
+node_modules/
+
+# working artefacts
+temporary screenshots/
+*.log
+.DS_Store
+
+# design reference — third-party template screenshot, 14 MB, not part of the site
+desktop.png
+
+# client brief: contains commercial pricing and business detail.
+# Deliberately kept out of this PUBLIC repo. Remove this line to publish it.
+Snou _ Бриф.txt
+
+# licensed skill documents
+SKILL.md
+SKILL canvas.md
