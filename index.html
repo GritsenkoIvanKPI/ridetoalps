@@ -330,6 +330,15 @@ select.control{
 .swap:hover{transform:translateX(2px)}
 .swap:focus-visible{outline:3px solid var(--color--primary-soft);outline-offset:4px;border-radius:4px}
 
+/* return-journey toggle: the plus rotates into a cross when the leg is on */
+.swap--toggle{margin-bottom:18px}
+.swap--toggle svg{transition:transform .45s var(--ease--spring)}
+.swap--toggle[aria-pressed="true"]{color:var(--color--primary-2)}
+.swap--toggle[aria-pressed="true"] svg{transform:rotate(45deg)}
+/* .calc__row sets display:grid, which would otherwise beat the hidden attribute */
+.calc__row[hidden],.breakdown li[hidden]{display:none}
+.calc__row--return{animation:fadeUp .45s var(--ease--spring) both}
+
 .calc__panel{
   position:relative;padding:44px;color:var(--color--white);
   background:var(--color--black);
@@ -351,6 +360,7 @@ select.control{
   font-family:var(--font-family--heading);
 }
 .price__value{font-size:64px;line-height:1;letter-spacing:-.045em;color:var(--color--white)}
+.price__value--request{font-size:40px;letter-spacing:-.03em}
 .price__unit{font-size:16px;color:var(--color--gray-3)}
 .price__note{font-size:15px;color:var(--color--primary-soft)}
 
@@ -435,8 +445,8 @@ select.control{
 /* ============================================================
    DESTINATIONS
    ============================================================ */
-.dest{display:grid;grid-template-columns:.85fr 2.15fr;gap:42px;align-items:start}
-.dest__grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:26px}
+.dest{display:grid;grid-template-columns:.8fr 2.2fr;gap:42px;align-items:start}
+.dest__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px}
 .dest__card{
   min-width:0;
   background:var(--color--gray-5);border-radius:var(--border-radius--lg);
@@ -445,7 +455,7 @@ select.control{
 }
 .dest__card:hover{transform:translateY(-5px);background:var(--color--primary-wash)}
 .dest__thumb{
-  position:relative;width:158px;max-width:100%;aspect-ratio:1;margin:0 auto 20px;
+  position:relative;width:180px;max-width:100%;aspect-ratio:1;margin:0 auto 20px;
   border-radius:var(--border-radius--round);overflow:hidden;
 }
 .dest__thumb img{width:100%;height:100%;object-fit:cover}
@@ -690,6 +700,7 @@ select.control{
   .features{grid-template-columns:repeat(2,1fr);gap:48px 32px}
   .dest{grid-template-columns:1fr;gap:34px}
   .dest__grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+  .dest__thumb{width:150px}
   .about{grid-template-columns:1fr;gap:62px}
   .about__media{order:-1}
   .about__frame{min-height:380px}
@@ -1281,7 +1292,7 @@ select.control{
 <!-- ================= FEATURES ================= -->
 <section class="section-spacing">
   <div class="container">
-    <h2 class="head-center reveal">A calm, private way to reach the mountains</h2>
+    <h2 class="head-center reveal">Your calm, private way to reach the mountain</h2>
 
     <div class="features">
       <div class="feature reveal">
@@ -1292,7 +1303,7 @@ select.control{
           </svg>
         </div>
         <h3>One ride per day</h3>
-        <p>Your date is booked for you alone. We wait for your real arrival, not for a slot in a schedule.</p>
+        <p>Your date is reserved exclusively for you. We wait for your real arrival, not for a slot in a schedule.</p>
       </div>
 
       <div class="feature reveal">
@@ -1313,8 +1324,8 @@ select.control{
             <path d="M3.5 8.5 15 5.2l1 3.3M16 13.5h3"/>
           </svg>
         </div>
-        <h3>Pay €30 to book</h3>
-        <p>A €30 deposit confirms the date. The rest is paid after the ride — cash, card or online.</p>
+        <h3>Pay €30 or $35 to book</h3>
+        <p>A €30 or $35 deposit confirms the date. The rest is paid after the ride — cash, card or online.</p>
       </div>
 
       <div class="feature reveal">
@@ -1327,7 +1338,7 @@ select.control{
           </svg>
         </div>
         <h3>Reachable 24/7</h3>
-        <p>WhatsApp and phone from the moment you board until you walk into your hotel.</p>
+        <p>Stay connected with us via WhatsApp or phone from boarding until you reach your hotel.</p>
       </div>
     </div>
   </div>
@@ -1368,7 +1379,16 @@ select.control{
               <option value="st-moritz" data-price="550">St. Moritz</option>
               <option value="bolzano" data-price="550">Bolzano region</option>
               <option value="bormio" data-price="550">Bormio / Livigno</option>
+              <option value="other">Other destination</option>
             </select>
+          </div>
+        </div>
+
+        <div class="calc__row calc__row--single" data-el="otherRow" hidden>
+          <div class="field">
+            <label for="otherDest-1">Where are you going?</label>
+            <input class="control" type="text" id="otherDest-1" data-el="otherDest"
+                   placeholder="Town, resort or hotel" autocomplete="off">
           </div>
         </div>
 
@@ -1387,6 +1407,23 @@ select.control{
           <div class="field">
             <label for="timeInp-1">Pick-up time</label>
             <input class="control" type="time" id="timeInp-1" data-el="time" value="10:00">
+          </div>
+        </div>
+
+        <button class="swap swap--toggle" data-el="returnBtn" type="button"
+                aria-pressed="false" aria-expanded="false" aria-controls="returnRow-1">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+          <span data-el="returnLabel">Add return journey</span>
+        </button>
+
+        <div class="calc__row calc__row--return" id="returnRow-1" data-el="returnRow" hidden>
+          <div class="field">
+            <label for="retDate-1">Return date</label>
+            <input class="control" type="date" id="retDate-1" data-el="retDate">
+          </div>
+          <div class="field">
+            <label for="retTime-1">Return time</label>
+            <input class="control" type="time" id="retTime-1" data-el="retTime" value="10:00">
           </div>
         </div>
 
@@ -1410,7 +1447,7 @@ select.control{
           </div>
         </div>
 
-        <p class="calc__fineprint">Fixed rates are per vehicle for 1–4 passengers departing between 07:00 and 22:00. Departures outside those hours, or groups of 5–7, are charged at the higher night / large-group rate. Groups over 7 travel in additional vehicles.</p>
+        <p class="calc__fineprint">Fixed rates are per vehicle for 1–4 passengers departing between 07:00 and 22:00. Departures outside those hours, or groups of 5–7, are charged at the higher night / large-group rate. Groups over 7 travel in additional vehicles. Every booking is assigned a Mercedes V-Class, or an equivalent vehicle where required.</p>
       </div>
 
       <div class="calc__panel grain">
@@ -1419,12 +1456,13 @@ select.control{
 
         <div class="price">
           <span class="price__value" data-el="price">€300</span>
-          <span class="price__unit">total, per booking</span>
+          <span class="price__unit" data-el="priceUnit">total, per booking</span>
         </div>
         <p class="price__note" data-el="note">Daytime rate · 1 vehicle</p>
 
         <ul class="breakdown">
-          <li><span>Base route rate</span><b data-el="base">€300</b></li>
+          <li><span data-el="baseLabel">Base route rate</span><b data-el="base">€300</b></li>
+          <li data-el="rowReturn" hidden><span>Return journey</span><b data-el="returnPrice">€300</b></li>
           <li><span>Vehicles required</span><b data-el="cars">1 × Mercedes V-Class</b></li>
           <li><span>Night / large-group rate</span><b data-el="surcharge">Not applied</b></li>
           <li><span>Deposit to confirm</span><b>€30</b></li>
@@ -1433,7 +1471,7 @@ select.control{
 
         <div class="calc__cta-wrap">
           <button class="btn" data-el="bookBtn" type="button">
-            <span>Book for €30</span>
+            <span data-el="bookLabel">Book for €30</span>
             <i><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></i>
           </button>
 
@@ -1627,6 +1665,31 @@ select.control{
           <div class="dest__thumb"><img src="images/dest-soelden.jpg" alt="Sölden ski slopes" loading="lazy" width="420" height="420" decoding="async"></div>
           <h4>Sölden</h4>
           <p>from €450</p>
+        </a>
+        <a class="dest__card" href="#calculator">
+          <div class="dest__thumb"><img src="images/dest-ischgl.jpg" alt="Ischgl ski slopes and gondola" loading="lazy" width="420" height="420" decoding="async"></div>
+          <h4>Ischgl</h4>
+          <p>from €400</p>
+        </a>
+        <a class="dest__card" href="#calculator">
+          <div class="dest__thumb"><img src="images/dest-st-anton.jpg" alt="St. Anton am Arlberg village in winter" loading="lazy" width="420" height="420" decoding="async"></div>
+          <h4>St. Anton</h4>
+          <p>from €500</p>
+        </a>
+        <a class="dest__card" href="#calculator">
+          <div class="dest__thumb"><img src="images/dest-st-moritz.jpg" alt="St. Moritz and the frozen lake" loading="lazy" width="420" height="420" decoding="async"></div>
+          <h4>St. Moritz</h4>
+          <p>from €550</p>
+        </a>
+        <a class="dest__card" href="#calculator">
+          <div class="dest__thumb"><img src="images/dest-bolzano.jpg" alt="Bolzano old town below the Dolomites" loading="lazy" width="420" height="420" decoding="async"></div>
+          <h4>Bolzano</h4>
+          <p>from €550</p>
+        </a>
+        <a class="dest__card" href="#calculator">
+          <div class="dest__thumb"><img src="images/dest-livigno.jpg" alt="Livigno alpine village in winter" loading="lazy" width="420" height="420" decoding="async"></div>
+          <h4>Bormio / Livigno</h4>
+          <p>from €550</p>
         </a>
       </div>
     </div>
@@ -2003,7 +2066,16 @@ select.control{
               <option value="st-moritz" data-price="550">St. Moritz</option>
               <option value="bolzano" data-price="550">Bolzano region</option>
               <option value="bormio" data-price="550">Bormio / Livigno</option>
+              <option value="other">Other destination</option>
             </select>
+          </div>
+        </div>
+
+        <div class="calc__row calc__row--single" data-el="otherRow" hidden>
+          <div class="field">
+            <label for="otherDest-2">Where are you going?</label>
+            <input class="control" type="text" id="otherDest-2" data-el="otherDest"
+                   placeholder="Town, resort or hotel" autocomplete="off">
           </div>
         </div>
 
@@ -2022,6 +2094,23 @@ select.control{
           <div class="field">
             <label for="timeInp-2">Pick-up time</label>
             <input class="control" type="time" id="timeInp-2" data-el="time" value="10:00">
+          </div>
+        </div>
+
+        <button class="swap swap--toggle" data-el="returnBtn" type="button"
+                aria-pressed="false" aria-expanded="false" aria-controls="returnRow-2">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+          <span data-el="returnLabel">Add return journey</span>
+        </button>
+
+        <div class="calc__row calc__row--return" id="returnRow-2" data-el="returnRow" hidden>
+          <div class="field">
+            <label for="retDate-2">Return date</label>
+            <input class="control" type="date" id="retDate-2" data-el="retDate">
+          </div>
+          <div class="field">
+            <label for="retTime-2">Return time</label>
+            <input class="control" type="time" id="retTime-2" data-el="retTime" value="10:00">
           </div>
         </div>
 
@@ -2045,7 +2134,7 @@ select.control{
           </div>
         </div>
 
-        <p class="calc__fineprint">Fixed rates are per vehicle for 1–4 passengers departing between 07:00 and 22:00. Departures outside those hours, or groups of 5–7, are charged at the higher night / large-group rate. Groups over 7 travel in additional vehicles.</p>
+        <p class="calc__fineprint">Fixed rates are per vehicle for 1–4 passengers departing between 07:00 and 22:00. Departures outside those hours, or groups of 5–7, are charged at the higher night / large-group rate. Groups over 7 travel in additional vehicles. Every booking is assigned a Mercedes V-Class, or an equivalent vehicle where required.</p>
       </div>
 
       <div class="calc__panel grain">
@@ -2054,12 +2143,13 @@ select.control{
 
         <div class="price">
           <span class="price__value" data-el="price">€300</span>
-          <span class="price__unit">total, per booking</span>
+          <span class="price__unit" data-el="priceUnit">total, per booking</span>
         </div>
         <p class="price__note" data-el="note">Daytime rate · 1 vehicle</p>
 
         <ul class="breakdown">
-          <li><span>Base route rate</span><b data-el="base">€300</b></li>
+          <li><span data-el="baseLabel">Base route rate</span><b data-el="base">€300</b></li>
+          <li data-el="rowReturn" hidden><span>Return journey</span><b data-el="returnPrice">€300</b></li>
           <li><span>Vehicles required</span><b data-el="cars">1 × Mercedes V-Class</b></li>
           <li><span>Night / large-group rate</span><b data-el="surcharge">Not applied</b></li>
           <li><span>Deposit to confirm</span><b>€30</b></li>
@@ -2068,7 +2158,7 @@ select.control{
 
         <div class="calc__cta-wrap">
           <button class="btn" data-el="bookBtn" type="button">
-            <span>Book for €30</span>
+            <span data-el="bookLabel">Book for €30</span>
             <i><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></i>
           </button>
 
@@ -2347,9 +2437,10 @@ select.control{
   function money(n){ return '€' + n.toLocaleString('en-GB'); }
 
   function carFor(pax){
-    if (pax <= 4) return 'Škoda Octavia';
-    if (pax <= 6) return 'Mercedes V-Class Lang';
-    return 'Mercedes V-Class Extra Lang';
+    // The Mercedes V-Class is the standard vehicle on every booking, whatever
+    // the group size. The smaller cars in the fleet are substitutes assigned
+    // when needed, not what the quote leads with.
+    return pax <= 6 ? 'Mercedes V-Class Lang' : 'Mercedes V-Class Extra Lang';
   }
 
   function initCalc(root){
@@ -2359,8 +2450,14 @@ select.control{
         timeInp = el('time'), paxSel = el('pax'), swapBtn = el('swap');
     var priceValue = el('price'), priceNote = el('note'), routeLabel = el('route'),
         bdBase = el('base'), bdCars = el('cars'), bdSurcharge = el('surcharge'), bdRest = el('rest');
+    var otherRow = el('otherRow'), otherDest = el('otherDest'),
+        priceUnit = el('priceUnit'), bookLabel = el('bookLabel');
+    var returnBtn = el('returnBtn'), returnRow = el('returnRow'), returnLabel = el('returnLabel'),
+        retDate = el('retDate'), retTime = el('retTime'),
+        rowReturn = el('rowReturn'), returnPrice = el('returnPrice'), baseLabel = el('baseLabel');
 
     var reversed = false;
+    var hasReturn = false;
 
     // default the date to tomorrow
     var t = new Date(); t.setDate(t.getDate() + 1);
@@ -2369,47 +2466,126 @@ select.control{
 
     function calc(){
       var opt  = toSel.options[toSel.selectedIndex];
-      var base = parseInt(opt.getAttribute('data-price'), 10);
+      // "Other destination" carries no data-price — it is quoted by hand.
+      var custom = opt.getAttribute('data-price') === null;
+      var base = custom ? 0 : parseInt(opt.getAttribute('data-price'), 10);
       var pax  = parseInt(paxSel.value, 10);
       var cars = Math.max(1, Math.ceil(pax / SEATS_PER_CAR));
-
-      var hour = parseInt((timeInp.value || '10:00').split(':')[0], 10);
-      var isNight = hour < 7 || hour >= 22;
       var isBigGroup = pax >= 5;
-      var uplift = (isNight || isBigGroup) ? (NIGHT_RATE / DAY_RATE) : 1;
 
-      var total = Math.round((base * uplift * cars) / 5) * 5;
+      otherRow.hidden = !custom;
+      bookLabel.textContent = custom ? 'Request a price' : 'Book for €30';
 
-      var origin = reversed ? opt.text : fromSel.options[fromSel.selectedIndex].text;
-      var dest   = reversed ? fromSel.options[fromSel.selectedIndex].text : opt.text;
-      routeLabel.textContent = origin + ' → ' + dest;
+      // A return is a second transfer, so each leg is priced on its own
+      // departure time — an evening flight back can be a night rate even when
+      // the outbound was not.
+      function leg(timeStr){
+        var hour = parseInt((timeStr || '10:00').split(':')[0], 10);
+        var night = hour < 7 || hour >= 22;
+        var uplift = (night || isBigGroup) ? (NIGHT_RATE / DAY_RATE) : 1;
+        return { night: night, price: Math.round((base * uplift * cars) / 5) * 5 };
+      }
 
-      priceValue.textContent = money(total);
-      bdBase.textContent = money(base) + (cars > 1 ? ' per car' : '');
+      var out = leg(timeInp.value);
+      var ret = hasReturn ? leg(retTime.value) : null;
+      var total = out.price + (ret ? ret.price : 0);
+
+      var typed  = custom ? otherDest.value.trim() : '';
+      var endpoint = custom ? (typed || 'Other destination') : opt.text;
+      var origin = reversed ? endpoint : fromSel.options[fromSel.selectedIndex].text;
+      var dest   = reversed ? fromSel.options[fromSel.selectedIndex].text : endpoint;
+      routeLabel.textContent = origin + (hasReturn ? ' ⇄ ' : ' → ') + dest;
+
+      priceValue.textContent = custom ? 'On request' : money(total);
+      priceValue.classList.toggle('price__value--request', custom);
+      priceUnit.textContent = custom ? 'we reply within a couple of hours' : 'total, per booking';
+      baseLabel.textContent = hasReturn ? 'Outbound journey' : 'Base route rate';
+      bdBase.textContent = custom ? 'Quoted by hand'
+                                  : (hasReturn ? money(out.price)
+                                               : money(base) + (cars > 1 ? ' per car' : ''));
+      rowReturn.hidden = !hasReturn;
+      if (ret) returnPrice.textContent = custom ? 'Quoted by hand' : money(ret.price);
       bdCars.textContent = cars + ' × ' + carFor(cars > 1 ? SEATS_PER_CAR : pax);
 
+      var anyNight = out.night || (ret && ret.night);
       var reasons = [];
-      if (isNight) reasons.push('night departure');
+      if (out.night && ret && ret.night) reasons.push('night departures');
+      else if (out.night) reasons.push(hasReturn ? 'night outbound' : 'night departure');
+      else if (ret && ret.night) reasons.push('night return');
       if (isBigGroup) reasons.push('5+ passengers');
       bdSurcharge.textContent = reasons.length ? 'Applied — ' + reasons.join(' + ') : 'Not applied';
 
-      priceNote.textContent = (isNight || isBigGroup ? 'Night / large-group rate' : 'Daytime rate')
-        + ' · ' + cars + (cars > 1 ? ' vehicles' : ' vehicle');
+      priceNote.textContent = (anyNight || isBigGroup ? 'Night / large-group rate' : 'Daytime rate')
+        + ' · ' + cars + (cars > 1 ? ' vehicles' : ' vehicle')
+        + (hasReturn ? ' · return included' : '');
 
-      bdRest.textContent = money(Math.max(0, total - DEPOSIT));
+      bdRest.textContent = custom ? '—' : money(Math.max(0, total - DEPOSIT));
     }
 
-    [toSel, fromSel, timeInp, paxSel, dateInp].forEach(function(node){
-      node.addEventListener('change', calc);
-      node.addEventListener('input', calc);
-    });
+    /* return journey toggle */
+    function syncReturnMin(){
+      if (dateInp.value) retDate.min = dateInp.value;
+      if (retDate.value && dateInp.value && retDate.value < dateInp.value) retDate.value = dateInp.value;
+    }
 
-    swapBtn.addEventListener('click', function(){
-      reversed = !reversed;
-      swapBtn.lastChild.nodeValue = reversed ? ' To Munich' : ' Reverse direction';
+    returnBtn.addEventListener('click', function(){
+      hasReturn = !hasReturn;
+      returnRow.hidden = !hasReturn;
+      returnBtn.setAttribute('aria-pressed', String(hasReturn));
+      returnBtn.setAttribute('aria-expanded', String(hasReturn));
+      returnLabel.textContent = hasReturn ? 'Remove return journey' : 'Add return journey';
+      if (hasReturn) {
+        if (!retDate.value) {                       // default to a week later
+          var d = new Date(dateInp.value || Date.now());
+          d.setDate(d.getDate() + 7);
+          retDate.value = d.toISOString().slice(0, 10);
+        }
+        syncReturnMin();
+        retDate.focus();
+      }
       calc();
     });
 
+    otherDest.addEventListener('input', calc);
+
+    [retDate, retTime].forEach(function(node){
+      node.addEventListener('change', function(){ syncReturnMin(); calc(); });
+      node.addEventListener('input', calc);
+    });
+
+    [toSel, fromSel, timeInp, paxSel, dateInp].forEach(function(node){
+      node.addEventListener('change', function(){ syncReturnMin(); calc(); });
+      node.addEventListener('input', calc);
+    });
+
+    /* Reversing has to move the selects themselves, not just relabel the quote:
+       the From column must always hold the origin. The nodes are reordered
+       rather than flipped with CSS order so tab order matches what you see. */
+    var routeRow    = fromSel.closest('.calc__row');
+    var munichField = fromSel.closest('.field');
+    var resortField = toSel.closest('.field');
+    var munichLabel = munichField.querySelector('label');
+    var resortLabel = resortField.querySelector('label');
+
+    function applyDirection(){
+      if (reversed) {
+        routeRow.appendChild(munichField);   // resort first, Munich second
+        resortLabel.textContent = 'From';
+        munichLabel.textContent = 'To';
+      } else {
+        routeRow.appendChild(resortField);   // Munich first, resort second
+        munichLabel.textContent = 'From';
+        resortLabel.textContent = 'To';
+      }
+    }
+
+    swapBtn.addEventListener('click', function(){
+      reversed = !reversed;
+      applyDirection();
+      calc();
+    });
+
+    applyDirection();
     calc();
 
     /* booking */
@@ -2431,9 +2607,13 @@ select.control{
         return;
       }
       bookingForm.classList.remove('is-open');
+      var isCustom = toSel.options[toSel.selectedIndex].getAttribute('data-price') === null;
       bookingOk.innerHTML = 'Thank you, ' + name.replace(/[<>&]/g, '') + '. We have your request for <b>'
         + routeLabel.textContent + '</b> on ' + dateInp.value + ' at ' + timeInp.value
-        + '. We will send the €30 deposit link to ' + mail.replace(/[<>&]/g, '') + ' shortly.';
+        + (hasReturn ? ', returning ' + retDate.value + ' at ' + retTime.value : '')
+        + (isCustom
+            ? '. We will price this route and email ' + mail.replace(/[<>&]/g, '') + ' within a couple of hours.'
+            : '. We will send the €30 deposit link to ' + mail.replace(/[<>&]/g, '') + ' shortly.');
       bookingOk.classList.add('is-open');
     });
   }
