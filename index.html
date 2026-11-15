@@ -1,11 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google tag (gtag.js) + Google Tag Manager, with Consent Mode v2.
+     The tags load immediately so Google can detect them, but every storage
+     type starts DENIED: no cookies are written and no identifiers are sent
+     until the visitor accepts in the banner (consent.js flips them to
+     granted). Removing the consent block would make this unlawful in
+     Germany under § 25 TDDDG. -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'denied',
+    functionality_storage: 'granted',
+    security_storage: 'granted',
+    wait_for_update: 500
+  });
+  gtag('js', new Date());
+  gtag('config', 'G-39Y7WT9DKR', { anonymize_ip: true });
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+    var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+    j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+    f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TC59WJXP');
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-39Y7WT9DKR"></script>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Munich Airport Transfers to the Alps &amp; Tyrol | ridetoalps</title>
 <meta name="description" content="Private door-to-door transfers from Munich Airport to Kitzbühel, Innsbruck, Ischgl and Sölden. Fixed prices per car, €30 or $35 deposit, flight tracking, 24/7.">
 <link rel="canonical" href="https://ridetoalps.com/">
+<link rel="alternate" hreflang="en" href="https://ridetoalps.com/">
+<link rel="alternate" hreflang="de" href="https://ridetoalps.com/de/">
+<link rel="alternate" hreflang="ru" href="https://ridetoalps.com/ru/">
+<link rel="alternate" hreflang="uk" href="https://ridetoalps.com/uk/">
+<link rel="alternate" hreflang="x-default" href="https://ridetoalps.com/">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <meta name="theme-color" content="#0e63e4">
 <meta name="author" content="ridetoalps">
@@ -37,7 +69,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 
-<link rel="preload" as="image" href="images/hero.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="images/hero.avif" type="image/avif" fetchpriority="high">
 <link rel="preload" as="font" type="font/woff2" href="fonts/instrument-sans-600-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="fonts/figtree-400-latin.woff2" crossorigin>
 <style>
@@ -145,6 +177,7 @@ body{
 }
 article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{display:block}
 img{max-width:100%;display:block}
+picture{display:contents}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 input,select,textarea{font:inherit;color:inherit}
@@ -155,6 +188,19 @@ h1,h2,h3,h4{
   color:var(--color--heading);
   font-weight:400;
   margin:0;
+  /* a single word must never be able to widen its container — German compounds
+     such as "Alpen-Transferunternehmen" otherwise push a grid past the viewport */
+  overflow-wrap:break-word;
+}
+/* Real hyphenation, using the dictionary for the page's language — but only
+   where a column is genuinely narrow. On a wide screen a heading broken
+   mid-word reads as a mistake, and the overflow-wrap above already stops a
+   long compound from widening its container. English is left out entirely so
+   the line breaks across the design stay exactly as drawn. */
+@media (max-width:900px){
+  html:not([lang="en"]) h1,
+  html:not([lang="en"]) h2,
+  html:not([lang="en"]) h3{hyphens:auto}
 }
 h1{font-size:clamp(2.5rem,5.55vw,5rem);line-height:1.05;letter-spacing:-.03em}
 h2{font-size:clamp(2rem,3.9vw,3.5rem);line-height:1.08;letter-spacing:-.03em}
@@ -288,6 +334,42 @@ p{margin:0}
 .nav a.is-active{color:var(--color--primary-soft)}
 .nav a:focus-visible{outline:2px solid var(--color--primary-soft);outline-offset:6px;border-radius:2px}
 
+/* language selector — sits in the bar at every width, so a visitor who landed
+   on the wrong version can leave it without first opening the menu */
+.lang{position:relative;flex:0 0 auto}
+.lang__btn{
+  display:inline-flex;align-items:center;gap:7px;height:68px;padding:0 16px;
+  background:rgba(14,20,32,.82);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,.08);border-radius:var(--border-radius--md);
+  color:rgba(255,255,255,.86);font-family:var(--font-family--heading);
+  font-size:17px;font-weight:400;letter-spacing:.02em;cursor:pointer;
+  transition:background-color .22s ease,color .22s ease;
+}
+.lang__btn:hover{background:rgba(20,28,44,.92);color:#fff}
+.lang__btn:focus-visible{outline:3px solid var(--color--primary-soft);outline-offset:3px}
+.lang__btn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.2;
+  transition:transform .3s var(--ease--spring)}
+.lang[data-open] .lang__btn svg{transform:rotate(180deg)}
+.lang__menu{
+  position:absolute;right:0;top:calc(100% + 8px);min-width:180px;padding:6px;z-index:40;
+  background:#0f1522;border:1px solid rgba(255,255,255,.14);
+  border-radius:var(--border-radius--md);
+  box-shadow:0 24px 60px -18px rgba(4,10,22,.9);
+  display:none;
+}
+.lang[data-open] .lang__menu{display:block}
+.lang__menu li{display:flex}
+.lang__menu a{
+  display:flex;align-items:center;width:100%;min-height:44px;padding:10px 12px;
+  border-radius:var(--border-radius--sm);color:rgba(255,255,255,.8);
+  font-family:var(--font-family--heading);font-size:16px;
+  transition:background-color .2s ease,color .2s ease;
+}
+.lang__menu a[aria-current="true"]{background:rgba(14,99,228,.22);color:#fff}
+.lang__menu a:not([aria-current="true"]):hover{background:rgba(255,255,255,.08);color:#fff}
+.lang__menu a:focus-visible{outline:2px solid var(--color--primary-soft);outline-offset:-2px}
+
 .nav-toggle{display:none;width:52px;height:52px;border-radius:var(--border-radius--md);background:rgba(14,20,32,.82);border:1px solid rgba(255,255,255,.12);place-items:center}
 .nav-toggle svg{width:22px;height:22px;stroke:#fff}
 .nav-toggle svg path{transition:opacity .2s ease}
@@ -347,6 +429,7 @@ p{margin:0}
 .calc__legend--second{margin-top:34px}
 .calc__legend .eyebrow{margin:0}
 .calc__row{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}
+.calc__row--single{grid-template-columns:1fr}
 .field{display:flex;flex-direction:column;gap:8px}
 .field label{
   font-family:var(--font-family--heading);font-size:13px;font-weight:500;
@@ -430,6 +513,38 @@ select.control{
 }
 .booking .control::placeholder{color:rgba(255,255,255,.45)}
 .booking .control:focus{border-color:var(--color--primary-soft);box-shadow:0 0 0 4px rgba(107,168,255,.18)}
+/* invisible to people, irresistible to bots — a filled value is discarded server side */
+.form-trap{position:absolute!important;left:-9999px;width:1px;height:1px;overflow:hidden}
+.booking__consent{margin:4px 0 14px;font-size:13px;line-height:1.55;color:rgba(255,255,255,.5)}
+.booking__consent a{color:var(--color--primary-soft);text-decoration:underline}
+.booking__consent a:focus-visible{outline:2px solid var(--color--primary-soft);outline-offset:2px}
+.booking__ok--error{background:rgba(255,138,110,.12)!important;border-color:rgba(255,138,110,.4)!important;color:#ffd9d0!important}
+.control.is-invalid{border-color:#ff8a6e!important;box-shadow:0 0 0 3px rgba(255,138,110,.18)!important}
+.booking__ref{
+  display:block;margin-top:16px;padding:12px 16px;
+  background:rgba(255,255,255,.07);border:1px dashed rgba(255,255,255,.28);
+  border-radius:var(--border-radius--md);
+  font-size:15px;color:rgba(255,255,255,.72);
+}
+.booking__ref b{
+  color:var(--color--white);font-family:var(--font-family--heading);
+  font-weight:600;letter-spacing:.04em;
+}
+.booking__pay{
+  display:inline-flex;align-items:center;gap:0;margin-top:16px;width:100%;
+  justify-content:space-between;
+  background:var(--color--primary-1);border-radius:var(--border-radius--button);
+  padding:14px 18px;color:var(--color--white);
+  font-family:var(--font-family--heading);font-size:17px;font-weight:500;line-height:1;
+  box-shadow:var(--shadow--brand);
+  transition:transform .45s var(--ease--spring),background-color .25s ease;
+}
+.booking__pay svg{width:16px;height:16px;stroke:currentColor;flex:0 0 16px}
+.booking__pay:hover{background:var(--color--primary-2);transform:translateY(-2px)}
+.booking__pay:active{transform:translateY(0) scale(.99)}
+.booking__pay:focus-visible{outline:3px solid var(--color--primary-soft);outline-offset:3px}
+.booking__payhint{display:block;margin-top:12px;font-size:13px;line-height:1.6;color:rgba(255,255,255,.55)}
+.booking__payhint b{color:rgba(255,255,255,.85);letter-spacing:.04em}
 .booking__ok{
   margin-top:16px;padding:16px 18px;border-radius:var(--border-radius--md);
   background:rgba(107,168,255,.14);border:1px solid rgba(107,168,255,.32);
@@ -568,7 +683,7 @@ select.control{
    ============================================================ */
 .about-band{position:relative;background:var(--color--white)}
 
-.about{display:grid;grid-template-columns:1fr 1.06fr;gap:74px;align-items:stretch}
+.about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.06fr);gap:74px;align-items:stretch}
 .about__media{display:flex;min-height:0}
 .about__frame{position:relative;flex:1;min-height:440px}
 .about__frame img{
@@ -581,7 +696,7 @@ select.control{
   background:linear-gradient(200deg,rgba(10,45,110,.9),rgba(12,21,36,0) 70%);
 }
 
-.about__content{display:flex;flex-direction:column;align-items:flex-start}
+.about__content{display:flex;flex-direction:column;align-items:flex-start;min-width:0}
 .badge{
   display:inline-block;background:var(--color--white);
   border-radius:var(--border-radius--md);padding:11px 22px;margin-bottom:26px;
@@ -749,7 +864,7 @@ select.control{
   .dest{grid-template-columns:1fr;gap:34px}
   .dest__grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
   .dest__thumb{width:150px}
-  .about{grid-template-columns:1fr;gap:62px}
+  .about{grid-template-columns:minmax(0,1fr);gap:62px}
   .about__media{order:-1}
   .about__frame{min-height:380px}
   .review{flex-basis:calc((100% - 30px) / 2)}
@@ -795,7 +910,10 @@ select.control{
     z-index:30;max-height:calc(100vh - 120px);overflow-y:auto;
   }
   .nav-toggle{display:grid}
-  .masthead{padding:20px}
+  .masthead{padding:20px;gap:12px}
+  /* the pill shrinks to the code and the chevron; the brand gives up the room */
+  .lang__btn{height:52px;padding:0 12px;font-size:16px}
+  .brand__name{font-size:25px}
 
   /* taller hero, two-line headline, roomier rhythm */
   .hero__frame{min-height:660px;min-height:max(660px,calc(100svh - 24px))}
@@ -881,7 +999,7 @@ select.control{
    "description": "Licensed private transfer service running door-to-door rides between Munich Airport and the alpine valleys of Austria, Switzerland and Italy. Fixed per-vehicle prices, a €30 or $35 deposit to book, flight tracking and 24/7 contact.",
    "image": "https://ridetoalps.com/images/og-cover.jpg",
    "logo": "https://ridetoalps.com/icon-512.png",
-   "telephone": "+380-98-595-55-50",
+   "telephone": "+1-470-752-9085",
    "email": "hello@ridetoalps.com",
    "priceRange": "€100–€550",
    "currenciesAccepted": "EUR",
@@ -1266,6 +1384,7 @@ select.control{
  ]
 }
 </script>
+<script src="consent.js" defer></script>
 </head>
 <body>
 
@@ -1273,7 +1392,7 @@ select.control{
 <header class="hero">
   <div class="hero__frame grain">
     <div class="hero__media">
-      <img src="images/hero.jpg" alt="Mercedes V-Class minivan on an alpine road in Tyrol" fetchpriority="high" width="1376" height="768">
+      <picture><source srcset="images/hero.avif" type="image/avif"><source srcset="images/hero.webp" type="image/webp"><img src="images/hero.jpg" alt="Mercedes V-Class minivan on an alpine road in Tyrol" fetchpriority="high" width="1376" height="768"></picture>
     </div>
 
     <div class="masthead">
@@ -1288,6 +1407,7 @@ select.control{
 
       <nav class="nav" id="nav">
         <a href="#top" class="is-active">Home</a>
+        <a href="routes.html">Routes</a>
         <a href="#calculator">Prices</a>
         <a href="#fleet">Fleet</a>
         <a href="#about">About</a>
@@ -1295,6 +1415,18 @@ select.control{
         <a href="#faq">FAQ</a>
         <a href="#contact">Contact</a>
       </nav>
+
+      <div class="lang">
+        <button class="lang__btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Change language">
+          EN <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul class="lang__menu">
+          <li><a href="/" lang="en" hreflang="en" aria-current="true">English</a></li>
+          <li><a href="/de/" lang="de" hreflang="de">Deutsch</a></li>
+          <li><a href="/ru/" lang="ru" hreflang="ru">Русский</a></li>
+          <li><a href="/uk/" lang="uk" hreflang="uk">Українська</a></li>
+        </ul>
+      </div>
 
       <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true">
@@ -1520,8 +1652,16 @@ select.control{
             <input class="control" type="text" data-el="name" placeholder="Your name" autocomplete="name" required>
             <input class="control" type="tel" data-el="phone" placeholder="Phone / WhatsApp" autocomplete="tel" required>
             <input class="control" type="email" data-el="mail" placeholder="Email" autocomplete="email" required>
+
+            <div class="form-trap" aria-hidden="true">
+              <label>Do not fill this in</label>
+              <input data-el="trap" type="text" tabindex="-1" autocomplete="off">
+            </div>
+            <p class="booking__consent">We use these details only to answer this enquiry — see our
+              <a href="datenschutz.html">privacy notice</a>.</p>
+
             <button class="btn" type="submit">
-              <span>Send booking request</span>
+              <span data-el="submitLabel">Send booking request</span>
               <i><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></i>
             </button>
           </form>
@@ -1548,7 +1688,7 @@ select.control{
       <div class="fleet__track" id="fleetTrack">
 
         <article class="car">
-          <div class="car__media"><img src="images/fleet-v250-lang.jpg" alt="Mercedes-Benz V-Class V250 long wheelbase" loading="lazy" width="1200" height="896" decoding="async"></div>
+          <div class="car__media"><picture><source srcset="images/fleet-v250-lang.avif" type="image/avif"><source srcset="images/fleet-v250-lang.webp" type="image/webp"><img src="images/fleet-v250-lang.jpg" alt="Mercedes-Benz V-Class V250 long wheelbase" loading="lazy" width="1200" height="896" decoding="async"></picture></div>
           <div class="car__body">
             <div class="car__top">
               <h3>Mercedes V-Class Lang</h3>
@@ -1572,7 +1712,7 @@ select.control{
         </article>
 
         <article class="car">
-          <div class="car__media"><img src="images/fleet-v250-xl.jpg" alt="Mercedes-Benz V-Class V250 extra long wheelbase" loading="lazy" width="1200" height="896" decoding="async"></div>
+          <div class="car__media"><picture><source srcset="images/fleet-v250-xl.avif" type="image/avif"><source srcset="images/fleet-v250-xl.webp" type="image/webp"><img src="images/fleet-v250-xl.jpg" alt="Mercedes-Benz V-Class V250 extra long wheelbase" loading="lazy" width="1200" height="896" decoding="async"></picture></div>
           <div class="car__body">
             <div class="car__top">
               <h3>Mercedes V-Class Extra Lang</h3>
@@ -1596,7 +1736,7 @@ select.control{
         </article>
 
         <article class="car">
-          <div class="car__media"><img src="images/fleet-peugeot.jpg" alt="Peugeot Traveller extra long passenger van" loading="lazy" width="1200" height="896" decoding="async"></div>
+          <div class="car__media"><picture><source srcset="images/fleet-peugeot.avif" type="image/avif"><source srcset="images/fleet-peugeot.webp" type="image/webp"><img src="images/fleet-peugeot.jpg" alt="Peugeot Traveller extra long passenger van" loading="lazy" width="1200" height="896" decoding="async"></picture></div>
           <div class="car__body">
             <div class="car__top">
               <h3>Peugeot Traveller Long</h3>
@@ -1620,7 +1760,7 @@ select.control{
         </article>
 
         <article class="car">
-          <div class="car__media"><img src="images/fleet-skoda.jpg" alt="Skoda Octavia sedan" loading="lazy" width="1200" height="896" decoding="async"></div>
+          <div class="car__media"><picture><source srcset="images/fleet-skoda.avif" type="image/avif"><source srcset="images/fleet-skoda.webp" type="image/webp"><img src="images/fleet-skoda.jpg" alt="Skoda Octavia sedan" loading="lazy" width="1200" height="896" decoding="async"></picture></div>
           <div class="car__body">
             <div class="car__top">
               <h3>Škoda Octavia</h3>
@@ -1644,7 +1784,7 @@ select.control{
         </article>
 
         <article class="car">
-          <div class="car__media"><img src="images/fleet-jeep.jpg" alt="Jeep Compass compact SUV" loading="lazy" width="1200" height="896" decoding="async"></div>
+          <div class="car__media"><picture><source srcset="images/fleet-jeep.avif" type="image/avif"><source srcset="images/fleet-jeep.webp" type="image/webp"><img src="images/fleet-jeep.jpg" alt="Jeep Compass compact SUV" loading="lazy" width="1200" height="896" decoding="async"></picture></div>
           <div class="car__body">
             <div class="car__top">
               <h3>Jeep Compass 4×4</h3>
@@ -1685,50 +1825,55 @@ select.control{
 <section class="section-spacing">
   <div class="container">
     <div class="dest">
-      <h2 class="reveal">Where we drive</h2>
+      <div class="reveal">
+        <h2>Where we drive</h2>
+        <a class="link-arrow" href="routes.html" style="margin-top:20px">All ten routes
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </a>
+      </div>
       <div class="dest__grid reveal">
-        <a class="dest__card" href="#calculator">
-          <div class="dest__thumb"><img src="images/dest-kitzbuehel.jpg" alt="Kitzbühel in winter" loading="lazy" width="420" height="420" decoding="async"></div>
+        <a class="dest__card" href="routes/kitzbuehel.html">
+          <div class="dest__thumb"><picture><source srcset="images/dest-kitzbuehel.avif" type="image/avif"><source srcset="images/dest-kitzbuehel.webp" type="image/webp"><img src="images/dest-kitzbuehel.jpg" alt="Kitzbühel in winter" loading="lazy" width="420" height="420" decoding="async"></picture></div>
           <h4>Kitzbühel</h4>
           <p>from €300</p>
         </a>
-        <a class="dest__card" href="#calculator">
-          <div class="dest__thumb"><img src="images/dest-innsbruck.jpg" alt="Innsbruck and the Nordkette range" loading="lazy" width="420" height="420" decoding="async"></div>
+        <a class="dest__card" href="routes/innsbruck.html">
+          <div class="dest__thumb"><picture><source srcset="images/dest-innsbruck.avif" type="image/avif"><source srcset="images/dest-innsbruck.webp" type="image/webp"><img src="images/dest-innsbruck.jpg" alt="Innsbruck and the Nordkette range" loading="lazy" width="420" height="420" decoding="async"></picture></div>
           <h4>Innsbruck</h4>
           <p>from €350</p>
         </a>
-        <a class="dest__card" href="#calculator">
-          <div class="dest__thumb"><img src="images/dest-salzburg.jpg" alt="Salzburg old town in winter" loading="lazy" width="420" height="420" decoding="async"></div>
+        <a class="dest__card" href="routes/salzburg.html">
+          <div class="dest__thumb"><picture><source srcset="images/dest-salzburg.avif" type="image/avif"><source srcset="images/dest-salzburg.webp" type="image/webp"><img src="images/dest-salzburg.jpg" alt="Salzburg old town in winter" loading="lazy" width="420" height="420" decoding="async"></picture></div>
           <h4>Salzburg</h4>
           <p>from €325</p>
         </a>
-        <a class="dest__card" href="#calculator">
-          <div class="dest__thumb"><img src="images/dest-soelden.jpg" alt="Sölden ski slopes" loading="lazy" width="420" height="420" decoding="async"></div>
+        <a class="dest__card" href="routes/soelden.html">
+          <div class="dest__thumb"><picture><source srcset="images/dest-soelden.avif" type="image/avif"><source srcset="images/dest-soelden.webp" type="image/webp"><img src="images/dest-soelden.jpg" alt="Sölden ski slopes" loading="lazy" width="420" height="420" decoding="async"></picture></div>
           <h4>Sölden</h4>
           <p>from €450</p>
         </a>
-        <a class="dest__card" href="#calculator">
-          <div class="dest__thumb"><img src="images/dest-ischgl.jpg" alt="Ischgl ski slopes and gondola" loading="lazy" width="420" height="420" decoding="async"></div>
+        <a class="dest__card" href="routes/ischgl.html">
+          <div class="dest__thumb"><picture><source srcset="images/dest-ischgl.avif" type="image/avif"><source srcset="images/dest-ischgl.webp" type="image/webp"><img src="images/dest-ischgl.jpg" alt="Ischgl ski slopes and gondola" loading="lazy" width="420" height="420" decoding="async"></picture></div>
           <h4>Ischgl</h4>
           <p>from €400</p>
         </a>
-        <a class="dest__card" href="#calculator">
-          <div class="dest__thumb"><img src="images/dest-st-anton.jpg" alt="St. Anton am Arlberg village in winter" loading="lazy" width="420" height="420" decoding="async"></div>
+        <a class="dest__card" href="routes/st-anton.html">
+          <div class="dest__thumb"><picture><source srcset="images/dest-st-anton.avif" type="image/avif"><source srcset="images/dest-st-anton.webp" type="image/webp"><img src="images/dest-st-anton.jpg" alt="St. Anton am Arlberg village in winter" loading="lazy" width="420" height="420" decoding="async"></picture></div>
           <h4>St. Anton</h4>
           <p>from €500</p>
         </a>
-        <a class="dest__card" href="#calculator">
-          <div class="dest__thumb"><img src="images/dest-st-moritz.jpg" alt="St. Moritz and the frozen lake" loading="lazy" width="420" height="420" decoding="async"></div>
+        <a class="dest__card" href="routes/st-moritz.html">
+          <div class="dest__thumb"><picture><source srcset="images/dest-st-moritz.avif" type="image/avif"><source srcset="images/dest-st-moritz.webp" type="image/webp"><img src="images/dest-st-moritz.jpg" alt="St. Moritz and the frozen lake" loading="lazy" width="420" height="420" decoding="async"></picture></div>
           <h4>St. Moritz</h4>
           <p>from €550</p>
         </a>
-        <a class="dest__card" href="#calculator">
-          <div class="dest__thumb"><img src="images/dest-bolzano.jpg" alt="Bolzano old town below the Dolomites" loading="lazy" width="420" height="420" decoding="async"></div>
+        <a class="dest__card" href="routes/bolzano.html">
+          <div class="dest__thumb"><picture><source srcset="images/dest-bolzano.avif" type="image/avif"><source srcset="images/dest-bolzano.webp" type="image/webp"><img src="images/dest-bolzano.jpg" alt="Bolzano old town below the Dolomites" loading="lazy" width="420" height="420" decoding="async"></picture></div>
           <h4>Bolzano</h4>
           <p>from €550</p>
         </a>
-        <a class="dest__card" href="#calculator">
-          <div class="dest__thumb"><img src="images/dest-livigno.jpg" alt="Livigno alpine village in winter" loading="lazy" width="420" height="420" decoding="async"></div>
+        <a class="dest__card" href="routes/bormio-livigno.html">
+          <div class="dest__thumb"><picture><source srcset="images/dest-livigno.avif" type="image/avif"><source srcset="images/dest-livigno.webp" type="image/webp"><img src="images/dest-livigno.jpg" alt="Livigno alpine village in winter" loading="lazy" width="420" height="420" decoding="async"></picture></div>
           <h4>Bormio / Livigno</h4>
           <p>from €550</p>
         </a>
@@ -1742,7 +1887,7 @@ select.control{
   <div class="container">
     <div class="steps grain reveal">
       <div class="steps__media">
-        <img src="images/steps.jpg" alt="Driver loading ski bags into a Mercedes V-Class outside Munich Airport arrivals" loading="lazy" width="821" height="1100" decoding="async">
+        <picture><source srcset="images/steps.avif" type="image/avif"><source srcset="images/steps.webp" type="image/webp"><img src="images/steps.jpg" alt="Driver loading ski bags into a Mercedes V-Class outside Munich Airport arrivals" loading="lazy" width="821" height="1100" decoding="async"></picture>
       </div>
       <div class="steps__body">
         <h2>Book your transfer in 3 easy steps</h2>
@@ -1779,7 +1924,7 @@ select.control{
 <section class="section-spacing--tight">
   <div class="container">
     <div class="cta grain reveal">
-      <img src="images/cta.jpg" alt="Snowy alpine valley road at blue hour" loading="lazy" width="1376" height="768" decoding="async">
+      <picture><source srcset="images/cta.avif" type="image/avif"><source srcset="images/cta.webp" type="image/webp"><img src="images/cta.jpg" alt="Snowy alpine valley road at blue hour" loading="lazy" width="1376" height="768" decoding="async"></picture>
       <div class="cta__inner">
         <h2>Your dream. Your time. Your ride.</h2>
         <p>We take one booking per day, so if your flight lands three hours late, the car is still there — no extra waiting fee, no rush to the next job.</p>
@@ -1804,7 +1949,7 @@ select.control{
     <div class="about">
       <div class="about__media reveal">
         <div class="about__frame">
-          <img src="images/about.jpg" alt="Minivan on an alpine pass road" loading="lazy" width="1200" height="896" decoding="async">
+          <picture><source srcset="images/about.avif" type="image/avif"><source srcset="images/about.webp" type="image/webp"><img src="images/about.jpg" alt="Minivan on an alpine pass road" loading="lazy" width="1200" height="896" decoding="async"></picture>
         </div>
       </div>
 
@@ -1865,7 +2010,7 @@ select.control{
           <svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
         </div>
         <p>Our flight from London was two hours late and I fully expected to be stranded. The driver was already tracking it and simply met us when we walked out. Straight to Kitzbühel, no fuss, no extra charge.</p>
-        <div class="review__by"><img src="images/av1.jpg" alt="" loading="lazy" width="260" height="260" decoding="async"><span>Mark Stevens</span></div>
+        <div class="review__by"><picture><source srcset="images/av1.avif" type="image/avif"><source srcset="images/av1.webp" type="image/webp"><img src="images/av1.jpg" alt="" loading="lazy" width="260" height="260" decoding="async"></picture><span>Mark Stevens</span></div>
       </article>
 
       <article class="review">
@@ -1877,7 +2022,7 @@ select.control{
           <svg viewBox="0 0 24 24" class="off" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
         </div>
         <p>Paying only €30 up front made the decision easy — we booked in September for a February trip. The rest went to the driver at the hotel. Exactly as described.</p>
-        <div class="review__by"><img src="images/av2.jpg" alt="" loading="lazy" width="260" height="260" decoding="async"><span>Lisa Anderson</span></div>
+        <div class="review__by"><picture><source srcset="images/av2.avif" type="image/avif"><source srcset="images/av2.webp" type="image/webp"><img src="images/av2.jpg" alt="" loading="lazy" width="260" height="260" decoding="async"></picture><span>Lisa Anderson</span></div>
       </article>
 
       <article class="review">
@@ -1889,7 +2034,7 @@ select.control{
           <svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
         </div>
         <p>Six of us with skis and boards. They put us in the extra-long V-Class with a roof box and everything fitted without anyone holding a bag on their lap.</p>
-        <div class="review__by"><img src="images/av3.jpg" alt="" loading="lazy" width="260" height="260" decoding="async"><span>Brian Tomlin</span></div>
+        <div class="review__by"><picture><source srcset="images/av3.avif" type="image/avif"><source srcset="images/av3.webp" type="image/webp"><img src="images/av3.jpg" alt="" loading="lazy" width="260" height="260" decoding="async"></picture><span>Brian Tomlin</span></div>
       </article>
 
       <article class="review">
@@ -1901,7 +2046,7 @@ select.control{
           <svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
         </div>
         <p>Booked a 5am pick-up from our hotel in Sölden back to Munich. The car was outside at 4:55 and the driver had already cleared the snow off it.</p>
-        <div class="review__by"><img src="images/av4.jpg" alt="" loading="lazy" width="260" height="260" decoding="async"><span>Emma Johnson</span></div>
+        <div class="review__by"><picture><source srcset="images/av4.avif" type="image/avif"><source srcset="images/av4.webp" type="image/webp"><img src="images/av4.jpg" alt="" loading="lazy" width="260" height="260" decoding="async"></picture><span>Emma Johnson</span></div>
       </article>
 
       <article class="review">
@@ -1913,7 +2058,7 @@ select.control{
           <svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
         </div>
         <p>We asked for a coffee stop halfway and a short photo break at the pass. Not a problem at all — the driver actually suggested a better viewpoint.</p>
-        <div class="review__by"><img src="images/av5.jpg" alt="" loading="lazy" width="260" height="260" decoding="async"><span>Jessica Ramirez</span></div>
+        <div class="review__by"><picture><source srcset="images/av5.avif" type="image/avif"><source srcset="images/av5.webp" type="image/webp"><img src="images/av5.jpg" alt="" loading="lazy" width="260" height="260" decoding="async"></picture><span>Jessica Ramirez</span></div>
       </article>
 
       <article class="review">
@@ -1925,7 +2070,7 @@ select.control{
           <svg viewBox="0 0 24 24" class="off" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
         </div>
         <p>Clear pricing to St. Anton, no surprise surcharges at the end. Wi-Fi in the car meant the kids were quiet the whole way.</p>
-        <div class="review__by"><img src="images/av6.jpg" alt="" loading="lazy" width="260" height="260" decoding="async"><span>Laura Jenkins</span></div>
+        <div class="review__by"><picture><source srcset="images/av6.avif" type="image/avif"><source srcset="images/av6.webp" type="image/webp"><img src="images/av6.jpg" alt="" loading="lazy" width="260" height="260" decoding="async"></picture><span>Laura Jenkins</span></div>
       </article>
 
       <article class="review">
@@ -1937,7 +2082,7 @@ select.control{
           <svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
         </div>
         <p>Travelling with a toddler, so the child seat mattered. It was fitted and ready before we arrived. Second booking already made for next winter.</p>
-        <div class="review__by"><img src="images/av7.jpg" alt="" loading="lazy" width="260" height="260" decoding="async"><span>Daniel Lee</span></div>
+        <div class="review__by"><picture><source srcset="images/av7.avif" type="image/avif"><source srcset="images/av7.webp" type="image/webp"><img src="images/av7.jpg" alt="" loading="lazy" width="260" height="260" decoding="async"></picture><span>Daniel Lee</span></div>
       </article>
 
       <article class="review">
@@ -1949,7 +2094,7 @@ select.control{
           <svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
         </div>
         <p>Roads to Ischgl were snowed in and the driver knew exactly which way to go. Calm, unhurried, clearly done it many times before.</p>
-        <div class="review__by"><img src="images/av8.jpg" alt="" loading="lazy" width="260" height="260" decoding="async"><span>Kevin Thompson</span></div>
+        <div class="review__by"><picture><source srcset="images/av8.avif" type="image/avif"><source srcset="images/av8.webp" type="image/webp"><img src="images/av8.jpg" alt="" loading="lazy" width="260" height="260" decoding="async"></picture><span>Kevin Thompson</span></div>
       </article>
 
       <article class="review">
@@ -1961,7 +2106,7 @@ select.control{
           <svg viewBox="0 0 24 24" class="off" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
         </div>
         <p>Changed our plans mid-trip and needed the return moved by a day. One WhatsApp message and it was handled the same evening.</p>
-        <div class="review__by"><img src="images/av9.jpg" alt="" loading="lazy" width="260" height="260" decoding="async"><span>Chris Palmer</span></div>
+        <div class="review__by"><picture><source srcset="images/av9.avif" type="image/avif"><source srcset="images/av9.webp" type="image/webp"><img src="images/av9.jpg" alt="" loading="lazy" width="260" height="260" decoding="async"></picture><span>Chris Palmer</span></div>
       </article>
     </div>
 
@@ -2216,8 +2361,16 @@ select.control{
             <input class="control" type="text" data-el="name" placeholder="Your name" autocomplete="name" required>
             <input class="control" type="tel" data-el="phone" placeholder="Phone / WhatsApp" autocomplete="tel" required>
             <input class="control" type="email" data-el="mail" placeholder="Email" autocomplete="email" required>
+
+            <div class="form-trap" aria-hidden="true">
+              <label>Do not fill this in</label>
+              <input data-el="trap" type="text" tabindex="-1" autocomplete="off">
+            </div>
+            <p class="booking__consent">We use these details only to answer this enquiry — see our
+              <a href="datenschutz.html">privacy notice</a>.</p>
+
             <button class="btn" type="submit">
-              <span>Send booking request</span>
+              <span data-el="submitLabel">Send booking request</span>
               <i><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></i>
             </button>
           </form>
@@ -2245,8 +2398,9 @@ select.control{
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3.5h3l1.6 4-2 1.4a11.5 11.5 0 0 0 5.5 5.5l1.4-2 4 1.6v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.5 5.7a2 2 0 0 1 2-2.2Z"/></svg>
         </div>
         <h4>Phone &amp; WhatsApp</h4>
-        <a href="tel:+380985955550">+380 98 595 55 50</a>
-        <a href="https://wa.me/380985955550" rel="noopener" target="_blank">Message us on WhatsApp</a>
+        <a href="tel:+14707529085">+1 470 752 9085</a>
+        <p>24/7 voice assistant</p>
+        <a href="https://wa.me/19542392185" rel="noopener" target="_blank">WhatsApp +1 954 239 2185</a>
       </div>
 
       <div class="contact-card reveal">
@@ -2290,7 +2444,11 @@ select.control{
         <ul class="footer__contact">
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3.5h3l1.6 4-2 1.4a11.5 11.5 0 0 0 5.5 5.5l1.4-2 4 1.6v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.5 5.7a2 2 0 0 1 2-2.2Z"/></svg>
-            <a href="tel:+380985955550">+380 98 595 55 50</a>
+            <a href="tel:+14707529085">+1 470 752 9085</a>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21a9 9 0 1 0-7.8-4.5L3 21l4.6-1.2A9 9 0 0 0 12 21Z"/></svg>
+            <a href="https://wa.me/19542392185" rel="noopener" target="_blank">+1 954 239 2185</a>
           </li>
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="m3.8 7 8.2 6 8.2-6"/></svg>
@@ -2313,21 +2471,21 @@ select.control{
       <div class="footer__col">
         <h5>Destinations</h5>
         <ul>
-          <li><a href="#calculator">Kitzbühel</a></li>
-          <li><a href="#calculator">Innsbruck</a></li>
-          <li><a href="#calculator">Salzburg</a></li>
-          <li><a href="#calculator">Ischgl</a></li>
-          <li><a href="#calculator">Sölden</a></li>
+          <li><a href="routes/kitzbuehel.html">Kitzbühel</a></li>
+          <li><a href="routes/innsbruck.html">Innsbruck</a></li>
+          <li><a href="routes/salzburg.html">Salzburg</a></li>
+          <li><a href="routes/ischgl.html">Ischgl</a></li>
+          <li><a href="routes/soelden.html">Sölden</a></li>
         </ul>
       </div>
 
       <div class="footer__col">
         <h5>More routes</h5>
         <ul>
-          <li><a href="#calculator">St. Anton am Arlberg</a></li>
-          <li><a href="#calculator">St. Moritz</a></li>
-          <li><a href="#calculator">Bolzano region</a></li>
-          <li><a href="#calculator">Bormio / Livigno</a></li>
+          <li><a href="routes/st-anton.html">St. Anton am Arlberg</a></li>
+          <li><a href="routes/st-moritz.html">St. Moritz</a></li>
+          <li><a href="routes/bolzano.html">Bolzano region</a></li>
+          <li><a href="routes/bormio-livigno.html">Bormio / Livigno</a></li>
           <li><a href="#faq">FAQ</a></li>
         </ul>
       </div>
@@ -2341,6 +2499,7 @@ select.control{
         <a href="impressum.html">Impressum</a>
         <a href="datenschutz.html">Datenschutz</a>
         <a href="agb.html">Terms &amp; cancellation</a>
+        <a href="#" data-consent-reopen>Cookie settings</a>
       </nav>
     </div>
   </div>
@@ -2349,6 +2508,21 @@ select.control{
 <script>
 (function(){
   'use strict';
+
+  /* ---------- translation runtime ----------
+     A localized page injects window.RTA_I18N (generated from i18n/ui.<lang>.mjs)
+     before this script runs. On the English page the object is absent, T() is
+     the identity and nothing changes — so the source below stays readable and
+     there is only ever one copy of each string in the markup.
+
+     F() is the same lookup with {placeholders} filled in, for the sentences
+     whose word order differs between languages. */
+  var I18N   = window.RTA_I18N || {};
+  var LOCALE = window.RTA_LOCALE || 'en-GB';
+  function T(s){ return Object.prototype.hasOwnProperty.call(I18N, s) ? I18N[s] : s; }
+  function F(s, vars){
+    return T(s).replace(/\{(\w+)\}/g, function(_, k){ return vars[k] == null ? '' : vars[k]; });
+  }
 
   /* ---------- year ---------- */
   document.getElementById('yr').textContent = new Date().getFullYear();
@@ -2377,14 +2551,14 @@ select.control{
     var open = nav.classList.toggle('is-open');
     navToggle.classList.toggle('is-open', open);
     navToggle.setAttribute('aria-expanded', String(open));
-    navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    navToggle.setAttribute('aria-label', open ? T('Close menu') : T('Open menu'));
   });
   function closeNav(){
     if (!nav.classList.contains('is-open')) return;
     nav.classList.remove('is-open');
     navToggle.classList.remove('is-open');
     navToggle.setAttribute('aria-expanded', 'false');
-    navToggle.setAttribute('aria-label', 'Open menu');
+    navToggle.setAttribute('aria-label', T('Open menu'));
   }
   nav.addEventListener('click', function(e){
     if (e.target.tagName === 'A') closeNav();
@@ -2523,7 +2697,10 @@ select.control{
   ------------------------------------------------------------------- */
   var DAY_RATE = 1.5, NIGHT_RATE = 1.7, DEPOSIT = 30, SEATS_PER_CAR = 7;
 
-  function money(n){ return '€' + n.toLocaleString('en-GB'); }
+  /* '€300' in English, '300 €' in German, Russian and Ukrainian. The pattern
+     comes from the page, so the rule lives next to the other translations. */
+  var MONEY = window.RTA_MONEY || '€{n}';
+  function money(n){ return MONEY.replace('{n}', n.toLocaleString(LOCALE)); }
 
   function carFor(pax){
     // The Mercedes V-Class is the standard vehicle on every booking, whatever
@@ -2563,7 +2740,7 @@ select.control{
       var isBigGroup = pax >= 5;
 
       otherRow.hidden = !custom;
-      bookLabel.textContent = custom ? 'Request a price' : 'Book for €30 or $35';
+      bookLabel.textContent = custom ? T('Request a price') : T('Book for €30 or $35');
 
       // A return is a second transfer, so each leg is priced on its own
       // departure time — an evening flight back can be a night rate even when
@@ -2580,33 +2757,33 @@ select.control{
       var total = out.price + (ret ? ret.price : 0);
 
       var typed  = custom ? otherDest.value.trim() : '';
-      var endpoint = custom ? (typed || 'Other destination') : opt.text;
+      var endpoint = custom ? (typed || T('Other destination')) : opt.text;
       var origin = reversed ? endpoint : fromSel.options[fromSel.selectedIndex].text;
       var dest   = reversed ? fromSel.options[fromSel.selectedIndex].text : endpoint;
       routeLabel.textContent = origin + (hasReturn ? ' ⇄ ' : ' → ') + dest;
 
-      priceValue.textContent = custom ? 'On request' : money(total);
+      priceValue.textContent = custom ? T('On request') : money(total);
       priceValue.classList.toggle('price__value--request', custom);
-      priceUnit.textContent = custom ? 'we reply within a couple of hours' : 'total, per booking';
-      baseLabel.textContent = hasReturn ? 'Outbound journey' : 'Base route rate';
-      bdBase.textContent = custom ? 'Quoted by hand'
+      priceUnit.textContent = custom ? T('we reply within a couple of hours') : T('total, per booking');
+      baseLabel.textContent = hasReturn ? T('Outbound journey') : T('Base route rate');
+      bdBase.textContent = custom ? T('Quoted by hand')
                                   : (hasReturn ? money(out.price)
-                                               : money(base) + (cars > 1 ? ' per car' : ''));
+                                               : money(base) + (cars > 1 ? ' ' + T('per car') : ''));
       rowReturn.hidden = !hasReturn;
-      if (ret) returnPrice.textContent = custom ? 'Quoted by hand' : money(ret.price);
+      if (ret) returnPrice.textContent = custom ? T('Quoted by hand') : money(ret.price);
       bdCars.textContent = cars + ' × ' + carFor(cars > 1 ? SEATS_PER_CAR : pax);
 
       var anyNight = out.night || (ret && ret.night);
       var reasons = [];
-      if (out.night && ret && ret.night) reasons.push('night departures');
-      else if (out.night) reasons.push(hasReturn ? 'night outbound' : 'night departure');
-      else if (ret && ret.night) reasons.push('night return');
-      if (isBigGroup) reasons.push('5+ passengers');
-      bdSurcharge.textContent = reasons.length ? 'Applied — ' + reasons.join(' + ') : 'Not applied';
+      if (out.night && ret && ret.night) reasons.push(T('night departures'));
+      else if (out.night) reasons.push(hasReturn ? T('night outbound') : T('night departure'));
+      else if (ret && ret.night) reasons.push(T('night return'));
+      if (isBigGroup) reasons.push(T('5+ passengers'));
+      bdSurcharge.textContent = reasons.length ? T('Applied —') + ' ' + reasons.join(' + ') : T('Not applied');
 
-      priceNote.textContent = (anyNight || isBigGroup ? 'Night / large-group rate' : 'Daytime rate')
-        + ' · ' + cars + (cars > 1 ? ' vehicles' : ' vehicle')
-        + (hasReturn ? ' · return included' : '');
+      priceNote.textContent = (anyNight || isBigGroup ? T('Night / large-group rate') : T('Daytime rate'))
+        + ' · ' + cars + ' ' + T(cars > 1 ? 'vehicles' : 'vehicle')
+        + (hasReturn ? ' · ' + T('return included') : '');
 
       bdRest.textContent = custom ? '—' : money(Math.max(0, total - DEPOSIT));
     }
@@ -2622,7 +2799,7 @@ select.control{
       returnRow.hidden = !hasReturn;
       returnBtn.setAttribute('aria-pressed', String(hasReturn));
       returnBtn.setAttribute('aria-expanded', String(hasReturn));
-      returnLabel.textContent = hasReturn ? 'Remove return journey' : 'Add return journey';
+      returnLabel.textContent = hasReturn ? T('Remove return journey') : T('Add return journey');
       if (hasReturn) {
         if (!retDate.value) {                       // default to a week later
           var d = new Date(dateInp.value || Date.now());
@@ -2687,27 +2864,147 @@ select.control{
       bkName.focus();
     });
 
+    /* The endpoint answers {ok:true} or {ok:false, error:'…'}; the bot token never
+       leaves the server, so the page only ever sees an error code. */
+    var DEPOSIT_LABEL = '€30 or $35';
+    var MESSAGES = {
+      sending:               T('Sending…'),
+      validation_failed:     T('Please check the highlighted fields.'),
+      rate_limited:          T('Too many attempts in a row. Please try again later, or message us on WhatsApp.'),
+      server_not_configured: T('The form is temporarily unavailable. Please message us on WhatsApp or call.'),
+      delivery_failed:       T('We could not send your request. Please message us on WhatsApp or call.'),
+      server_error:          T('We could not send your request. Please message us on WhatsApp or call.'),
+      method_not_allowed:    T('We could not send your request. Please message us on WhatsApp or call.'),
+      network:               T('No connection to the server. Check your internet and try again.')
+    };
+    var skiSel      = el('ski');
+    var trapInput   = el('trap');
+    var submitBtn   = bookingForm.querySelector('button[type="submit"]');
+    var submitLabel = el('submitLabel');
+    var idleLabel   = submitLabel.textContent;
+    var FIELDS      = { name: bkName, phone: bkPhone, email: bkMail };
+
+    function showError(message, fields){
+      Object.keys(FIELDS).forEach(function(k){ FIELDS[k].classList.remove('is-invalid'); });
+      var first = null;
+      Object.keys(fields || {}).forEach(function(k){
+        if (FIELDS[k]) { FIELDS[k].classList.add('is-invalid'); first = first || FIELDS[k]; }
+      });
+      bookingOk.textContent = message;
+      bookingOk.classList.add('is-open', 'booking__ok--error');
+      if (first) first.focus();
+    }
+
     bookingForm.addEventListener('submit', function(e){
       e.preventDefault();
+      bookingOk.classList.remove('is-open', 'booking__ok--error');
+      Object.keys(FIELDS).forEach(function(k){ FIELDS[k].classList.remove('is-invalid'); });
+
       var name = bkName.value.trim(), phone = bkPhone.value.trim(), mail = bkMail.value.trim();
-      if (!name || !phone || !mail) {
-        bookingOk.textContent = 'Please fill in your name, phone and email so we can confirm the date.';
-        bookingOk.classList.add('is-open');
-        return;
-      }
-      bookingForm.classList.remove('is-open');
       var isCustom = toSel.options[toSel.selectedIndex].getAttribute('data-price') === null;
-      bookingOk.innerHTML = 'Thank you, ' + name.replace(/[<>&]/g, '') + '. We have your request for <b>'
-        + routeLabel.textContent + '</b> on ' + dateInp.value + ' at ' + timeInp.value
-        + (hasReturn ? ', returning ' + retDate.value + ' at ' + retTime.value : '')
-        + (isCustom
-            ? '. We will price this route and email ' + mail.replace(/[<>&]/g, '') + ' within a couple of hours.'
-            : '. We will send the €30 or $35 deposit link to ' + mail.replace(/[<>&]/g, '') + ' shortly.');
-      bookingOk.classList.add('is-open');
+
+      submitBtn.disabled = true;
+      submitLabel.textContent = MESSAGES.sending;
+
+      // the quote travels with the enquiry, so it arrives already priced
+      var body = {
+        name: name, phone: phone, email: mail,
+        route: routeLabel.textContent,
+        date: dateInp.value, time: timeInp.value,
+        returnDate: hasReturn ? retDate.value : '',
+        returnTime: hasReturn ? retTime.value : '',
+        passengers: paxSel.value,
+        skiBags: skiSel ? skiSel.options[skiSel.selectedIndex].text : '',
+        vehicles: bdCars.textContent,
+        price: priceValue.textContent,
+        website: trapInput ? trapInput.value : '',
+        page: location.pathname
+      };
+
+      fetch('send-form.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      }).then(function(res){
+        return res.json().catch(function(){ return {}; }).then(function(payload){
+          return { ok: res.ok, payload: payload };
+        });
+      }).then(function(r){
+        if (r.ok && r.payload.ok) {
+          bookingForm.classList.remove('is-open');
+          var safe = function(v){ return String(v == null ? '' : v).replace(/[<>&"]/g, ''); };
+          var ref  = safe(r.payload.ref);
+          var pay  = r.payload.pay_url || '';
+
+          var html = F('Thank you, {name}. We have your request for <b>{route}</b> on {date} at {time}', {
+            name: safe(name), route: routeLabel.textContent,
+            date: dateInp.value, time: timeInp.value
+          })
+            + (hasReturn ? F(', returning {date} at {time}', { date: retDate.value, time: retTime.value }) : '')
+            + (isCustom
+                ? T('. We will price this route and get back to you within a couple of hours.')
+                : T('. We will be in touch shortly to confirm.'));
+
+          if (ref) {
+            html += '<span class="booking__ref">'
+                 +  F('Your reference <b>{ref}</b>', { ref: ref })
+                 +  '</span>';
+          }
+
+          // Only offered once the price is settled — there is nothing to pay a
+          // deposit against while a route is still "on request".
+          if (pay && !isCustom) {
+            html += '<a class="booking__pay" href="' + pay.replace(/"/g, '&quot;') + '"'
+                 +  ' target="_blank" rel="noopener">'
+                 +  '<span>' + F('Pay the {amount} deposit', { amount: DEPOSIT_LABEL }) + '</span>'
+                 +  '<svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>'
+                 +  '</a>'
+                 +  '<span class="booking__payhint">'
+                 +  F('Please quote <b>{ref}</b> in the payment note so we can match it to your booking. ' +
+                      'Your date is held once the deposit arrives.', { ref: ref })
+                 +  '</span>';
+          }
+
+          bookingOk.innerHTML = html;
+          bookingOk.classList.add('is-open');
+          return;
+        }
+        showError(MESSAGES[r.payload.error] || MESSAGES.delivery_failed, r.payload.fields);
+      }).catch(function(){
+        showError(MESSAGES.network);
+      }).then(function(){
+        submitBtn.disabled = false;
+        submitLabel.textContent = idleLabel;
+      });
     });
   }
 
   document.querySelectorAll('[data-calc]').forEach(initCalc);
+
+  /* ---------- language selector ----------
+     The options are plain links, so this only opens and closes the menu — with
+     JavaScript off the <ul> is still in the markup and still navigable. */
+  (function(){
+    var box = document.querySelector('.lang');
+    if (!box) return;
+    var btn = box.querySelector('.lang__btn');
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var open = box.hasAttribute('data-open');
+      if (open) box.removeAttribute('data-open'); else box.setAttribute('data-open', '');
+      btn.setAttribute('aria-expanded', String(!open));
+    });
+    document.addEventListener('click', function(){
+      box.removeAttribute('data-open');
+      btn.setAttribute('aria-expanded', 'false');
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') {
+        box.removeAttribute('data-open');
+        btn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  })();
 
   /* ---------- active nav link on scroll ---------- */
   var sections = ['top','calculator','fleet','about','reviews','faq','book','contact'];

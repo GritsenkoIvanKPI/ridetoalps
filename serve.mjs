@@ -18,14 +18,17 @@ const MIME = {
   '.gif': 'image/gif',
   '.svg': 'image/svg+xml',
   '.webp': 'image/webp',
+  '.avif': 'image/avif',
   '.woff': 'font/woff',
   '.woff2': 'font/woff2',
   '.ico': 'image/x-icon',
 };
 
 http.createServer((req, res) => {
-  let urlPath = req.url.split('?')[0];
-  if (urlPath === '/') urlPath = '/index.html';
+  let urlPath = decodeURIComponent(req.url.split('?')[0]);
+  // Apache serves DirectoryIndex for a path ending in '/', which is how the
+  // language versions are addressed: /de/ must reach /de/index.html.
+  if (urlPath.endsWith('/')) urlPath += 'index.html';
   const filePath = path.join(__dirname, urlPath);
   const ext = path.extname(filePath).toLowerCase();
   const mime = MIME[ext] || 'application/octet-stream';

@@ -1,6 +1,33 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+<!-- Google tag (gtag.js) + Google Tag Manager, with Consent Mode v2.
+     The tags load immediately so Google can detect them, but every storage
+     type starts DENIED: no cookies are written and no identifiers are sent
+     until the visitor accepts in the banner (consent.js flips them to
+     granted). Removing the consent block would make this unlawful in
+     Germany under § 25 TDDDG. -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'denied',
+    functionality_storage: 'granted',
+    security_storage: 'granted',
+    wait_for_update: 500
+  });
+  gtag('js', new Date());
+  gtag('config', 'G-39Y7WT9DKR', { anonymize_ip: true });
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+    var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+    j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+    f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TC59WJXP');
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-39Y7WT9DKR"></script>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Allgemeine Geschäftsbedingungen | ridetoalps</title>
@@ -12,19 +39,20 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="legal.css">
+<script src="consent.js" defer></script>
 </head>
 <body>
 
 <header class="top">
   <div class="top__in">
-    <a class="brand" href="index.html" aria-label="ridetoalps — Startseite">
+    <a class="brand" href="/" aria-label="ridetoalps — Startseite">
       <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
         <rect width="40" height="40" rx="9" fill="#0e63e4"/>
         <path d="M6.6 28.4 15.1 12.6l5.2 9.2 3.2-5.8 9.9 12.4Z" fill="#fff"/>
       </svg>
       <span>ridetoalps</span>
     </a>
-    <a class="back" href="index.html">
+    <a class="back" href="/">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m7-7-7 7 7 7"/></svg>
       Zur Startseite
     </a>
@@ -69,7 +97,10 @@
   <div class="foot__in">
     <p>© <span id="yr">2026</span> ridetoalps</p>
     <nav>
-      <a href="index.html">Startseite / Home</a>
+      <a href="/">Home (EN)</a>
+      <a href="/de/">Startseite (DE)</a>
+      <a href="/ru/">Главная (RU)</a>
+      <a href="/uk/">Головна (UK)</a>
       <a href="impressum.html">Impressum</a>
       <a href="datenschutz.html">Datenschutz / Privacy</a>
     </nav>

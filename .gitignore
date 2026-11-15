@@ -16,3 +16,14 @@ Snou _ Бриф.txt
 # licensed skill documents
 SKILL.md
 SKILL canvas.md
+
+# form secrets — the bot token lives here, created directly on the server
+config.php
+
+# upload bundle — regenerate with `node build-deploy.mjs`
+deploy/
+deploy.zip
+
+# client-facing operations document (payment checking): business detail,
+# kept out of this PUBLIC repo. Remove this line to publish it.
+Інструкція — перевірка оплат ridetoalps.docx

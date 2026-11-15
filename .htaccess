@@ -1,0 +1,119 @@
+# ridetoalps — Apache configuration
+#
+# Every block is wrapped in <IfModule> so that a module the host does not load
+# is skipped rather than throwing a 500 for the whole site.
+
+# ----------------------------------------------------------------------------
+# Protect the Telegram bot token.
+#
+# config.php returns an array and prints nothing, so a request for it is empty
+# while PHP is running. If PHP is ever disabled or misconfigured, Apache would
+# fall back to serving it as plain text and the token would be readable by
+# anyone. This denies the request outright, whatever PHP is doing.
+# ----------------------------------------------------------------------------
+<FilesMatch "^(config\.php|config\.example\.php|\.gitignore|.*\.(mjs|json|md))$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+# site.webmanifest must stay reachable despite the .json-ish rule above
+<Files "site.webmanifest">
+  <IfModule mod_authz_core.c>
+    Require all granted
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Allow from all
+  </IfModule>
+</Files>
+
+# ----------------------------------------------------------------------------
+# MIME types
+#
+# The host currently returns site.webmanifest as text/html, which makes browsers
+# ignore it, so the icons and "add to home screen" data never apply.
+# ----------------------------------------------------------------------------
+<IfModule mod_mime.c>
+  AddType application/manifest+json  .webmanifest
+  AddType image/webp                 .webp
+  AddType font/woff2                 .woff2
+  AddType image/svg+xml              .svg
+  AddType image/x-icon               .ico
+  AddType application/xml            .xml
+</IfModule>
+
+# ----------------------------------------------------------------------------
+# Caching
+#
+# The host sends no Cache-Control at all, so browsers guess. Fingerprint-free
+# assets that rarely change get a long life; HTML must always be revalidated or
+# visitors keep seeing an old page after a deploy.
+# ----------------------------------------------------------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html                  "access plus 0 seconds"
+  ExpiresByType text/css                   "access plus 7 days"
+  ExpiresByType application/javascript     "access plus 7 days"
+  ExpiresByType text/javascript            "access plus 7 days"
+  ExpiresByType image/webp                 "access plus 1 year"
+  ExpiresByType image/jpeg                 "access plus 1 year"
+  ExpiresByType image/png                  "access plus 1 year"
+  ExpiresByType image/svg+xml              "access plus 1 year"
+  ExpiresByType image/x-icon               "access plus 1 year"
+  ExpiresByType font/woff2                 "access plus 1 year"
+  ExpiresByType application/manifest+json  "access plus 7 days"
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(jpg|jpeg|png|webp|svg|ico|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+
+  # The endpoint posts JSON; never let a proxy cache a reply.
+  <Files "send-form.php">
+    Header set Cache-Control "no-store"
+  </Files>
+
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# ----------------------------------------------------------------------------
+# Compression — woff2 and jpg are already compressed, so they are left alone.
+# ----------------------------------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml
+  AddOutputFilterByType DEFLATE application/javascript text/javascript application/json
+  AddOutputFilterByType DEFLATE application/manifest+json application/xml
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# ----------------------------------------------------------------------------
+# Force HTTPS. The privacy notice states the site is delivered over TLS, so
+# plain HTTP must not be reachable.
+# ----------------------------------------------------------------------------
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+</IfModule>
+
+# Directory listings off, in case a folder ever loses its index file.
+<IfModule mod_autoindex.c>
+  Options -Indexes
+</IfModule>
+
+ErrorDocument 404 /index.html
