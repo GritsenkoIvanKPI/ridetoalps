@@ -29,6 +29,7 @@ const ROOT_FILES = [
   'favicon.ico', 'favicon.svg', 'favicon-16.png', 'favicon-32.png',
   'apple-touch-icon.png', 'icon-192.png', 'icon-512.png',
   'site.webmanifest', 'robots.txt', 'sitemap.xml',
+  'llms.txt', 'llms-full.txt',
 ];
 
 const NEVER_UPLOAD = [
@@ -36,7 +37,7 @@ const NEVER_UPLOAD = [
   'README.md', 'CLAUDE.md', 'GEMINI_IMAGE_GENERATION.md', 'SKILL.md',
   'config.example.php', '.gitignore', 'desktop.png',
   'routes.data.mjs', 'build-routes.mjs', 'build-routes-index.mjs',
-  'build-i18n.mjs', 'build-sitemap.mjs', 'build.mjs',
+  'build-i18n.mjs', 'build-sitemap.mjs', 'build.mjs', 'build-llms.mjs',
   'check-links.mjs', 'check-layout.mjs',
   'Інструкція — перевірка оплат ridetoalps.docx',
   'htaccess.txt',

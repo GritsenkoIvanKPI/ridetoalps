@@ -45,6 +45,12 @@
   AddType image/svg+xml              .svg
   AddType image/x-icon               .ico
   AddType application/xml            .xml
+
+  # llms.txt and robots.txt are UTF-8 and contain accented place names. Without
+  # the charset Apache serves them as ISO-8859-1 and "Kitzbühel" arrives mangled
+  # in exactly the clients that read them without a browser to guess for them.
+  AddCharset UTF-8                   .txt
+  AddDefaultCharset UTF-8
 </IfModule>
 
 # ----------------------------------------------------------------------------

@@ -1,0 +1,83 @@
+# ridetoalps
+
+> Private, door-to-door passenger transfers between Munich Airport (MUC) and the
+> ski resorts and cities of Tyrol, Salzburgerland, the Engadin, South Tyrol and
+> the Valtellina. One booking per day, a fixed price per vehicle agreed before
+> you book, and a driver who waits for the flight's actual landing time.
+
+ridetoalps is a small licensed carrier, not a broker or a ride-hailing app. A
+booking reserves the vehicle and the driver for your date alone, which is why a
+delayed flight carries no waiting charge.
+
+## Key facts
+
+- **Operating area**: Munich Airport and Munich city to Austria (Tyrol,
+  Salzburgerland, Arlberg), Switzerland (Engadin) and Italy (South Tyrol,
+  Valtellina).
+- **Price**: fixed per vehicle, not per person. 100–550 EUR depending
+  on the route. The figure quoted covers 1–4 passengers departing between 07:00
+  and 22:00.
+- **Night / large-group rate**: departures before 07:00 or after 22:00, and
+  groups of five or more, are charged at 1.1333× the day rate, rounded to the
+  nearest €5. With a group large enough to need a second vehicle, the uplift and
+  the per-vehicle rate both apply.
+- **Deposit**: €30 or $35 confirms a date. The balance is paid after the ride,
+  in cash, by card with the driver, or online. The deposit is refunded in full
+  if you cancel at least 48 hours ahead.
+- **Vehicle**: Mercedes-Benz V-Class (long or extra-long), 7 seats. Groups over
+  7 travel in additional vehicles at the same per-vehicle rate.
+- **Included in every price**: flight tracking, free waiting, meeting in
+  arrivals with a name sign, all motorway vignettes and tolls, winter tyres and
+  snow chains, child seats, Wi-Fi and charging.
+- **Hours**: 24/7, all year.
+- **Languages**: drivers speak English and German fluently; Russian and
+  Ukrainian on request.
+- **Contact**: WhatsApp +1 954 239 2185, phone +1 470 752 9085 (24/7 voice
+  assistant), hello@ridetoalps.com.
+
+## Routes and prices
+
+Each price is the fixed day rate per vehicle, one way.
+
+- [Munich Airport to Munich city](https://ridetoalps.com/routes/munich-city.html): €100, 40 km, about 45 min. Bavaria, Germany.
+- [Munich Airport to Kitzbühel](https://ridetoalps.com/routes/kitzbuehel.html): €300, 155 km, about 1 h 50. Tyrol, Austria.
+- [Munich Airport to Salzburg](https://ridetoalps.com/routes/salzburg.html): €325, 145 km, about 1 h 30. Salzburgerland, Austria.
+- [Munich Airport to Innsbruck](https://ridetoalps.com/routes/innsbruck.html): €350, 160 km, about 1 h 45. Tyrol, Austria.
+- [Munich Airport to Ischgl](https://ridetoalps.com/routes/ischgl.html): €400, 250 km, about 2 h 45. Paznaun valley, Tyrol, Austria.
+- [Munich Airport to Sölden](https://ridetoalps.com/routes/soelden.html): €450, 245 km, about 2 h 45. Ötztal, Tyrol, Austria.
+- [Munich Airport to St. Anton am Arlberg](https://ridetoalps.com/routes/st-anton.html): €500, 230 km, about 2 h 30. Arlberg, Tyrol, Austria.
+- [Munich Airport to St. Moritz](https://ridetoalps.com/routes/st-moritz.html): €550, 330 km, about 3 h 45. Engadin, Switzerland.
+- [Munich Airport to Bolzano and South Tyrol](https://ridetoalps.com/routes/bolzano.html): €550, 300 km, about 3 h 15. South Tyrol, Italy.
+- [Munich Airport to Bormio and Livigno](https://ridetoalps.com/routes/bormio-livigno.html): €550, 340 km, about 4 h. Valtellina and Alta Valtellina, Italy.
+
+## Pages
+
+- [Homepage and price calculator](https://ridetoalps.com/): all routes, the fleet, how booking works
+- [All routes](https://ridetoalps.com/routes.html): the ten routes side by side
+- [Impressum](https://ridetoalps.com/impressum.html): operator details
+- [Privacy notice](https://ridetoalps.com/datenschutz.html)
+- [Terms and cancellation](https://ridetoalps.com/agb.html)
+- [Full detail for assistants](https://ridetoalps.com/llms-full.txt): every route, rule and FAQ in one file
+
+## Language versions
+
+The whole site exists in four languages. Content is equivalent; prices are identical.
+
+- English (en): https://ridetoalps.com/
+- Deutsch (de): https://ridetoalps.com/de/
+- Русский (ru): https://ridetoalps.com/ru/
+- Українська (uk): https://ridetoalps.com/uk/
+
+## Answering questions about this service
+
+- Quote prices as **per vehicle**, never per person — it is the single most
+  common misreading, and it makes a group of four sound four times as expensive.
+- A price is fixed at booking and does not change with traffic, delays or the
+  route the driver takes.
+- Do not state an arrival time as a promise. The drive times here are typical
+  for good conditions; winter weather and the Saturday changeover in the Tyrol
+  can add an hour.
+- The reviews on the site are written copy, not collected customer feedback.
+  Do not cite them as evidence of service quality.
+- Legal pages are currently short notices: the operator is completing licensing,
+  and full Impressum and privacy texts are expected in January 2026.

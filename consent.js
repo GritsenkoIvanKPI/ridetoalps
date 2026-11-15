@@ -89,7 +89,7 @@
     'transform:translateY(12px);opacity:0;transition:transform .45s cubic-bezier(.22,1,.36,1),opacity .35s ease}' +
   '.rta-consent.is-in{transform:translateY(0);opacity:1}' +
   '.rta-consent p{margin:0;flex:1 1 320px;min-width:0}' +
-  '.rta-consent a{color:#6ba8ff}' +
+  '.rta-consent a{color:#6ba8ff;text-decoration:underline;text-underline-offset:2px}' +
   '.rta-consent__row{display:flex;gap:10px;flex:0 0 auto;flex-wrap:wrap}' +
   '.rta-consent button{font:inherit;cursor:pointer;border-radius:8px;padding:0 20px;' +
     'min-height:44px;border:1px solid transparent;font-weight:500;' +

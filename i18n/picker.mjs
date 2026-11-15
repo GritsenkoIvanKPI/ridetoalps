@@ -21,8 +21,11 @@ export function langPicker(current, urlFor, { label = 'Change language' } = {}) 
            `${here ? ' aria-current="true"' : ''}>${l.native}</a></li>`;
   }).join('\n');
 
+  // The accessible name has to contain the visible text. A button that reads
+  // "EN" but announces only "Change language" fails WCAG 2.5.3, and breaks
+  // voice control: saying "click EN" then matches nothing.
   return `<div class="lang">
-        <button class="lang__btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="${label}">
+        <button class="lang__btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="${code} — ${label}">
           ${code} ${CHEVRON}
         </button>
         <ul class="lang__menu">

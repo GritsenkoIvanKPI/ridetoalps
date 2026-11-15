@@ -16,6 +16,7 @@ const STEPS = [
   ['build-routes.mjs',         'route landing pages'],
   ['build-routes-index.mjs',   'route hub pages'],
   ['build-sitemap.mjs',        'sitemap'],
+  ['build-llms.mjs',           'llms.txt for AI assistants'],
 ];
 
 for (const [script, what] of STEPS) {

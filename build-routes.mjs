@@ -25,6 +25,7 @@ import { LANGS, SITE, byCode } from './i18n/config.mjs';
 import { localize } from './i18n/localize.mjs';
 import { loadMap, loadUi } from './i18n/load.mjs';
 import { langPicker, alternates } from './i18n/picker.mjs';
+import { header } from './i18n/nav.mjs';
 
 const PHONE = '+14707529085', PHONE_FMT = '+1 470 752 9085';
 const WA = '19542392185', WA_FMT = '+1 954 239 2185';
@@ -53,7 +54,10 @@ function reroot(s, lang) {
   const b = lang === 'en' ? '' : '/' + lang;
   return s
     .replace(/(\s(?:src|href)=")(images\/)/g, '$1/$2')
-    .replace(/(\ssrcset=")(images\/)/g, '$1/$2')
+    // every URL in the list, not just the first: a srcset holds several,
+    // and a half-rewritten one silently 404s the widths it did not touch
+    .replace(/\s(srcset|imagesrcset)="([^"]*)"/g,
+             (m, attr, val) => ' ' + attr + '="' + val.replace(/(^|,\s*)images\//g, '$1/images/') + '"')
     .replace(/(\shref=")routes\.html"/g, `$1${b}/routes.html"`)
     .replace(/(\shref=")routes\/([a-z0-9-]+)\.html"/g, `$1${b}/routes/$2.html"`)
     .replace(/(\shref=")(impressum|datenschutz|agb)\.html"/g, '$1/$2.html"')
@@ -83,6 +87,24 @@ function pic(jpg, alt, cls, extra = '') {
          `<img src="${jpg}" alt="${esc(alt)}"${cls ? ` class="${cls}"` : ''} ${extra}></picture>`;
 }
 
+/* The route hero spans the viewport, so a phone is handed a 1376px photograph
+   it can only show at about 400 — and on a throttled CPU the AVIF decode of
+   the oversized one costs more than the download it saved. These are the
+   widths build-images produced; `sizes` is 100vw because the frame is
+   full-bleed apart from the --shell gutter. */
+const HERO_SIZES = '100vw';
+const heroSet = (base, ext) =>
+  `${base}-768.${ext} 768w, ${base}-1100.${ext} 1100w, ${base}.${ext} 1376w`;
+
+function heroPic(jpg, alt, extra = '') {
+  const base = jpg.replace(/\.jpg$/, '');
+  return `<picture>` +
+         `<source type="image/avif" sizes="${HERO_SIZES}" srcset="${heroSet(base, 'avif')}">` +
+         `<source type="image/webp" sizes="${HERO_SIZES}" srcset="${heroSet(base, 'webp')}">` +
+         `<img src="${base}-1100.jpg" sizes="${HERO_SIZES}" srcset="${heroSet(base, 'jpg')}" ` +
+         `alt="${esc(alt)}" ${extra}></picture>`;
+}
+
 /* ---------- one page ---------- */
 
 function page(r, all, L) {
@@ -100,11 +122,24 @@ function page(r, all, L) {
     '@context': 'https://schema.org',
     inLanguage: lang.intl,
     '@graph': [
-      { '@type': 'Service', name: r.h1, serviceType: t.serviceType,
-        provider: { '@type': 'LimousineService', name: 'ridetoalps', url: SITE + '/' },
+      // provider is an @id rather than a repeated description: this is the same
+      // business as the one described on the homepage, and one identifier lets a
+      // search engine or an assistant join the ten route pages into a single
+      // operator instead of ten lookalike companies
+      { '@type': 'Service', '@id': SITE + url(code) + '#service',
+        name: r.h1, serviceType: t.serviceType,
+        provider: { '@id': SITE + '/#business' },
         areaServed: { '@type': 'Place', name: `${r.dest}, ${r.region}` },
-        offers: { '@type': 'Offer', price: String(r.price), priceCurrency: 'EUR',
-                  description: t.offerDesc } },
+        offers: { '@type': 'Offer', url: SITE + url(code),
+                  price: String(r.price), priceCurrency: 'EUR',
+                  description: t.offerDesc,
+                  // the price buys a vehicle, not a seat. Stated outright so it
+                  // need not be inferred from the sentence above — reading it as
+                  // per-person is the mistake that quotes a family of four
+                  // four times the real fare
+                  eligibleQuantity: { '@type': 'QuantitativeValue',
+                                      minValue: 1, maxValue: 4,
+                                      unitText: 'passenger' } } },
       { '@type': 'FAQPage',
         mainEntity: r.faqs.map(([q, a]) => ({ '@type': 'Question', name: q,
           acceptedAnswer: { '@type': 'Answer', text: a } })) },
@@ -135,8 +170,11 @@ function page(r, all, L) {
   return `<!DOCTYPE html>
 <html lang="${code}">
 <head>
-${GTAG}
+<!-- charset first: the declaration must fall inside the first 1024 bytes,
+     and the Google tag alone is longer than that -->
 <meta charset="utf-8">
+<script>document.documentElement.className+=" js";</script>
+${GTAG}
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(desc)}">
@@ -155,38 +193,23 @@ ${alternates(url)}
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preload" as="image" href="/${r.hero.replace(/\.jpg$/, '.avif')}" type="image/avif" fetchpriority="high">
+<!-- imagesrcset must match the <source> in the hero exactly, or the preload
+     fetches a width the picture then ignores -->
+<link rel="preload" as="image" type="image/avif" fetchpriority="high" imagesizes="${HERO_SIZES}" imagesrcset="${heroSet('/' + r.hero.replace(/\.jpg$/, ''), 'avif')}">
 <link rel="stylesheet" href="/route.css">
 <script src="/consent.js" defer></script>
 <script type="application/ld+json">${JSON.stringify(ld)}</script>
 </head>
 <body>
 
-<header class="rhead">
-  <div class="rhead__in">
-    <a class="brand" href="${b}/" aria-label="${esc(M('ridetoalps home'))}">
-      <svg class="brand__mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-        <rect width="40" height="40" rx="12" fill="#0e63e4"/>
-        <path d="M8 27.5 16 14l4.6 7.6L23.5 17l8.5 10.5H8Z" fill="#fff"/>
-      </svg>
-      <span class="brand__name">ridetoalps</span>
-    </a>
-    <nav class="rhead__nav">
-      <a href="${b}/">${esc(M('Home'))}</a>
-      <a href="${b}/routes.html">${esc(M('All routes'))}</a>
-      <a href="#calculator">${esc(M('Price'))}</a>
-      <a href="#faq">${esc(M('FAQ'))}</a>
-      ${langPicker(code, url, { label: M('Change language') })}
-    </nav>
-  </div>
-</header>
+${header({ code, routes: all, map, t, current: r.slug, urlFor: url })}
 
 <main>
 
 <!-- hero -->
 <section class="rhero">
   <div class="rhero__frame grain">
-    <div class="rhero__media">${pic('/' + r.hero, r.heroAlt, '', 'fetchpriority="high" width="1600" height="900"')}</div>
+    <div class="rhero__media">${heroPic('/' + r.hero, r.heroAlt, 'fetchpriority="high" width="1600" height="900"')}</div>
     <div class="rhero__body">
       <p class="rhero__crumb"><a href="${b}/">${esc(t.crumbHome)}</a> › <a href="${b}/routes.html">${esc(t.crumbRoutes)}</a> › ${esc(r.destShort)}</p>
       <h1>${esc(r.h1)}</h1>
@@ -251,7 +274,7 @@ ${calc}
 <section class="section-spacing">
   <div class="container">
     <div class="rsplit">
-      <div class="rsplit__media reveal">${pic('/' + r.hero, r.heroAlt, '', 'loading="lazy" width="1600" height="900"')}</div>
+      <div class="rsplit__media reveal">${heroPic('/' + r.hero, r.heroAlt, 'loading="lazy" width="1600" height="900"')}</div>
       <div class="reveal">
         <span class="eyebrow">${esc(r.region)}</span>
         <h2>${esc(t.aboutDest(r))}</h2>
@@ -324,7 +347,7 @@ ${L.fleet.split('\n').slice(1).join('\n')}
     <h2 class="head-center reveal">${esc(t.guests(r))}</h2>
     <div class="reviews reveal" id="reviewsTrack">
       ${r.reviews.map(([text, name, rating]) => `<article class="review">
-        <div class="stars" aria-label="${esc(M(`${rating} out of 5`))}">${[1, 2, 3, 4, 5].map(i => star(i <= rating)).join('')}</div>
+        <div class="stars" role="img" aria-label="${esc(M(`${rating} out of 5`))}">${[1, 2, 3, 4, 5].map(i => star(i <= rating)).join('')}</div>
         <p>${esc(text)}</p>
         <div class="review__by"><span>${esc(name)}</span></div>
       </article>`).join('\n      ')}

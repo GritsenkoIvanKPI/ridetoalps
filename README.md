@@ -38,12 +38,15 @@ and reaches 48 pages on the next build. A change made in `de/index.html` is lost
 | `build-routes.mjs` | Ten route pages per language → `routes/`, `<lang>/routes/` |
 | `build-routes-index.mjs` | The routes hub per language → `routes.html`, `<lang>/routes.html` |
 | `build-sitemap.mjs` | `sitemap.xml`, with hreflang alternates for all 48 pages |
+| `build-llms.mjs` | `llms.txt` and `llms-full.txt` — the service, in plain text, for AI assistants |
 | `build-deploy.mjs` | Assembles `deploy/` — exactly what belongs in `public_html` |
 | `route.css`, `route.js` | Styles and script for the generated pages |
 | `consent.js` | Consent Mode v2 banner, in all four languages |
 | `send-form.php` | Booking form endpoint → Telegram |
 | `check-links.mjs` | Every internal link, asset and hreflang on all 48 pages |
 | `check-layout.mjs` | Overflow and script errors, every language × four widths |
+| `robots.txt` | Crawler access — search engines and AI assistants, named explicitly |
+| `i18n/nav.mjs` | The header shared by every generated page |
 | `serve.mjs`, `screenshot.mjs` | Dev server and Puppeteer screenshot helper |
 
 ## How the translation works
@@ -102,14 +105,41 @@ quietly reverting three languages to English.
 
 ```bash
 node serve.mjs &
-node check-links.mjs     # 2,600 references across 51 pages
+node check-links.mjs     # every link, asset and hreflang on 51 pages, and that
+                         # each homepage still links all ten routes
 node check-layout.mjs    # 4 languages × 4 widths, overflow and JS errors
 node i18n/check.mjs      # stray characters in the translation files
 ```
 
+`serve.mjs` applies the same gzip, cache and charset headers as `.htaccess`, so a
+local Lighthouse run measures something close to the real site rather than
+reporting compression failures that only exist on the dev server.
+
+Current scores, mobile: **95–98** performance, **100** accessibility, **100** best
+practices, **100** SEO. Desktop is 100 across the board.
+
 `check-links.mjs` reports the three legal pages as having no hreflang alternates. That is
 deliberate — they are documents under German law and all four language versions link to
 the same copy.
+
+## Being found
+
+Three audiences, handled separately.
+
+- **Search engines.** `robots.txt` names Googlebot, Bingbot and the rest
+  explicitly; `sitemap.xml` lists all 48 pages with their language alternates;
+  every page carries JSON-LD.
+- **AI assistants.** ChatGPT, Claude, Gemini and Perplexity increasingly answer
+  "how do I get from Munich Airport to Kitzbühel" without the person opening a
+  page. `robots.txt` allows their crawlers by name, and `llms.txt` /
+  `llms-full.txt` give them the routes, prices and rules as plain text,
+  generated from `routes.data.mjs` so they cannot drift from the calculator.
+- **Link previews.** Open Graph and Twitter cards on every page, in the page's
+  own language.
+
+The structured data states `eligibleQuantity: 1–4 passengers` on every offer.
+That is deliberate: the price is per vehicle, and an assistant that reads it as
+per person quotes a family of four four times the real fare.
 
 ## Deploying
 

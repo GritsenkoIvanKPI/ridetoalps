@@ -1,0 +1,373 @@
+# ridetoalps — full reference
+
+> Private door-to-door transfers from Munich Airport (MUC) to the Alps. This
+> file contains every route, price, rule and answer published on the site, so
+> that a question can be answered from one fetch.
+
+Generated from the same data as the website. Last built 2026-11-15.
+
+## How pricing works
+
+A price is quoted **per vehicle**, not per passenger, and is fixed before you
+book. It covers 1–4 passengers on a departure between 07:00 and 22:00.
+
+- Departures before 07:00 or after 22:00 use the night rate.
+- Groups of **five or more** use the same higher rate, whatever the hour.
+- The uplift is 1.1333× the day rate, rounded to the nearest €5.
+- Groups over 7 people travel in more than one vehicle. Each vehicle is charged
+  at the route rate, and because such a group is also over five, the uplift
+  applies on top.
+- A return journey is priced as a second transfer, on its own departure time —
+  so an evening flight home can attract the night rate even when the outbound
+  did not.
+- A deposit of €30 or $35 confirms the date; the balance is paid after the ride.
+- Cancel 48 hours or more before the booked date and the deposit is refunded in
+  full. Later than that, it is not refundable.
+
+### Worked example
+
+Kitzbühel is €300 by day for up to four people. The same journey leaving at
+23:30, or with six passengers, is €340. Nine passengers need two vehicles and are
+also over five, so both adjustments apply: €680.
+
+## What every price includes
+
+- **Flight tracking** — We watch your flight and meet your actual landing time, not the schedule. Delays cost you nothing.
+- **Meet in arrivals** — Your driver waits in the arrivals hall with a name sign, reachable on WhatsApp from the moment you land.
+- **All tolls and vignettes** — Austrian motorway vignette, Brenner and tunnel tolls, winter tyres and snow chains — all in the quoted price.
+- **Luggage and ski bags** — One suitcase and one cabin bag per person, plus a ski or board bag per two people. Roof box on request.
+- **Child seats** — Fitted before we collect you, at no extra charge. Tell us the age and weight when you book.
+- **Wi-Fi and charging** — On board, so the group arrives having actually rested.
+
+## Fleet
+
+- Mercedes-Benz V-Class V250 long wheelbase — 6 passengers, 6 cases, ski bags on
+  a roof box
+- Mercedes-Benz V-Class V250 extra long wheelbase — 7 passengers, 7 cases, roof box
+- Peugeot Traveller extra long — substitute vehicle of equivalent size
+- Škoda Octavia, Jeep Compass — smaller substitutes, assigned only when the
+  group fits
+
+Every booking is assigned a V-Class or an equivalent vehicle.
+
+## How to book
+
+1. Get a price on the site, or ask on WhatsApp. The calculator shows the fixed
+   total for your route, date, time and group size.
+2. Pay the €30 / $35 deposit. That reserves the date — and because only one
+   booking is taken per day, the date is then unavailable to anyone else.
+3. The driver tracks your flight and meets you in arrivals with a name sign.
+   The balance is paid at the end of the ride.
+
+## Routes
+
+### Munich Airport to Munich city
+
+- **Price**: €100 per vehicle, one way (day rate, 1–4 passengers)
+- **Night / large-group rate**: €115
+- **Distance**: 40 km
+- **Typical drive time**: 45 min
+- **Region**: Bavaria, Germany
+- **Page**: https://ridetoalps.com/routes/munich-city.html
+
+The short hop into town — a fixed €100 whether you are heading to a hotel in Altstadt, a flat in Schwabing or the Messe.
+
+**The drive.** The airport sits about 30 km north-east of the city, and the drive is almost entirely motorway: the A92 west, then the A99 ring road south before dropping into town. Outside rush hour it is a comfortable 40 minutes. Between roughly 07:00 and 09:30, and again from 16:00 to 18:30, the A9 into the centre can add twenty minutes or more, so we build that into the plan rather than leaving you watching the clock.
+
+No mountain passes, no tolls, no seasonal closures — this is the one route that is the same in January and July.
+
+**About Munich.** Munich rewards an early start. The Altstadt is compact enough to walk end to end in half an hour, from Marienplatz and the Viktualienmarkt to the Hofbräuhaus and the Residenz. If you are connecting onward to the Alps the next morning, staying near the Hauptbahnhof or Sendlinger Tor keeps everything close. Many of our guests use this transfer as the first or last leg of a longer trip — airport to hotel on arrival, hotel to airport on the way home, same fixed price in both directions.
+
+**Questions about this route**
+
+- *Does the €100 apply to any address in Munich?*
+  Yes — any hotel or private address inside the city. The fixed rate covers the airport run in either direction. For addresses well outside the ring road, tell us where and we will confirm before you book.
+- *What if my flight lands in rush hour?*
+  We plan for it. Your driver is already tracking the flight and allows for the A9 backing up between 07:00–09:30 and 16:00–18:30. There is no waiting charge either way.
+- *Can you collect from the Messe or a conference venue?*
+  Yes. Give us the hall or entrance number when you book — Messe München has several and ending up at the wrong one costs everybody time.
+- *Is this cheaper than a taxi?*
+  Roughly comparable on the meter, but fixed. A Munich taxi from the airport typically runs €75–110 depending on traffic, and traffic is exactly what you cannot predict. Our price does not move.
+
+### Munich Airport to Kitzbühel
+
+- **Price**: €300 per vehicle, one way (day rate, 1–4 passengers)
+- **Night / large-group rate**: €340
+- **Distance**: 155 km
+- **Typical drive time**: 1 h 50
+- **Region**: Tyrol, Austria
+- **Page**: https://ridetoalps.com/routes/kitzbuehel.html
+
+One of the easiest alpine runs from Munich — motorway almost to the valley floor, then a short climb into one of Tyrol’s best-known ski towns.
+
+**The drive.** From the airport you take the A8 south-east towards Salzburg, then turn off at Rosenheim onto the A93 down the Inn valley. At Kufstein you cross into Austria and the road follows the river to Wörgl, where the B170 and B161 climb the last stretch over the Pass Thurn side into Kitzbühel. It is a genuinely straightforward drive — around 155 km, roughly 1 h 50 in good conditions.
+
+The final climb is cleared constantly through the season, but after heavy snowfall it is the one section where we slow down. Allow a little extra on a Saturday in January, when the whole Tyrol changes over its chalets at once.
+
+**About Kitzbühel.** Kitzbühel is a medieval town first and a ski resort second, which is why it feels different from the purpose-built valleys further west. The painted facades along the Vorderstadt are the real thing, and the town stays busy in the evening long after the lifts close. The Hahnenkamm needs no introduction — the Streif is the most feared downhill on the World Cup calendar, and in late January the whole town turns out for it. For everyone else there are 230 km of pistes, a gondola from the edge of the centre, and the KitzSki link across to Kirchberg and Pass Thurn.
+
+**Questions about this route**
+
+- *How long does the drive really take in winter?*
+  Around 1 h 50 on clear roads. On a peak Saturday in January, with changeover traffic through Wörgl and fresh snow on the final climb, 2 h 15 is more realistic. We plan for the worse case rather than the brochure figure.
+- *Do you drop at the chalet or the town centre?*
+  At the door. Kitzbühel has a lot of narrow one-way streets in the old town — tell us the address when you book and we will work out the access rather than leaving you to drag cases across cobbles.
+- *Is the Austrian vignette included?*
+  Yes. The motorway vignette and every toll on the route are in the €300. The price you see is the price you pay.
+- *Can you take us to the Hahnenkamm races?*
+  Yes, and we would book early. The race weekend in late January is the single busiest date of the Tyrolean year and our one-booking-per-day rule means the date goes to whoever confirms first.
+- *What about ski and board bags?*
+  One bag per two people fits comfortably in a V-Class. Larger groups or unusual luggage — tell us and we will assign a car with a roof box.
+
+### Munich Airport to Salzburg
+
+- **Price**: €325 per vehicle, one way (day rate, 1–4 passengers)
+- **Night / large-group rate**: €370
+- **Distance**: 145 km
+- **Typical drive time**: 1 h 30
+- **Region**: Salzburgerland, Austria
+- **Page**: https://ridetoalps.com/routes/salzburg.html
+
+The fastest alpine city run from Munich — straight down the A8, no passes, no climbing, and you are in Mozart’s old town in ninety minutes.
+
+**The drive.** This is the simplest drive we do. The A8 runs south-east from the airport almost the whole way, past the Chiemsee and across the border at Walserberg into Salzburg. 145 km, about 1 h 30, and virtually all of it flat motorway. Because there is no mountain section, this route is the least affected by winter weather of any in our list.
+
+Worth knowing: the A8 around the Chiemsee is a well-known bottleneck on Friday afternoons and Sunday evenings in the ski season. We time around it where the flight allows.
+
+**About Salzburg.** Salzburg works as a destination and as a base. The old town is a UNESCO site and walkable end to end — Getreidegasse, the Residenz, Mozart’s birthplace, and the fortress above it all reached by funicular. In winter the Christkindlmarkt in the Domplatz runs through December and the city is noticeably quieter than Vienna. It is also the gateway to Salzburgerland proper: Zell am See, Saalbach and the Gastein valley are all within an hour, so a number of our guests fly to Munich, transfer to Salzburg for a night, then continue into the mountains.
+
+**Questions about this route**
+
+- *Why is Salzburg more expensive than Kitzbühel when it is closer?*
+  It is a shorter drive but a longer day for the car — Salzburg pick-ups and drop-offs are concentrated in the city centre, where access and waiting take longer than a chalet door. The rate reflects the round trip, not just the kilometres.
+- *Can you continue on to Zell am See or Saalbach?*
+  Yes — those are separate routes and we price them individually. Choose "Other destination" in the calculator and tell us where, and we will come back with a fixed figure.
+- *Is the old town accessible by car?*
+  Partly. Much of the centre is pedestrianised and some hotels are only reachable on foot from a nearby drop-off point. We know which ones, and we will tell you before the day rather than on arrival.
+- *Does the route cross a border?*
+  Yes, Germany into Austria at Walserberg. It is a Schengen crossing with no routine checks, though occasional spot controls happen. Bring your passport or ID card.
+
+### Munich Airport to Innsbruck
+
+- **Price**: €350 per vehicle, one way (day rate, 1–4 passengers)
+- **Night / large-group rate**: €395
+- **Distance**: 160 km
+- **Typical drive time**: 1 h 45
+- **Region**: Tyrol, Austria
+- **Page**: https://ridetoalps.com/routes/innsbruck.html
+
+Motorway the whole way down the Inn valley, into the only city in the Alps where the mountains start at the end of the street.
+
+**The drive.** A8 south-east to Rosenheim, A93 down to Kufstein and the Austrian border, then the A12 Inntal autobahn follows the river all the way to Innsbruck. Around 160 km and 1 h 45. Because the entire route is motorway along a valley floor, it stays open and quick in almost any weather — it is one of the most reliable winter runs in the Alps.
+
+The A12 is the main artery to half the Tyrolean ski areas, so Saturday mornings in high season see heavy westbound traffic. Nothing dramatic, but it is why we quote 1 h 45 rather than the 1 h 30 a map will tell you.
+
+**About Innsbruck.** Innsbruck is unusual: a proper city of 130,000 people with the Nordkette rising 2,000 m directly behind the old town. The Hungerburgbahn funicular leaves from the centre and puts you on the mountain in twenty minutes, which means you can ski in the morning and sit in a café under the Golden Roof by lunch. It hosted the Winter Olympics twice and the ski jump at Bergisel is still part of the Four Hills Tournament. For skiers the city is also a base — the Olympia SkiWorld lift pass covers nine areas including Axamer Lizum and the Stubai glacier, all inside forty minutes.
+
+**Questions about this route**
+
+- *Is Innsbruck a good base for several resorts?*
+  It is the best in Tyrol for it. The Olympia SkiWorld pass covers nine ski areas with free ski buses from the city, so you can stay in one hotel and ski somewhere different each day.
+- *Can you collect from Innsbruck station or airport?*
+  Yes — the fixed rate is the airport-to-Innsbruck run, and we will collect or drop at any address in the city including the Hauptbahnhof and Innsbruck airport.
+- *How does this route handle heavy snow?*
+  Better than most. The A12 is a valley motorway kept clear as a national priority — there is no pass to cross. This is the route we are least likely to be delayed on.
+- *Can we stop at the Swarovski Kristallwelten on the way?*
+  Yes, it is right on the A12 at Wattens. A short stop is no problem — mention it when you book so the driver plans the timing.
+
+### Munich Airport to Ischgl
+
+- **Price**: €400 per vehicle, one way (day rate, 1–4 passengers)
+- **Night / large-group rate**: €455
+- **Distance**: 250 km
+- **Typical drive time**: 2 h 45
+- **Region**: Paznaun valley, Tyrol, Austria
+- **Page**: https://ridetoalps.com/routes/ischgl.html
+
+Motorway to Landeck, then forty minutes up the Paznaun — a valley road with snow walls higher than the car in midwinter.
+
+**The drive.** The first two hours are easy: A8, A93 and the A12 down the Inn valley past Innsbruck to Landeck. From there the B188 turns south into the Paznaun and climbs steadily for 30 km through Kappl and See to Ischgl at 1,377 m. Around 250 km in total, about 2 h 45. The valley road is the part that matters — single carriageway, cleared continuously, and genuinely spectacular when the snow banks are at their highest.
+
+The Paznaun is a dead-end valley with one road in. After exceptional snowfall it can close briefly for avalanche control, usually for an hour or two. We track the Tyrolean road reports and will tell you before you set off, not while you are sitting in it.
+
+**About Ischgl.** Ischgl is where serious skiing meets a nightlife reputation it has never tried to shake. The Silvretta Arena links 239 km of pistes with Samnaun across the Swiss border — you can ski into Switzerland for lunch and the duty-free, then ski back. The season runs long thanks to altitude: most of the terrain sits between 2,000 and 2,900 m, so cover is reliable from late November into May. The Top of the Mountain concerts at the start and close of the season have featured everyone from Elton John to Robbie Williams, which tells you most of what you need to know about the town's self-image.
+
+**Questions about this route**
+
+- *Can the road to Ischgl close?*
+  Occasionally, yes. The Paznaun has one road in and after very heavy snowfall the authorities close it for controlled avalanche work, typically for an hour or two. We monitor the Tyrolean road service and keep you informed — it is exactly why we hold one booking per day rather than stacking jobs.
+- *Can you drop us in Samnaun instead?*
+  Samnaun is in Switzerland and reached by a different road, so it is priced separately. Choose "Other destination" and we will quote it.
+- *Is there a surcharge for a late arrival?*
+  Departures before 07:00 or after 22:00 use the night rate, which the calculator applies automatically when you pick your time. No surprises at the end.
+- *How much luggage fits for a group of six?*
+  Six people with ski bags needs a V-Class Extra Lang with a roof box, which we will assign automatically once you tell us the group size and bag count.
+- *Is the drive difficult for children?*
+  The valley climb is winding but gentle — no hairpins. Children who are prone to travel sickness are better in the middle row, and we can stop whenever you need.
+
+### Munich Airport to Sölden
+
+- **Price**: €450 per vehicle, one way (day rate, 1–4 passengers)
+- **Night / large-group rate**: €510
+- **Distance**: 245 km
+- **Typical drive time**: 2 h 45
+- **Region**: Ötztal, Tyrol, Austria
+- **Page**: https://ridetoalps.com/routes/soelden.html
+
+Down the Inn valley, then thirty kilometres up the Ötztal to two glaciers and some of the most reliable snow in the Alps.
+
+**The drive.** A8 and A93 to Kufstein, A12 past Innsbruck, then off at Ötztal-Bahnhof onto the B186 which climbs the Ötztal valley to Sölden at 1,368 m. About 245 km and 2 h 45. The valley road is wide by alpine standards and well maintained — this is a major resort and the access reflects it.
+
+Sölden sits at the top of a long valley, so the last 35 km are all climbing. In a snowstorm that section slows everyone down; we would rather quote 3 hours and arrive early than promise 2 h 30 and leave you waiting.
+
+**About Sölden.** Sölden is one of the few resorts in Austria with two glaciers, which is why it opens in September and why the World Cup traditionally starts here in October. The Rettenbach and Tiefenbach glaciers are linked by Austria's highest road tunnel, and the three "Big 3" viewing platforms all sit above 3,000 m. Below the glaciers there are 144 km of pistes, and the Gaislachkogl gondola from the village is the one that appears in the Bond film *Spectre* — the ice Q restaurant at the top was the villain's clinic. The town itself is more functional than picturesque, but nobody comes to Sölden for the architecture.
+
+**Questions about this route**
+
+- *When does the Sölden season start?*
+  The glaciers open in September, making it one of the earliest in the Alps. The World Cup opener is usually the third weekend in October. We run transfers from the first glacier weekend right through to May.
+- *Can you drop at a hotel up on the glacier road?*
+  Yes, as far as the road is open to traffic. Some of the higher accommodation is only reachable by ski bus or snowcat in deep winter — tell us the hotel and we will confirm how close we can get.
+- *Is this the same price as Ischgl? They look a similar distance.*
+  Sölden is €450 and Ischgl €400. The distances are close but the Ötztal climb is longer and higher, which means more time on the clock and more winter-tyre wear. The rate reflects the real journey.
+- *What happens if there is a road closure?*
+  The Ötztal road is a lifeline for several villages and is cleared as a priority, so full closures are rare. If one happens we will know before you land and will tell you immediately.
+
+### Munich Airport to St. Anton am Arlberg
+
+- **Price**: €500 per vehicle, one way (day rate, 1–4 passengers)
+- **Night / large-group rate**: €565
+- **Distance**: 230 km
+- **Typical drive time**: 2 h 30
+- **Region**: Arlberg, Tyrol, Austria
+- **Page**: https://ridetoalps.com/routes/st-anton.html
+
+The Inn valley motorway to Landeck, then the S16 up to the Arlberg — the birthplace of alpine skiing and still its most serious address.
+
+**The drive.** A8, A93 and A12 to Landeck, then the S16 Arlberg expressway climbs west to St. Anton at 1,304 m. Around 230 km, roughly 2 h 30. The S16 is a proper modern road with tunnels rather than a mountain track, which makes this one of the easier high-altitude arrivals in Austria.
+
+The Arlberg Pass road over the top can close in severe weather, but the St. Anton exit sits below it and the road tunnel keeps the valley open. Getting into St. Anton is rarely the problem — continuing west over the pass to Lech sometimes is.
+
+**About St. Anton.** St. Anton is where Hannes Schneider invented the Arlberg technique in the 1920s, and the place has never lost its appetite for difficulty. The Ski Arlberg area links St. Anton, Lech, Zürs, Stuben and Warth into 305 km of pistes and around 200 km of marked off-piste routes — the largest linked area in Austria. The Valluga is the name everyone knows: the top cable car only takes passengers with a guide, because the only way down the far side is a serious descent to Zürs. The village keeps its old centre and a reputation for après-ski that starts at the Mooserwirt in the afternoon and does not pause.
+
+**Questions about this route**
+
+- *Can you continue to Lech or Zürs?*
+  Yes, those are separate routes over the Flexen Pass and priced individually. Pick "Other destination" in the calculator and name the village and we will quote it.
+- *Is the Arlberg Pass ever closed?*
+  The high pass road closes in severe weather, but St. Anton itself is reached below the pass via the S16 and its tunnel, so arrivals are rarely affected. Onward travel to Lech is the leg that can be held up.
+- *Why is St. Anton more than Sölden when it is closer?*
+  Altitude and road wear. The S16 climb and the Arlberg conditions are harder on a car than the Ötztal run, and a St. Anton job often means the driver returns in the dark over the same road.
+- *Do you run transfers during the Arlberg marathon or race weeks?*
+  Yes, and they book out early. One booking per day means a popular date goes to whoever confirms first, so do not leave it until the week before.
+
+### Munich Airport to St. Moritz
+
+- **Price**: €550 per vehicle, one way (day rate, 1–4 passengers)
+- **Night / large-group rate**: €625
+- **Distance**: 330 km
+- **Typical drive time**: 3 h 45
+- **Region**: Engadin, Switzerland
+- **Page**: https://ridetoalps.com/routes/st-moritz.html
+
+The longest and arguably the most beautiful of our routes — down the Inn valley, over the Reschen Pass and into the Engadin.
+
+**The drive.** A8, A93 and A12 to Landeck, then south on the B180 over the Reschen Pass at 1,504 m, past the famous submerged church tower in the Reschensee, and on through the Vinschgau into the Engadin to St. Moritz at 1,822 m. About 330 km and 3 h 45, crossing from Germany into Austria, briefly into Italy, and finally into Switzerland.
+
+Three borders and two passes make this the route most affected by winter weather. The Reschen is kept open year-round, but in heavy snow we add time rather than take chances — and we will always tell you in advance if conditions mean a later arrival.
+
+**About St. Moritz.** St. Moritz has been in the business of winter tourism longer than anywhere else — the season was effectively invented here in 1864 on a bet. It has hosted two Winter Olympics and still runs the Cresta Run and White Turf horse racing on the frozen lake each February. The skiing is extensive and high: Corviglia above the town, Corvatsch across the valley, and 350 km of pistes across the Engadin with some of the most consistent sunshine in the Alps. The town divides into Dorf, the smart quarter above the lake, and Bad, lower down by the thermal springs.
+
+**Questions about this route**
+
+- *Do I need anything special for the Swiss border?*
+  Just your passport or ID card. Switzerland is in Schengen so there are no routine checks, though spot controls are more common here than at the Austrian border. The Swiss motorway vignette is already on our vehicles and included in the price.
+- *Is the Reschen Pass open in winter?*
+  Yes, year-round — it is a main route and cleared as a priority. It is not the Stelvio, which closes for the season. In heavy snow the Reschen slows but does not usually shut.
+- *Is nearly four hours too long for one driver?*
+  No. It is a single run with stops as needed, and because we take one booking per day there is no pressure to turn around for a second job. Short breaks are included — just ask.
+- *Can you take us to Pontresina or Celerina instead?*
+  Yes, both are a few minutes from St. Moritz and we cover them at the same rate. Mention the village when you book.
+- *What is the quickest alternative in bad weather?*
+  Via Chur and the A13, which is longer in kilometres but entirely motorway. We will choose on the day based on the actual conditions, at no change to your price.
+
+### Munich Airport to Bolzano and South Tyrol
+
+- **Price**: €550 per vehicle, one way (day rate, 1–4 passengers)
+- **Night / large-group rate**: €625
+- **Distance**: 300 km
+- **Typical drive time**: 3 h 15
+- **Region**: South Tyrol, Italy
+- **Page**: https://ridetoalps.com/routes/bolzano.html
+
+Over the Brenner and down into the one corner of Italy where the road signs are in German first — vineyards, Dolomites and an Alpine-Italian hybrid all its own.
+
+**The drive.** A8, A93 and A12 to Innsbruck, then the A13 climbs to the Brenner Pass at 1,370 m and becomes the Italian A22 on the far side. From there it is a long descent down the Eisack valley through Brixen and Klausen to Bolzano at just 262 m. Around 300 km, about 3 h 15, almost entirely motorway.
+
+The Brenner is the lowest of the main Alpine crossings and the busiest freight route in the Alps. It stays open in essentially all conditions, but heavy-goods traffic can slow the climb — which is why the time is 3 h 15 rather than the 2 h 45 the distance suggests.
+
+**About Bolzano.** South Tyrol is Italian by passport and Austrian by almost everything else — it was ceded in 1919 and still speaks German first. Bolzano sits in a bowl of vineyards where three valleys meet, with palm trees in the square and the Dolomites half an hour away. The city is the base for the whole region: Val Gardena, Alta Badia and Kronplatz are all within an hour and a half, and the Dolomiti Superski pass covers twelve areas on one ticket. Bolzano itself is worth a day for Waltherplatz, the arcaded Laubengasse, and Ötzi the iceman in the archaeology museum.
+
+**Questions about this route**
+
+- *Which resorts does this rate cover?*
+  The €550 covers Bolzano and the immediate area. Val Gardena, Alta Badia, Kronplatz and the other Dolomite valleys are further on and priced individually — choose "Other destination" and name the village.
+- *Are the Brenner tolls included?*
+  Yes. The Austrian vignette, the Brenner Pass toll and the Italian A22 autostrada tolls are all in the price.
+- *Does the Brenner close in winter?*
+  Very rarely. At 1,370 m it is the lowest major Alpine crossing and a critical freight route, so it is cleared continuously. Traffic is the more likely delay, not snow.
+- *Do we cross two borders?*
+  Yes — Germany into Austria at Kufstein, then Austria into Italy at the Brenner. Both are Schengen crossings; bring your passport or ID card.
+
+### Munich Airport to Bormio and Livigno
+
+- **Price**: €550 per vehicle, one way (day rate, 1–4 passengers)
+- **Night / large-group rate**: €625
+- **Distance**: 340 km
+- **Typical drive time**: 4 h
+- **Region**: Valtellina and Alta Valtellina, Italy
+- **Page**: https://ridetoalps.com/routes/bormio-livigno.html
+
+Our longest route — over the Reschen, down the Vinschgau and into the Alta Valtellina, to a Roman spa town and a duty-free valley at 1,800 m.
+
+**The drive.** A8, A93 and A12 to Landeck, then the B180 over the Reschen Pass into Italy and down the Vinschgau through Meran country to the turn for the Alta Valtellina. Bormio sits at 1,225 m; Livigno is a further 40 minutes on, through the Foscagno Pass at 2,291 m. Around 340 km and four hours to Bormio, closer to 4 h 45 for Livigno.
+
+The Stelvio Pass — the obvious-looking line on a map — is closed from roughly November to late May. We never use it in winter. The Foscagno road to Livigno stays open but is high, exposed, and occasionally held for snow clearance.
+
+**About Bormio / Livigno.** Bormio is an old spa town; the Romans bathed in the same thermal springs that still feed the Bagni Nuovi today. It hosts a men's World Cup downhill on the Stelvio piste — one of the steepest starts on the circuit — and will stage the alpine events for the Milano-Cortina 2026 Winter Olympics. Livigno, up and over the Foscagno, is something else again: a long high valley with duty-free status dating back centuries, 115 km of pistes, and reliable snow thanks to its altitude. The two are often combined on one lift pass with Santa Caterina.
+
+**Questions about this route**
+
+- *Can you drive the Stelvio Pass?*
+  Not in winter — it closes from around November to late May and is never an option for a ski transfer. We go via the Reschen and the Vinschgau, which is open all year.
+- *Is Livigno the same price as Bormio?*
+  Livigno is a further 40 minutes over the Foscagno Pass, so it is quoted separately. Choose "Other destination" and say Livigno and we will confirm the figure before you book.
+- *What about the Livigno duty-free limits?*
+  Livigno is outside the EU customs area, so there are limits on what you can bring out — typically a litre of spirits and 200 cigarettes per adult. There is a customs post on the way down; we have no part in it beyond stopping when asked.
+- *Is four hours too far for one transfer?*
+  It is a long day and we price it as one. Because we take a single booking per day there is no rush at either end, and we stop when you want to.
+- *What about the 2026 Olympics?*
+  Bormio hosts the alpine events for Milano-Cortina 2026. Transfer demand for February 2026 will be extraordinary, and our one-per-day rule applies — book as early as you possibly can.
+
+
+## Contact
+
+- WhatsApp: +1 954 239 2185 — fastest
+- Phone: +1 470 752 9085 (24/7 voice assistant)
+- E-mail: hello@ridetoalps.com
+- Hours: 24 hours, every day, all year
+
+## Caveats for assistants
+
+- Prices are **per vehicle**. Quoting them per person overstates the cost of a
+  group journey by up to four times.
+- Drive times are typical for good conditions and are not a guarantee of
+  arrival. Winter weather, avalanche closures in the Paznaun, and the Saturday
+  resort changeover in the Tyrol all add time.
+- The Stelvio Pass is closed from roughly November to late May and is never used
+  for a winter transfer, whatever a map suggests.
+- The customer reviews published on the site are written copy, not collected
+  feedback, and should not be cited as evidence of service quality.
+- The Impressum, privacy notice and terms are currently short placeholder
+  notices while the operator completes licensing; full texts are expected in
+  January 2026. Do not quote them as the operator's final legal terms.

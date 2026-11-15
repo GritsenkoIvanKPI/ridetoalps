@@ -463,6 +463,75 @@
   document.querySelectorAll('[data-calc]').forEach(initCalc);
 
 
+  /* ---------- header navigation ----------
+     The burger panel and the Routes dropdown. Both are progressive: the links
+     exist in the markup and work without any of this running — this only
+     controls when they are on screen. */
+  (function(){
+    var toggle = document.getElementById('rnavToggle');
+    var nav    = document.getElementById('rnav');
+    if (!toggle || !nav) return;
+
+    var OPEN  = toggle.getAttribute('data-label-open')  || toggle.getAttribute('aria-label');
+    var CLOSE = toggle.getAttribute('data-label-close') || OPEN;
+
+    function setNav(open){
+      nav.classList.toggle('is-open', open);
+      toggle.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? CLOSE : OPEN);
+    }
+    function closeNav(){ setNav(false); }
+
+    toggle.addEventListener('click', function(e){
+      e.stopPropagation();
+      setNav(!nav.classList.contains('is-open'));
+    });
+
+    // a tap on a link is a navigation, so the panel should not linger
+    nav.addEventListener('click', function(e){
+      if (e.target.closest('a')) closeNav();
+    });
+    document.addEventListener('click', function(e){
+      if (!nav.contains(e.target) && !toggle.contains(e.target)) closeNav();
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') closeNav();
+    });
+    window.addEventListener('resize', function(){
+      if (!window.matchMedia('(max-width:900px)').matches) closeNav();
+    });
+
+    /* Routes dropdown. Below 900px the button is hidden and the panel is always
+       open, so this does nothing there. */
+    var menu = nav.querySelector('[data-menu]');
+    if (!menu) return;
+    var btn = menu.querySelector('.menu__btn');
+
+    function setMenu(open){
+      if (open) menu.setAttribute('data-open', ''); else menu.removeAttribute('data-open');
+      btn.setAttribute('aria-expanded', String(open));
+    }
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      setMenu(!menu.hasAttribute('data-open'));
+    });
+    document.addEventListener('click', function(e){
+      if (!menu.contains(e.target)) setMenu(false);
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') setMenu(false);
+    });
+    // opening one dropdown closes the other, so they never overlap
+    var lang = nav.querySelector('.lang .lang__btn');
+    if (lang) lang.addEventListener('click', function(){ setMenu(false); });
+    btn.addEventListener('click', function(){
+      var box = nav.querySelector('.lang');
+      if (box) { box.removeAttribute('data-open'); }
+      if (lang) lang.setAttribute('aria-expanded', 'false');
+    });
+  })();
+
   /* ---------- language selector ----------
      Only English is active today. The menu is wired so that adding a locale is
      a data change rather than a header rewrite. */

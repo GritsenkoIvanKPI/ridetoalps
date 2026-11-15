@@ -65,4 +65,19 @@ for (const page of PAGES) {
   }
 }
 
-console.log(`\npages: ${PAGES.length}   references checked: ${checked}   broken: ${broken}   hreflang problems: ${hreflangIssues}`);
+/* Every route must be reachable from its own homepage. The grid, the header
+   menu and the footer are three hand-written lists on a page the build does not
+   generate, so a route added to routes.data.mjs can quietly end up with no link
+   pointing at it from anywhere a visitor would look. */
+let unlinked = 0;
+for (const l of LANGS) {
+  const home = await (await fetch(BASE + urlFor(l.code, 'index.html'))).text();
+  for (const r of ROUTES) {
+    if (!home.includes(`routes/${r.slug}.html`)) {
+      console.log(`  ${l.code} homepage does not link to ${r.slug}`);
+      unlinked++;
+    }
+  }
+}
+
+console.log(`\npages: ${PAGES.length}   references checked: ${checked}   broken: ${broken}   hreflang problems: ${hreflangIssues}   unlinked routes: ${unlinked}`);

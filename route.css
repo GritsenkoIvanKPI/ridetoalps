@@ -613,10 +613,13 @@ select.control{
 /* ============================================================
    REVEAL
    ============================================================ */
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease--spring),transform .8s var(--ease--spring)}
-.reveal.visible{opacity:1;transform:translateY(0)}
+/* The hidden state is applied only once JavaScript has announced itself.
+   Without that guard a failed or blocked script leaves every .reveal element at
+   opacity 0 — which is to say the whole page body, permanently blank. */
+.js .reveal{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease--spring),transform .8s var(--ease--spring)}
+.js .reveal.visible{opacity:1;transform:translateY(0)}
 @media (prefers-reduced-motion:reduce){
-  .reveal{opacity:1;transform:none;transition:none}
+  .js .reveal{opacity:1;transform:none;transition:none}
   *{animation-duration:.001ms!important;transition-duration:.001ms!important}
   html{scroll-behavior:auto}
 }
@@ -636,6 +639,70 @@ select.control{
   display:inline-flex;align-items:center;min-height:44px;transition:color .2s ease}
 .rhead__nav a:hover{color:var(--color--white)}
 .rhead__nav a:focus-visible{outline:2px solid var(--color--primary-soft);outline-offset:4px;border-radius:3px}
+
+
+/* ------------------------------------------------------------------
+   Header navigation
+
+   Desktop: a row of links with the ten routes behind a dropdown.
+   Phone:   the same links in a panel the burger opens, with the routes
+            listed flat — a dropdown inside a dropdown is a trap on touch.
+
+   The panel is a plain <nav> that is simply not positioned off-screen when
+   JavaScript is absent, so the links stay reachable either way.
+   ------------------------------------------------------------------ */
+.rnav{display:flex;align-items:center;gap:28px}
+.rnav__link,.menu__btn{
+  font-family:var(--font-family--heading);font-size:16px;font-weight:400;
+  color:rgba(255,255,255,.84);display:inline-flex;align-items:center;gap:6px;
+  min-height:44px;background:none;border:0;cursor:pointer;
+  transition:color .2s ease;
+}
+.rnav__link:hover,.menu__btn:hover{color:var(--color--white)}
+.rnav__link:focus-visible,.menu__btn:focus-visible{
+  outline:2px solid var(--color--primary-soft);outline-offset:4px;border-radius:3px}
+
+.menu{position:relative}
+.menu__btn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.2;
+  transition:transform .3s var(--ease--spring)}
+.menu[data-open] .menu__btn svg{transform:rotate(180deg)}
+.menu[data-open] .menu__btn{color:var(--color--white)}
+.menu__panel{
+  position:absolute;left:50%;transform:translateX(-50%);top:calc(100% + 10px);
+  width:300px;padding:8px;z-index:50;
+  background:#0f1522;border:1px solid rgba(255,255,255,.14);
+  border-radius:var(--border-radius--md);
+  box-shadow:0 26px 70px -20px rgba(4,10,22,.92);
+  display:none;
+}
+.menu[data-open] .menu__panel{display:block}
+.menu__panel a{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  min-height:44px;padding:8px 12px;border-radius:var(--border-radius--sm);
+  font-size:15px;color:rgba(255,255,255,.82);
+  transition:background-color .2s ease,color .2s ease;
+}
+.menu__panel a:hover{background:rgba(255,255,255,.08);color:#fff}
+.menu__panel a:focus-visible{outline:2px solid var(--color--primary-soft);outline-offset:-2px}
+.menu__panel a[aria-current="page"]{background:rgba(14,99,228,.22);color:#fff}
+.menu__panel b{font-weight:500;color:var(--color--primary-soft);white-space:nowrap}
+.menu__all{
+  margin-top:6px;border-top:1px solid rgba(255,255,255,.12);
+  border-radius:0 0 var(--border-radius--sm) var(--border-radius--sm);
+  justify-content:center!important;color:#fff!important;font-weight:500;
+}
+
+.rnav-toggle{
+  display:none;width:50px;height:50px;flex:0 0 50px;
+  border-radius:var(--border-radius--md);background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.14);place-items:center;cursor:pointer;
+}
+.rnav-toggle svg{width:22px;height:22px;stroke:#fff}
+.rnav-toggle svg path{transition:opacity .2s ease}
+.rnav-toggle .ic-close{opacity:0}
+.rnav-toggle.is-open .ic-burger{opacity:0}
+.rnav-toggle.is-open .ic-close{opacity:1}
+.rnav-toggle:focus-visible{outline:3px solid var(--color--primary-soft);outline-offset:3px}
 
 /* language selector — only English is live; the markup is here so adding a
    locale later is a data change rather than a template rewrite */
@@ -657,6 +724,16 @@ select.control{
   border-radius:var(--border-radius--sm);color:rgba(255,255,255,.8);font-size:15px;cursor:pointer}
 .lang__menu a[aria-current="true"]{background:rgba(14,99,228,.22);color:#fff}
 .lang__menu a:not([aria-current="true"]):hover{background:rgba(255,255,255,.08);color:#fff}
+
+/* breadcrumb on the hub — the route pages have one in the hero, and without
+   this the hub was the only page with no trail back to the homepage */
+.crumb{display:flex;align-items:center;justify-content:center;gap:9px;
+  font-size:15px;color:var(--color--gray-2);margin-bottom:18px}
+.crumb a{color:var(--color--gray-2);min-height:44px;display:inline-flex;align-items:center;
+  transition:color .2s ease}
+.crumb a:hover{color:var(--color--black)}
+.crumb a:focus-visible{outline:2px solid var(--color--primary-soft);outline-offset:3px;border-radius:3px}
+.crumb [aria-current]{color:var(--color--black)}
 
 /* hero */
 .rhero{padding:var(--shell)}
@@ -729,8 +806,36 @@ select.control{
 }
 @media (max-width:900px){
   .rhead__in{padding:0 20px;min-height:66px}
-  .rhead__nav{gap:18px}
-  .rhead__nav a:not(.lang__btn){display:none}
+
+  /* The burger takes over. The old rule here hid every link instead of moving
+     them anywhere, which left a route page with no navigation at all on a
+     phone — the one place a visitor is most likely to be reading it. */
+  .rnav-toggle{display:grid}
+  .rnav{
+    position:absolute;top:66px;right:20px;left:20px;
+    flex-direction:column;align-items:stretch;gap:2px;
+    padding:12px;z-index:60;
+    background:#0f1522;border:1px solid rgba(255,255,255,.14);
+    border-radius:var(--border-radius--md);
+    box-shadow:0 26px 70px -20px rgba(4,10,22,.92);
+    max-height:calc(100vh - 100px);overflow-y:auto;
+    display:none;
+  }
+  .rnav.is-open{display:flex}
+  .rnav__link{padding:0 10px;min-height:48px}
+
+  /* flat, not a dropdown inside a dropdown */
+  .menu__btn{display:none}
+  .menu__panel{
+    position:static;transform:none;width:auto;display:block;
+    padding:6px 0;margin:4px 0;background:none;border:0;box-shadow:none;
+    border-top:1px solid rgba(255,255,255,.12);
+    border-bottom:1px solid rgba(255,255,255,.12);
+  }
+  .menu__panel a{padding:8px 10px;min-height:46px}
+  .lang{margin-top:8px}
+  .lang__btn{width:100%;justify-content:space-between}
+  .lang__menu{position:static;width:100%;min-width:0;margin-top:6px;box-shadow:none}
   .rhero__frame{min-height:520px}
   .rhero__body{padding:26px 20px 34px}
   .rhero__body h1{font-size:clamp(1.6rem,7.4vw,2.6rem);max-width:none}
@@ -860,7 +965,7 @@ select.control{
 .rcard__media img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease--spring)}
 .rcard:hover .rcard__media img{transform:scale(1.04)}
 .rcard__body{padding:24px 26px 26px;display:flex;flex-direction:column;flex:1}
-.rcard__body h3{font-size:21px;font-weight:600}
+.rcard__body h2{font-size:21px;font-weight:600;line-height:1.25;letter-spacing:-.015em}
 .rcard__region{font-size:15px;color:var(--color--gray-2);margin-top:4px}
 .rcard__meta{display:flex;gap:16px;margin-top:14px;font-size:15px;color:var(--color--gray-2)}
 .rcard__meta span{display:inline-flex;align-items:center;gap:6px}

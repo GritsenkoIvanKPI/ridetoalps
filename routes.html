@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- charset first: the declaration must fall inside the first 1024 bytes,
+     and the Google tag alone is longer than that -->
+<meta charset="utf-8">
+<script>document.documentElement.className+=" js";</script>
 <!-- Google tag (gtag.js) + Google Tag Manager, with Consent Mode v2.
      The tags load immediately so Google can detect them, but every storage
      type starts DENIED: no cookies are written and no identifiers are sent
@@ -27,7 +31,6 @@
     f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TC59WJXP');
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-39Y7WT9DKR"></script>
-<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>All routes from Munich Airport to the Alps | ridetoalps</title>
 <meta name="description" content="Ten fixed-price private transfer routes from Munich Airport to Austria, Switzerland and Italy. Prices per vehicle, drive times and distances.">
@@ -51,7 +54,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="/route.css">
 <script src="/consent.js" defer></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","inLanguage":"en-GB","name":"Where we drive from Munich","itemListElement":[{"@type":"ListItem","position":1,"name":"Munich Airport to Munich city","url":"https://ridetoalps.com/routes/munich-city.html"},{"@type":"ListItem","position":2,"name":"Munich Airport to Kitzbühel","url":"https://ridetoalps.com/routes/kitzbuehel.html"},{"@type":"ListItem","position":3,"name":"Munich Airport to Salzburg","url":"https://ridetoalps.com/routes/salzburg.html"},{"@type":"ListItem","position":4,"name":"Munich Airport to Innsbruck","url":"https://ridetoalps.com/routes/innsbruck.html"},{"@type":"ListItem","position":5,"name":"Munich Airport to Ischgl","url":"https://ridetoalps.com/routes/ischgl.html"},{"@type":"ListItem","position":6,"name":"Munich Airport to Sölden","url":"https://ridetoalps.com/routes/soelden.html"},{"@type":"ListItem","position":7,"name":"Munich Airport to St. Anton am Arlberg","url":"https://ridetoalps.com/routes/st-anton.html"},{"@type":"ListItem","position":8,"name":"Munich Airport to St. Moritz","url":"https://ridetoalps.com/routes/st-moritz.html"},{"@type":"ListItem","position":9,"name":"Munich Airport to Bolzano and South Tyrol","url":"https://ridetoalps.com/routes/bolzano.html"},{"@type":"ListItem","position":10,"name":"Munich Airport to Bormio and Livigno","url":"https://ridetoalps.com/routes/bormio-livigno.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://ridetoalps.com/"},{"@type":"ListItem","position":2,"name":"Routes"}]},{"@type":"ItemList","inLanguage":"en-GB","name":"Where we drive from Munich","itemListElement":[{"@type":"ListItem","position":1,"name":"Munich Airport to Munich city","url":"https://ridetoalps.com/routes/munich-city.html"},{"@type":"ListItem","position":2,"name":"Munich Airport to Kitzbühel","url":"https://ridetoalps.com/routes/kitzbuehel.html"},{"@type":"ListItem","position":3,"name":"Munich Airport to Salzburg","url":"https://ridetoalps.com/routes/salzburg.html"},{"@type":"ListItem","position":4,"name":"Munich Airport to Innsbruck","url":"https://ridetoalps.com/routes/innsbruck.html"},{"@type":"ListItem","position":5,"name":"Munich Airport to Ischgl","url":"https://ridetoalps.com/routes/ischgl.html"},{"@type":"ListItem","position":6,"name":"Munich Airport to Sölden","url":"https://ridetoalps.com/routes/soelden.html"},{"@type":"ListItem","position":7,"name":"Munich Airport to St. Anton am Arlberg","url":"https://ridetoalps.com/routes/st-anton.html"},{"@type":"ListItem","position":8,"name":"Munich Airport to St. Moritz","url":"https://ridetoalps.com/routes/st-moritz.html"},{"@type":"ListItem","position":9,"name":"Munich Airport to Bolzano and South Tyrol","url":"https://ridetoalps.com/routes/bolzano.html"},{"@type":"ListItem","position":10,"name":"Munich Airport to Bormio and Livigno","url":"https://ridetoalps.com/routes/bormio-livigno.html"}]}]}</script>
 </head>
 <body>
 
@@ -59,16 +62,40 @@
   <div class="rhead__in">
     <a class="brand" href="/" aria-label="ridetoalps home">
       <svg class="brand__mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-        <rect width="40" height="40" rx="12" fill="#0e63e4"/><path d="M8 27.5 16 14l4.6 7.6L23.5 17l8.5 10.5H8Z" fill="#fff"/>
+        <rect width="40" height="40" rx="12" fill="#0e63e4"/>
+        <path d="M8 27.5 16 14l4.6 7.6L23.5 17l8.5 10.5H8Z" fill="#fff"/>
       </svg>
       <span class="brand__name">ridetoalps</span>
     </a>
-    <nav class="rhead__nav">
-      <a href="/">Home</a>
-      <a href="/#calculator">Price</a>
-      <a href="/#contact">Contact</a>
+
+    <nav class="rnav" id="rnav" aria-label="Main navigation">
+      <a class="rnav__link" href="/">Home</a>
+
+      <div class="menu" data-menu>
+        <button class="menu__btn" type="button" aria-expanded="false" aria-controls="routesMenu">
+          Routes <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="menu__panel" id="routesMenu">
+          <a href="/routes/munich-city.html"><span>Munich</span><b>€100</b></a>
+          <a href="/routes/kitzbuehel.html"><span>Kitzbühel</span><b>€300</b></a>
+          <a href="/routes/salzburg.html"><span>Salzburg</span><b>€325</b></a>
+          <a href="/routes/innsbruck.html"><span>Innsbruck</span><b>€350</b></a>
+          <a href="/routes/ischgl.html"><span>Ischgl</span><b>€400</b></a>
+          <a href="/routes/soelden.html"><span>Sölden</span><b>€450</b></a>
+          <a href="/routes/st-anton.html"><span>St. Anton</span><b>€500</b></a>
+          <a href="/routes/st-moritz.html"><span>St. Moritz</span><b>€550</b></a>
+          <a href="/routes/bolzano.html"><span>Bolzano</span><b>€550</b></a>
+          <a href="/routes/bormio-livigno.html"><span>Bormio / Livigno</span><b>€550</b></a>
+          <a class="menu__all" href="/routes.html">All routes</a>
+        </div>
+      </div>
+
+      <a class="rnav__link" href="/#calculator">Prices</a>
+      <a class="rnav__link" href="/#fleet">Fleet</a>
+      <a class="rnav__link" href="/#contact">Contact</a>
+
       <div class="lang">
-        <button class="lang__btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Change language">
+        <button class="lang__btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="EN — Change language">
           EN <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
         </button>
         <ul class="lang__menu">
@@ -79,102 +106,111 @@
         </ul>
       </div>
     </nav>
+
+    <button class="rnav-toggle" id="rnavToggle" type="button"
+            aria-label="Open menu" aria-expanded="false" aria-controls="rnav"
+            data-label-open="Open menu" data-label-close="Close menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path class="ic-burger" d="M4 7h16M4 12h16M4 17h16"/><path class="ic-close" d="m6 6 12 12M18 6 6 18"/></svg>
+    </button>
   </div>
 </header>
 
 <main>
 <section class="section-spacing">
   <div class="container">
-    <h1 class="head-center reveal" style="margin-bottom:14px">Where we drive from Munich</h1>
-    <p class="lede reveal" style="text-align:center;max-width:62ch;margin:0 auto">
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="/">Home</a> <span aria-hidden="true">›</span> <span aria-current="page">Routes</span>
+    </nav>
+    <h1 class="head-center" style="margin-bottom:14px">Where we drive from Munich</h1>
+    <p class="lede" style="text-align:center;max-width:62ch;margin:0 auto">
       Ten fixed-price routes, each with its own road, drive time and conditions. Prices are per vehicle for up to four passengers between 07:00 and 22:00.
     </p>
     <div class="rgrid">
-      <a class="rcard reveal" href="/routes/munich-city.html">
-        <div class="rcard__media"><picture><source srcset="/images/routes/town-muc-city.avif" type="image/avif"><source srcset="/images/routes/town-muc-city.webp" type="image/webp"><img src="/images/routes/town-muc-city.jpg" alt="Marienplatz in central Munich on a winter evening" loading="lazy" width="1200" height="900"></picture></div>
+      <a class="rcard" href="/routes/munich-city.html">
+        <div class="rcard__media"><picture><source type="image/avif" sizes="(min-width:1180px) 420px, (min-width:700px) 45vw, 90vw" srcset="/images/routes/town-muc-city-600.avif 600w, /images/routes/town-muc-city-800.avif 800w, /images/routes/town-muc-city.avif 1200w"><source type="image/webp" sizes="(min-width:1180px) 420px, (min-width:700px) 45vw, 90vw" srcset="/images/routes/town-muc-city-600.webp 600w, /images/routes/town-muc-city-800.webp 800w, /images/routes/town-muc-city.webp 1200w"><img src="/images/routes/town-muc-city-600.jpg" sizes="(min-width:1180px) 420px, (min-width:700px) 45vw, 90vw" srcset="/images/routes/town-muc-city-600.jpg 600w, /images/routes/town-muc-city-800.jpg 800w, /images/routes/town-muc-city.jpg 1200w" alt="Marienplatz in central Munich on a winter evening" fetchpriority="high" width="1200" height="900"></picture></div>
         <div class="rcard__body">
-          <h3>Munich city</h3>
+          <h2>Munich city</h2>
           <p class="rcard__region">Bavaria, Germany</p>
           <div class="rcard__meta"><span>45 min</span><span>40 km</span></div>
           <div class="rcard__foot"><b>from €100</b><span>View route <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></div>
         </div>
       </a>
       <a class="rcard reveal" href="/routes/kitzbuehel.html">
-        <div class="rcard__media"><picture><source srcset="/images/routes/town-kitzbuehel.avif" type="image/avif"><source srcset="/images/routes/town-kitzbuehel.webp" type="image/webp"><img src="/images/routes/town-kitzbuehel.jpg" alt="The main street of Kitzbühel in deep winter" loading="lazy" width="1200" height="900"></picture></div>
+        <div class="rcard__media"><picture><source type="image/avif" sizes="(min-width:1180px) 420px, (min-width:700px) 45vw, 90vw" srcset="/images/routes/town-kitzbuehel-600.avif 600w, /images/routes/town-kitzbuehel-800.avif 800w, /images/routes/town-kitzbuehel.avif 1200w"><source type="image/webp" sizes="(min-width:1180px) 420px, (min-width:700px) 45vw, 90vw" srcset="/images/routes/town-kitzbuehel-600.webp 600w, /images/routes/town-kitzbuehel-800.webp 800w, /images/routes/town-kitzbuehel.webp 1200w"><img src="/images/routes/town-kitzbuehel-600.jpg" sizes="(min-width:1180px) 420px, (min-width:700px) 45vw, 90vw" srcset="/images/routes/town-kitzbuehel-600.jpg 600w, /images/routes/town-kitzbuehel-800.jpg 800w, /images/routes/town-kitzbuehel.jpg 1200w" alt="The main street of Kitzbühel in deep winter" loading="lazy" width="1200" height="900"></picture></div>
         <div class="rcard__body">
-          <h3>Kitzbühel</h3>
+          <h2>Kitzbühel</h2>
           <p class="rcard__region">Tyrol, Austria</p>
           <div class="rcard__meta"><span>1 h 50</span><span>155 km</span></div>
           <div class="rcard__foot"><b>from €300</b><span>View route <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></div>
         </div>
       </a>
       <a class="rcard reveal" href="/routes/salzburg.html">
-        <div class="rcard__media"><picture><source srcset="/images/routes/town-salzburg.avif" type="image/avif"><source srcset="/images/routes/town-salzburg.webp" type="image/webp"><img src="/images/routes/town-salzburg.jpg" alt="Salzburg old town below the Hohensalzburg Fortress in winter" loading="lazy" width="1200" height="900"></picture></div>
+        <div class="rcard__media"><picture><source type="image/avif" sizes="(min-width:1180px) 420px, (min-width:700px) 45vw, 90vw" srcset="/images/routes/town-salzburg-600.avif 600w, /images/routes/town-salzburg-800.avif 800w, /images/routes/town-salzburg.avif 1200w"><source type="image/webp" sizes="(min-width:1180px) 420px, (min-width:700px) 45vw, 90vw" srcset="/images/routes/town-salzburg-600.webp 600w, /images/routes/town-salzburg-800.webp 800w, /images/routes/town-salzburg.webp 1200w"><img src="/images/routes/town-salzburg-600.jpg" sizes="(min-width:1180px) 420px, (min-width:700px) 45vw, 90vw" srcset="/images/routes/town-salzburg-600.jpg 600w, /images/routes/town-salzburg-800.jpg 800w, /images/routes/town-salzburg.jpg 1200w" alt="Salzburg old town below the Hohensalzburg Fortress in winter" loading="lazy" width="1200" height="900"></picture></div>
         <div class="rcard__body">
-          <h3>Salzburg</h3>
+          <h2>Salzburg</h2>
           <p class="rcard__region">Salzburgerland, Austria</p>
           <div class="rcard__meta"><span>1 h 30</span><span>145 km</span></div>
           <div class="rcard__foot"><b>from €325</b><span>View route <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></div>
         </div>
       </a>
       <a class="rcard reveal" href="/routes/innsbruck.html">
-        <div class="rcard__media"><picture><source srcset="/images/routes/town-innsbruck.avif" type="image/avif"><source srcset="/images/routes/town-innsbruck.webp" type="image/webp"><img src="/images/routes/town-innsbruck.jpg" alt="The Golden Roof in Innsbruck with the Nordkette range behind" loading="lazy" width="1200" height="900"></picture></div>
+        <div class="rcard__media"><picture><source type="image/avif" sizes="(min-width:1180px) 420px, (min-width:700px) 45vw, 90vw" srcset="/images/routes/town-innsbruck-600.avif 600w, /images/routes/town-innsbruck-800.avif 800w, /images/routes/town-innsbruck.avif 1200w"><source type="image/webp" sizes="(min-width:1180px) 420px, (min-width:700px) 45vw, 90vw" srcset="/images/routes/town-innsbruck-600.webp 600w, /images/routes/town-innsbruck-800.webp 800w, /images/routes/town-innsbruck.webp 1200w"><img src="/images/routes/town-innsbruck-600.jpg" sizes="(min-width:1180px) 420px, (min-width:700px) 45vw, 90vw" srcset="/images/routes/town-innsbruck-600.jpg 600w, /images/routes/town-innsbruck-800.jpg 800w, /images/routes/town-innsbruck.jpg 1200w" alt="The Golden Roof in Innsbruck with the Nordkette range behind" loading="lazy" width="1200" height="900"></picture></div>
         <div class="rcard__body">
-          <h3>Innsbruck</h3>
+          <h2>Innsbruck</h2>
           <p class="rcard__region">Tyrol, Austria</p>
           <div class="rcard__meta"><span>1 h 45</span><span>160 km</span></div>
           <div class="rcard__foot"><b>from €350</b><span>View route <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></div>
         </div>
       </a>
       <a class="rcard reveal" href="/routes/ischgl.html">
-        <div class="rcard__media"><picture><source srcset="/images/routes/town-ischgl.avif" type="image/avif"><source srcset="/images/routes/town-ischgl.webp" type="image/webp"><img src="/images/routes/town-ischgl.jpg" alt="Ischgl ski area with the Silvretta gondola above the pistes" loading="lazy" width="1200" height="900"></picture></div>
+        <div class="rcard__media"><picture><source type="image/avif" sizes="(min-width:1180px) 420px, (min-width:700px) 45vw, 90vw" srcset="/images/routes/town-ischgl-600.avif 600w, /images/routes/town-ischgl-800.avif 800w, /images/routes/town-ischgl.avif 1200w"><source type="image/webp" sizes="(min-width:1180px) 420px, (min-width:700px) 45vw, 90vw" srcset="/images/routes/town-ischgl-600.webp 600w, /images/routes/town-ischgl-800.webp 800w, /images/routes/town-ischgl.webp 1200w"><img src="/images/routes/town-ischgl-600.jpg" sizes="(min-width:1180px) 420px, (min-width:700px) 45vw, 90vw" srcset="/images/routes/town-ischgl-600.jpg 600w, /images/routes/town-ischgl-800.jpg 800w, /images/routes/town-ischgl.jpg 1200w" alt="Ischgl ski area with the Silvretta gondola above the pistes" loading="lazy" width="1200" height="900"></picture></div>
         <div class="rcard__body">
-          <h3>Ischgl</h3>
+          <h2>Ischgl</h2>
           <p class="rcard__region">Paznaun valley, Tyrol, Austria</p>
           <div class="rcard__meta"><span>2 h 45</span><span>250 km</span></div>
           <div class="rcard__foot"><b>from €400</b><span>View route <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></div>
         </div>
       </a>
       <a class="rcard reveal" href="/routes/soelden.html">
-        <div class="rcard__media"><picture><source srcset="/images/routes/town-soelden.avif" type="image/avif"><source srcset="/images/routes/town-soelden.webp" type="image/webp"><img src="/images/routes/town-soelden.jpg" alt="Sölden glacier ski slopes with gondola above the valley" loading="lazy" width="1200" height="900"></picture></div>
+        <div class="rcard__media"><picture><source type="image/avif" sizes="(min-width:1180px) 420px, (min-width:700px) 45vw, 90vw" srcset="/images/routes/town-soelden-600.avif 600w, /images/routes/town-soelden-800.avif 800w, /images/routes/town-soelden.avif 1200w"><source type="image/webp" sizes="(min-width:1180px) 420px, (min-width:700px) 45vw, 90vw" srcset="/images/routes/town-soelden-600.webp 600w, /images/routes/town-soelden-800.webp 800w, /images/routes/town-soelden.webp 1200w"><img src="/images/routes/town-soelden-600.jpg" sizes="(min-width:1180px) 420px, (min-width:700px) 45vw, 90vw" srcset="/images/routes/town-soelden-600.jpg 600w, /images/routes/town-soelden-800.jpg 800w, /images/routes/town-soelden.jpg 1200w" alt="Sölden glacier ski slopes with gondola above the valley" loading="lazy" width="1200" height="900"></picture></div>
         <div class="rcard__body">
-          <h3>Sölden</h3>
+          <h2>Sölden</h2>
           <p class="rcard__region">Ötztal, Tyrol, Austria</p>
           <div class="rcard__meta"><span>2 h 45</span><span>245 km</span></div>
           <div class="rcard__foot"><b>from €450</b><span>View route <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></div>
         </div>
       </a>
       <a class="rcard reveal" href="/routes/st-anton.html">
-        <div class="rcard__media"><picture><source srcset="/images/routes/town-st-anton.avif" type="image/avif"><source srcset="/images/routes/town-st-anton.webp" type="image/webp"><img src="/images/routes/town-st-anton.jpg" alt="St. Anton am Arlberg village centre under deep snow" loading="lazy" width="1200" height="900"></picture></div>
+        <div class="rcard__media"><picture><source type="image/avif" sizes="(min-width:1180px) 420px, (min-width:700px) 45vw, 90vw" srcset="/images/routes/town-st-anton-600.avif 600w, /images/routes/town-st-anton-800.avif 800w, /images/routes/town-st-anton.avif 1200w"><source type="image/webp" sizes="(min-width:1180px) 420px, (min-width:700px) 45vw, 90vw" srcset="/images/routes/town-st-anton-600.webp 600w, /images/routes/town-st-anton-800.webp 800w, /images/routes/town-st-anton.webp 1200w"><img src="/images/routes/town-st-anton-600.jpg" sizes="(min-width:1180px) 420px, (min-width:700px) 45vw, 90vw" srcset="/images/routes/town-st-anton-600.jpg 600w, /images/routes/town-st-anton-800.jpg 800w, /images/routes/town-st-anton.jpg 1200w" alt="St. Anton am Arlberg village centre under deep snow" loading="lazy" width="1200" height="900"></picture></div>
         <div class="rcard__body">
-          <h3>St. Anton am Arlberg</h3>
+          <h2>St. Anton am Arlberg</h2>
           <p class="rcard__region">Arlberg, Tyrol, Austria</p>
           <div class="rcard__meta"><span>2 h 30</span><span>230 km</span></div>
           <div class="rcard__foot"><b>from €500</b><span>View route <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></div>
         </div>
       </a>
       <a class="rcard reveal" href="/routes/st-moritz.html">
-        <div class="rcard__media"><picture><source srcset="/images/routes/town-st-moritz.avif" type="image/avif"><source srcset="/images/routes/town-st-moritz.webp" type="image/webp"><img src="/images/routes/town-st-moritz.jpg" alt="St. Moritz and the frozen lake in the Engadin valley" loading="lazy" width="1200" height="900"></picture></div>
+        <div class="rcard__media"><picture><source type="image/avif" sizes="(min-width:1180px) 420px, (min-width:700px) 45vw, 90vw" srcset="/images/routes/town-st-moritz-600.avif 600w, /images/routes/town-st-moritz-800.avif 800w, /images/routes/town-st-moritz.avif 1200w"><source type="image/webp" sizes="(min-width:1180px) 420px, (min-width:700px) 45vw, 90vw" srcset="/images/routes/town-st-moritz-600.webp 600w, /images/routes/town-st-moritz-800.webp 800w, /images/routes/town-st-moritz.webp 1200w"><img src="/images/routes/town-st-moritz-600.jpg" sizes="(min-width:1180px) 420px, (min-width:700px) 45vw, 90vw" srcset="/images/routes/town-st-moritz-600.jpg 600w, /images/routes/town-st-moritz-800.jpg 800w, /images/routes/town-st-moritz.jpg 1200w" alt="St. Moritz and the frozen lake in the Engadin valley" loading="lazy" width="1200" height="900"></picture></div>
         <div class="rcard__body">
-          <h3>St. Moritz</h3>
+          <h2>St. Moritz</h2>
           <p class="rcard__region">Engadin, Switzerland</p>
           <div class="rcard__meta"><span>3 h 45</span><span>330 km</span></div>
           <div class="rcard__foot"><b>from €550</b><span>View route <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></div>
         </div>
       </a>
       <a class="rcard reveal" href="/routes/bolzano.html">
-        <div class="rcard__media"><picture><source srcset="/images/routes/town-bolzano.avif" type="image/avif"><source srcset="/images/routes/town-bolzano.webp" type="image/webp"><img src="/images/routes/town-bolzano.jpg" alt="Waltherplatz in Bolzano with the Dolomites behind" loading="lazy" width="1200" height="900"></picture></div>
+        <div class="rcard__media"><picture><source type="image/avif" sizes="(min-width:1180px) 420px, (min-width:700px) 45vw, 90vw" srcset="/images/routes/town-bolzano-600.avif 600w, /images/routes/town-bolzano-800.avif 800w, /images/routes/town-bolzano.avif 1200w"><source type="image/webp" sizes="(min-width:1180px) 420px, (min-width:700px) 45vw, 90vw" srcset="/images/routes/town-bolzano-600.webp 600w, /images/routes/town-bolzano-800.webp 800w, /images/routes/town-bolzano.webp 1200w"><img src="/images/routes/town-bolzano-600.jpg" sizes="(min-width:1180px) 420px, (min-width:700px) 45vw, 90vw" srcset="/images/routes/town-bolzano-600.jpg 600w, /images/routes/town-bolzano-800.jpg 800w, /images/routes/town-bolzano.jpg 1200w" alt="Waltherplatz in Bolzano with the Dolomites behind" loading="lazy" width="1200" height="900"></picture></div>
         <div class="rcard__body">
-          <h3>Bolzano region</h3>
+          <h2>Bolzano region</h2>
           <p class="rcard__region">South Tyrol, Italy</p>
           <div class="rcard__meta"><span>3 h 15</span><span>300 km</span></div>
           <div class="rcard__foot"><b>from €550</b><span>View route <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></div>
         </div>
       </a>
       <a class="rcard reveal" href="/routes/bormio-livigno.html">
-        <div class="rcard__media"><picture><source srcset="/images/routes/town-bormio.avif" type="image/avif"><source srcset="/images/routes/town-bormio.webp" type="image/webp"><img src="/images/routes/town-bormio.jpg" alt="The old town of Bormio in the Italian Alps in winter" loading="lazy" width="1200" height="900"></picture></div>
+        <div class="rcard__media"><picture><source type="image/avif" sizes="(min-width:1180px) 420px, (min-width:700px) 45vw, 90vw" srcset="/images/routes/town-bormio-600.avif 600w, /images/routes/town-bormio-800.avif 800w, /images/routes/town-bormio.avif 1200w"><source type="image/webp" sizes="(min-width:1180px) 420px, (min-width:700px) 45vw, 90vw" srcset="/images/routes/town-bormio-600.webp 600w, /images/routes/town-bormio-800.webp 800w, /images/routes/town-bormio.webp 1200w"><img src="/images/routes/town-bormio-600.jpg" sizes="(min-width:1180px) 420px, (min-width:700px) 45vw, 90vw" srcset="/images/routes/town-bormio-600.jpg 600w, /images/routes/town-bormio-800.jpg 800w, /images/routes/town-bormio.jpg 1200w" alt="The old town of Bormio in the Italian Alps in winter" loading="lazy" width="1200" height="900"></picture></div>
         <div class="rcard__body">
-          <h3>Bormio and Livigno</h3>
+          <h2>Bormio and Livigno</h2>
           <p class="rcard__region">Valtellina and Alta Valtellina, Italy</p>
           <div class="rcard__meta"><span>4 h</span><span>340 km</span></div>
           <div class="rcard__foot"><b>from €550</b><span>View route <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></div>
@@ -216,7 +252,7 @@
       </div>
 
       <div class="footer__col">
-        <h5>Pages</h5>
+        <h3>Pages</h3>
         <ul>
           <li><a href="/#top" class="is-active">Home</a></li>
           <li><a href="/#calculator">Prices</a></li>
@@ -228,7 +264,7 @@
       </div>
 
       <div class="footer__col">
-        <h5>Destinations</h5>
+        <h3>Destinations</h3>
         <ul>
           <li><a href="/routes/kitzbuehel.html">Kitzbühel</a></li>
           <li><a href="/routes/innsbruck.html">Innsbruck</a></li>
@@ -239,7 +275,7 @@
       </div>
 
       <div class="footer__col">
-        <h5>More routes</h5>
+        <h3>More routes</h3>
         <ul>
           <li><a href="/routes/st-anton.html">St. Anton am Arlberg</a></li>
           <li><a href="/routes/st-moritz.html">St. Moritz</a></li>

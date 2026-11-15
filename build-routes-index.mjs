@@ -15,6 +15,7 @@ import path from 'path';
 import { pathToFileURL } from 'url';
 import { SITE, LANGS, urlFor } from './i18n/config.mjs';
 import { langPicker, alternates } from './i18n/picker.mjs';
+import { header } from './i18n/nav.mjs';
 import { languageContext } from './build-routes.mjs';
 
 const home = fs.readFileSync('index.html', 'utf8');
@@ -27,12 +28,30 @@ const GTAG = (() => {
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
 const ARROW = `<svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>`;
 
-const pic = (jpg, alt) => {
+/* A card is about 420px wide at most, so the full 1200px photograph is four
+   times more image than any of them can show. The 600px variant covers every
+   layout including a 2× phone screen.
+
+   `eager` is for the first card only: it is the largest thing painted on this
+   page, and a lazily loaded LCP image is a guaranteed late paint — the browser
+   will not even request it until layout has run. */
+const CARD_SIZES = '(min-width:1180px) 420px, (min-width:700px) 45vw, 90vw';
+
+const pic = (jpg, alt, eager = false) => {
   const b = jpg.replace(/\.jpg$/, '');
-  return `<picture><source srcset="/${b}.avif" type="image/avif"><source srcset="/${b}.webp" type="image/webp">` +
-         `<img src="/${jpg}" alt="${esc(alt)}" loading="lazy" width="1200" height="900"></picture>`;
+  const set = (ext) => `/${b}-600.${ext} 600w, /${b}-800.${ext} 800w, /${b}.${ext} 1200w`;
+  return `<picture>` +
+         `<source type="image/avif" sizes="${CARD_SIZES}" srcset="${set('avif')}">` +
+         `<source type="image/webp" sizes="${CARD_SIZES}" srcset="${set('webp')}">` +
+         `<img src="/${b}-600.jpg" sizes="${CARD_SIZES}" srcset="${set('jpg')}" alt="${esc(alt)}" ` +
+         (eager ? 'fetchpriority="high" ' : 'loading="lazy" ') +
+         `width="1200" height="900"></picture>`;
 };
 
+/* The heading, the lede and the first card carry no .reveal: they are above the
+   fold at every width, and an element that fades in on a scroll it never
+   receives is simply an element that paints late. The first card is this
+   page's largest paint, so the wait showed up directly in LCP. */
 function hub(L) {
   const { lang, t, map, ui, routes } = L;
   const code = lang.code;
@@ -40,10 +59,10 @@ function hub(L) {
   const url = (c) => urlFor(c, 'routes.html');
   const M = (k, fallback) => map[k] || fallback || k;
 
-  const cards = routes.map(r => `      <a class="rcard reveal" href="${b}/routes/${r.slug}.html">
-        <div class="rcard__media">${pic(r.town, r.townAlt)}</div>
+  const cards = routes.map((r, i) => `      <a class="rcard${i === 0 ? '' : ' reveal'}" href="${b}/routes/${r.slug}.html">
+        <div class="rcard__media">${pic(r.town, r.townAlt, i === 0)}</div>
         <div class="rcard__body">
-          <h3>${esc(r.dest)}</h3>
+          <h2>${esc(r.dest)}</h2>
           <p class="rcard__region">${esc(r.region)}</p>
           <div class="rcard__meta"><span>${esc(r.time)}</span><span>${esc(t.dist(r.km))}</span></div>
           <div class="rcard__foot"><b>${esc(M('from €' + r.price, 'from €' + r.price))}</b><span>${esc(M('View route'))} ${ARROW}</span></div>
@@ -51,13 +70,22 @@ function hub(L) {
       </a>`).join('\n');
 
   const ld = {
-    '@context': 'https://schema.org', '@type': 'ItemList',
+    '@context': 'https://schema.org',
+    '@graph': [{
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: t.crumbHome, item: SITE + b + '/' },
+        { '@type': 'ListItem', position: 2, name: t.crumbRoutes },
+      ],
+    }, {
+    '@type': 'ItemList',
     inLanguage: lang.intl,
     name: t.hubH1,
     itemListElement: routes.map((r, i) => ({
       '@type': 'ListItem', position: i + 1, name: r.h1,
       url: `${SITE}${b}/routes/${r.slug}.html`,
     })),
+    }],
   };
 
   const blob = code === 'en' ? '' : `<script>
@@ -70,8 +98,11 @@ function hub(L) {
   return `<!DOCTYPE html>
 <html lang="${code}">
 <head>
-${GTAG}
+<!-- charset first: the declaration must fall inside the first 1024 bytes,
+     and the Google tag alone is longer than that -->
 <meta charset="utf-8">
+<script>document.documentElement.className+=" js";</script>
+${GTAG}
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(t.hubTitle)}</title>
 <meta name="description" content="${esc(t.hubDesc)}">
@@ -95,28 +126,16 @@ ${alternates(url)}
 </head>
 <body>
 
-<header class="rhead">
-  <div class="rhead__in">
-    <a class="brand" href="${b}/" aria-label="${esc(M('ridetoalps home'))}">
-      <svg class="brand__mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-        <rect width="40" height="40" rx="12" fill="#0e63e4"/><path d="M8 27.5 16 14l4.6 7.6L23.5 17l8.5 10.5H8Z" fill="#fff"/>
-      </svg>
-      <span class="brand__name">ridetoalps</span>
-    </a>
-    <nav class="rhead__nav">
-      <a href="${b}/">${esc(M('Home'))}</a>
-      <a href="${b}/#calculator">${esc(M('Price'))}</a>
-      <a href="${b}/#contact">${esc(M('Contact'))}</a>
-      ${langPicker(code, url, { label: M('Change language') })}
-    </nav>
-  </div>
-</header>
+${header({ code, routes, map, t, urlFor: url })}
 
 <main>
 <section class="section-spacing">
   <div class="container">
-    <h1 class="head-center reveal" style="margin-bottom:14px">${esc(t.hubH1)}</h1>
-    <p class="lede reveal" style="text-align:center;max-width:62ch;margin:0 auto">
+    <nav class="crumb" aria-label="${esc(M('Breadcrumb'))}">
+      <a href="${b}/">${esc(t.crumbHome)}</a> <span aria-hidden="true">›</span> <span aria-current="page">${esc(t.crumbRoutes)}</span>
+    </nav>
+    <h1 class="head-center" style="margin-bottom:14px">${esc(t.hubH1)}</h1>
+    <p class="lede" style="text-align:center;max-width:62ch;margin:0 auto">
       ${esc(t.hubLede)}
     </p>
     <div class="rgrid">

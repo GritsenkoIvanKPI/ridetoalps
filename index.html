@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- charset first, before anything else: the encoding declaration must fall
+     inside the first 1024 bytes of the document, and the Google tag below is
+     longer than that on its own. A browser that reaches the title before the
+     charset re-parses the page, and "Kitzbühel" is what breaks first. -->
+<meta charset="utf-8">
+<script>document.documentElement.className+=" js";</script>
 <!-- Google tag (gtag.js) + Google Tag Manager, with Consent Mode v2.
      The tags load immediately so Google can detect them, but every storage
      type starts DENIED: no cookies are written and no identifiers are sent
@@ -28,7 +34,6 @@
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-39Y7WT9DKR"></script>
 
-<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Munich Airport Transfers to the Alps &amp; Tyrol | ridetoalps</title>
 <meta name="description" content="Private door-to-door transfers from Munich Airport to Kitzbühel, Innsbruck, Ischgl and Sölden. Fixed prices per car, €30 or $35 deposit, flight tracking, 24/7.">
@@ -69,7 +74,11 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 
-<link rel="preload" as="image" href="images/hero.avif" type="image/avif" fetchpriority="high">
+<!-- The hero is the largest paint on the page, so it is preloaded. Only the
+     AVIF set: a browser without AVIF support ignores a preload carrying a type
+     it cannot decode, whereas preloading two formats makes Chrome fetch both.
+     imagesrcset must match the <source> below exactly or the preload is wasted. -->
+<link rel="preload" as="image" type="image/avif" fetchpriority="high" imagesizes="100vw" imagesrcset="images/hero-768.avif 768w, images/hero-1100.avif 1100w, images/hero.avif 1376w">
 <link rel="preload" as="font" type="font/woff2" href="fonts/instrument-sans-600-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="fonts/figtree-400-latin.woff2" crossorigin>
 <style>
@@ -333,6 +342,54 @@ p{margin:0}
 .nav a:hover::after{transform:scaleX(1)}
 .nav a.is-active{color:var(--color--primary-soft)}
 .nav a:focus-visible{outline:2px solid var(--color--primary-soft);outline-offset:6px;border-radius:2px}
+
+/* ------------------------------------------------------------------
+   Routes dropdown
+
+   The ten route pages were reachable only from the grid further down and
+   from the footer, which meant comparing two of them involved scrolling back
+   to the homepage in between. This puts all ten, with their prices, one click
+   from the top of any page.
+
+   On a phone it flattens into the burger panel: a dropdown inside a dropdown
+   is a trap under a thumb.
+   ------------------------------------------------------------------ */
+.menu{position:relative}
+.menu__btn{
+  font-family:var(--font-family--heading);font-size:17px;font-weight:400;
+  color:rgba(255,255,255,.86);background:none;border:0;cursor:pointer;
+  display:inline-flex;align-items:center;gap:7px;min-height:44px;
+  transition:color .22s ease;
+}
+.menu__btn:hover{color:var(--color--white)}
+.menu__btn:focus-visible{outline:2px solid var(--color--primary-soft);outline-offset:6px;border-radius:2px}
+.menu__btn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.2;
+  transition:transform .3s var(--ease--spring)}
+.menu[data-open] .menu__btn svg{transform:rotate(180deg)}
+.menu[data-open] .menu__btn{color:var(--color--white)}
+.menu__panel{
+  position:absolute;left:50%;transform:translateX(-50%);top:calc(100% + 18px);
+  width:300px;padding:8px;z-index:50;
+  background:#0f1522;border:1px solid rgba(255,255,255,.14);
+  border-radius:var(--border-radius--md);
+  box-shadow:0 26px 70px -20px rgba(4,10,22,.92);
+  display:none;
+}
+.menu[data-open] .menu__panel{display:block}
+.menu__panel a{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  min-height:44px;padding:8px 12px;border-radius:var(--border-radius--sm);
+  font-size:15px;color:rgba(255,255,255,.82);
+  transition:background-color .2s ease,color .2s ease;
+}
+.menu__panel a::after{content:none}
+.menu__panel a:hover{background:rgba(255,255,255,.08);color:#fff}
+.menu__panel a:focus-visible{outline:2px solid var(--color--primary-soft);outline-offset:-2px}
+.menu__panel b{font-weight:500;color:var(--color--primary-soft);white-space:nowrap}
+.menu__all{
+  margin-top:6px;border-top:1px solid rgba(255,255,255,.12);
+  justify-content:center!important;color:#fff!important;font-weight:500;
+}
 
 /* language selector — sits in the bar at every width, so a visitor who landed
    on the wrong version can leave it without first opening the menu */
@@ -630,7 +687,7 @@ select.control{
   content:"";position:absolute;inset:0;border-radius:inherit;
   background:linear-gradient(to top,rgba(12,21,36,.35),rgba(12,21,36,0) 55%);
 }
-.dest__card h4{font-size:19px;font-weight:500}
+.dest__card h3{font-size:19px;font-weight:500;letter-spacing:normal;line-height:1.25}
 .dest__card p{font-size:15px;color:var(--color--gray-2);margin-top:5px}
 
 /* ============================================================
@@ -797,7 +854,7 @@ select.control{
 .contact-card:hover{transform:translateY(-4px);background:var(--color--primary-wash)}
 .contact-card__ic{width:48px;height:48px;border-radius:var(--border-radius--md);background:var(--color--white);display:grid;place-items:center;margin-bottom:22px}
 .contact-card__ic svg{width:24px;height:24px;stroke:var(--color--primary-1)}
-.contact-card h4{font-size:18px;margin-bottom:8px}
+.contact-card h3{font-size:18px;margin-bottom:8px;letter-spacing:normal;line-height:1.3}
 .contact-card a,.contact-card p{font-size:17px;line-height:1.6;color:var(--color--gray-2);display:block}
 .contact-card a{transition:color .2s ease}
 .contact-card a:hover{color:var(--color--primary-1)}
@@ -826,7 +883,7 @@ select.control{
 .footer__contact a:hover{color:var(--color--primary-soft)}
 .footer__contact a:focus-visible{outline:2px solid var(--color--primary-soft);outline-offset:3px;border-radius:2px}
 
-.footer h5{
+.footer h3{
   font-family:var(--font-family--heading);font-size:19px;font-weight:500;
   color:var(--color--white);margin:0 0 22px;letter-spacing:-.015em;
 }
@@ -853,10 +910,13 @@ select.control{
 /* ============================================================
    REVEAL
    ============================================================ */
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease--spring),transform .8s var(--ease--spring)}
-.reveal.visible{opacity:1;transform:translateY(0)}
+/* The hidden state is applied only once JavaScript has announced itself.
+   Without that guard a failed or blocked script leaves every .reveal element at
+   opacity 0 — which is to say the whole page body, permanently blank. */
+.js .reveal{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease--spring),transform .8s var(--ease--spring)}
+.js .reveal.visible{opacity:1;transform:translateY(0)}
 @media (prefers-reduced-motion:reduce){
-  .reveal{opacity:1;transform:none;transition:none}
+  .js .reveal{opacity:1;transform:none;transition:none}
   *{animation-duration:.001ms!important;transition-duration:.001ms!important}
   html{scroll-behavior:auto}
 }
@@ -918,6 +978,16 @@ select.control{
     position:absolute;top:88px;right:20px;left:20px;height:auto;padding:14px 20px;
     z-index:30;max-height:calc(100vh - 120px);overflow-y:auto;
   }
+  /* flattened: the routes sit in the panel rather than behind a second tap */
+  .menu{width:100%}
+  .menu__btn{display:none}
+  .menu__panel{
+    position:static;transform:none;width:auto;display:block;
+    padding:4px 0;margin:4px 0;background:none;border:0;box-shadow:none;
+    border-top:1px solid rgba(255,255,255,.12);
+    border-bottom:1px solid rgba(255,255,255,.12);
+  }
+  .menu__panel a{padding:8px 0;min-height:46px}
   .nav-toggle{display:grid}
   .masthead{padding:20px;gap:12px}
   /* the pill shrinks to the code and the chevron; the brand gives up the room */
@@ -985,8 +1055,7 @@ select.control{
 }
 </style>
 
-<script type="application/ld+json">
-{
+<script type="application/ld+json">{
  "@context": "https://schema.org",
  "@graph": [
   {
@@ -1099,7 +1168,15 @@ select.control{
      "itemOffered": {
       "@type": "Service",
       "name": "Private transfer Munich Airport to Munich city / hotel",
-      "serviceType": "Airport transfer"
+      "serviceType": "Airport transfer",
+      "@id": "https://ridetoalps.com/routes/munich-city.html#service"
+     },
+     "url": "https://ridetoalps.com/routes/munich-city.html",
+     "eligibleQuantity": {
+      "@type": "QuantitativeValue",
+      "minValue": 1,
+      "maxValue": 4,
+      "unitText": "passenger"
      }
     },
     {
@@ -1111,7 +1188,15 @@ select.control{
      "itemOffered": {
       "@type": "Service",
       "name": "Private transfer Munich Airport to Kitzbühel",
-      "serviceType": "Airport transfer"
+      "serviceType": "Airport transfer",
+      "@id": "https://ridetoalps.com/routes/kitzbuehel.html#service"
+     },
+     "url": "https://ridetoalps.com/routes/kitzbuehel.html",
+     "eligibleQuantity": {
+      "@type": "QuantitativeValue",
+      "minValue": 1,
+      "maxValue": 4,
+      "unitText": "passenger"
      }
     },
     {
@@ -1123,7 +1208,15 @@ select.control{
      "itemOffered": {
       "@type": "Service",
       "name": "Private transfer Munich Airport to Salzburg",
-      "serviceType": "Airport transfer"
+      "serviceType": "Airport transfer",
+      "@id": "https://ridetoalps.com/routes/salzburg.html#service"
+     },
+     "url": "https://ridetoalps.com/routes/salzburg.html",
+     "eligibleQuantity": {
+      "@type": "QuantitativeValue",
+      "minValue": 1,
+      "maxValue": 4,
+      "unitText": "passenger"
      }
     },
     {
@@ -1135,7 +1228,15 @@ select.control{
      "itemOffered": {
       "@type": "Service",
       "name": "Private transfer Munich Airport to Innsbruck",
-      "serviceType": "Airport transfer"
+      "serviceType": "Airport transfer",
+      "@id": "https://ridetoalps.com/routes/innsbruck.html#service"
+     },
+     "url": "https://ridetoalps.com/routes/innsbruck.html",
+     "eligibleQuantity": {
+      "@type": "QuantitativeValue",
+      "minValue": 1,
+      "maxValue": 4,
+      "unitText": "passenger"
      }
     },
     {
@@ -1147,7 +1248,15 @@ select.control{
      "itemOffered": {
       "@type": "Service",
       "name": "Private transfer Munich Airport to Ischgl",
-      "serviceType": "Airport transfer"
+      "serviceType": "Airport transfer",
+      "@id": "https://ridetoalps.com/routes/ischgl.html#service"
+     },
+     "url": "https://ridetoalps.com/routes/ischgl.html",
+     "eligibleQuantity": {
+      "@type": "QuantitativeValue",
+      "minValue": 1,
+      "maxValue": 4,
+      "unitText": "passenger"
      }
     },
     {
@@ -1159,7 +1268,15 @@ select.control{
      "itemOffered": {
       "@type": "Service",
       "name": "Private transfer Munich Airport to Sölden",
-      "serviceType": "Airport transfer"
+      "serviceType": "Airport transfer",
+      "@id": "https://ridetoalps.com/routes/soelden.html#service"
+     },
+     "url": "https://ridetoalps.com/routes/soelden.html",
+     "eligibleQuantity": {
+      "@type": "QuantitativeValue",
+      "minValue": 1,
+      "maxValue": 4,
+      "unitText": "passenger"
      }
     },
     {
@@ -1171,7 +1288,15 @@ select.control{
      "itemOffered": {
       "@type": "Service",
       "name": "Private transfer Munich Airport to St. Anton am Arlberg",
-      "serviceType": "Airport transfer"
+      "serviceType": "Airport transfer",
+      "@id": "https://ridetoalps.com/routes/st-anton.html#service"
+     },
+     "url": "https://ridetoalps.com/routes/st-anton.html",
+     "eligibleQuantity": {
+      "@type": "QuantitativeValue",
+      "minValue": 1,
+      "maxValue": 4,
+      "unitText": "passenger"
      }
     },
     {
@@ -1183,7 +1308,15 @@ select.control{
      "itemOffered": {
       "@type": "Service",
       "name": "Private transfer Munich Airport to St. Moritz",
-      "serviceType": "Airport transfer"
+      "serviceType": "Airport transfer",
+      "@id": "https://ridetoalps.com/routes/st-moritz.html#service"
+     },
+     "url": "https://ridetoalps.com/routes/st-moritz.html",
+     "eligibleQuantity": {
+      "@type": "QuantitativeValue",
+      "minValue": 1,
+      "maxValue": 4,
+      "unitText": "passenger"
      }
     },
     {
@@ -1195,7 +1328,15 @@ select.control{
      "itemOffered": {
       "@type": "Service",
       "name": "Private transfer Munich Airport to Bolzano region",
-      "serviceType": "Airport transfer"
+      "serviceType": "Airport transfer",
+      "@id": "https://ridetoalps.com/routes/bolzano.html#service"
+     },
+     "url": "https://ridetoalps.com/routes/bolzano.html",
+     "eligibleQuantity": {
+      "@type": "QuantitativeValue",
+      "minValue": 1,
+      "maxValue": 4,
+      "unitText": "passenger"
      }
     },
     {
@@ -1207,8 +1348,38 @@ select.control{
      "itemOffered": {
       "@type": "Service",
       "name": "Private transfer Munich Airport to Bormio / Livigno",
-      "serviceType": "Airport transfer"
+      "serviceType": "Airport transfer",
+      "@id": "https://ridetoalps.com/routes/bormio-livigno.html#service"
+     },
+     "url": "https://ridetoalps.com/routes/bormio-livigno.html",
+     "eligibleQuantity": {
+      "@type": "QuantitativeValue",
+      "minValue": 1,
+      "maxValue": 4,
+      "unitText": "passenger"
      }
+    }
+   ],
+   "availableLanguage": [
+    {
+     "@type": "Language",
+     "name": "English",
+     "alternateName": "en"
+    },
+    {
+     "@type": "Language",
+     "name": "German",
+     "alternateName": "de"
+    },
+    {
+     "@type": "Language",
+     "name": "Russian",
+     "alternateName": "ru"
+    },
+    {
+     "@type": "Language",
+     "name": "Ukrainian",
+     "alternateName": "uk"
     }
    ]
   },
@@ -1232,61 +1403,71 @@ select.control{
       "@type": "Offer",
       "name": "Munich Airport → Munich city / hotel",
       "price": "100",
-      "priceCurrency": "EUR"
+      "priceCurrency": "EUR",
+      "url": "https://ridetoalps.com/routes/munich-city.html"
      },
      {
       "@type": "Offer",
       "name": "Munich Airport → Kitzbühel",
       "price": "300",
-      "priceCurrency": "EUR"
+      "priceCurrency": "EUR",
+      "url": "https://ridetoalps.com/routes/kitzbuehel.html"
      },
      {
       "@type": "Offer",
       "name": "Munich Airport → Salzburg",
       "price": "325",
-      "priceCurrency": "EUR"
+      "priceCurrency": "EUR",
+      "url": "https://ridetoalps.com/routes/salzburg.html"
      },
      {
       "@type": "Offer",
       "name": "Munich Airport → Innsbruck",
       "price": "350",
-      "priceCurrency": "EUR"
+      "priceCurrency": "EUR",
+      "url": "https://ridetoalps.com/routes/innsbruck.html"
      },
      {
       "@type": "Offer",
       "name": "Munich Airport → Ischgl",
       "price": "400",
-      "priceCurrency": "EUR"
+      "priceCurrency": "EUR",
+      "url": "https://ridetoalps.com/routes/ischgl.html"
      },
      {
       "@type": "Offer",
       "name": "Munich Airport → Sölden",
       "price": "450",
-      "priceCurrency": "EUR"
+      "priceCurrency": "EUR",
+      "url": "https://ridetoalps.com/routes/soelden.html"
      },
      {
       "@type": "Offer",
       "name": "Munich Airport → St. Anton am Arlberg",
       "price": "500",
-      "priceCurrency": "EUR"
+      "priceCurrency": "EUR",
+      "url": "https://ridetoalps.com/routes/st-anton.html"
      },
      {
       "@type": "Offer",
       "name": "Munich Airport → St. Moritz",
       "price": "550",
-      "priceCurrency": "EUR"
+      "priceCurrency": "EUR",
+      "url": "https://ridetoalps.com/routes/st-moritz.html"
      },
      {
       "@type": "Offer",
       "name": "Munich Airport → Bolzano region",
       "price": "550",
-      "priceCurrency": "EUR"
+      "priceCurrency": "EUR",
+      "url": "https://ridetoalps.com/routes/bolzano.html"
      },
      {
       "@type": "Offer",
       "name": "Munich Airport → Bormio / Livigno",
       "price": "550",
-      "priceCurrency": "EUR"
+      "priceCurrency": "EUR",
+      "url": "https://ridetoalps.com/routes/bormio-livigno.html"
      }
     ]
    }
@@ -1394,8 +1575,7 @@ select.control{
    ]
   }
  ]
-}
-</script>
+}</script>
 <script src="consent.js" defer></script>
 </head>
 <body>
@@ -1404,7 +1584,7 @@ select.control{
 <header class="hero">
   <div class="hero__frame grain">
     <div class="hero__media">
-      <picture><source srcset="images/hero.avif" type="image/avif"><source srcset="images/hero.webp" type="image/webp"><img src="images/hero.jpg" alt="Mercedes V-Class minivan on an alpine road in Tyrol" fetchpriority="high" width="1376" height="768"></picture>
+      <picture><source type="image/avif" sizes="100vw" srcset="images/hero-768.avif 768w, images/hero-1100.avif 1100w, images/hero.avif 1376w"><source type="image/webp" sizes="100vw" srcset="images/hero-768.webp 768w, images/hero-1100.webp 1100w, images/hero.webp 1376w"><img src="images/hero.jpg" sizes="100vw" srcset="images/hero-768.jpg 768w, images/hero-1100.jpg 1100w, images/hero.jpg 1376w" alt="Mercedes V-Class minivan on an alpine road in Tyrol" fetchpriority="high" width="1376" height="768"></picture>
     </div>
 
     <div class="masthead">
@@ -1419,7 +1599,24 @@ select.control{
 
       <nav class="nav" id="nav">
         <a href="#top" class="is-active">Home</a>
-        <a href="routes.html">Routes</a>
+        <div class="menu" data-menu>
+          <button class="menu__btn" type="button" aria-expanded="false" aria-controls="routesMenu">
+            Routes <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="menu__panel" id="routesMenu">
+          <a href="routes/munich-city.html"><span>Munich</span><b>from €100</b></a>
+          <a href="routes/kitzbuehel.html"><span>Kitzbühel</span><b>from €300</b></a>
+          <a href="routes/salzburg.html"><span>Salzburg</span><b>from €325</b></a>
+          <a href="routes/innsbruck.html"><span>Innsbruck</span><b>from €350</b></a>
+          <a href="routes/ischgl.html"><span>Ischgl</span><b>from €400</b></a>
+          <a href="routes/soelden.html"><span>Sölden</span><b>from €450</b></a>
+          <a href="routes/st-anton.html"><span>St. Anton</span><b>from €500</b></a>
+          <a href="routes/st-moritz.html"><span>St. Moritz</span><b>from €550</b></a>
+          <a href="routes/bolzano.html"><span>Bolzano</span><b>from €550</b></a>
+          <a href="routes/bormio-livigno.html"><span>Bormio / Livigno</span><b>from €550</b></a>
+          <a class="menu__all" href="routes.html">All routes</a>
+          </div>
+        </div>
         <a href="#calculator">Prices</a>
         <a href="#fleet">Fleet</a>
         <a href="#about">About</a>
@@ -1429,7 +1626,7 @@ select.control{
       </nav>
 
       <div class="lang">
-        <button class="lang__btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Change language">
+        <button class="lang__btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="EN — Change language">
           EN <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
         </button>
         <ul class="lang__menu">
@@ -1846,52 +2043,52 @@ select.control{
       <div class="dest__grid reveal">
         <a class="dest__card" href="routes/kitzbuehel.html">
           <div class="dest__thumb"><picture><source srcset="images/dest-kitzbuehel.avif" type="image/avif"><source srcset="images/dest-kitzbuehel.webp" type="image/webp"><img src="images/dest-kitzbuehel.jpg" alt="Kitzbühel in winter" loading="lazy" width="420" height="420" decoding="async"></picture></div>
-          <h4>Kitzbühel</h4>
+          <h3>Kitzbühel</h3>
           <p>from €300</p>
         </a>
         <a class="dest__card" href="routes/innsbruck.html">
           <div class="dest__thumb"><picture><source srcset="images/dest-innsbruck.avif" type="image/avif"><source srcset="images/dest-innsbruck.webp" type="image/webp"><img src="images/dest-innsbruck.jpg" alt="Innsbruck and the Nordkette range" loading="lazy" width="420" height="420" decoding="async"></picture></div>
-          <h4>Innsbruck</h4>
+          <h3>Innsbruck</h3>
           <p>from €350</p>
         </a>
         <a class="dest__card" href="routes/salzburg.html">
           <div class="dest__thumb"><picture><source srcset="images/dest-salzburg.avif" type="image/avif"><source srcset="images/dest-salzburg.webp" type="image/webp"><img src="images/dest-salzburg.jpg" alt="Salzburg old town in winter" loading="lazy" width="420" height="420" decoding="async"></picture></div>
-          <h4>Salzburg</h4>
+          <h3>Salzburg</h3>
           <p>from €325</p>
         </a>
         <a class="dest__card" href="routes/soelden.html">
           <div class="dest__thumb"><picture><source srcset="images/dest-soelden.avif" type="image/avif"><source srcset="images/dest-soelden.webp" type="image/webp"><img src="images/dest-soelden.jpg" alt="Sölden ski slopes" loading="lazy" width="420" height="420" decoding="async"></picture></div>
-          <h4>Sölden</h4>
+          <h3>Sölden</h3>
           <p>from €450</p>
         </a>
         <a class="dest__card" href="routes/ischgl.html">
           <div class="dest__thumb"><picture><source srcset="images/dest-ischgl.avif" type="image/avif"><source srcset="images/dest-ischgl.webp" type="image/webp"><img src="images/dest-ischgl.jpg" alt="Ischgl ski slopes and gondola" loading="lazy" width="420" height="420" decoding="async"></picture></div>
-          <h4>Ischgl</h4>
+          <h3>Ischgl</h3>
           <p>from €400</p>
         </a>
         <a class="dest__card" href="routes/st-anton.html">
           <div class="dest__thumb"><picture><source srcset="images/dest-st-anton.avif" type="image/avif"><source srcset="images/dest-st-anton.webp" type="image/webp"><img src="images/dest-st-anton.jpg" alt="St. Anton am Arlberg village in winter" loading="lazy" width="420" height="420" decoding="async"></picture></div>
-          <h4>St. Anton</h4>
+          <h3>St. Anton</h3>
           <p>from €500</p>
         </a>
         <a class="dest__card" href="routes/st-moritz.html">
           <div class="dest__thumb"><picture><source srcset="images/dest-st-moritz.avif" type="image/avif"><source srcset="images/dest-st-moritz.webp" type="image/webp"><img src="images/dest-st-moritz.jpg" alt="St. Moritz and the frozen lake" loading="lazy" width="420" height="420" decoding="async"></picture></div>
-          <h4>St. Moritz</h4>
+          <h3>St. Moritz</h3>
           <p>from €550</p>
         </a>
         <a class="dest__card" href="routes/bolzano.html">
           <div class="dest__thumb"><picture><source srcset="images/dest-bolzano.avif" type="image/avif"><source srcset="images/dest-bolzano.webp" type="image/webp"><img src="images/dest-bolzano.jpg" alt="Bolzano old town below the Dolomites" loading="lazy" width="420" height="420" decoding="async"></picture></div>
-          <h4>Bolzano</h4>
+          <h3>Bolzano</h3>
           <p>from €550</p>
         </a>
         <a class="dest__card" href="routes/bormio-livigno.html">
           <div class="dest__thumb"><picture><source srcset="images/dest-livigno.avif" type="image/avif"><source srcset="images/dest-livigno.webp" type="image/webp"><img src="images/dest-livigno.jpg" alt="Livigno alpine village in winter" loading="lazy" width="420" height="420" decoding="async"></picture></div>
-          <h4>Bormio / Livigno</h4>
+          <h3>Bormio / Livigno</h3>
           <p>from €550</p>
         </a>
         <a class="dest__card" href="routes/munich-city.html">
           <div class="dest__thumb"><picture><source srcset="images/dest-munich.avif" type="image/avif"><source srcset="images/dest-munich.webp" type="image/webp"><img src="images/dest-munich.jpg" alt="Marienplatz in central Munich on a winter evening" loading="lazy" width="420" height="420" decoding="async"></picture></div>
-          <h4>Munich city</h4>
+          <h3>Munich city</h3>
           <p>from €100</p>
         </a>
       </div>
@@ -2019,7 +2216,7 @@ select.control{
 
     <div class="reviews reveal" id="reviewsTrack">
       <article class="review">
-        <div class="stars" aria-label="5 out of 5">
+        <div class="stars" role="img" aria-label="5 out of 5">
           <svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
           <svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
           <svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
@@ -2031,7 +2228,7 @@ select.control{
       </article>
 
       <article class="review">
-        <div class="stars" aria-label="4 out of 5">
+        <div class="stars" role="img" aria-label="4 out of 5">
           <svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
           <svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
           <svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
@@ -2043,7 +2240,7 @@ select.control{
       </article>
 
       <article class="review">
-        <div class="stars" aria-label="5 out of 5">
+        <div class="stars" role="img" aria-label="5 out of 5">
           <svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
           <svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
           <svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
@@ -2055,7 +2252,7 @@ select.control{
       </article>
 
       <article class="review">
-        <div class="stars" aria-label="5 out of 5">
+        <div class="stars" role="img" aria-label="5 out of 5">
           <svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
           <svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
           <svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
@@ -2067,7 +2264,7 @@ select.control{
       </article>
 
       <article class="review">
-        <div class="stars" aria-label="5 out of 5">
+        <div class="stars" role="img" aria-label="5 out of 5">
           <svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
           <svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
           <svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
@@ -2079,7 +2276,7 @@ select.control{
       </article>
 
       <article class="review">
-        <div class="stars" aria-label="4 out of 5">
+        <div class="stars" role="img" aria-label="4 out of 5">
           <svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
           <svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
           <svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
@@ -2091,7 +2288,7 @@ select.control{
       </article>
 
       <article class="review">
-        <div class="stars" aria-label="5 out of 5">
+        <div class="stars" role="img" aria-label="5 out of 5">
           <svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
           <svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
           <svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
@@ -2103,7 +2300,7 @@ select.control{
       </article>
 
       <article class="review">
-        <div class="stars" aria-label="5 out of 5">
+        <div class="stars" role="img" aria-label="5 out of 5">
           <svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
           <svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
           <svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
@@ -2115,7 +2312,7 @@ select.control{
       </article>
 
       <article class="review">
-        <div class="stars" aria-label="4 out of 5">
+        <div class="stars" role="img" aria-label="4 out of 5">
           <svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
           <svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
           <svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg>
@@ -2414,7 +2611,7 @@ select.control{
         <div class="contact-card__ic">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3.5h3l1.6 4-2 1.4a11.5 11.5 0 0 0 5.5 5.5l1.4-2 4 1.6v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.5 5.7a2 2 0 0 1 2-2.2Z"/></svg>
         </div>
-        <h4>Phone &amp; WhatsApp</h4>
+        <h3>Phone &amp; WhatsApp</h3>
         <a href="tel:+14707529085">+1 470 752 9085</a>
         <p>24/7 voice assistant</p>
         <a href="https://wa.me/19542392185" rel="noopener" target="_blank">WhatsApp +1 954 239 2185</a>
@@ -2424,7 +2621,7 @@ select.control{
         <div class="contact-card__ic">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="m3.8 7 8.2 6 8.2-6"/></svg>
         </div>
-        <h4>Email</h4>
+        <h3>Email</h3>
         <a href="mailto:hello@ridetoalps.com">hello@ridetoalps.com</a>
         <p>We reply within a couple of hours.</p>
       </div>
@@ -2433,7 +2630,7 @@ select.control{
         <div class="contact-card__ic">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.2 2"/></svg>
         </div>
-        <h4>Hours &amp; coverage</h4>
+        <h3>Hours &amp; coverage</h3>
         <p>Open 24/7, all year</p>
         <p>Munich · Tyrol · Salzburgerland · Engadin · South Tyrol</p>
       </div>
@@ -2475,7 +2672,7 @@ select.control{
       </div>
 
       <div class="footer__col">
-        <h5>Pages</h5>
+        <h3>Pages</h3>
         <ul>
           <li><a href="#top" class="is-active">Home</a></li>
           <li><a href="#calculator">Prices</a></li>
@@ -2487,7 +2684,7 @@ select.control{
       </div>
 
       <div class="footer__col">
-        <h5>Destinations</h5>
+        <h3>Destinations</h3>
         <ul>
           <li><a href="routes/kitzbuehel.html">Kitzbühel</a></li>
           <li><a href="routes/innsbruck.html">Innsbruck</a></li>
@@ -2498,7 +2695,7 @@ select.control{
       </div>
 
       <div class="footer__col">
-        <h5>More routes</h5>
+        <h3>More routes</h3>
         <ul>
           <li><a href="routes/st-anton.html">St. Anton am Arlberg</a></li>
           <li><a href="routes/st-moritz.html">St. Moritz</a></li>
@@ -3000,6 +3197,38 @@ select.control{
 
   document.querySelectorAll('[data-calc]').forEach(initCalc);
 
+  /* ---------- routes dropdown ----------
+     Below 900px the button is hidden and the panel is always open inside the
+     burger menu, so this only runs on wider screens. The links work without
+     it either way. */
+  (function(){
+    var menu = document.querySelector('[data-menu]');
+    if (!menu) return;
+    var btn = menu.querySelector('.menu__btn');
+
+    function set(open){
+      if (open) menu.setAttribute('data-open', ''); else menu.removeAttribute('data-open');
+      btn.setAttribute('aria-expanded', String(open));
+    }
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      set(!menu.hasAttribute('data-open'));
+      // never two panels open at once
+      var lang = document.querySelector('.lang');
+      if (lang) {
+        lang.removeAttribute('data-open');
+        var lb = lang.querySelector('.lang__btn');
+        if (lb) lb.setAttribute('aria-expanded', 'false');
+      }
+    });
+    document.addEventListener('click', function(e){
+      if (!menu.contains(e.target)) set(false);
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') set(false);
+    });
+  })();
+
   /* ---------- language selector ----------
      The options are plain links, so this only opens and closes the menu — with
      JavaScript off the <ul> is still in the markup and still navigable. */
@@ -3012,6 +3241,12 @@ select.control{
       var open = box.hasAttribute('data-open');
       if (open) box.removeAttribute('data-open'); else box.setAttribute('data-open', '');
       btn.setAttribute('aria-expanded', String(!open));
+      var menu = document.querySelector('[data-menu]');
+      if (menu) {
+        menu.removeAttribute('data-open');
+        var mb = menu.querySelector('.menu__btn');
+        if (mb) mb.setAttribute('aria-expanded', 'false');
+      }
     });
     document.addEventListener('click', function(){
       box.removeAttribute('data-open');

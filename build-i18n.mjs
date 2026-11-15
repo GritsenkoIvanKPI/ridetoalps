@@ -41,7 +41,10 @@ function reroot(s, code) {
   return s
     // assets live once, at the root, and are shared by all four versions
     .replace(/(\s(?:src|href)=")(images\/)/g, '$1/$2')
-    .replace(/(\ssrcset=")(images\/)/g, '$1/$2')
+    // every URL in the list, not just the first: a srcset holds several,
+    // and a half-rewritten one silently 404s the widths it did not touch
+    .replace(/\s(srcset|imagesrcset)="([^"]*)"/g,
+             (m, attr, val) => ' ' + attr + '="' + val.replace(/(^|,\s*)images\//g, '$1/images/') + '"')
     .replace(/(\s(?:src|href)=")(fonts\/)/g, '$1/$2')
     .replace(/url\('fonts\//g, "url('/fonts/")
     .replace(/(\ssrc=")consent\.js"/g, '$1/consent.js"')

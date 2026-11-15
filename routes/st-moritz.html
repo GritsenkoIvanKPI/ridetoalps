@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- charset first: the declaration must fall inside the first 1024 bytes,
+     and the Google tag alone is longer than that -->
+<meta charset="utf-8">
+<script>document.documentElement.className+=" js";</script>
 <!-- Google tag (gtag.js) + Google Tag Manager, with Consent Mode v2.
      The tags load immediately so Google can detect them, but every storage
      type starts DENIED: no cookies are written and no identifiers are sent
@@ -27,7 +31,6 @@
     f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TC59WJXP');
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-39Y7WT9DKR"></script>
-<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Munich Airport to St. Moritz — private transfer from €550 | ridetoalps</title>
 <meta name="description" content="Private door-to-door transfer from Munich Airport to St. Moritz. 330 km, about 3 h 45. Fixed price from €550 per vehicle, flight tracking and all tolls included.">
@@ -50,10 +53,12 @@
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preload" as="image" href="/images/routes/hero-st-moritz.avif" type="image/avif" fetchpriority="high">
+<!-- imagesrcset must match the <source> in the hero exactly, or the preload
+     fetches a width the picture then ignores -->
+<link rel="preload" as="image" type="image/avif" fetchpriority="high" imagesizes="100vw" imagesrcset="/images/routes/hero-st-moritz-768.avif 768w, /images/routes/hero-st-moritz-1100.avif 1100w, /images/routes/hero-st-moritz.avif 1376w">
 <link rel="stylesheet" href="/route.css">
 <script src="/consent.js" defer></script>
-<script type="application/ld+json">{"@context":"https://schema.org","inLanguage":"en-GB","@graph":[{"@type":"Service","name":"Munich Airport to St. Moritz","serviceType":"Private airport transfer","provider":{"@type":"LimousineService","name":"ridetoalps","url":"https://ridetoalps.com/"},"areaServed":{"@type":"Place","name":"St. Moritz, Engadin, Switzerland"},"offers":{"@type":"Offer","price":"550","priceCurrency":"EUR","description":"Fixed price per vehicle for up to 4 passengers departing 07:00–22:00."}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need anything special for the Swiss border?","acceptedAnswer":{"@type":"Answer","text":"Just your passport or ID card. Switzerland is in Schengen so there are no routine checks, though spot controls are more common here than at the Austrian border. The Swiss motorway vignette is already on our vehicles and included in the price."}},{"@type":"Question","name":"Is the Reschen Pass open in winter?","acceptedAnswer":{"@type":"Answer","text":"Yes, year-round — it is a main route and cleared as a priority. It is not the Stelvio, which closes for the season. In heavy snow the Reschen slows but does not usually shut."}},{"@type":"Question","name":"Is nearly four hours too long for one driver?","acceptedAnswer":{"@type":"Answer","text":"No. It is a single run with stops as needed, and because we take one booking per day there is no pressure to turn around for a second job. Short breaks are included — just ask."}},{"@type":"Question","name":"Can you take us to Pontresina or Celerina instead?","acceptedAnswer":{"@type":"Answer","text":"Yes, both are a few minutes from St. Moritz and we cover them at the same rate. Mention the village when you book."}},{"@type":"Question","name":"What is the quickest alternative in bad weather?","acceptedAnswer":{"@type":"Answer","text":"Via Chur and the A13, which is longer in kilometres but entirely motorway. We will choose on the day based on the actual conditions, at no change to your price."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://ridetoalps.com/"},{"@type":"ListItem","position":2,"name":"Routes","item":"https://ridetoalps.com/routes.html"},{"@type":"ListItem","position":3,"name":"Munich Airport to St. Moritz"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","inLanguage":"en-GB","@graph":[{"@type":"Service","@id":"https://ridetoalps.com/routes/st-moritz.html#service","name":"Munich Airport to St. Moritz","serviceType":"Private airport transfer","provider":{"@id":"https://ridetoalps.com/#business"},"areaServed":{"@type":"Place","name":"St. Moritz, Engadin, Switzerland"},"offers":{"@type":"Offer","url":"https://ridetoalps.com/routes/st-moritz.html","price":"550","priceCurrency":"EUR","description":"Fixed price per vehicle for up to 4 passengers departing 07:00–22:00.","eligibleQuantity":{"@type":"QuantitativeValue","minValue":1,"maxValue":4,"unitText":"passenger"}}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need anything special for the Swiss border?","acceptedAnswer":{"@type":"Answer","text":"Just your passport or ID card. Switzerland is in Schengen so there are no routine checks, though spot controls are more common here than at the Austrian border. The Swiss motorway vignette is already on our vehicles and included in the price."}},{"@type":"Question","name":"Is the Reschen Pass open in winter?","acceptedAnswer":{"@type":"Answer","text":"Yes, year-round — it is a main route and cleared as a priority. It is not the Stelvio, which closes for the season. In heavy snow the Reschen slows but does not usually shut."}},{"@type":"Question","name":"Is nearly four hours too long for one driver?","acceptedAnswer":{"@type":"Answer","text":"No. It is a single run with stops as needed, and because we take one booking per day there is no pressure to turn around for a second job. Short breaks are included — just ask."}},{"@type":"Question","name":"Can you take us to Pontresina or Celerina instead?","acceptedAnswer":{"@type":"Answer","text":"Yes, both are a few minutes from St. Moritz and we cover them at the same rate. Mention the village when you book."}},{"@type":"Question","name":"What is the quickest alternative in bad weather?","acceptedAnswer":{"@type":"Answer","text":"Via Chur and the A13, which is longer in kilometres but entirely motorway. We will choose on the day based on the actual conditions, at no change to your price."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://ridetoalps.com/"},{"@type":"ListItem","position":2,"name":"Routes","item":"https://ridetoalps.com/routes.html"},{"@type":"ListItem","position":3,"name":"Munich Airport to St. Moritz"}]}]}</script>
 </head>
 <body>
 
@@ -66,13 +71,35 @@
       </svg>
       <span class="brand__name">ridetoalps</span>
     </a>
-    <nav class="rhead__nav">
-      <a href="/">Home</a>
-      <a href="/routes.html">All routes</a>
-      <a href="#calculator">Price</a>
-      <a href="#faq">FAQ</a>
+
+    <nav class="rnav" id="rnav" aria-label="Main navigation">
+      <a class="rnav__link" href="/">Home</a>
+
+      <div class="menu" data-menu>
+        <button class="menu__btn" type="button" aria-expanded="false" aria-controls="routesMenu">
+          Routes <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="menu__panel" id="routesMenu">
+          <a href="/routes/munich-city.html"><span>Munich</span><b>€100</b></a>
+          <a href="/routes/kitzbuehel.html"><span>Kitzbühel</span><b>€300</b></a>
+          <a href="/routes/salzburg.html"><span>Salzburg</span><b>€325</b></a>
+          <a href="/routes/innsbruck.html"><span>Innsbruck</span><b>€350</b></a>
+          <a href="/routes/ischgl.html"><span>Ischgl</span><b>€400</b></a>
+          <a href="/routes/soelden.html"><span>Sölden</span><b>€450</b></a>
+          <a href="/routes/st-anton.html"><span>St. Anton</span><b>€500</b></a>
+          <a href="/routes/st-moritz.html" aria-current="page"><span>St. Moritz</span><b>€550</b></a>
+          <a href="/routes/bolzano.html"><span>Bolzano</span><b>€550</b></a>
+          <a href="/routes/bormio-livigno.html"><span>Bormio / Livigno</span><b>€550</b></a>
+          <a class="menu__all" href="/routes.html">All routes</a>
+        </div>
+      </div>
+
+      <a class="rnav__link" href="/#calculator">Prices</a>
+      <a class="rnav__link" href="/#fleet">Fleet</a>
+      <a class="rnav__link" href="/#contact">Contact</a>
+
       <div class="lang">
-        <button class="lang__btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Change language">
+        <button class="lang__btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="EN — Change language">
           EN <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
         </button>
         <ul class="lang__menu">
@@ -83,6 +110,12 @@
         </ul>
       </div>
     </nav>
+
+    <button class="rnav-toggle" id="rnavToggle" type="button"
+            aria-label="Open menu" aria-expanded="false" aria-controls="rnav"
+            data-label-open="Open menu" data-label-close="Close menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path class="ic-burger" d="M4 7h16M4 12h16M4 17h16"/><path class="ic-close" d="m6 6 12 12M18 6 6 18"/></svg>
+    </button>
   </div>
 </header>
 
@@ -91,7 +124,7 @@
 <!-- hero -->
 <section class="rhero">
   <div class="rhero__frame grain">
-    <div class="rhero__media"><picture><source srcset="/images/routes/hero-st-moritz.avif" type="image/avif"><source srcset="/images/routes/hero-st-moritz.webp" type="image/webp"><img src="/images/routes/hero-st-moritz.jpg" alt="Mercedes V-Class beside the frozen lake at St. Moritz" fetchpriority="high" width="1600" height="900"></picture></div>
+    <div class="rhero__media"><picture><source type="image/avif" sizes="100vw" srcset="/images/routes/hero-st-moritz-768.avif 768w, /images/routes/hero-st-moritz-1100.avif 1100w, /images/routes/hero-st-moritz.avif 1376w"><source type="image/webp" sizes="100vw" srcset="/images/routes/hero-st-moritz-768.webp 768w, /images/routes/hero-st-moritz-1100.webp 1100w, /images/routes/hero-st-moritz.webp 1376w"><img src="/images/routes/hero-st-moritz-1100.jpg" sizes="100vw" srcset="/images/routes/hero-st-moritz-768.jpg 768w, /images/routes/hero-st-moritz-1100.jpg 1100w, /images/routes/hero-st-moritz.jpg 1376w" alt="Mercedes V-Class beside the frozen lake at St. Moritz" fetchpriority="high" width="1600" height="900"></picture></div>
     <div class="rhero__body">
       <p class="rhero__crumb"><a href="/">Home</a> › <a href="/routes.html">Routes</a> › St. Moritz</p>
       <h1>Munich Airport to St. Moritz</h1>
@@ -298,7 +331,7 @@
 <section class="section-spacing">
   <div class="container">
     <div class="rsplit">
-      <div class="rsplit__media reveal"><picture><source srcset="/images/routes/hero-st-moritz.avif" type="image/avif"><source srcset="/images/routes/hero-st-moritz.webp" type="image/webp"><img src="/images/routes/hero-st-moritz.jpg" alt="Mercedes V-Class beside the frozen lake at St. Moritz" loading="lazy" width="1600" height="900"></picture></div>
+      <div class="rsplit__media reveal"><picture><source type="image/avif" sizes="100vw" srcset="/images/routes/hero-st-moritz-768.avif 768w, /images/routes/hero-st-moritz-1100.avif 1100w, /images/routes/hero-st-moritz.avif 1376w"><source type="image/webp" sizes="100vw" srcset="/images/routes/hero-st-moritz-768.webp 768w, /images/routes/hero-st-moritz-1100.webp 1100w, /images/routes/hero-st-moritz.webp 1376w"><img src="/images/routes/hero-st-moritz-1100.jpg" sizes="100vw" srcset="/images/routes/hero-st-moritz-768.jpg 768w, /images/routes/hero-st-moritz-1100.jpg 1100w, /images/routes/hero-st-moritz.jpg 1376w" alt="Mercedes V-Class beside the frozen lake at St. Moritz" loading="lazy" width="1600" height="900"></picture></div>
       <div class="reveal">
         <span class="eyebrow">Engadin, Switzerland</span>
         <h2>About St. Moritz</h2>
@@ -510,17 +543,17 @@
     <h2 class="head-center reveal">Guests on the St. Moritz run</h2>
     <div class="reviews reveal" id="reviewsTrack">
       <article class="review">
-        <div class="stars" aria-label="5 out of 5"><svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg><svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg><svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg><svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg><svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg></div>
+        <div class="stars" role="img" aria-label="5 out of 5"><svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg><svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg><svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg><svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg><svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg></div>
         <p>Three borders, two passes, four hours, and the Reschensee church tower in the middle of it. Easily the best drive of the trip.</p>
         <div class="review__by"><span>Alexandra Weiss</span></div>
       </article>
       <article class="review">
-        <div class="stars" aria-label="5 out of 5"><svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg><svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg><svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg><svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg><svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg></div>
+        <div class="stars" role="img" aria-label="5 out of 5"><svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg><svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg><svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg><svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg><svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg></div>
         <p>Heavy snow forecast and he called the night before to say he would route via Chur instead. Arrived on time, same price as quoted.</p>
         <div class="review__by"><span>Graham Whitfield</span></div>
       </article>
       <article class="review">
-        <div class="stars" aria-label="5 out of 5"><svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg><svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg><svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg><svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg><svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg></div>
+        <div class="stars" role="img" aria-label="5 out of 5"><svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg><svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg><svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg><svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg><svg viewBox="0 0 24 24" class="on" aria-hidden="true"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8L12 2Z"/></svg></div>
         <p>Long drive with two teenagers and nobody complained. Wi-Fi did a lot of the work.</p>
         <div class="review__by"><span>Ingrid Solberg</span></div>
       </article>
@@ -661,7 +694,7 @@
       </div>
 
       <div class="footer__col">
-        <h5>Pages</h5>
+        <h3>Pages</h3>
         <ul>
           <li><a href="/#top" class="is-active">Home</a></li>
           <li><a href="/#calculator">Prices</a></li>
@@ -673,7 +706,7 @@
       </div>
 
       <div class="footer__col">
-        <h5>Destinations</h5>
+        <h3>Destinations</h3>
         <ul>
           <li><a href="/routes/kitzbuehel.html">Kitzbühel</a></li>
           <li><a href="/routes/innsbruck.html">Innsbruck</a></li>
@@ -684,7 +717,7 @@
       </div>
 
       <div class="footer__col">
-        <h5>More routes</h5>
+        <h3>More routes</h3>
         <ul>
           <li><a href="/routes/st-anton.html">St. Anton am Arlberg</a></li>
           <li><a href="/routes/st-moritz.html">St. Moritz</a></li>
