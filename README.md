@@ -45,6 +45,7 @@ and reaches 48 pages on the next build. A change made in `de/index.html` is lost
 | `send-form.php` | Booking form endpoint → Telegram |
 | `check-links.mjs` | Every internal link, asset and hreflang on all 48 pages |
 | `check-layout.mjs` | Overflow and script errors, every language × four widths |
+| `check-grid.mjs` | That every element sits on the one content column, at ten widths |
 | `robots.txt` | Crawler access — search engines and AI assistants, named explicitly |
 | `i18n/nav.mjs` | The header shared by every generated page |
 | `serve.mjs`, `screenshot.mjs` | Dev server and Puppeteer screenshot helper |
@@ -108,8 +109,25 @@ node serve.mjs &
 node check-links.mjs     # every link, asset and hreflang on 51 pages, and that
                          # each homepage still links all ten routes
 node check-layout.mjs    # 4 languages × 4 widths, overflow and JS errors
+node check-grid.mjs      # every element on the one content column, 10 widths
 node i18n/check.mjs      # stray characters in the translation files
 ```
+
+### The layout grid
+
+Four tokens define it, in both `index.html` and `route.css`:
+
+```css
+--shell            inset of a full-bleed card (hero, footer) from the viewport
+--gutter           the content column's side padding
+--grid-max         the content column's width
+--grid-max-inset   } the same column, expressed from inside a card that is
+--gutter-inset     } already inset by --shell
+```
+
+Content inside a full-bleed card needs the `-inset` pair, or it lands short of
+the column by exactly `--shell`. Put the gutter on the row that is also
+max-width constrained — never on its parent as well, or the two add up.
 
 `serve.mjs` applies the same gzip, cache and charset headers as `.htaccess`, so a
 local Lighthouse run measures something close to the real site rather than

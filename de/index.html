@@ -171,6 +171,16 @@
 
   --ease--spring:cubic-bezier(.22,1,.36,1);
   --shell:20px;
+  /* ---- layout grid ----------------------------------------------------
+     One content column for the whole site. --shell is the inset of a
+     full-bleed card (the hero, the footer) from the viewport edge; the two
+     -inset values put content *inside* such a card onto the same column by
+     subtracting that inset from both the width and the padding. Without them
+     the hero text starts 132px left of the heading below it. */
+  --grid-max:1380px;
+  --gutter:30px;
+  --grid-max-inset:calc(var(--grid-max) - 2 * var(--shell));
+  --gutter-inset:calc(var(--gutter) - var(--shell));
 }
 
 *{box-sizing:border-box}
@@ -220,7 +230,7 @@ h3{font-size:1.5rem;line-height:1.25;letter-spacing:-.02em;font-weight:500}
 h4{font-size:1.25rem;line-height:1.3;letter-spacing:-.015em;font-weight:500}
 p{margin:0}
 
-.container{width:100%;max-width:1380px;margin:0 auto;padding:0 30px}
+.container{width:100%;max-width:var(--grid-max);margin:0 auto;padding:0 var(--gutter)}
 .section-spacing{padding-top:90px;padding-bottom:90px}
 .section-spacing--tight{padding-top:60px;padding-bottom:60px}
 
@@ -313,7 +323,8 @@ p{margin:0}
 .masthead{
   position:relative;z-index:20;
   display:flex;align-items:center;justify-content:space-between;
-  padding:32px 48px;gap:24px;
+  width:100%;max-width:var(--grid-max-inset);margin-left:auto;margin-right:auto;
+  padding:32px var(--gutter-inset);gap:24px;
 }
 .brand{display:inline-flex;align-items:center;gap:12px}
 .brand__mark{width:38px;height:38px;flex:0 0 38px}
@@ -440,7 +451,8 @@ p{margin:0}
 
 .hero__body{
   position:relative;z-index:5;margin-top:auto;
-  padding:0 48px 52px;max-width:1000px;
+  width:100%;max-width:var(--grid-max-inset);margin-left:auto;margin-right:auto;
+  padding:0 var(--gutter-inset) 52px;
 }
 .hero__body h1{color:var(--color--white);max-width:15ch}
 .hero__br{display:none}
@@ -453,7 +465,8 @@ p{margin:0}
 .hero__strip{
   position:relative;z-index:5;
   display:flex;flex-wrap:wrap;gap:14px 40px;
-  padding:0 48px 44px;
+  width:100%;max-width:var(--grid-max-inset);margin-left:auto;margin-right:auto;
+  padding:0 var(--gutter-inset) 44px;
 }
 .hero__strip li{
   display:flex;align-items:center;gap:10px;
@@ -866,7 +879,7 @@ select.control{
 .footer{padding:0 var(--shell) var(--shell)}
 .footer__inner{
   position:relative;background:var(--color--black);border-radius:var(--border-radius--lg);
-  padding:64px 62px 40px;color:var(--color--white);overflow:hidden;isolation:isolate;
+  padding:64px 0 40px;color:var(--color--white);overflow:hidden;isolation:isolate;
 }
 .footer__inner::before{
   content:"";position:absolute;inset:0;z-index:0;
@@ -901,6 +914,13 @@ select.control{
   position:relative;z-index:4;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
   font-size:15px;color:var(--color--gray-3);
 }
+/* The footer card is inset by --shell like the hero, so its rows need the same
+   correction to land on the page column rather than 18px left of it. */
+.footer__top,.footer__rule,.footer__bottom{
+  width:100%;max-width:var(--grid-max-inset);margin-left:auto;margin-right:auto;
+  padding-left:var(--gutter-inset);padding-right:var(--gutter-inset);
+}
+
 .footer__bottom a{color:var(--color--primary-soft)}
 .footer__legal{display:flex;gap:26px;flex-wrap:wrap}
 .footer__legal a{
@@ -947,7 +967,7 @@ select.control{
   .footer__top{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:900px){
-  :root{--shell:12px}
+  :root{--shell:12px;--gutter:20px}
 
   /* touch targets: 44px minimum on every tappable element */
   .nav a{display:flex;align-items:center;width:100%;min-height:44px}
@@ -973,7 +993,6 @@ select.control{
     box-shadow:0 24px 60px -18px rgba(4,10,22,.9);
   }
   .steps__body{padding:36px 24px 40px}
-  .container{padding:0 20px}
   .section-spacing{padding-top:64px;padding-bottom:64px}
   .nav{display:none}
   .nav.is-open{
@@ -992,7 +1011,7 @@ select.control{
   }
   .menu__panel a{padding:8px 0;min-height:46px}
   .nav-toggle{display:grid}
-  .masthead{padding:20px;gap:12px}
+  .masthead{padding:20px var(--gutter-inset);gap:12px}
   /* the pill shrinks to the code and the chevron; the brand gives up the room */
   .lang__btn{height:52px;padding:0 12px;font-size:16px}
   .brand__name{font-size:25px}
@@ -1008,8 +1027,8 @@ select.control{
     background:
       linear-gradient(180deg,rgba(6,17,35,.72) 0%,rgba(6,17,35,.58) 45%,rgba(6,17,35,.88) 100%);
   }
-  .hero__body{padding:26px 20px 42px}
-  .hero__strip{padding:0 20px 36px;gap:18px 24px}
+  .hero__body{padding:26px var(--gutter-inset) 42px}
+  .hero__strip{padding:0 var(--gutter-inset) 36px;gap:18px 24px}
   .car{flex:0 0 86%}
   .fleet__track{gap:20px}
   .fleet__track::after{content:"";flex:0 0 12%}
@@ -1025,7 +1044,7 @@ select.control{
   .car__body{padding:22px 24px 28px}
   .car__specs{grid-template-columns:1fr;gap:14px}
   .footer{padding:0 12px 12px}
-  .footer__inner{padding:44px 24px 28px}
+  .footer__inner{padding:44px 0 28px}
   .footer__top{grid-template-columns:minmax(0,1fr);gap:34px}
   .about__frame{min-height:300px}
   .checklist h3{font-size:23px}

@@ -38,7 +38,7 @@ const NEVER_UPLOAD = [
   'config.example.php', '.gitignore', 'desktop.png',
   'routes.data.mjs', 'build-routes.mjs', 'build-routes-index.mjs',
   'build-i18n.mjs', 'build-sitemap.mjs', 'build.mjs', 'build-llms.mjs',
-  'check-links.mjs', 'check-layout.mjs',
+  'check-links.mjs', 'check-layout.mjs', 'check-grid.mjs',
   'Інструкція — перевірка оплат ridetoalps.docx',
   'htaccess.txt',
 ];
