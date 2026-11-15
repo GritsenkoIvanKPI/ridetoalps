@@ -32,6 +32,8 @@ export default {
     'ridetoalps — private Transfers von München in die Alpen',
 
   /* ---------- destinations ---------- */
+  'Marienplatz in central Munich on a winter evening':
+    'Der Marienplatz in der Münchner Innenstadt an einem Winterabend',
   'Kitzbühel': 'Kitzbühel',
   'Salzburg': 'Salzburg',
   'Innsbruck': 'Innsbruck',

@@ -612,6 +612,11 @@ select.control{
    ============================================================ */
 .dest{display:grid;grid-template-columns:.8fr 2.2fr;gap:42px;align-items:start}
 .dest__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px}
+/* Ten cards in three columns leave the last one on its own. Pushing it to the
+   middle column centres that short row instead of letting it hang to the left.
+   The selector only matches when a final card really does start a row alone,
+   so adding or removing a destination needs no change here. */
+.dest__card:last-child:nth-child(3n+1){grid-column:2}
 .dest__card{
   min-width:0;
   background:var(--color--gray-5);border-radius:var(--border-radius--lg);
@@ -866,6 +871,10 @@ select.control{
   .features{grid-template-columns:repeat(2,1fr);gap:48px 32px}
   .dest{grid-template-columns:1fr;gap:34px}
   .dest__grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+  /* four columns, so ten cards end on a row of two — nudged in by one column
+     so the pair sits centred. The three-column rule above no longer applies. */
+  .dest__card:last-child:nth-child(3n+1){grid-column:auto}
+  .dest__card:nth-last-child(2):nth-child(4n+1){grid-column:2}
   .dest__thumb{width:150px}
   .about{grid-template-columns:minmax(0,1fr);gap:62px}
   .about__media{order:-1}
@@ -935,6 +944,9 @@ select.control{
   .fleet__track{gap:20px}
   .fleet__track::after{content:"";flex:0 0 12%}
   .dest__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  /* two columns divide ten cards evenly, so the centring rules above are not
+     only unnecessary here, they would strand the ninth card on its own row */
+  .dest__card:nth-last-child(2):nth-child(4n+1){grid-column:auto}
   .dest__thumb{width:132px}
   .contact-grid{grid-template-columns:1fr}
   .reviews{gap:20px}
@@ -1469,6 +1481,11 @@ select.control{
           <div class="dest__thumb"><picture><source srcset="/images/dest-livigno.avif" type="image/avif"><source srcset="/images/dest-livigno.webp" type="image/webp"><img src="/images/dest-livigno.jpg" alt="Лівіньо взимку" loading="lazy" width="420" height="420" decoding="async"></picture></div>
           <h4>Борміо / Лівіньо</h4>
           <p>від 550 €</p>
+        </a>
+        <a class="dest__card" href="/uk/routes/munich-city.html">
+          <div class="dest__thumb"><picture><source srcset="/images/dest-munich.avif" type="image/avif"><source srcset="/images/dest-munich.webp" type="image/webp"><img src="/images/dest-munich.jpg" alt="Марієнплац у центрі Мюнхена зимового вечора" loading="lazy" width="420" height="420" decoding="async"></picture></div>
+          <h4>Мюнхен, місто</h4>
+          <p>від 100 €</p>
         </a>
       </div>
     </div>
@@ -2058,6 +2075,7 @@ select.control{
           <li><a href="#fleet">Автопарк</a></li>
           <li><a href="#about">Про нас</a></li>
           <li><a href="#reviews">Відгуки</a></li>
+          <li><a href="#faq">Питання</a></li>
         </ul>
       </div>
 
@@ -2079,7 +2097,8 @@ select.control{
           <li><a href="/uk/routes/st-moritz.html">Санкт-Моріц</a></li>
           <li><a href="/uk/routes/bolzano.html">Регіон Больцано</a></li>
           <li><a href="/uk/routes/bormio-livigno.html">Борміо / Лівіньо</a></li>
-          <li><a href="#faq">Питання</a></li>
+          <li><a href="/uk/routes/munich-city.html">Мюнхен, місто</a></li>
+          <li><a href="/uk/routes.html">Усі маршрути</a></li>
         </ul>
       </div>
     </div>

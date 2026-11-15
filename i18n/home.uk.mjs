@@ -26,6 +26,8 @@ export default {
     'ridetoalps — приватні трансфери з Мюнхена в Альпи',
 
   /* ---------- напрямки ---------- */
+  'Marienplatz in central Munich on a winter evening':
+    'Марієнплац у центрі Мюнхена зимового вечора',
   'Kitzbühel': 'Кіцбюель',
   'Salzburg': 'Зальцбург',
   'Innsbruck': 'Інсбрук',
