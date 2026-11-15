@@ -86,13 +86,20 @@ refs.forEach(r => {
   if (fs.existsSync(r) && fs.statSync(r).isFile()) take(r);
 });
 
-// the operator fills this in; it is git-ignored and must never be committed
+// Written as config.sample.php, never as config.php.
+//
+// The live config.php holds the Telegram bot token and is created once, on the
+// server. If this folder contained a config.php, then every later upload of
+// deploy/ would overwrite that file with blank placeholders and silently break
+// the booking form — the kind of failure nobody notices until an enquiry goes
+// missing. So the template ships under a different name and is copied into
+// place by hand, once.
 const CONFIG = `<?php
 /**
  * ridetoalps — form settings.
  *
  * 1. Replace the two PASTE_ values below.
- * 2. Upload this file next to send-form.php.
+ * 2. Rename it to config.php and upload it next to send-form.php.
  * 3. Set its permissions to 600 in the Webuzo file manager.
  *
  * Never commit this file and never e-mail it. Anyone holding the token
@@ -122,7 +129,7 @@ return [
     'rate_limit_per_hour' => 5,
 ];
 `;
-fs.writeFileSync(path.join(OUT, 'config.php'), CONFIG);
+fs.writeFileSync(path.join(OUT, 'config.sample.php'), CONFIG);
 count++;
 
 const size = (dir) => fs.readdirSync(dir, { withFileTypes: true })
@@ -131,4 +138,6 @@ const size = (dir) => fs.readdirSync(dir, { withFileTypes: true })
     : fs.statSync(path.join(dir, e.name)).size), 0);
 
 console.log(`deploy/ built — ${count} files, ${(size(OUT) / 1024 / 1024).toFixed(2)} MB`);
-console.log('config.php is a template: fill in the two PASTE_ values before uploading.');
+console.log('config.sample.php is a template. On a FIRST install, rename it to');
+console.log('config.php on the server, fill in the two PASTE_ values and chmod 600.');
+console.log('On later uploads leave it alone — the live config.php is never overwritten.');

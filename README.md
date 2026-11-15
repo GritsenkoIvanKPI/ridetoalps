@@ -118,12 +118,16 @@ node build.mjs
 node build-deploy.mjs    # → deploy/, 224 files
 ```
 
-Upload the contents of `deploy/` to `public_html`. Then, on the server only:
+Upload the contents of `deploy/` to `public_html`, overwriting what is there.
 
-1. Open `config.php` and fill in `bot_token` and `chat_id`.
-2. Set its permissions to **600**.
+On a **first install** only, on the server: rename `config.sample.php` to `config.php`,
+fill in `bot_token` and `chat_id`, and set its permissions to **600**.
 
-`config.php` is git-ignored and must never be committed — this repository is public, and
+On later uploads leave it alone. `deploy/` deliberately contains no `config.php`, so
+re-uploading the whole folder can never overwrite the live token — which would break the
+booking form quietly, and nobody would notice until an enquiry went missing.
+
+`config.php` is git-ignored and must never be committed: this repository is public, and
 anyone holding the token controls the bot.
 
 ## Pricing rules
