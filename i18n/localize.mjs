@@ -18,7 +18,8 @@
 
 /* Attributes a human reads. `content` is handled separately: only the meta
    tags whose value is prose, never og:url or theme-color. */
-const TEXT_ATTRS = ['alt', 'aria-label', 'placeholder', 'title'];
+const TEXT_ATTRS = ['alt', 'aria-label', 'placeholder', 'title',
+                    'data-label-open', 'data-label-close'];
 
 /* Text that carries no language, so asking for a translation would be noise:
    bare numbers and prices, punctuation, the brand, vehicle models, phone
@@ -48,8 +49,12 @@ export function localize(html, map) {
 
   const t = (raw) => {
     const s = raw.trim();
-    if (!s || NOT_TRANSLATABLE.test(s)) return null;
+    if (!s) return null;
+    // an explicit translation wins over the "not language" test: "€300" looks
+    // like pure punctuation and digits, but German and the Slavic languages
+    // put the symbol after the number, so the map gets asked first
     if (Object.prototype.hasOwnProperty.call(map, s)) { used.add(s); return map[s]; }
+    if (NOT_TRANSLATABLE.test(s)) return null;
     missing.add(s);
     return null;
   };

@@ -47,7 +47,7 @@ and reaches 48 pages on the next build. A change made in `de/index.html` is lost
 | `check-layout.mjs` | Overflow and script errors, every language × four widths |
 | `check-grid.mjs` | That every element sits on the one content column, at ten widths |
 | `robots.txt` | Crawler access — search engines and AI assistants, named explicitly |
-| `i18n/nav.mjs` | The header shared by every generated page |
+| `i18n/nav.mjs` | The header: one definition, every page |
 | `serve.mjs`, `screenshot.mjs` | Dev server and Puppeteer screenshot helper |
 
 ## How the translation works
@@ -112,6 +112,18 @@ node check-layout.mjs    # 4 languages × 4 widths, overflow and JS errors
 node check-grid.mjs      # every element on the one content column, 10 widths
 node i18n/check.mjs      # stray characters in the translation files
 ```
+
+### The header
+
+One bar on every page — sticky, with the Routes menu, the language picker and a
+`Book now` button pointing at `#calculator`. `i18n/nav.mjs` generates it for the
+route and hub pages; `index.html` carries the same markup by hand, because it
+*is* the served English homepage. `check-links.mjs` compares the two and fails
+on drift.
+
+`--head-h` is its height. The homepage hero subtracts it to stay exactly one
+viewport tall, and every anchor target reserves it as `scroll-margin-top` so a
+section jumped to from the menu does not land behind the bar.
 
 ### The layout grid
 

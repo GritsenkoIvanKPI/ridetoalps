@@ -87,11 +87,18 @@
      the hero text starts 132px left of the heading below it. */
   --grid-max:1380px;
   --gutter:30px;
+  /* height of the sticky header: the hero subtracts it to stay exactly one
+     viewport tall, and anchor targets reserve it so a jumped-to heading does
+     not land behind the bar */
+  --head-h:74px;
   --grid-max-inset:calc(var(--grid-max) - 2 * var(--shell));
   --gutter-inset:calc(var(--gutter) - var(--shell));
 }
 
 *{box-sizing:border-box}
+/* the header is sticky, so a section jumped to from the menu would start
+   underneath it without this */
+:target,section[id],main[id],header[id]{scroll-margin-top:calc(var(--head-h) + 14px)}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{
   margin:0;
@@ -648,7 +655,7 @@ select.control{
 .rhead{position:sticky;top:0;z-index:40;background:rgba(12,21,36,.92);
   -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
   border-bottom:1px solid rgba(255,255,255,.08)}
-.rhead__in{max-width:1380px;margin:0 auto;padding:0 30px;min-height:74px;
+.rhead__in{max-width:var(--grid-max);margin:0 auto;padding:0 var(--gutter);min-height:var(--head-h);
   display:flex;align-items:center;justify-content:space-between;gap:20px}
 .rhead .brand__name{color:var(--color--white);font-size:26px}
 .rhead__nav{display:flex;align-items:center;gap:30px}
@@ -708,6 +715,21 @@ select.control{
   border-radius:0 0 var(--border-radius--sm) var(--border-radius--sm);
   justify-content:center!important;color:#fff!important;font-weight:500;
 }
+
+/* the booking call to action: the only filled control in the bar, so it reads
+   as the action rather than another link */
+.rnav__cta{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:44px;padding:0 20px;margin-left:2px;
+  border-radius:var(--border-radius--sm);
+  background:var(--color--primary-1);color:#fff;
+  font-family:var(--font-family--heading);font-size:16px;font-weight:500;
+  white-space:nowrap;
+  transition:background-color .22s ease,transform .22s var(--ease--spring);
+}
+.rnav__cta:hover{background:var(--color--primary-2);transform:translateY(-1px)}
+.rnav__cta:active{transform:translateY(0)}
+.rnav__cta:focus-visible{outline:3px solid var(--color--primary-soft);outline-offset:3px}
 
 .rnav-toggle{
   display:none;width:50px;height:50px;flex:0 0 50px;
@@ -824,14 +846,14 @@ select.control{
   .rincl,.rother{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:900px){
-  .rhead__in{padding:0 20px;min-height:66px}
+  .rhead__in{padding:0 var(--gutter)}
 
   /* The burger takes over. The old rule here hid every link instead of moving
      them anywhere, which left a route page with no navigation at all on a
      phone — the one place a visitor is most likely to be reading it. */
   .rnav-toggle{display:grid}
   .rnav{
-    position:absolute;top:66px;right:20px;left:20px;
+    position:absolute;top:var(--head-h);right:var(--gutter);left:var(--gutter);
     flex-direction:column;align-items:stretch;gap:2px;
     padding:12px;z-index:60;
     background:#0f1522;border:1px solid rgba(255,255,255,.14);
@@ -852,6 +874,7 @@ select.control{
     border-bottom:1px solid rgba(255,255,255,.12);
   }
   .menu__panel a{padding:8px 10px;min-height:46px}
+  .rnav__cta{width:100%;margin:10px 0 2px;min-height:50px;font-size:17px}
   .lang{margin-top:8px}
   .lang__btn{width:100%;justify-content:space-between}
   .lang__menu{position:static;width:100%;min-width:0;margin-top:6px;box-shadow:none}
@@ -880,7 +903,7 @@ select.control{
   .footer__top{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:900px){
-  :root{--shell:12px;--gutter:20px}
+  :root{--shell:12px;--gutter:20px;--head-h:66px}
 
   /* touch targets: 44px minimum on every tappable element */
   .nav a{display:flex;align-items:center;width:100%;min-height:44px}

@@ -74,6 +74,12 @@ ${items}
       <a class="rnav__link" href="${b}/#contact">${esc(M('Contact'))}</a>
 
       ${langPicker(code, urlFor, { label: M('Change language') })}
+
+      <!-- The header is sticky, so this is the one control on screen at every
+           scroll position. It points at #calculator rather than the closing
+           #book block: same target on every page type, and the thing it lands
+           on is a complete quote-and-book form either way. -->
+      <a class="rnav__cta" href="${b}/#calculator">${esc(M('Book now'))}</a>
     </nav>
 
     <button class="rnav-toggle" id="rnavToggle" type="button"

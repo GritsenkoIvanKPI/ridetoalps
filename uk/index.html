@@ -179,11 +179,18 @@
      the hero text starts 132px left of the heading below it. */
   --grid-max:1380px;
   --gutter:30px;
+  /* height of the sticky header: the hero subtracts it to stay exactly one
+     viewport tall, and anchor targets reserve it so a jumped-to heading does
+     not land behind the bar */
+  --head-h:74px;
   --grid-max-inset:calc(var(--grid-max) - 2 * var(--shell));
   --gutter-inset:calc(var(--gutter) - var(--shell));
 }
 
 *{box-sizing:border-box}
+/* the header is sticky, so a section jumped to from the menu would start
+   underneath it without this */
+:target,section[id],main[id],header[id]{scroll-margin-top:calc(var(--head-h) + 14px)}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{
   margin:0;
@@ -302,8 +309,8 @@ p{margin:0}
   /* full-viewport hero: the frame plus the shell padding equals exactly 100vh.
      min-height (not height) so the frame still grows if the copy needs more
      room on a short window. svh avoids the mobile URL-bar overshoot. */
-  min-height:calc(100vh - (var(--shell) * 2));
-  min-height:calc(100svh - (var(--shell) * 2));
+  min-height:calc(100vh - (var(--shell) * 2) - var(--head-h));
+  min-height:calc(100svh - (var(--shell) * 2) - var(--head-h));
   display:flex;flex-direction:column;
   isolation:isolate;
 }
@@ -320,12 +327,12 @@ p{margin:0}
   background:radial-gradient(120% 90% at 15% 100%,#0a2d6e 0%,rgba(10,45,110,0) 60%);
 }
 
-.masthead{
-  position:relative;z-index:20;
-  display:flex;align-items:center;justify-content:space-between;
-  width:100%;max-width:var(--grid-max-inset);margin-left:auto;margin-right:auto;
-  padding:32px var(--gutter-inset);gap:24px;
-}
+/* ------------------------------------------------------------------
+   Header — the same bar on every page, kept in step with route.css.
+   It used to be a transparent .masthead floating inside the hero image on
+   the homepage and a solid sticky bar everywhere else, so the site changed
+   shape the moment you opened a route page.
+   ------------------------------------------------------------------ */
 .brand{display:inline-flex;align-items:center;gap:12px}
 .brand__mark{width:38px;height:38px;flex:0 0 38px}
 .brand__name{
@@ -333,29 +340,97 @@ p{margin:0}
   font-size:30px;font-weight:500;letter-spacing:-.035em;color:var(--color--white);line-height:1;
 }
 .brand--dark .brand__name{color:var(--color--black)}
-
-.nav{
-  display:flex;align-items:center;gap:38px;
-  background:rgba(14,20,32,.82);
+.rhead{position:sticky;top:0;z-index:40;background:rgba(12,21,36,.92);
   -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
-  border:1px solid rgba(255,255,255,.08);
+  border-bottom:1px solid rgba(255,255,255,.08)}
+.rhead__in{max-width:var(--grid-max);margin:0 auto;padding:0 var(--gutter);min-height:var(--head-h);
+  display:flex;align-items:center;justify-content:space-between;gap:20px}
+.rhead .brand__name{color:var(--color--white);font-size:26px}
+.rhead__nav{display:flex;align-items:center;gap:30px}
+.rhead__nav a{font-family:var(--font-family--heading);font-size:16px;color:rgba(255,255,255,.84);
+  display:inline-flex;align-items:center;min-height:44px;transition:color .2s ease}
+.rhead__nav a:hover{color:var(--color--white)}
+.rhead__nav a:focus-visible{outline:2px solid var(--color--primary-soft);outline-offset:4px;border-radius:3px}
+
+
+/* ------------------------------------------------------------------
+   Header navigation
+
+   Desktop: a row of links with the ten routes behind a dropdown.
+   Phone:   the same links in a panel the burger opens, with the routes
+            listed flat — a dropdown inside a dropdown is a trap on touch.
+
+   The panel is a plain <nav> that is simply not positioned off-screen when
+   JavaScript is absent, so the links stay reachable either way.
+   ------------------------------------------------------------------ */
+.rnav{display:flex;align-items:center;gap:28px}
+.rnav__link,.menu__btn{
+  font-family:var(--font-family--heading);font-size:16px;font-weight:400;
+  color:rgba(255,255,255,.84);display:inline-flex;align-items:center;gap:6px;
+  min-height:44px;background:none;border:0;cursor:pointer;
+  transition:color .2s ease;
+}
+.rnav__link:hover,.menu__btn:hover{color:var(--color--white)}
+.rnav__link:focus-visible,.menu__btn:focus-visible{
+  outline:2px solid var(--color--primary-soft);outline-offset:4px;border-radius:3px}
+
+.menu{position:relative}
+.menu__btn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.2;
+  transition:transform .3s var(--ease--spring)}
+.menu[data-open] .menu__btn svg{transform:rotate(180deg)}
+.menu[data-open] .menu__btn{color:var(--color--white)}
+.menu__panel{
+  position:absolute;left:50%;transform:translateX(-50%);top:calc(100% + 10px);
+  width:300px;padding:8px;z-index:50;
+  background:#0f1522;border:1px solid rgba(255,255,255,.14);
   border-radius:var(--border-radius--md);
-  padding:0 38px;height:68px;
+  box-shadow:0 26px 70px -20px rgba(4,10,22,.92);
+  display:none;
 }
-.nav a{
-  font-family:var(--font-family--heading);font-size:17px;font-weight:400;
-  color:rgba(255,255,255,.86);position:relative;
-  transition:color .22s ease;
+.menu[data-open] .menu__panel{display:block}
+.menu__panel a{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  min-height:44px;padding:8px 12px;border-radius:var(--border-radius--sm);
+  font-size:15px;color:rgba(255,255,255,.82);
+  transition:background-color .2s ease,color .2s ease;
 }
-.nav a::after{
-  content:"";position:absolute;left:0;right:0;bottom:-8px;height:2px;
-  background:var(--color--primary-soft);border-radius:2px;
-  transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease--spring);
+.menu__panel a:hover{background:rgba(255,255,255,.08);color:#fff}
+.menu__panel a:focus-visible{outline:2px solid var(--color--primary-soft);outline-offset:-2px}
+.menu__panel a[aria-current="page"]{background:rgba(14,99,228,.22);color:#fff}
+.menu__panel b{font-weight:500;color:var(--color--primary-soft);white-space:nowrap}
+.menu__all{
+  margin-top:6px;border-top:1px solid rgba(255,255,255,.12);
+  border-radius:0 0 var(--border-radius--sm) var(--border-radius--sm);
+  justify-content:center!important;color:#fff!important;font-weight:500;
 }
-.nav a:hover{color:var(--color--white)}
-.nav a:hover::after{transform:scaleX(1)}
-.nav a.is-active{color:var(--color--primary-soft)}
-.nav a:focus-visible{outline:2px solid var(--color--primary-soft);outline-offset:6px;border-radius:2px}
+
+/* the booking call to action: the only filled control in the bar, so it reads
+   as the action rather than another link */
+.rnav__cta{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:44px;padding:0 20px;margin-left:2px;
+  border-radius:var(--border-radius--sm);
+  background:var(--color--primary-1);color:#fff;
+  font-family:var(--font-family--heading);font-size:16px;font-weight:500;
+  white-space:nowrap;
+  transition:background-color .22s ease,transform .22s var(--ease--spring);
+}
+.rnav__cta:hover{background:var(--color--primary-2);transform:translateY(-1px)}
+.rnav__cta:active{transform:translateY(0)}
+.rnav__cta:focus-visible{outline:3px solid var(--color--primary-soft);outline-offset:3px}
+
+.rnav-toggle{
+  display:none;width:50px;height:50px;flex:0 0 50px;
+  border-radius:var(--border-radius--md);background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.14);place-items:center;cursor:pointer;
+}
+.rnav-toggle svg{width:22px;height:22px;stroke:#fff}
+.rnav-toggle svg path{transition:opacity .2s ease}
+.rnav-toggle .ic-close{opacity:0}
+.rnav-toggle.is-open .ic-burger{opacity:0}
+.rnav-toggle.is-open .ic-close{opacity:1}
+.rnav-toggle:focus-visible{outline:3px solid var(--color--primary-soft);outline-offset:3px}
+
 
 /* ------------------------------------------------------------------
    Routes dropdown
@@ -408,16 +483,13 @@ p{margin:0}
 /* language selector — sits in the bar at every width, so a visitor who landed
    on the wrong version can leave it without first opening the menu */
 .lang{position:relative;flex:0 0 auto}
-.lang__btn{
-  display:inline-flex;align-items:center;gap:7px;height:68px;padding:0 16px;
-  background:rgba(14,20,32,.82);
-  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
-  border:1px solid rgba(255,255,255,.08);border-radius:var(--border-radius--md);
-  color:rgba(255,255,255,.86);font-family:var(--font-family--heading);
-  font-size:17px;font-weight:400;letter-spacing:.02em;cursor:pointer;
-  transition:background-color .22s ease,color .22s ease;
-}
-.lang__btn:hover{background:rgba(20,28,44,.92);color:#fff}
+/* matches route.css: a 68px pill was right when it sat in the old transparent
+   masthead, and a head taller than the Book button once the bar became solid */
+.lang__btn{display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0 12px;
+  border:1px solid rgba(255,255,255,.2);border-radius:var(--border-radius--sm);
+  color:#fff;font-family:var(--font-family--heading);font-size:15px;background:none;cursor:pointer;
+  transition:background-color .2s ease}
+.lang__btn:hover{background:rgba(255,255,255,.08)}
 .lang__btn:focus-visible{outline:3px solid var(--color--primary-soft);outline-offset:3px}
 .lang__btn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.2;
   transition:transform .3s var(--ease--spring)}
@@ -441,13 +513,6 @@ p{margin:0}
 .lang__menu a:not([aria-current="true"]):hover{background:rgba(255,255,255,.08);color:#fff}
 .lang__menu a:focus-visible{outline:2px solid var(--color--primary-soft);outline-offset:-2px}
 
-.nav-toggle{display:none;width:52px;height:52px;border-radius:var(--border-radius--md);background:rgba(14,20,32,.82);border:1px solid rgba(255,255,255,.12);place-items:center}
-.nav-toggle svg{width:22px;height:22px;stroke:#fff}
-.nav-toggle svg path{transition:opacity .2s ease}
-.nav-toggle .ic-close{opacity:0}
-.nav-toggle.is-open .ic-burger{opacity:0}
-.nav-toggle.is-open .ic-close{opacity:1}
-.nav-toggle:focus-visible{outline:3px solid var(--color--primary-soft);outline-offset:3px}
 
 .hero__body{
   position:relative;z-index:5;margin-top:auto;
@@ -967,11 +1032,9 @@ select.control{
   .footer__top{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:900px){
-  :root{--shell:12px;--gutter:20px}
+  :root{--shell:12px;--gutter:20px;--head-h:66px}
 
   /* touch targets: 44px minimum on every tappable element */
-  .nav a{display:flex;align-items:center;width:100%;min-height:44px}
-  .nav a::after{bottom:6px}
   .brand{min-height:44px}
   .link-arrow{min-height:44px}
   .swap{min-height:46px;margin-top:0}
@@ -987,19 +1050,8 @@ select.control{
   .fleet__track{transform:none;transition:none}
   .car{scroll-snap-align:start}
 
-  .nav.is-open{
-    background:#0f1522;
-    border-color:rgba(255,255,255,.14);
-    box-shadow:0 24px 60px -18px rgba(4,10,22,.9);
-  }
   .steps__body{padding:36px 24px 40px}
   .section-spacing{padding-top:64px;padding-bottom:64px}
-  .nav{display:none}
-  .nav.is-open{
-    display:flex;flex-direction:column;align-items:flex-start;gap:4px;
-    position:absolute;top:88px;right:20px;left:20px;height:auto;padding:14px 20px;
-    z-index:30;max-height:calc(100vh - 120px);overflow-y:auto;
-  }
   /* flattened: the routes sit in the panel rather than behind a second tap */
   .menu{width:100%}
   .menu__btn{display:none}
@@ -1010,14 +1062,39 @@ select.control{
     border-bottom:1px solid rgba(255,255,255,.12);
   }
   .menu__panel a{padding:8px 0;min-height:46px}
-  .nav-toggle{display:grid}
-  .masthead{padding:20px var(--gutter-inset);gap:12px}
-  /* the pill shrinks to the code and the chevron; the brand gives up the room */
-  .lang__btn{height:52px;padding:0 12px;font-size:16px}
-  .brand__name{font-size:25px}
+  /* The burger takes over. The old rule here hid every link instead of moving
+     them anywhere, which left a route page with no navigation at all on a
+     phone — the one place a visitor is most likely to be reading it. */
+  .rnav-toggle{display:grid}
+  .rnav{
+    position:absolute;top:var(--head-h);right:var(--gutter);left:var(--gutter);
+    flex-direction:column;align-items:stretch;gap:2px;
+    padding:12px;z-index:60;
+    background:#0f1522;border:1px solid rgba(255,255,255,.14);
+    border-radius:var(--border-radius--md);
+    box-shadow:0 26px 70px -20px rgba(4,10,22,.92);
+    max-height:calc(100vh - 100px);overflow-y:auto;
+    display:none;
+  }
+  .rnav.is-open{display:flex}
+  .rnav__link{padding:0 10px;min-height:48px}
+
+  /* flat, not a dropdown inside a dropdown */
+  .menu__btn{display:none}
+  .menu__panel{
+    position:static;transform:none;width:auto;display:block;
+    padding:6px 0;margin:4px 0;background:none;border:0;box-shadow:none;
+    border-top:1px solid rgba(255,255,255,.12);
+    border-bottom:1px solid rgba(255,255,255,.12);
+  }
+  .menu__panel a{padding:8px 10px;min-height:46px}
+  .rnav__cta{width:100%;margin:10px 0 2px;min-height:50px;font-size:17px}
+  .lang{margin-top:8px}
+  .lang__btn{width:100%;justify-content:space-between}
+  .lang__menu{position:static;width:100%;min-width:0;margin-top:6px;box-shadow:none}
 
   /* taller hero, two-line headline, roomier rhythm */
-  .hero__frame{min-height:660px;min-height:max(660px,calc(100svh - 24px))}
+  .hero__frame{min-height:620px;min-height:max(620px,calc(100svh - 24px - var(--head-h)))}
   .hero__media img{object-position:84% 42%}
   .hero__br{display:inline}
   .hero__body h1{max-width:none;font-size:clamp(1.5rem,8.2vw,2.9rem);line-height:1.14}
@@ -1058,8 +1135,9 @@ select.control{
 }
 /* short landscape phones: 7 stacked links do not fit, so use two columns */
 @media (max-width:900px) and (max-height:520px){
-  .nav.is-open{flex-flow:row wrap;gap:2px 10px;padding:12px 18px}
-  .nav.is-open a{width:calc(50% - 5px)}
+  .rnav.is-open{flex-flow:row wrap;gap:2px 10px;padding:12px 18px}
+  .rnav.is-open > a,.rnav.is-open .menu{width:calc(50% - 5px)}
+  .rnav.is-open .rnav__cta{width:100%}
 }
 
 @media (max-width:520px){
@@ -1083,49 +1161,41 @@ select.control{
 <body>
 
 <!-- ================= HERO ================= -->
-<header class="hero">
-  <div class="hero__frame grain">
-    <div class="hero__media">
-      <picture><source type="image/avif" sizes="100vw" srcset="/images/hero-768.avif 768w, /images/hero-1100.avif 1100w, /images/hero.avif 1376w"><source type="image/webp" sizes="100vw" srcset="/images/hero-768.webp 768w, /images/hero-1100.webp 1100w, /images/hero.webp 1376w"><img src="/images/hero.jpg" sizes="100vw" srcset="/images/hero-768.jpg 768w, /images/hero-1100.jpg 1100w, /images/hero.jpg 1376w" alt="Mercedes V-Class minivan on an alpine road in Tyrol" fetchpriority="high" width="1376" height="768"></picture>
-    </div>
+<header class="rhead">
+  <div class="rhead__in">
+    <a class="brand" href="#top" aria-label="ridetoalps — на головну">
+      <svg class="brand__mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <rect width="40" height="40" rx="12" fill="#0e63e4"/>
+        <path d="M8 27.5 16 14l4.6 7.6L23.5 17l8.5 10.5H8Z" fill="#fff"/>
+      </svg>
+      <span class="brand__name">ridetoalps</span>
+    </a>
 
-    <div class="masthead">
-      <a class="brand" href="#top" aria-label="ridetoalps — на головну">
-        <svg class="brand__mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-          <rect width="40" height="40" rx="12" fill="#0e63e4"/>
-          <path d="M8 27.5 16 14l4.6 7.6L23.5 17l8.5 10.5H8Z" fill="#fff"/>
-          <path d="M13.2 21.4h5.4l1.7 2.8h-8.8l1.7-2.8Z" fill="#0e63e4" opacity=".55"/>
-        </svg>
-        <span class="brand__name">ridetoalps</span>
-      </a>
+    <nav class="rnav" id="rnav" aria-label="Основна навігація">
+      <a class="rnav__link" href="#top">Головна</a>
 
-      <nav class="nav" id="nav">
-        <a href="#top" class="is-active">Головна</a>
-        <div class="menu" data-menu>
-          <button class="menu__btn" type="button" aria-expanded="false" aria-controls="routesMenu">
-            Маршрути <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="menu__panel" id="routesMenu">
-          <a href="/uk/routes/munich-city.html"><span>Мюнхен</span><b>від 100 €</b></a>
-          <a href="/uk/routes/kitzbuehel.html"><span>Кіцбюель</span><b>від 300 €</b></a>
-          <a href="/uk/routes/salzburg.html"><span>Зальцбург</span><b>від 325 €</b></a>
-          <a href="/uk/routes/innsbruck.html"><span>Інсбрук</span><b>від 350 €</b></a>
-          <a href="/uk/routes/ischgl.html"><span>Ішгль</span><b>від 400 €</b></a>
-          <a href="/uk/routes/soelden.html"><span>Зельден</span><b>від 450 €</b></a>
-          <a href="/uk/routes/st-anton.html"><span>Санкт-Антон</span><b>від 500 €</b></a>
-          <a href="/uk/routes/st-moritz.html"><span>Санкт-Моріц</span><b>від 550 €</b></a>
-          <a href="/uk/routes/bolzano.html"><span>Больцано</span><b>від 550 €</b></a>
-          <a href="/uk/routes/bormio-livigno.html"><span>Борміо / Лівіньо</span><b>від 550 €</b></a>
-          <a class="menu__all" href="/uk/routes.html">Усі маршрути</a>
-          </div>
+      <div class="menu" data-menu>
+        <button class="menu__btn" type="button" aria-expanded="false" aria-controls="routesMenu">
+          Маршрути <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="menu__panel" id="routesMenu">
+          <a href="/routes/munich-city.html"><span>Мюнхен</span><b>100 €</b></a>
+          <a href="/routes/kitzbuehel.html"><span>Кіцбюель</span><b>300 €</b></a>
+          <a href="/routes/salzburg.html"><span>Зальцбург</span><b>325 €</b></a>
+          <a href="/routes/innsbruck.html"><span>Інсбрук</span><b>350 €</b></a>
+          <a href="/routes/ischgl.html"><span>Ішгль</span><b>400 €</b></a>
+          <a href="/routes/soelden.html"><span>Зельден</span><b>450 €</b></a>
+          <a href="/routes/st-anton.html"><span>Санкт-Антон</span><b>500 €</b></a>
+          <a href="/routes/st-moritz.html"><span>Санкт-Моріц</span><b>550 €</b></a>
+          <a href="/routes/bolzano.html"><span>Больцано</span><b>550 €</b></a>
+          <a href="/routes/bormio-livigno.html"><span>Борміо / Лівіньо</span><b>550 €</b></a>
+          <a class="menu__all" href="/routes.html">Усі маршрути</a>
         </div>
-        <a href="#calculator">Ціни</a>
-        <a href="#fleet">Автопарк</a>
-        <a href="#about">Про нас</a>
-        <a href="#reviews">Відгуки</a>
-        <a href="#faq">Питання</a>
-        <a href="#contact">Контакти</a>
-      </nav>
+      </div>
+
+      <a class="rnav__link" href="#calculator">Ціни</a>
+      <a class="rnav__link" href="#fleet">Автопарк</a>
+      <a class="rnav__link" href="#contact">Контакти</a>
 
       <div class="lang">
         <button class="lang__btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="UK — Змінити мову">
@@ -1139,12 +1209,25 @@ select.control{
         </ul>
       </div>
 
-      <button class="nav-toggle" id="navToggle" aria-label="Відкрити меню" aria-expanded="false" aria-controls="nav">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-          <path class="ic-burger" d="M4 7h16M4 12h16M4 17h16"/>
-          <path class="ic-close" d="m6 6 12 12M18 6 6 18"/>
-        </svg>
-      </button>
+      <!-- The header is sticky, so this is the one control on screen at every
+           scroll position. It points at #calculator rather than the closing
+           #book block: same target on every page type, and the thing it lands
+           on is a complete quote-and-book form either way. -->
+      <a class="rnav__cta" href="#calculator">Забронювати</a>
+    </nav>
+
+    <button class="rnav-toggle" id="rnavToggle" type="button"
+            aria-label="Відкрити меню" aria-expanded="false" aria-controls="rnav"
+            data-label-open="Відкрити меню" data-label-close="Закрити меню">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path class="ic-burger" d="M4 7h16M4 12h16M4 17h16"/><path class="ic-close" d="m6 6 12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero__frame grain">
+    <div class="hero__media">
+      <picture><source type="image/avif" sizes="100vw" srcset="/images/hero-768.avif 768w, /images/hero-1100.avif 1100w, /images/hero.avif 1376w"><source type="image/webp" sizes="100vw" srcset="/images/hero-768.webp 768w, /images/hero-1100.webp 1100w, /images/hero.webp 1376w"><img src="/images/hero.jpg" sizes="100vw" srcset="/images/hero-768.jpg 768w, /images/hero-1100.jpg 1100w, /images/hero.jpg 1376w" alt="Mercedes V-Class на альпійській дорозі в Тіролі" fetchpriority="high" width="1376" height="768"></picture>
     </div>
 
     <div class="hero__body">
@@ -1169,9 +1252,9 @@ select.control{
       <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Водії володіють англійською та німецькою</li>
     </ul>
   </div>
-</header>
+</section>
 
-<main id="top">
+<main>
 
 <!-- ================= FEATURES ================= -->
 <section class="section-spacing">
@@ -1339,14 +1422,14 @@ select.control{
         <p class="muted" data-el="route">Аеропорт Мюнхена (MUC) → Кіцбюель</p>
 
         <div class="price">
-          <span class="price__value" data-el="price">€300</span>
+          <span class="price__value" data-el="price">300 €</span>
           <span class="price__unit" data-el="priceUnit">усього за бронювання</span>
         </div>
         <p class="price__note" data-el="note">Денний тариф · 1 автомобіль</p>
 
         <ul class="breakdown">
-          <li><span data-el="baseLabel">Базова ціна маршруту</span><b data-el="base">€300</b></li>
-          <li data-el="rowReturn" hidden><span>Зворотна поїздка</span><b data-el="returnPrice">€300</b></li>
+          <li><span data-el="baseLabel">Базова ціна маршруту</span><b data-el="base">300 €</b></li>
+          <li data-el="rowReturn" hidden><span>Зворотна поїздка</span><b data-el="returnPrice">300 €</b></li>
           <li><span>Потрібно автомобілів</span><b data-el="cars">1 × Mercedes V-Class</b></li>
           <li><span>Нічний / груповий тариф</span><b data-el="surcharge">Не застосовано</b></li>
           <li><span>Депозит для підтвердження</span><b>30 € або 35 $</b></li>
@@ -1399,7 +1482,7 @@ select.control{
       <div class="fleet__track" id="fleetTrack">
 
         <article class="car">
-          <div class="car__media"><picture><source srcset="/images/fleet-v250-lang.avif" type="image/avif"><source srcset="/images/fleet-v250-lang.webp" type="image/webp"><img src="/images/fleet-v250-lang.jpg" alt="Mercedes-Benz V-Class V250 long wheelbase" loading="lazy" width="1200" height="896" decoding="async"></picture></div>
+          <div class="car__media"><picture><source srcset="/images/fleet-v250-lang.avif" type="image/avif"><source srcset="/images/fleet-v250-lang.webp" type="image/webp"><img src="/images/fleet-v250-lang.jpg" alt="Mercedes-Benz V-Class V250 довга база" loading="lazy" width="1200" height="896" decoding="async"></picture></div>
           <div class="car__body">
             <div class="car__top">
               <h3>Mercedes V-Class Lang</h3>
@@ -1423,7 +1506,7 @@ select.control{
         </article>
 
         <article class="car">
-          <div class="car__media"><picture><source srcset="/images/fleet-v250-xl.avif" type="image/avif"><source srcset="/images/fleet-v250-xl.webp" type="image/webp"><img src="/images/fleet-v250-xl.jpg" alt="Mercedes-Benz V-Class V250 extra long wheelbase" loading="lazy" width="1200" height="896" decoding="async"></picture></div>
+          <div class="car__media"><picture><source srcset="/images/fleet-v250-xl.avif" type="image/avif"><source srcset="/images/fleet-v250-xl.webp" type="image/webp"><img src="/images/fleet-v250-xl.jpg" alt="Mercedes-Benz V-Class V250 подовжена база" loading="lazy" width="1200" height="896" decoding="async"></picture></div>
           <div class="car__body">
             <div class="car__top">
               <h3>Mercedes V-Class Extra Lang</h3>
@@ -1447,7 +1530,7 @@ select.control{
         </article>
 
         <article class="car">
-          <div class="car__media"><picture><source srcset="/images/fleet-peugeot.avif" type="image/avif"><source srcset="/images/fleet-peugeot.webp" type="image/webp"><img src="/images/fleet-peugeot.jpg" alt="Peugeot Traveller extra long passenger van" loading="lazy" width="1200" height="896" decoding="async"></picture></div>
+          <div class="car__media"><picture><source srcset="/images/fleet-peugeot.avif" type="image/avif"><source srcset="/images/fleet-peugeot.webp" type="image/webp"><img src="/images/fleet-peugeot.jpg" alt="Peugeot Traveller подовжений" loading="lazy" width="1200" height="896" decoding="async"></picture></div>
           <div class="car__body">
             <div class="car__top">
               <h3>Peugeot Traveller Long</h3>
@@ -1471,7 +1554,7 @@ select.control{
         </article>
 
         <article class="car">
-          <div class="car__media"><picture><source srcset="/images/fleet-skoda.avif" type="image/avif"><source srcset="/images/fleet-skoda.webp" type="image/webp"><img src="/images/fleet-skoda.jpg" alt="Skoda Octavia sedan" loading="lazy" width="1200" height="896" decoding="async"></picture></div>
+          <div class="car__media"><picture><source srcset="/images/fleet-skoda.avif" type="image/avif"><source srcset="/images/fleet-skoda.webp" type="image/webp"><img src="/images/fleet-skoda.jpg" alt="Škoda Octavia седан" loading="lazy" width="1200" height="896" decoding="async"></picture></div>
           <div class="car__body">
             <div class="car__top">
               <h3>Škoda Octavia</h3>
@@ -1495,7 +1578,7 @@ select.control{
         </article>
 
         <article class="car">
-          <div class="car__media"><picture><source srcset="/images/fleet-jeep.avif" type="image/avif"><source srcset="/images/fleet-jeep.webp" type="image/webp"><img src="/images/fleet-jeep.jpg" alt="Jeep Compass compact SUV" loading="lazy" width="1200" height="896" decoding="async"></picture></div>
+          <div class="car__media"><picture><source srcset="/images/fleet-jeep.avif" type="image/avif"><source srcset="/images/fleet-jeep.webp" type="image/webp"><img src="/images/fleet-jeep.jpg" alt="Jeep Compass компактний кросовер" loading="lazy" width="1200" height="896" decoding="async"></picture></div>
           <div class="car__body">
             <div class="car__top">
               <h3>Jeep Compass 4×4</h3>
@@ -2053,14 +2136,14 @@ select.control{
         <p class="muted" data-el="route">Аеропорт Мюнхена (MUC) → Кіцбюель</p>
 
         <div class="price">
-          <span class="price__value" data-el="price">€300</span>
+          <span class="price__value" data-el="price">300 €</span>
           <span class="price__unit" data-el="priceUnit">усього за бронювання</span>
         </div>
         <p class="price__note" data-el="note">Денний тариф · 1 автомобіль</p>
 
         <ul class="breakdown">
-          <li><span data-el="baseLabel">Базова ціна маршруту</span><b data-el="base">€300</b></li>
-          <li data-el="rowReturn" hidden><span>Зворотна поїздка</span><b data-el="returnPrice">€300</b></li>
+          <li><span data-el="baseLabel">Базова ціна маршруту</span><b data-el="base">300 €</b></li>
+          <li data-el="rowReturn" hidden><span>Зворотна поїздка</span><b data-el="returnPrice">300 €</b></li>
           <li><span>Потрібно автомобілів</span><b data-el="cars">1 × Mercedes V-Class</b></li>
           <li><span>Нічний / груповий тариф</span><b data-el="surcharge">Не застосовано</b></li>
           <li><span>Депозит для підтвердження</span><b>30 € або 35 $</b></li>
@@ -2228,7 +2311,7 @@ select.control{
      Generated by build-i18n.mjs from i18n/ui.uk.mjs — do not edit here. */
   window.RTA_LOCALE = "uk-UA";
   window.RTA_MONEY = "{n} €";
-  window.RTA_I18N = {"Home":"Головна","Routes":"Маршрути","Prices":"Ціни","Fleet":"Автопарк","About":"Про нас","Reviews":"Відгуки","FAQ":"Питання","Contact":"Контакти","All routes":"Усі маршрути","Price":"Ціна","Private transfers from":"Приватні трансфери з","Munich to the Alps":"Мюнхена в Альпи","Door-to-door rides from Munich Airport to Tyrol, Salzburgerland, Engadin and South Tyrol. Fixed prices, one booking per day, and a driver who waits for your actual landing time.":"Поїздки від дверей до дверей з аеропорту Мюнхена до Тіролю, Зальцбургерланду, Енгадіну та Південного Тіролю. Фіксовані ціни, одна поїздка на день і водій, який чекає на ваше фактичне прибуття.","Calculate your price":"Розрахувати ціну","See the fleet":"Переглянути автопарк","Licensed &amp; insured carrier":"Ліцензований застрахований перевізник","Flight tracking, free waiting":"Відслідковуємо рейс, очікування безкоштовне","€30 or $35 deposit, rest after the ride":"Депозит 30 € або 35 $, решта після поїздки","English &amp; German speaking drivers":"Водії володіють англійською та німецькою","Your calm, private way to reach the mountain":"Спокійний приватний шлях до гір","One ride per day":"Одна поїздка на день","Your date is reserved exclusively for you. We wait for your real arrival, not for a slot in a schedule.":"Ваша дата зарезервована лише за вами. Ми чекаємо на ваше справжнє прибуття, а не на слот у розкладі.","Fixed route prices":"Фіксовані ціни за маршрут","Kitzbühel, Innsbruck, Ischgl, Sölden and more — a set rate per car, quoted before you book.":"Кіцбюель, Інсбрук, Ішгль, Зельден та інші — фіксована ціна за автомобіль, відома до бронювання.","Pay €30 or $35 to book":"Бронювання за 30 € або 35 $","A €30 or $35 deposit confirms the date. The rest is paid after the ride — cash, card or online.":"Депозит 30 € або 35 $ підтверджує дату. Решта сплачується після поїздки — готівкою, картою чи онлайн.","Reachable 24/7":"На зв’язку 24/7","Stay connected with us via WhatsApp or phone from boarding until you reach your hotel.":"Залишайтеся з нами на зв’язку у WhatsApp або телефоном — від посадки в літак до приїзду в готель.","Get your transfer price":"Дізнатися ціну трансферу","How pricing works":"Як формується ціна","Step 1 — your route":"Крок 1 — маршрут","From":"Звідки","To":"Куди","Munich Airport (MUC)":"Аеропорт Мюнхена (MUC)","Munich":"Мюнхен","Munich city":"Мюнхен, місто","Munich city / hotel":"Мюнхен, місто / готель","Other destination":"Інший напрямок","Where are you going?":"Куди ви їдете?","Town, resort or hotel":"Місто, курорт або готель","Reverse direction":"Зворотний напрямок","To Munich":"До Мюнхена","Step 2 — date &amp; group":"Крок 2 — дата та група","Pick-up date":"Дата виїзду","Pick-up time":"Час виїзду","Add return journey":"Додати зворотну поїздку","Remove return journey":"Прибрати зворотну поїздку","Return date":"Дата повернення","Return time":"Час повернення","Passengers":"Пасажирів","Ski / board bags":"Чохли для лиж / сноуборду","None":"Немає","1–2 bags":"1–2 чохли","3–4 bags":"3–4 чохли","5 or more":"5 і більше","Fixed rates are per vehicle for 1–4 passengers departing between 07:00 and 22:00. Departures outside those hours, or groups of 5–7, are charged at the higher night / large-group rate. Groups over 7 travel in additional vehicles. Every booking is assigned a Mercedes V-Class, or an equivalent vehicle where required.":"Фіксовані тарифи вказані за автомобіль для 1–4 пасажирів при виїзді з 07:00 до 22:00. Виїзди поза цими годинами, а також групи з 5–7 осіб розраховуються за вищим нічним / груповим тарифом. Групи понад 7 осіб їдуть кількома автомобілями. На кожне бронювання подається Mercedes V-Class або рівноцінний автомобіль.","Your quote":"Ваш розрахунок","total, per booking":"усього за бронювання","we reply within a couple of hours":"відповідаємо протягом кількох годин","Base route rate":"Базова ціна маршруту","Outbound journey":"Поїздка туди","Return journey":"Зворотна поїздка","Vehicles required":"Потрібно автомобілів","1 × Mercedes V-Class":"1 × Mercedes V-Class","Night / large-group rate":"Нічний / груповий тариф","Not applied":"Не застосовано","Quoted by hand":"Розраховуємо індивідуально","Deposit to confirm":"Депозит для підтвердження","Payable after the ride":"До сплати після поїздки","Book for €30 or $35":"Забронювати за 30 € або 35 $","Request a price":"Запитати ціну","On request":"За запитом","Do not fill this in":"Це поле заповнювати не потрібно","We use these details only to answer this enquiry — see our":"Ми використовуємо ці дані лише для відповіді на запит — див. нашу","privacy notice":"політику конфіденційності","Your name":"Ваше ім’я","Phone / WhatsApp":"Телефон / WhatsApp","Email":"E-mail","Send booking request":"Надіслати запит","Sending…":"Надсилаємо…","Please check the highlighted fields.":"Будь ласка, перевірте виділені поля.","Our transfer fleet":"Наш автопарк","Check availability":"Перевірити наявність","/seats":"/місць","Seats":"Місць","Luggage":"Багаж","Ski bags":"Чохли для лиж","6 cases":"6 валіз","7 cases":"7 валіз","3 cases":"3 валізи","Roof box":"Бокс на даху","Roof rack":"Багажник на даху","Previous vehicles":"Попередні автомобілі","Next vehicles":"Наступні автомобілі","Where we drive":"Куди ми їздимо","All ten routes":"Усі десять маршрутів","from €300":"від 300 €","from €325":"від 325 €","from €350":"від 350 €","from €400":"від 400 €","from €450":"від 450 €","from €500":"від 500 €","from €550":"від 550 €","from €100":"від 100 €","Book your transfer in 3 easy steps":"Три кроки до трансферу","Get your price":"Дізнайтеся ціну","Pick your resort, date, time and group size. The calculator shows a fixed total per vehicle — no hidden extras.":"Виберіть курорт, дату, час і розмір групи. Калькулятор покаже фіксовану суму за автомобіль — без прихованих доплат.","Confirm with €30 or $35":"Підтвердьте 30 € або 35 $","A €30 or $35 deposit locks your date. Cancel at least 48 hours ahead and it is refunded in full.":"Депозит 30 € або 35 $ закріплює за вами дату. При скасуванні не пізніше ніж за 48 годин він повертається повністю.","Meet your driver":"Зустріньте водія","We track your flight and meet you in arrivals with a name sign. The balance is paid after you arrive.":"Ми відслідковуємо ваш рейс і зустрічаємо вас у зоні прибуття з табличкою. Решту ви сплачуєте після приїзду.","Your dream. Your time. Your ride.":"Ваша мрія. Ваш час. Ваша поїздка.","We take one booking per day, so if your flight lands three hours late, the car is still there — no extra waiting fee, no rush to the next job.":"Ми беремо одну поїздку на день. Якщо рейс затримається на три години, автомобіль усе одно чекатиме на вас — без доплати за очікування й без поспіху до наступного замовлення.","Book your date":"Забронювати дату","Ask a question":"Поставити питання","Ready when your date is":"Готові, коли призначите дату","About Us":"Про нас","A small alpine transfer company, not a call centre":"Невелика альпійська трансферна компанія, а не кол-центр","Alpine resorts served across Austria, Switzerland and Italy":"Альпійських курортів в Австрії, Швейцарії та Італії","Reachable on WhatsApp before, during and after your ride":"На зв’язку у WhatsApp до, під час і після поїздки","Talk to us":"Зв’язатися з нами","Feedback from our guests":"Відгуки наших гостей","Questions guests ask before the ride":"Про що запитують перед поїздкою","Previous reviews":"Попередні відгуки","Next reviews":"Наступні відгуки","5 out of 5":"5 з 5","4 out of 5":"4 з 5","Get in touch":"Зв’яжіться з нами","Or go straight to the calculator":"Або одразу до калькулятора","Phone &amp; WhatsApp":"Телефон і WhatsApp","24/7 voice assistant":"Голосовий асистент 24/7","We reply within a couple of hours.":"Відповідаємо протягом кількох годин.","Hours &amp; coverage":"Години роботи та географія","Open 24/7, all year":"Цілодобово, цілий рік","Munich · Tyrol · Salzburgerland · Engadin · South Tyrol":"Мюнхен · Тіроль · Зальцбургерланд · Енгадін · Південний Тіроль","Private transfers between Munich and the alpine valleys of Austria, Switzerland and Italy. One booking per day, fixed prices, drivers who know the passes.":"Приватні трансфери між Мюнхеном та альпійськими долинами Австрії, Швейцарії та Італії. Одна поїздка на день, фіксовані ціни, водії, які знають перевали.","Pages":"Розділи","Destinations":"Напрямки","More routes":"Інші маршрути","ridetoalps — licensed passenger transport.":"ridetoalps — ліцензовані пасажирські перевезення.","Terms &amp; cancellation":"Умови та скасування","Cookie settings":"Налаштування cookie","Legal":"Правова інформація","ridetoalps home":"ridetoalps — на головну","Breadcrumb":"Навігаційний ланцюжок","Main navigation":"Основна навігація","Change language":"Змінити мову","Open menu":"Відкрити меню","Close menu":"Закрити меню","Mercedes V-Class minivan on an alpine road in Tyrol":"Mercedes V-Class на альпійській дорозі в Тіролі","Mercedes-Benz V-Class V250 long wheelbase":"Mercedes-Benz V-Class V250 довга база","Mercedes-Benz V-Class V250 extra long wheelbase":"Mercedes-Benz V-Class V250 подовжена база","Peugeot Traveller extra long passenger van":"Peugeot Traveller подовжений","Skoda Octavia sedan":"Škoda Octavia седан","Jeep Compass compact SUV":"Jeep Compass компактний кросовер","Kitzbühel in winter":"Кіцбюель узимку","Innsbruck and the Nordkette range":"Інсбрук і хребет Нордкетте","Salzburg old town in winter":"Старе місто Зальцбурга взимку","Sölden ski slopes":"Схили Зельдена","Ischgl ski slopes and gondola":"Схили та гондола Ішгля","St. Anton am Arlberg village in winter":"Санкт-Антон-ам-Арльберг узимку","St. Moritz and the frozen lake":"Санкт-Моріц і замерзле озеро","Bolzano old town below the Dolomites":"Старе місто Больцано під Доломітами","Livigno alpine village in winter":"Лівіньо взимку","Driver loading ski bags into a Mercedes V-Class outside Munich Airport arrivals":"Водій завантажує чохли з лижами в Mercedes V-Class біля зони прибуття аеропорту Мюнхена","Snowy alpine valley road at blue hour":"Засніжена альпійська дорога в сині сутінки","Minivan on an alpine pass road":"Мінівен на дорозі альпійського перевалу","Get your price ":"Дізнатися ціну ","Ask on WhatsApp":"Запитати у WhatsApp","Drive time":"Час у дорозі","Distance":"Відстань","Deposit":"Депозит","The drive":"Дорога","Other routes from Munich":"Інші маршрути з Мюнхена","See all ten":"Дивитися всі десять","Rather just ask someone?":"Простіше запитати людину?","Vehicles for this route":"Автомобілі для цього маршруту","Where we drive from Munich":"Куди ми їздимо з Мюнхена","Ten fixed-price routes, each with its own road, drive time and conditions. Prices are per vehicle for up to four passengers between 07:00 and 22:00.":"Десять маршрутів із фіксованою ціною, у кожного своя дорога, час у дорозі та умови. Ціни вказані за автомобіль для чотирьох пасажирів при виїзді з 07:00 до 22:00.","View route":"Відкрити маршрут","One booking a day, and it is yours":"Одна поїздка на день — і вона ваша","We do not stack jobs. On your date the car and driver are yours alone, which is why a delayed flight costs you nothing.":"Ми не ставимо замовлення одне за одним. У вашу дату автомобіль і водій належать лише вам — тому затримка рейсу вам нічого не коштує.","Flight tracking":"Відслідковування рейсу","We watch your flight and meet your actual landing time, not the schedule. Delays cost you nothing.":"Ми слідкуємо за вашим рейсом і орієнтуємося на фактичну посадку, а не на розклад. Затримки вам нічого не коштують.","Meet in arrivals":"Зустріч у зоні прибуття","Your driver waits in the arrivals hall with a name sign, reachable on WhatsApp from the moment you land.":"Водій чекає в залі прибуття з табличкою і доступний у WhatsApp з моменту посадки.","All tolls and vignettes":"Усі збори та він’єтки","Austrian motorway vignette, Brenner and tunnel tolls, winter tyres and snow chains — all in the quoted price.":"Австрійська він’єтка, плата за Бреннер і тунелі, зимові шини та ланцюги — усе включено в названу ціну.","Luggage and ski bags":"Багаж і лижні чохли","One suitcase and one cabin bag per person, plus a ski or board bag per two people. Roof box on request.":"Одна валіза та одна ручна поклажа на особу плюс чохол для лиж або сноуборду на двох. Бокс на даху — за запитом.","Child seats":"Дитячі крісла","Fitted before we collect you, at no extra charge. Tell us the age and weight when you book.":"Встановлюємо заздалегідь, без доплати. Вкажіть вік і вагу дитини під час бронювання.","Wi-Fi and charging":"Wi-Fi і зарядка","On board, so the group arrives having actually rested.":"У салоні — щоб група приїхала справді відпочилою.","Daytime rate":"Денний тариф","vehicle":"автомобіль","vehicles":"автомобіля","per car":"за автомобіль","return included":"зворотна поїздка включена","Applied —":"Застосовано —","night departures":"нічні виїзди","night outbound":"нічний виїзд туди","night departure":"нічний виїзд","night return":"нічний виїзд назад","5+ passengers":"5 і більше пасажирів","Too many attempts in a row. Please try again later, or message us on WhatsApp.":"Занадто багато спроб підряд. Спробуйте пізніше або напишіть нам у WhatsApp.","The form is temporarily unavailable. Please message us on WhatsApp or call.":"Форма тимчасово недоступна. Напишіть нам у WhatsApp або зателефонуйте.","We could not send your request. Please message us on WhatsApp or call.":"Не вдалося надіслати запит. Напишіть нам у WhatsApp або зателефонуйте.","No connection to the server. Check your internet and try again.":"Немає зв’язку із сервером. Перевірте інтернет і спробуйте знову.","Thank you, {name}. We have your request for <b>{route}</b> on {date} at {time}":"Дякуємо, {name}. Ваш запит на <b>{route}</b> на {date} о {time}",", returning {date} at {time}":", назад {date} о {time}",". We will price this route and get back to you within a couple of hours.":". Ми розрахуємо цей маршрут і відповімо вам протягом кількох годин.",". We will be in touch shortly to confirm.":". Ми зв’яжемося з вами найближчим часом для підтвердження.","Your reference <b>{ref}</b>":"Ваш номер броні <b>{ref}</b>","Pay the {amount} deposit":"Внести депозит {amount}","Please quote <b>{ref}</b> in the payment note so we can match it to your booking. Your date is held once the deposit arrives.":"Будь ласка, вкажіть <b>{ref}</b> у примітці до платежу, щоб ми зіставили його з вашою броню. Дата закріплюється за вами, щойно депозит надійде."};
+  window.RTA_I18N = {"Home":"Головна","Routes":"Маршрути","Prices":"Ціни","Fleet":"Автопарк","About":"Про нас","Reviews":"Відгуки","FAQ":"Питання","Contact":"Контакти","Book now":"Забронювати","All routes":"Усі маршрути","Price":"Ціна","Private transfers from":"Приватні трансфери з","Munich to the Alps":"Мюнхена в Альпи","Door-to-door rides from Munich Airport to Tyrol, Salzburgerland, Engadin and South Tyrol. Fixed prices, one booking per day, and a driver who waits for your actual landing time.":"Поїздки від дверей до дверей з аеропорту Мюнхена до Тіролю, Зальцбургерланду, Енгадіну та Південного Тіролю. Фіксовані ціни, одна поїздка на день і водій, який чекає на ваше фактичне прибуття.","Calculate your price":"Розрахувати ціну","See the fleet":"Переглянути автопарк","Licensed &amp; insured carrier":"Ліцензований застрахований перевізник","Flight tracking, free waiting":"Відслідковуємо рейс, очікування безкоштовне","€30 or $35 deposit, rest after the ride":"Депозит 30 € або 35 $, решта після поїздки","English &amp; German speaking drivers":"Водії володіють англійською та німецькою","Your calm, private way to reach the mountain":"Спокійний приватний шлях до гір","One ride per day":"Одна поїздка на день","Your date is reserved exclusively for you. We wait for your real arrival, not for a slot in a schedule.":"Ваша дата зарезервована лише за вами. Ми чекаємо на ваше справжнє прибуття, а не на слот у розкладі.","Fixed route prices":"Фіксовані ціни за маршрут","Kitzbühel, Innsbruck, Ischgl, Sölden and more — a set rate per car, quoted before you book.":"Кіцбюель, Інсбрук, Ішгль, Зельден та інші — фіксована ціна за автомобіль, відома до бронювання.","Pay €30 or $35 to book":"Бронювання за 30 € або 35 $","A €30 or $35 deposit confirms the date. The rest is paid after the ride — cash, card or online.":"Депозит 30 € або 35 $ підтверджує дату. Решта сплачується після поїздки — готівкою, картою чи онлайн.","Reachable 24/7":"На зв’язку 24/7","Stay connected with us via WhatsApp or phone from boarding until you reach your hotel.":"Залишайтеся з нами на зв’язку у WhatsApp або телефоном — від посадки в літак до приїзду в готель.","Get your transfer price":"Дізнатися ціну трансферу","How pricing works":"Як формується ціна","Step 1 — your route":"Крок 1 — маршрут","From":"Звідки","To":"Куди","Munich Airport (MUC)":"Аеропорт Мюнхена (MUC)","Munich":"Мюнхен","Munich city":"Мюнхен, місто","Munich city / hotel":"Мюнхен, місто / готель","Other destination":"Інший напрямок","Where are you going?":"Куди ви їдете?","Town, resort or hotel":"Місто, курорт або готель","Reverse direction":"Зворотний напрямок","To Munich":"До Мюнхена","Step 2 — date &amp; group":"Крок 2 — дата та група","Pick-up date":"Дата виїзду","Pick-up time":"Час виїзду","Add return journey":"Додати зворотну поїздку","Remove return journey":"Прибрати зворотну поїздку","Return date":"Дата повернення","Return time":"Час повернення","Passengers":"Пасажирів","Ski / board bags":"Чохли для лиж / сноуборду","None":"Немає","1–2 bags":"1–2 чохли","3–4 bags":"3–4 чохли","5 or more":"5 і більше","Fixed rates are per vehicle for 1–4 passengers departing between 07:00 and 22:00. Departures outside those hours, or groups of 5–7, are charged at the higher night / large-group rate. Groups over 7 travel in additional vehicles. Every booking is assigned a Mercedes V-Class, or an equivalent vehicle where required.":"Фіксовані тарифи вказані за автомобіль для 1–4 пасажирів при виїзді з 07:00 до 22:00. Виїзди поза цими годинами, а також групи з 5–7 осіб розраховуються за вищим нічним / груповим тарифом. Групи понад 7 осіб їдуть кількома автомобілями. На кожне бронювання подається Mercedes V-Class або рівноцінний автомобіль.","Your quote":"Ваш розрахунок","total, per booking":"усього за бронювання","we reply within a couple of hours":"відповідаємо протягом кількох годин","Base route rate":"Базова ціна маршруту","Outbound journey":"Поїздка туди","Return journey":"Зворотна поїздка","Vehicles required":"Потрібно автомобілів","1 × Mercedes V-Class":"1 × Mercedes V-Class","Night / large-group rate":"Нічний / груповий тариф","Not applied":"Не застосовано","Quoted by hand":"Розраховуємо індивідуально","Deposit to confirm":"Депозит для підтвердження","Payable after the ride":"До сплати після поїздки","Book for €30 or $35":"Забронювати за 30 € або 35 $","Request a price":"Запитати ціну","On request":"За запитом","Do not fill this in":"Це поле заповнювати не потрібно","We use these details only to answer this enquiry — see our":"Ми використовуємо ці дані лише для відповіді на запит — див. нашу","privacy notice":"політику конфіденційності","Your name":"Ваше ім’я","Phone / WhatsApp":"Телефон / WhatsApp","Email":"E-mail","Send booking request":"Надіслати запит","Sending…":"Надсилаємо…","Please check the highlighted fields.":"Будь ласка, перевірте виділені поля.","Our transfer fleet":"Наш автопарк","Check availability":"Перевірити наявність","/seats":"/місць","Seats":"Місць","Luggage":"Багаж","Ski bags":"Чохли для лиж","6 cases":"6 валіз","7 cases":"7 валіз","3 cases":"3 валізи","Roof box":"Бокс на даху","Roof rack":"Багажник на даху","Previous vehicles":"Попередні автомобілі","Next vehicles":"Наступні автомобілі","Where we drive":"Куди ми їздимо","All ten routes":"Усі десять маршрутів","€100":"100 €","€300":"300 €","€325":"325 €","€350":"350 €","€400":"400 €","€450":"450 €","€500":"500 €","€550":"550 €","from €300":"від 300 €","from €325":"від 325 €","from €350":"від 350 €","from €400":"від 400 €","from €450":"від 450 €","from €500":"від 500 €","from €550":"від 550 €","from €100":"від 100 €","Book your transfer in 3 easy steps":"Три кроки до трансферу","Get your price":"Дізнайтеся ціну","Pick your resort, date, time and group size. The calculator shows a fixed total per vehicle — no hidden extras.":"Виберіть курорт, дату, час і розмір групи. Калькулятор покаже фіксовану суму за автомобіль — без прихованих доплат.","Confirm with €30 or $35":"Підтвердьте 30 € або 35 $","A €30 or $35 deposit locks your date. Cancel at least 48 hours ahead and it is refunded in full.":"Депозит 30 € або 35 $ закріплює за вами дату. При скасуванні не пізніше ніж за 48 годин він повертається повністю.","Meet your driver":"Зустріньте водія","We track your flight and meet you in arrivals with a name sign. The balance is paid after you arrive.":"Ми відслідковуємо ваш рейс і зустрічаємо вас у зоні прибуття з табличкою. Решту ви сплачуєте після приїзду.","Your dream. Your time. Your ride.":"Ваша мрія. Ваш час. Ваша поїздка.","We take one booking per day, so if your flight lands three hours late, the car is still there — no extra waiting fee, no rush to the next job.":"Ми беремо одну поїздку на день. Якщо рейс затримається на три години, автомобіль усе одно чекатиме на вас — без доплати за очікування й без поспіху до наступного замовлення.","Book your date":"Забронювати дату","Ask a question":"Поставити питання","Ready when your date is":"Готові, коли призначите дату","About Us":"Про нас","A small alpine transfer company, not a call centre":"Невелика альпійська трансферна компанія, а не кол-центр","Alpine resorts served across Austria, Switzerland and Italy":"Альпійських курортів в Австрії, Швейцарії та Італії","Reachable on WhatsApp before, during and after your ride":"На зв’язку у WhatsApp до, під час і після поїздки","Talk to us":"Зв’язатися з нами","Feedback from our guests":"Відгуки наших гостей","Questions guests ask before the ride":"Про що запитують перед поїздкою","Previous reviews":"Попередні відгуки","Next reviews":"Наступні відгуки","5 out of 5":"5 з 5","4 out of 5":"4 з 5","Get in touch":"Зв’яжіться з нами","Or go straight to the calculator":"Або одразу до калькулятора","Phone &amp; WhatsApp":"Телефон і WhatsApp","24/7 voice assistant":"Голосовий асистент 24/7","We reply within a couple of hours.":"Відповідаємо протягом кількох годин.","Hours &amp; coverage":"Години роботи та географія","Open 24/7, all year":"Цілодобово, цілий рік","Munich · Tyrol · Salzburgerland · Engadin · South Tyrol":"Мюнхен · Тіроль · Зальцбургерланд · Енгадін · Південний Тіроль","Private transfers between Munich and the alpine valleys of Austria, Switzerland and Italy. One booking per day, fixed prices, drivers who know the passes.":"Приватні трансфери між Мюнхеном та альпійськими долинами Австрії, Швейцарії та Італії. Одна поїздка на день, фіксовані ціни, водії, які знають перевали.","Pages":"Розділи","Destinations":"Напрямки","More routes":"Інші маршрути","ridetoalps — licensed passenger transport.":"ridetoalps — ліцензовані пасажирські перевезення.","Terms &amp; cancellation":"Умови та скасування","Cookie settings":"Налаштування cookie","Legal":"Правова інформація","ridetoalps home":"ridetoalps — на головну","Breadcrumb":"Навігаційний ланцюжок","Main navigation":"Основна навігація","Change language":"Змінити мову","Open menu":"Відкрити меню","Close menu":"Закрити меню","Mercedes V-Class minivan on an alpine road in Tyrol":"Mercedes V-Class на альпійській дорозі в Тіролі","Mercedes-Benz V-Class V250 long wheelbase":"Mercedes-Benz V-Class V250 довга база","Mercedes-Benz V-Class V250 extra long wheelbase":"Mercedes-Benz V-Class V250 подовжена база","Peugeot Traveller extra long passenger van":"Peugeot Traveller подовжений","Skoda Octavia sedan":"Škoda Octavia седан","Jeep Compass compact SUV":"Jeep Compass компактний кросовер","Kitzbühel in winter":"Кіцбюель узимку","Innsbruck and the Nordkette range":"Інсбрук і хребет Нордкетте","Salzburg old town in winter":"Старе місто Зальцбурга взимку","Sölden ski slopes":"Схили Зельдена","Ischgl ski slopes and gondola":"Схили та гондола Ішгля","St. Anton am Arlberg village in winter":"Санкт-Антон-ам-Арльберг узимку","St. Moritz and the frozen lake":"Санкт-Моріц і замерзле озеро","Bolzano old town below the Dolomites":"Старе місто Больцано під Доломітами","Livigno alpine village in winter":"Лівіньо взимку","Driver loading ski bags into a Mercedes V-Class outside Munich Airport arrivals":"Водій завантажує чохли з лижами в Mercedes V-Class біля зони прибуття аеропорту Мюнхена","Snowy alpine valley road at blue hour":"Засніжена альпійська дорога в сині сутінки","Minivan on an alpine pass road":"Мінівен на дорозі альпійського перевалу","Get your price ":"Дізнатися ціну ","Ask on WhatsApp":"Запитати у WhatsApp","Drive time":"Час у дорозі","Distance":"Відстань","Deposit":"Депозит","The drive":"Дорога","Other routes from Munich":"Інші маршрути з Мюнхена","See all ten":"Дивитися всі десять","Rather just ask someone?":"Простіше запитати людину?","Vehicles for this route":"Автомобілі для цього маршруту","Where we drive from Munich":"Куди ми їздимо з Мюнхена","Ten fixed-price routes, each with its own road, drive time and conditions. Prices are per vehicle for up to four passengers between 07:00 and 22:00.":"Десять маршрутів із фіксованою ціною, у кожного своя дорога, час у дорозі та умови. Ціни вказані за автомобіль для чотирьох пасажирів при виїзді з 07:00 до 22:00.","View route":"Відкрити маршрут","One booking a day, and it is yours":"Одна поїздка на день — і вона ваша","We do not stack jobs. On your date the car and driver are yours alone, which is why a delayed flight costs you nothing.":"Ми не ставимо замовлення одне за одним. У вашу дату автомобіль і водій належать лише вам — тому затримка рейсу вам нічого не коштує.","Flight tracking":"Відслідковування рейсу","We watch your flight and meet your actual landing time, not the schedule. Delays cost you nothing.":"Ми слідкуємо за вашим рейсом і орієнтуємося на фактичну посадку, а не на розклад. Затримки вам нічого не коштують.","Meet in arrivals":"Зустріч у зоні прибуття","Your driver waits in the arrivals hall with a name sign, reachable on WhatsApp from the moment you land.":"Водій чекає в залі прибуття з табличкою і доступний у WhatsApp з моменту посадки.","All tolls and vignettes":"Усі збори та він’єтки","Austrian motorway vignette, Brenner and tunnel tolls, winter tyres and snow chains — all in the quoted price.":"Австрійська він’єтка, плата за Бреннер і тунелі, зимові шини та ланцюги — усе включено в названу ціну.","Luggage and ski bags":"Багаж і лижні чохли","One suitcase and one cabin bag per person, plus a ski or board bag per two people. Roof box on request.":"Одна валіза та одна ручна поклажа на особу плюс чохол для лиж або сноуборду на двох. Бокс на даху — за запитом.","Child seats":"Дитячі крісла","Fitted before we collect you, at no extra charge. Tell us the age and weight when you book.":"Встановлюємо заздалегідь, без доплати. Вкажіть вік і вагу дитини під час бронювання.","Wi-Fi and charging":"Wi-Fi і зарядка","On board, so the group arrives having actually rested.":"У салоні — щоб група приїхала справді відпочилою.","Daytime rate":"Денний тариф","vehicle":"автомобіль","vehicles":"автомобіля","per car":"за автомобіль","return included":"зворотна поїздка включена","Applied —":"Застосовано —","night departures":"нічні виїзди","night outbound":"нічний виїзд туди","night departure":"нічний виїзд","night return":"нічний виїзд назад","5+ passengers":"5 і більше пасажирів","Too many attempts in a row. Please try again later, or message us on WhatsApp.":"Занадто багато спроб підряд. Спробуйте пізніше або напишіть нам у WhatsApp.","The form is temporarily unavailable. Please message us on WhatsApp or call.":"Форма тимчасово недоступна. Напишіть нам у WhatsApp або зателефонуйте.","We could not send your request. Please message us on WhatsApp or call.":"Не вдалося надіслати запит. Напишіть нам у WhatsApp або зателефонуйте.","No connection to the server. Check your internet and try again.":"Немає зв’язку із сервером. Перевірте інтернет і спробуйте знову.","Thank you, {name}. We have your request for <b>{route}</b> on {date} at {time}":"Дякуємо, {name}. Ваш запит на <b>{route}</b> на {date} о {time}",", returning {date} at {time}":", назад {date} о {time}",". We will price this route and get back to you within a couple of hours.":". Ми розрахуємо цей маршрут і відповімо вам протягом кількох годин.",". We will be in touch shortly to confirm.":". Ми зв’яжемося з вами найближчим часом для підтвердження.","Your reference <b>{ref}</b>":"Ваш номер броні <b>{ref}</b>","Pay the {amount} deposit":"Внести депозит {amount}","Please quote <b>{ref}</b> in the payment note so we can match it to your booking. Your date is held once the deposit arrives.":"Будь ласка, вкажіть <b>{ref}</b> у примітці до платежу, щоб ми зіставили його з вашою броню. Дата закріплюється за вами, щойно депозит надійде."};
 </script>
 <script>
 (function(){
@@ -2269,24 +2352,31 @@ select.control{
     revealEls.forEach(function(el){ el.classList.add('visible'); });
   }
 
-  /* ---------- mobile nav ---------- */
-  var nav = document.getElementById('nav');
-  var navToggle = document.getElementById('navToggle');
-  navToggle.addEventListener('click', function(){
+  /* ---------- header panel ----------
+     Same ids and behaviour as route.js, because the header is now the same
+     markup on every page. The links work without any of this; it only decides
+     when the panel is on screen. */
+  var nav = document.getElementById('rnav');
+  var navToggle = document.getElementById('rnavToggle');
+  var LBL_OPEN  = navToggle.getAttribute('data-label-open')  || navToggle.getAttribute('aria-label');
+  var LBL_CLOSE = navToggle.getAttribute('data-label-close') || LBL_OPEN;
+
+  navToggle.addEventListener('click', function(e){
+    e.stopPropagation();
     var open = nav.classList.toggle('is-open');
     navToggle.classList.toggle('is-open', open);
     navToggle.setAttribute('aria-expanded', String(open));
-    navToggle.setAttribute('aria-label', open ? T('Close menu') : T('Open menu'));
+    navToggle.setAttribute('aria-label', open ? LBL_CLOSE : LBL_OPEN);
   });
   function closeNav(){
     if (!nav.classList.contains('is-open')) return;
     nav.classList.remove('is-open');
     navToggle.classList.remove('is-open');
     navToggle.setAttribute('aria-expanded', 'false');
-    navToggle.setAttribute('aria-label', T('Open menu'));
+    navToggle.setAttribute('aria-label', LBL_OPEN);
   }
   nav.addEventListener('click', function(e){
-    if (e.target.tagName === 'A') closeNav();
+    if (e.target.closest('a')) closeNav();
   });
   window.addEventListener('resize', function(){
     if (!window.matchMedia('(max-width:900px)').matches) closeNav();
@@ -2776,7 +2866,7 @@ select.control{
 
   /* ---------- active nav link on scroll ---------- */
   var sections = ['top','calculator','fleet','about','reviews','faq','book','contact'];
-  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav a'));
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.rnav__link'));
   window.addEventListener('scroll', function(){
     var y = window.scrollY + 140, current = 'top';
     sections.forEach(function(id){

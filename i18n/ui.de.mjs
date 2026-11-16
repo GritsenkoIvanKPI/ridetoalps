@@ -17,6 +17,7 @@ export default {
   'Reviews': 'Bewertungen',
   'FAQ': 'FAQ',
   'Contact': 'Kontakt',
+  'Book now': 'Jetzt buchen',
   'All routes': 'Alle Strecken',
   'Price': 'Preis',
 
@@ -121,6 +122,16 @@ export default {
   // destinations
   'Where we drive': 'Wohin wir fahren',
   'All ten routes': 'Alle zehn Strecken',
+  /* bare prices in the header menu: the symbol follows the number here */
+  '€100': '100 €',
+  '€300': '300 €',
+  '€325': '325 €',
+  '€350': '350 €',
+  '€400': '400 €',
+  '€450': '450 €',
+  '€500': '500 €',
+  '€550': '550 €',
+
   'from €300': 'ab 300 €', 'from €325': 'ab 325 €', 'from €350': 'ab 350 €',
   'from €400': 'ab 400 €', 'from €450': 'ab 450 €', 'from €500': 'ab 500 €',
   'from €550': 'ab 550 €', 'from €100': 'ab 100 €',
