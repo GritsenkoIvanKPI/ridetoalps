@@ -602,6 +602,160 @@
   </div>
 </section>
 
+<!-- closing call to action: the calculator again, at the point where the
+     questions have just been answered and the next move is to price it -->
+<section class="section-spacing" id="book">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>Забронювати трансфер: Больцано</h2>
+      <a class="link-arrow" href="https://wa.me/19542392185" rel="noopener" target="_blank">Запитати у WhatsApp <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+    </div>
+    <div class="calc reveal" data-calc>
+      <div class="calc__form">
+        <div class="calc__legend"><span class="eyebrow">Крок 1 — маршрут</span></div>
+
+        <div class="calc__row">
+          <div class="field">
+            <label for="fromSel-bolzano-book">Звідки</label>
+            <select class="control" id="fromSel-bolzano-book" data-el="from">
+              <option value="muc-airport">Аеропорт Мюнхена (MUC)</option>
+              <option value="muc-city">Мюнхен, місто</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="toSel-bolzano-book">Куди</label>
+            <select class="control" id="toSel-bolzano-book" data-el="to">
+              <option value="muc-city" data-price="100">Мюнхен, місто / готель</option>
+              <option value="kitzbuehel" data-price="300">Кіцбюель</option>
+              <option value="salzburg" data-price="325">Зальцбург</option>
+              <option value="innsbruck" data-price="350">Інсбрук</option>
+              <option value="ischgl" data-price="400">Ішгль</option>
+              <option value="soelden" data-price="450">Зельден</option>
+              <option value="st-anton" data-price="500">Санкт-Антон-ам-Арльберг</option>
+              <option value="st-moritz" data-price="550">Санкт-Моріц</option>
+              <option value="bolzano" data-price="550" selected>Регіон Больцано</option>
+              <option value="bormio" data-price="550">Борміо / Лівіньо</option>
+              <option value="other">Інший напрямок</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="calc__row calc__row--single" data-el="otherRow" hidden>
+          <div class="field">
+            <label for="otherDest-bolzano-book">Куди ви їдете?</label>
+            <input class="control" type="text" id="otherDest-bolzano-book" data-el="otherDest"
+                   placeholder="Місто, курорт або готель" autocomplete="off">
+          </div>
+        </div>
+
+        <button class="swap" data-el="swap" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4 4 7l3 3M4 7h13M17 20l3-3-3-3M20 17H7"/></svg>
+          Зворотний напрямок
+        </button>
+
+        <div class="calc__legend calc__legend--second"><span class="eyebrow">Крок 2 — дата та група</span></div>
+
+        <div class="calc__row">
+          <div class="field">
+            <label for="dateInp-bolzano-book">Дата виїзду</label>
+            <input class="control" type="date" id="dateInp-bolzano-book" data-el="date">
+          </div>
+          <div class="field">
+            <label for="timeInp-bolzano-book">Час виїзду</label>
+            <input class="control" type="time" id="timeInp-bolzano-book" data-el="time" value="10:00">
+          </div>
+        </div>
+
+        <button class="swap swap--toggle" data-el="returnBtn" type="button"
+                aria-pressed="false" aria-expanded="false" aria-controls="returnRow-bolzano-book">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+          <span data-el="returnLabel">Додати зворотну поїздку</span>
+        </button>
+
+        <div class="calc__row calc__row--return" id="returnRow-bolzano-book" data-el="returnRow" hidden>
+          <div class="field">
+            <label for="retDate-bolzano-book">Дата повернення</label>
+            <input class="control" type="date" id="retDate-bolzano-book" data-el="retDate">
+          </div>
+          <div class="field">
+            <label for="retTime-bolzano-book">Час повернення</label>
+            <input class="control" type="time" id="retTime-bolzano-book" data-el="retTime" value="10:00">
+          </div>
+        </div>
+
+        <div class="calc__row">
+          <div class="field">
+            <label for="paxSel-bolzano-book">Пасажирів</label>
+            <select class="control" id="paxSel-bolzano-book" data-el="pax">
+              <option>1</option><option>2</option><option selected>3</option><option>4</option>
+              <option>5</option><option>6</option><option>7</option>
+              <option>8</option><option>9</option><option>10</option><option>11</option><option>12</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="skiSel-bolzano-book">Чохли для лиж / сноуборду</label>
+            <select class="control" id="skiSel-bolzano-book" data-el="ski">
+              <option value="0" selected>Немає</option>
+              <option value="1">1–2 чохли</option>
+              <option value="2">3–4 чохли</option>
+              <option value="3">5 і більше</option>
+            </select>
+          </div>
+        </div>
+
+        <p class="calc__fineprint">Фіксовані тарифи вказані за автомобіль для 1–4 пасажирів при виїзді з 07:00 до 22:00. Виїзди поза цими годинами, а також групи з 5–7 осіб розраховуються за вищим нічним / груповим тарифом. Групи понад 7 осіб їдуть кількома автомобілями. На кожне бронювання подається Mercedes V-Class або рівноцінний автомобіль.</p>
+      </div>
+
+      <div class="calc__panel grain">
+        <h3>Ваш розрахунок</h3>
+        <p class="muted" data-el="route">Аеропорт Мюнхена (MUC) → Кіцбюель</p>
+
+        <div class="price">
+          <span class="price__value" data-el="price">€300</span>
+          <span class="price__unit" data-el="priceUnit">усього за бронювання</span>
+        </div>
+        <p class="price__note" data-el="note">Денний тариф · 1 автомобіль</p>
+
+        <ul class="breakdown">
+          <li><span data-el="baseLabel">Базова ціна маршруту</span><b data-el="base">€300</b></li>
+          <li data-el="rowReturn" hidden><span>Зворотна поїздка</span><b data-el="returnPrice">€300</b></li>
+          <li><span>Потрібно автомобілів</span><b data-el="cars">1 × Mercedes V-Class</b></li>
+          <li><span>Нічний / груповий тариф</span><b data-el="surcharge">Не застосовано</b></li>
+          <li><span>Депозит для підтвердження</span><b>30 € або 35 $</b></li>
+          <li><span>До сплати після поїздки</span><b data-el="rest">€270</b></li>
+        </ul>
+
+        <div class="calc__cta-wrap">
+          <button class="btn" data-el="bookBtn" type="button">
+            <span data-el="bookLabel">Забронювати за 30 € або 35 $</span>
+            <i><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></i>
+          </button>
+
+          <form class="booking" data-el="form" novalidate>
+            <input class="control" type="text" data-el="name" placeholder="Ваше ім’я" autocomplete="name" required>
+            <input class="control" type="tel" data-el="phone" placeholder="Телефон / WhatsApp" autocomplete="tel" required>
+            <input class="control" type="email" data-el="mail" placeholder="E-mail" autocomplete="email" required>
+
+            <div class="form-trap" aria-hidden="true">
+              <label>Це поле заповнювати не потрібно</label>
+              <input data-el="trap" type="text" tabindex="-bolzano-book" autocomplete="off">
+            </div>
+            <p class="booking__consent">Ми використовуємо ці дані лише для відповіді на запит — див. нашу
+              <a href="/datenschutz.html">політику конфіденційності</a>.</p>
+
+            <button class="btn" type="submit">
+              <span data-el="submitLabel">Надіслати запит</span>
+              <i><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></i>
+            </button>
+          </form>
+
+          <div class="booking__ok" data-el="ok" role="status"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- other routes -->
 <section class="section-spacing">
   <div class="container">

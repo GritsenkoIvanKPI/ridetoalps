@@ -4,7 +4,7 @@
 > file contains every route, price, rule and answer published on the site, so
 > that a question can be answered from one fetch.
 
-Generated from the same data as the website. Last built 2026-11-15.
+Generated from the same data as the website. Last built 2026-11-16.
 
 ## How pricing works
 

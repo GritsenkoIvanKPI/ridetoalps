@@ -608,6 +608,160 @@
   </div>
 </section>
 
+<!-- closing call to action: the calculator again, at the point where the
+     questions have just been answered and the next move is to price it -->
+<section class="section-spacing" id="book">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>Ihren Transfer nach Bormio / Livigno buchen</h2>
+      <a class="link-arrow" href="https://wa.me/19542392185" rel="noopener" target="_blank">Per WhatsApp fragen <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+    </div>
+    <div class="calc reveal" data-calc>
+      <div class="calc__form">
+        <div class="calc__legend"><span class="eyebrow">Schritt 1 — Ihre Strecke</span></div>
+
+        <div class="calc__row">
+          <div class="field">
+            <label for="fromSel-bormio-livigno-book">Von</label>
+            <select class="control" id="fromSel-bormio-livigno-book" data-el="from">
+              <option value="muc-airport">Flughafen München (MUC)</option>
+              <option value="muc-city">München Stadt</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="toSel-bormio-livigno-book">Nach</label>
+            <select class="control" id="toSel-bormio-livigno-book" data-el="to">
+              <option value="muc-city" data-price="100">München Stadt / Hotel</option>
+              <option value="kitzbuehel" data-price="300">Kitzbühel</option>
+              <option value="salzburg" data-price="325">Salzburg</option>
+              <option value="innsbruck" data-price="350">Innsbruck</option>
+              <option value="ischgl" data-price="400">Ischgl</option>
+              <option value="soelden" data-price="450">Sölden</option>
+              <option value="st-anton" data-price="500">St. Anton am Arlberg</option>
+              <option value="st-moritz" data-price="550">St. Moritz</option>
+              <option value="bolzano" data-price="550">Region Bozen</option>
+              <option value="bormio" data-price="550" selected>Bormio / Livigno</option>
+              <option value="other">Anderes Ziel</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="calc__row calc__row--single" data-el="otherRow" hidden>
+          <div class="field">
+            <label for="otherDest-bormio-livigno-book">Wohin möchten Sie?</label>
+            <input class="control" type="text" id="otherDest-bormio-livigno-book" data-el="otherDest"
+                   placeholder="Ort, Skigebiet oder Hotel" autocomplete="off">
+          </div>
+        </div>
+
+        <button class="swap" data-el="swap" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4 4 7l3 3M4 7h13M17 20l3-3-3-3M20 17H7"/></svg>
+          Richtung umkehren
+        </button>
+
+        <div class="calc__legend calc__legend--second"><span class="eyebrow">Schritt 2 — Datum &amp; Gruppe</span></div>
+
+        <div class="calc__row">
+          <div class="field">
+            <label for="dateInp-bormio-livigno-book">Abholdatum</label>
+            <input class="control" type="date" id="dateInp-bormio-livigno-book" data-el="date">
+          </div>
+          <div class="field">
+            <label for="timeInp-bormio-livigno-book">Abholzeit</label>
+            <input class="control" type="time" id="timeInp-bormio-livigno-book" data-el="time" value="10:00">
+          </div>
+        </div>
+
+        <button class="swap swap--toggle" data-el="returnBtn" type="button"
+                aria-pressed="false" aria-expanded="false" aria-controls="returnRow-bormio-livigno-book">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+          <span data-el="returnLabel">Rückfahrt hinzufügen</span>
+        </button>
+
+        <div class="calc__row calc__row--return" id="returnRow-bormio-livigno-book" data-el="returnRow" hidden>
+          <div class="field">
+            <label for="retDate-bormio-livigno-book">Rückfahrtdatum</label>
+            <input class="control" type="date" id="retDate-bormio-livigno-book" data-el="retDate">
+          </div>
+          <div class="field">
+            <label for="retTime-bormio-livigno-book">Rückfahrtzeit</label>
+            <input class="control" type="time" id="retTime-bormio-livigno-book" data-el="retTime" value="10:00">
+          </div>
+        </div>
+
+        <div class="calc__row">
+          <div class="field">
+            <label for="paxSel-bormio-livigno-book">Personen</label>
+            <select class="control" id="paxSel-bormio-livigno-book" data-el="pax">
+              <option>1</option><option>2</option><option selected>3</option><option>4</option>
+              <option>5</option><option>6</option><option>7</option>
+              <option>8</option><option>9</option><option>10</option><option>11</option><option>12</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="skiSel-bormio-livigno-book">Ski- / Boardtaschen</label>
+            <select class="control" id="skiSel-bormio-livigno-book" data-el="ski">
+              <option value="0" selected>Keine</option>
+              <option value="1">1–2 Taschen</option>
+              <option value="2">3–4 Taschen</option>
+              <option value="3">5 oder mehr</option>
+            </select>
+          </div>
+        </div>
+
+        <p class="calc__fineprint">Die Festpreise gelten pro Fahrzeug für 1–4 Personen bei Abfahrt zwischen 07:00 und 22:00 Uhr. Abfahrten außerhalb dieser Zeiten oder Gruppen von 5–7 Personen werden zum höheren Nacht- bzw. Gruppentarif berechnet. Gruppen über 7 Personen reisen in weiteren Fahrzeugen. Jede Buchung erhält einen Mercedes V-Klasse oder ein gleichwertiges Fahrzeug.</p>
+      </div>
+
+      <div class="calc__panel grain">
+        <h3>Ihr Angebot</h3>
+        <p class="muted" data-el="route">Flughafen München (MUC) → Kitzbühel</p>
+
+        <div class="price">
+          <span class="price__value" data-el="price">€300</span>
+          <span class="price__unit" data-el="priceUnit">gesamt, pro Buchung</span>
+        </div>
+        <p class="price__note" data-el="note">Tagestarif · 1 Fahrzeug</p>
+
+        <ul class="breakdown">
+          <li><span data-el="baseLabel">Grundpreis der Strecke</span><b data-el="base">€300</b></li>
+          <li data-el="rowReturn" hidden><span>Rückfahrt</span><b data-el="returnPrice">€300</b></li>
+          <li><span>Benötigte Fahrzeuge</span><b data-el="cars">1 × Mercedes V-Klasse</b></li>
+          <li><span>Nacht- / Gruppentarif</span><b data-el="surcharge">Nicht angewendet</b></li>
+          <li><span>Anzahlung zur Bestätigung</span><b>30 € oder 35 $</b></li>
+          <li><span>Zahlbar nach der Fahrt</span><b data-el="rest">€270</b></li>
+        </ul>
+
+        <div class="calc__cta-wrap">
+          <button class="btn" data-el="bookBtn" type="button">
+            <span data-el="bookLabel">Für 30 € oder 35 $ buchen</span>
+            <i><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></i>
+          </button>
+
+          <form class="booking" data-el="form" novalidate>
+            <input class="control" type="text" data-el="name" placeholder="Ihr Name" autocomplete="name" required>
+            <input class="control" type="tel" data-el="phone" placeholder="Telefon / WhatsApp" autocomplete="tel" required>
+            <input class="control" type="email" data-el="mail" placeholder="E-Mail" autocomplete="email" required>
+
+            <div class="form-trap" aria-hidden="true">
+              <label>Dieses Feld bitte leer lassen</label>
+              <input data-el="trap" type="text" tabindex="-bormio-livigno-book" autocomplete="off">
+            </div>
+            <p class="booking__consent">Wir verwenden diese Angaben nur zur Beantwortung Ihrer Anfrage — siehe unsere
+              <a href="/datenschutz.html">Datenschutzerklärung</a>.</p>
+
+            <button class="btn" type="submit">
+              <span data-el="submitLabel">Buchungsanfrage senden</span>
+              <i><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></i>
+            </button>
+          </form>
+
+          <div class="booking__ok" data-el="ok" role="status"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- other routes -->
 <section class="section-spacing">
   <div class="container">

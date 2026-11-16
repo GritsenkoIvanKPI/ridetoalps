@@ -34,6 +34,7 @@ export default {
                    'The balance is paid after the ride.',
   guests:    (r) => `Guests on the ${r.destShort} run`,
   questions: (r) => `${r.destShort} transfers — your questions`,
+  bookNow:   (r) => `Book your transfer to ${r.destShort}`,
   waFastest: (r) => `Fastest for questions about ${r.destShort}`,
   callNum:   (n) => `Call ${n}`,
 

@@ -23,6 +23,7 @@ export default {
                    'Namensschild. Der Restbetrag wird nach der Fahrt bezahlt.',
   guests:    (r) => `Gäste auf der Strecke nach ${r.destShort}`,
   questions: (r) => `Transfers nach ${r.destShort} — Ihre Fragen`,
+  bookNow:   (r) => `Ihren Transfer nach ${r.destShort} buchen`,
   waFastest: (r) => `Am schnellsten für Fragen zu ${r.destShort}`,
   callNum:   (n) => `Anruf ${n}`,
 

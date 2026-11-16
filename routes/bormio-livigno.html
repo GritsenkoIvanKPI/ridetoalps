@@ -608,6 +608,160 @@
   </div>
 </section>
 
+<!-- closing call to action: the calculator again, at the point where the
+     questions have just been answered and the next move is to price it -->
+<section class="section-spacing" id="book">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>Book your transfer to Bormio / Livigno</h2>
+      <a class="link-arrow" href="https://wa.me/19542392185" rel="noopener" target="_blank">Ask on WhatsApp <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+    </div>
+    <div class="calc reveal" data-calc>
+      <div class="calc__form">
+        <div class="calc__legend"><span class="eyebrow">Step 1 — your route</span></div>
+
+        <div class="calc__row">
+          <div class="field">
+            <label for="fromSel-bormio-livigno-book">From</label>
+            <select class="control" id="fromSel-bormio-livigno-book" data-el="from">
+              <option value="muc-airport">Munich Airport (MUC)</option>
+              <option value="muc-city">Munich city</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="toSel-bormio-livigno-book">To</label>
+            <select class="control" id="toSel-bormio-livigno-book" data-el="to">
+              <option value="muc-city" data-price="100">Munich city / hotel</option>
+              <option value="kitzbuehel" data-price="300">Kitzbühel</option>
+              <option value="salzburg" data-price="325">Salzburg</option>
+              <option value="innsbruck" data-price="350">Innsbruck</option>
+              <option value="ischgl" data-price="400">Ischgl</option>
+              <option value="soelden" data-price="450">Sölden</option>
+              <option value="st-anton" data-price="500">St. Anton am Arlberg</option>
+              <option value="st-moritz" data-price="550">St. Moritz</option>
+              <option value="bolzano" data-price="550">Bolzano region</option>
+              <option value="bormio" data-price="550" selected>Bormio / Livigno</option>
+              <option value="other">Other destination</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="calc__row calc__row--single" data-el="otherRow" hidden>
+          <div class="field">
+            <label for="otherDest-bormio-livigno-book">Where are you going?</label>
+            <input class="control" type="text" id="otherDest-bormio-livigno-book" data-el="otherDest"
+                   placeholder="Town, resort or hotel" autocomplete="off">
+          </div>
+        </div>
+
+        <button class="swap" data-el="swap" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4 4 7l3 3M4 7h13M17 20l3-3-3-3M20 17H7"/></svg>
+          Reverse direction
+        </button>
+
+        <div class="calc__legend calc__legend--second"><span class="eyebrow">Step 2 — date &amp; group</span></div>
+
+        <div class="calc__row">
+          <div class="field">
+            <label for="dateInp-bormio-livigno-book">Pick-up date</label>
+            <input class="control" type="date" id="dateInp-bormio-livigno-book" data-el="date">
+          </div>
+          <div class="field">
+            <label for="timeInp-bormio-livigno-book">Pick-up time</label>
+            <input class="control" type="time" id="timeInp-bormio-livigno-book" data-el="time" value="10:00">
+          </div>
+        </div>
+
+        <button class="swap swap--toggle" data-el="returnBtn" type="button"
+                aria-pressed="false" aria-expanded="false" aria-controls="returnRow-bormio-livigno-book">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+          <span data-el="returnLabel">Add return journey</span>
+        </button>
+
+        <div class="calc__row calc__row--return" id="returnRow-bormio-livigno-book" data-el="returnRow" hidden>
+          <div class="field">
+            <label for="retDate-bormio-livigno-book">Return date</label>
+            <input class="control" type="date" id="retDate-bormio-livigno-book" data-el="retDate">
+          </div>
+          <div class="field">
+            <label for="retTime-bormio-livigno-book">Return time</label>
+            <input class="control" type="time" id="retTime-bormio-livigno-book" data-el="retTime" value="10:00">
+          </div>
+        </div>
+
+        <div class="calc__row">
+          <div class="field">
+            <label for="paxSel-bormio-livigno-book">Passengers</label>
+            <select class="control" id="paxSel-bormio-livigno-book" data-el="pax">
+              <option>1</option><option>2</option><option selected>3</option><option>4</option>
+              <option>5</option><option>6</option><option>7</option>
+              <option>8</option><option>9</option><option>10</option><option>11</option><option>12</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="skiSel-bormio-livigno-book">Ski / board bags</label>
+            <select class="control" id="skiSel-bormio-livigno-book" data-el="ski">
+              <option value="0" selected>None</option>
+              <option value="1">1–2 bags</option>
+              <option value="2">3–4 bags</option>
+              <option value="3">5 or more</option>
+            </select>
+          </div>
+        </div>
+
+        <p class="calc__fineprint">Fixed rates are per vehicle for 1–4 passengers departing between 07:00 and 22:00. Departures outside those hours, or groups of 5–7, are charged at the higher night / large-group rate. Groups over 7 travel in additional vehicles. Every booking is assigned a Mercedes V-Class, or an equivalent vehicle where required.</p>
+      </div>
+
+      <div class="calc__panel grain">
+        <h3>Your quote</h3>
+        <p class="muted" data-el="route">Munich Airport (MUC) → Kitzbühel</p>
+
+        <div class="price">
+          <span class="price__value" data-el="price">€300</span>
+          <span class="price__unit" data-el="priceUnit">total, per booking</span>
+        </div>
+        <p class="price__note" data-el="note">Daytime rate · 1 vehicle</p>
+
+        <ul class="breakdown">
+          <li><span data-el="baseLabel">Base route rate</span><b data-el="base">€300</b></li>
+          <li data-el="rowReturn" hidden><span>Return journey</span><b data-el="returnPrice">€300</b></li>
+          <li><span>Vehicles required</span><b data-el="cars">1 × Mercedes V-Class</b></li>
+          <li><span>Night / large-group rate</span><b data-el="surcharge">Not applied</b></li>
+          <li><span>Deposit to confirm</span><b>€30 or $35</b></li>
+          <li><span>Payable after the ride</span><b data-el="rest">€270</b></li>
+        </ul>
+
+        <div class="calc__cta-wrap">
+          <button class="btn" data-el="bookBtn" type="button">
+            <span data-el="bookLabel">Book for €30 or $35</span>
+            <i><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></i>
+          </button>
+
+          <form class="booking" data-el="form" novalidate>
+            <input class="control" type="text" data-el="name" placeholder="Your name" autocomplete="name" required>
+            <input class="control" type="tel" data-el="phone" placeholder="Phone / WhatsApp" autocomplete="tel" required>
+            <input class="control" type="email" data-el="mail" placeholder="Email" autocomplete="email" required>
+
+            <div class="form-trap" aria-hidden="true">
+              <label>Do not fill this in</label>
+              <input data-el="trap" type="text" tabindex="-bormio-livigno-book" autocomplete="off">
+            </div>
+            <p class="booking__consent">We use these details only to answer this enquiry — see our
+              <a href="/datenschutz.html">privacy notice</a>.</p>
+
+            <button class="btn" type="submit">
+              <span data-el="submitLabel">Send booking request</span>
+              <i><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></i>
+            </button>
+          </form>
+
+          <div class="booking__ok" data-el="ok" role="status"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- other routes -->
 <section class="section-spacing">
   <div class="container">

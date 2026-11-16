@@ -602,6 +602,160 @@
   </div>
 </section>
 
+<!-- closing call to action: the calculator again, at the point where the
+     questions have just been answered and the next move is to price it -->
+<section class="section-spacing" id="book">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>Забронировать трансфер: Зальцбург</h2>
+      <a class="link-arrow" href="https://wa.me/19542392185" rel="noopener" target="_blank">Спросить в WhatsApp <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+    </div>
+    <div class="calc reveal" data-calc>
+      <div class="calc__form">
+        <div class="calc__legend"><span class="eyebrow">Шаг 1 — маршрут</span></div>
+
+        <div class="calc__row">
+          <div class="field">
+            <label for="fromSel-salzburg-book">Откуда</label>
+            <select class="control" id="fromSel-salzburg-book" data-el="from">
+              <option value="muc-airport">Аэропорт Мюнхена (MUC)</option>
+              <option value="muc-city">Мюнхен, город</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="toSel-salzburg-book">Куда</label>
+            <select class="control" id="toSel-salzburg-book" data-el="to">
+              <option value="muc-city" data-price="100">Мюнхен, город / отель</option>
+              <option value="kitzbuehel" data-price="300">Кицбюэль</option>
+              <option value="salzburg" data-price="325" selected>Зальцбург</option>
+              <option value="innsbruck" data-price="350">Инсбрук</option>
+              <option value="ischgl" data-price="400">Ишгль</option>
+              <option value="soelden" data-price="450">Зёльден</option>
+              <option value="st-anton" data-price="500">Санкт-Антон-ам-Арльберг</option>
+              <option value="st-moritz" data-price="550">Санкт-Мориц</option>
+              <option value="bolzano" data-price="550">Регион Больцано</option>
+              <option value="bormio" data-price="550">Бормио / Ливиньо</option>
+              <option value="other">Другое направление</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="calc__row calc__row--single" data-el="otherRow" hidden>
+          <div class="field">
+            <label for="otherDest-salzburg-book">Куда вы едете?</label>
+            <input class="control" type="text" id="otherDest-salzburg-book" data-el="otherDest"
+                   placeholder="Город, курорт или отель" autocomplete="off">
+          </div>
+        </div>
+
+        <button class="swap" data-el="swap" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4 4 7l3 3M4 7h13M17 20l3-3-3-3M20 17H7"/></svg>
+          Обратное направление
+        </button>
+
+        <div class="calc__legend calc__legend--second"><span class="eyebrow">Шаг 2 — дата и группа</span></div>
+
+        <div class="calc__row">
+          <div class="field">
+            <label for="dateInp-salzburg-book">Дата подачи</label>
+            <input class="control" type="date" id="dateInp-salzburg-book" data-el="date">
+          </div>
+          <div class="field">
+            <label for="timeInp-salzburg-book">Время подачи</label>
+            <input class="control" type="time" id="timeInp-salzburg-book" data-el="time" value="10:00">
+          </div>
+        </div>
+
+        <button class="swap swap--toggle" data-el="returnBtn" type="button"
+                aria-pressed="false" aria-expanded="false" aria-controls="returnRow-salzburg-book">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+          <span data-el="returnLabel">Добавить обратную поездку</span>
+        </button>
+
+        <div class="calc__row calc__row--return" id="returnRow-salzburg-book" data-el="returnRow" hidden>
+          <div class="field">
+            <label for="retDate-salzburg-book">Дата обратно</label>
+            <input class="control" type="date" id="retDate-salzburg-book" data-el="retDate">
+          </div>
+          <div class="field">
+            <label for="retTime-salzburg-book">Время обратно</label>
+            <input class="control" type="time" id="retTime-salzburg-book" data-el="retTime" value="10:00">
+          </div>
+        </div>
+
+        <div class="calc__row">
+          <div class="field">
+            <label for="paxSel-salzburg-book">Пассажиров</label>
+            <select class="control" id="paxSel-salzburg-book" data-el="pax">
+              <option>1</option><option>2</option><option selected>3</option><option>4</option>
+              <option>5</option><option>6</option><option>7</option>
+              <option>8</option><option>9</option><option>10</option><option>11</option><option>12</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="skiSel-salzburg-book">Чехлы для лыж / сноуборда</label>
+            <select class="control" id="skiSel-salzburg-book" data-el="ski">
+              <option value="0" selected>Нет</option>
+              <option value="1">1–2 чехла</option>
+              <option value="2">3–4 чехла</option>
+              <option value="3">5 и более</option>
+            </select>
+          </div>
+        </div>
+
+        <p class="calc__fineprint">Фиксированные тарифы указаны за автомобиль для 1–4 пассажиров при выезде с 07:00 до 22:00. Выезды вне этого времени, а также группы из 5–7 человек рассчитываются по повышенному ночному / групповому тарифу. Группы более 7 человек едут на нескольких автомобилях. На каждую поездку подаётся Mercedes V-Class или равноценный автомобиль.</p>
+      </div>
+
+      <div class="calc__panel grain">
+        <h3>Ваш расчёт</h3>
+        <p class="muted" data-el="route">Аэропорт Мюнхена (MUC) → Кицбюэль</p>
+
+        <div class="price">
+          <span class="price__value" data-el="price">€300</span>
+          <span class="price__unit" data-el="priceUnit">всего за бронирование</span>
+        </div>
+        <p class="price__note" data-el="note">Дневной тариф · 1 автомобиль</p>
+
+        <ul class="breakdown">
+          <li><span data-el="baseLabel">Базовая цена маршрута</span><b data-el="base">€300</b></li>
+          <li data-el="rowReturn" hidden><span>Обратная поездка</span><b data-el="returnPrice">€300</b></li>
+          <li><span>Требуется автомобилей</span><b data-el="cars">1 × Mercedes V-Class</b></li>
+          <li><span>Ночной / групповой тариф</span><b data-el="surcharge">Не применяется</b></li>
+          <li><span>Депозит для подтверждения</span><b>30 € или 35 $</b></li>
+          <li><span>К оплате после поездки</span><b data-el="rest">€270</b></li>
+        </ul>
+
+        <div class="calc__cta-wrap">
+          <button class="btn" data-el="bookBtn" type="button">
+            <span data-el="bookLabel">Забронировать за 30 € или 35 $</span>
+            <i><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></i>
+          </button>
+
+          <form class="booking" data-el="form" novalidate>
+            <input class="control" type="text" data-el="name" placeholder="Ваше имя" autocomplete="name" required>
+            <input class="control" type="tel" data-el="phone" placeholder="Телефон / WhatsApp" autocomplete="tel" required>
+            <input class="control" type="email" data-el="mail" placeholder="E-mail" autocomplete="email" required>
+
+            <div class="form-trap" aria-hidden="true">
+              <label>Это поле заполнять не нужно</label>
+              <input data-el="trap" type="text" tabindex="-salzburg-book" autocomplete="off">
+            </div>
+            <p class="booking__consent">Мы используем эти данные только для ответа на заявку — см. нашу
+              <a href="/datenschutz.html">политику конфиденциальности</a>.</p>
+
+            <button class="btn" type="submit">
+              <span data-el="submitLabel">Отправить заявку</span>
+              <i><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></i>
+            </button>
+          </form>
+
+          <div class="booking__ok" data-el="ok" role="status"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- other routes -->
 <section class="section-spacing">
   <div class="container">

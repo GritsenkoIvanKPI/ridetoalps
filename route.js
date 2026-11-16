@@ -314,15 +314,20 @@
     var munichLabel = munichField.querySelector('label');
     var resortLabel = resortField.querySelector('label');
 
+    /* T(), not the bare strings: this runs once on init as well as on every
+       click, so hard-coded labels here silently overwrote the translated ones
+       the page was served with — leaving FROM and TO in English on the German,
+       Russian and Ukrainian versions while every other label around them was
+       translated. */
     function applyDirection(){
       if (reversed) {
         routeRow.appendChild(munichField);   // resort first, Munich second
-        resortLabel.textContent = 'From';
-        munichLabel.textContent = 'To';
+        resortLabel.textContent = T('From');
+        munichLabel.textContent = T('To');
       } else {
         routeRow.appendChild(resortField);   // Munich first, resort second
-        munichLabel.textContent = 'From';
-        resortLabel.textContent = 'To';
+        munichLabel.textContent = T('From');
+        resortLabel.textContent = T('To');
       }
     }
 

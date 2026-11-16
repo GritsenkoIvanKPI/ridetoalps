@@ -26,6 +26,7 @@ export default {
                    'Решта сплачується після поїздки.',
   guests:    (r) => `Відгуки про поїздки: ${r.destShort}`,
   questions: (r) => `${r.destShort}: часті запитання`,
+  bookNow:   (r) => `Забронювати трансфер: ${r.destShort}`,
   waFastest: (r) => `Питання щодо маршруту: ${r.destShort}`,
   callNum:   (n) => `Дзвінок ${n}`,
 

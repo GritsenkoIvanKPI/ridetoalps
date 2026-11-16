@@ -150,14 +150,23 @@ function page(r, all, L) {
     ],
   };
 
-  const calc = L.calc
-    .replace(/-1"/g, `-${r.slug}"`)
-    .replace(/id="returnRow-1"/g, `id="returnRow-${r.slug}"`)
-    .replace(/for="([a-zA-Z]+)-1"/g, `for="$1-${r.slug}"`)
+  /* The page carries the calculator twice — once under the hero and once as the
+     closing call to action, after the FAQ has answered the objections. Each
+     copy needs its own element ids or the labels, the aria-controls and
+     getElementById all point at whichever came first, so the suffix is what
+     keeps the two instances independent. initCalc() wires each [data-calc]
+     separately, so they hold different quotes without interfering. */
+  const calcFor = (suffix) => L.calc
+    .replace(/-1"/g, `-${suffix}"`)
+    .replace(/id="returnRow-1"/g, `id="returnRow-${suffix}"`)
+    .replace(/for="([a-zA-Z]+)-1"/g, `for="$1-${suffix}"`)
     // the FROM select also contains a muc-city option, so match only options
     // that carry data-price — those are the destinations
     .replace(/(<option value="kitzbuehel" data-price="300") selected>/, '$1>')
     .replace(new RegExp(`(<option value="${r.calc}" data-price="\\d+")>`), '$1 selected>');
+
+  const calc = calcFor(r.slug);
+  const calcClosing = calcFor(`${r.slug}-book`);
 
   const blob = code === 'en' ? '' : `<script>
   /* Strings the page builds at runtime — generated from i18n/ui.${code}.mjs */
@@ -375,6 +384,18 @@ ${L.fleet.split('\n').slice(1).join('\n')}
         <div class="qa__a"><p>${esc(a)}</p></div>
       </div>`).join('\n      ')}
     </div>
+  </div>
+</section>
+
+<!-- closing call to action: the calculator again, at the point where the
+     questions have just been answered and the next move is to price it -->
+<section class="section-spacing" id="book">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>${esc(t.bookNow(r))}</h2>
+      <a class="link-arrow" href="https://wa.me/${WA}" rel="noopener" target="_blank">${esc(M('Ask on WhatsApp'))} ${ARROW}</a>
+    </div>
+${calcClosing}
   </div>
 </section>
 

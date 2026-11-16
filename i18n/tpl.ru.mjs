@@ -30,6 +30,7 @@ export default {
                    'Остаток оплачивается после поездки.',
   guests:    (r) => `Отзывы о поездках: ${r.destShort}`,
   questions: (r) => `${r.destShort}: частые вопросы`,
+  bookNow:   (r) => `Забронировать трансфер: ${r.destShort}`,
   waFastest: (r) => `Вопросы по маршруту: ${r.destShort}`,
   callNum:   (n) => `Звонок ${n}`,
 
