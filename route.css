@@ -989,7 +989,11 @@ select.control{
   }
   .menu__panel a{padding:8px 10px;min-height:46px}
   .rnav__cta{width:100%;margin:10px 0 2px;min-height:50px;font-size:17px}
-  .lang{margin-top:8px}
+  /* First in the panel, not last. The menu is taller than a phone screen once
+     the ten routes are in it, so a picker at the bottom is below the fold —
+     someone who landed on the wrong language had to scroll past every route to
+     find the way out, which reads as the control being broken. */
+  .lang{order:-1;margin:0 0 6px}
   .lang__btn{width:100%;justify-content:space-between}
   .lang__menu{position:static;width:100%;min-width:0;margin-top:6px;box-shadow:none}
   .rhero__frame{min-height:520px}

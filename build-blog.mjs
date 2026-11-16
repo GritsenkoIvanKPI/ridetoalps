@@ -160,7 +160,7 @@ ${alternates(url)}
 ${extraHead}</head>
 <body>
 
-${header({ code, routes: L.routes, map, t, urlFor: () => url(code) })}
+${header({ code, routes: L.routes, map, t, urlFor: url })}
 
 <main>
 ${main}
