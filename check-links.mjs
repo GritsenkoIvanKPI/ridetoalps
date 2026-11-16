@@ -15,12 +15,15 @@
 import fs from 'fs';
 import { LANGS, urlFor } from './i18n/config.mjs';
 import { ROUTES } from './routes.data.mjs';
+import { ARTICLES } from './blog.data.mjs';
 
 const BASE = 'http://localhost:3010';
 const PAGES = [];
 for (const l of LANGS) {
   PAGES.push(urlFor(l.code, 'index.html'), urlFor(l.code, 'routes.html'));
   for (const r of ROUTES) PAGES.push(urlFor(l.code, `routes/${r.slug}.html`));
+  PAGES.push(urlFor(l.code, 'blog.html'));
+  for (const a of ARTICLES) PAGES.push(urlFor(l.code, `blog/${a.slug}.html`));
 }
 PAGES.push('/impressum.html', '/datenschutz.html', '/agb.html');
 

@@ -71,6 +71,7 @@ ${items}
 
       <a class="rnav__link" href="${b}/#calculator">${esc(M('Prices'))}</a>
       <a class="rnav__link" href="${b}/#fleet">${esc(M('Fleet'))}</a>
+      <a class="rnav__link" href="${b}/blog.html">${esc(M('Blog'))}</a>
       <a class="rnav__link" href="${b}/#contact">${esc(M('Contact'))}</a>
 
       ${langPicker(code, urlFor, { label: M('Change language') })}

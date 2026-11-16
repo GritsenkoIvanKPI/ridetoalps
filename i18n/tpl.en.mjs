@@ -39,6 +39,24 @@ export default {
   callNum:   (n) => `Call ${n}`,
 
   /* ---------- the hub page ---------- */
+  /* ---------- blog ---------- */
+  blogTitle: 'Transfer and ski-trip guides | ridetoalps',
+  blogDesc:  'Practical guides to getting from Munich Airport into the Alps: transport ' +
+             'options compared, flying in with skis, and the winter rules of the road.',
+  blogH1:    'Guides for the journey',
+  blogLede:  'What we get asked before a booking: how to get there, what the airport is ' +
+             'like with ski bags, and what the roads demand in winter.',
+  blogCrumb: 'Blog',
+  readTime:  (n) => `${n} min read`,
+  moreArticles: 'More from the blog',
+  blogCtaHead: 'Now work out what the ride costs',
+  blogCtaText: 'Fixed price per vehicle, agreed before you book. Pick your route, date and ' +
+               'group size and the total appears.',
+  blogCtaBtn:  'Calculate transfer cost',
+  articleFaq:  'Questions about this',
+  filterLabel: 'Filter articles by topic',
+  noArticles: 'Nothing else in this category yet — try another, or read them all.',
+
   hubTitle: 'All routes from Munich Airport to the Alps | ridetoalps',
   hubDesc:  'Ten fixed-price private transfer routes from Munich Airport to Austria, ' +
             'Switzerland and Italy. Prices per vehicle, drive times and distances.',

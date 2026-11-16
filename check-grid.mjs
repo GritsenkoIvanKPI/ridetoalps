@@ -33,7 +33,7 @@ const PROBES = [
   ['hero facts', '.rfacts .rfact, .hero__strip li',               'box'],
 ];
 let bad = 0;
-for (const url of ['/', '/routes.html', '/routes/munich-city.html', '/de/', '/uk/routes/ischgl.html']) {
+for (const url of ['/', '/routes.html', '/routes/munich-city.html', '/blog.html', '/blog/munich-airport-ski-luggage-arrivals.html', '/de/', '/uk/routes/ischgl.html']) {
   for (const w of [1920, 1720, 1500, 1440, 1280, 1024, 820, 600, 390, 320]) {
     const p = await b.newPage();
     await p.setViewport({ width: w, height: 900 });

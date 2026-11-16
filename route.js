@@ -537,6 +537,40 @@
     });
   })();
 
+  /* ---------- blog filters ----------
+     Client-side, because three categories do not justify three more indexable
+     URLs competing with the blog index for the same queries. The cards are all
+     in the markup, so a crawler and a reader without JavaScript see every
+     article; this only hides some of them on request. */
+  (function(){
+    var chips = document.querySelectorAll('.chip[data-filter]');
+    var posts = document.getElementById('posts');
+    if (!chips.length || !posts) return;
+    var cards = posts.querySelectorAll('.post');
+    var empty = document.querySelector('.posts__empty');
+
+    function apply(key){
+      var shown = 0;
+      Array.prototype.forEach.call(cards, function(card){
+        var match = key === 'all' || card.getAttribute('data-category') === key;
+        card.hidden = !match;
+        if (match) shown++;
+      });
+      if (empty) empty.hidden = shown > 0;
+    }
+
+    Array.prototype.forEach.call(chips, function(chip){
+      chip.addEventListener('click', function(){
+        Array.prototype.forEach.call(chips, function(c){
+          var on = c === chip;
+          c.classList.toggle('is-on', on);
+          c.setAttribute('aria-pressed', String(on));
+        });
+        apply(chip.getAttribute('data-filter'));
+      });
+    });
+  })();
+
   /* ---------- language selector ----------
      Only English is active today. The menu is wired so that adding a locale is
      a data change rather than a header rewrite. */

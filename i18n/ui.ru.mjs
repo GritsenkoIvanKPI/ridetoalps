@@ -8,6 +8,7 @@ export default {
   'About': 'О нас',
   'Reviews': 'Отзывы',
   'FAQ': 'Вопросы',
+  'Blog': 'Блог',
   'Contact': 'Контакты',
   'Book now': 'Забронировать',
   'All routes': 'Все маршруты',

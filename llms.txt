@@ -50,9 +50,19 @@ Each price is the fixed day rate per vehicle, one way.
 - [Munich Airport to Bolzano and South Tyrol](https://ridetoalps.com/routes/bolzano.html): €550, 300 km, about 3 h 15. South Tyrol, Italy.
 - [Munich Airport to Bormio and Livigno](https://ridetoalps.com/routes/bormio-livigno.html): €550, 340 km, about 4 h. Valtellina and Alta Valtellina, Italy.
 
+## Guides
+
+Written for the questions that come before a route is chosen. None of them
+quotes a per-route price; that lives on the route page.
+
+- [Munich Airport to the Alps: train, bus, rental car or private transfer](https://ridetoalps.com/blog/munich-airport-to-alps-transport-options.html): Four ways to get from Munich Airport (MUC) to the Austrian, Swiss and Italian Alps compared on cost, door-to-door time, ski luggage and what happens when your flight is late.
+- [Munich Airport with skis: terminals, oversized baggage and how long arrivals really takes](https://ridetoalps.com/blog/munich-airport-ski-luggage-arrivals.html): Where ski bags come out at Munich Airport, the difference between Terminal 1 and Terminal 2 arrivals, where to meet a driver, and how much time to allow before anyone expects you.
+- [Winter driving in the Alps: vignettes, tolls, snow chains and when the passes close](https://ridetoalps.com/blog/alpine-winter-driving-vignettes-chains.html): What you legally need to drive from Germany into Austria, Switzerland and Italy in winter — motorway vignettes, pass tolls, winter tyre and snow chain rules, and which passes shut for the season.
+
 ## Pages
 
 - [Homepage and price calculator](https://ridetoalps.com/): all routes, the fleet, how booking works
+- [Guides](https://ridetoalps.com/blog.html): the articles above
 - [All routes](https://ridetoalps.com/routes.html): the ten routes side by side
 - [Impressum](https://ridetoalps.com/impressum.html): operator details
 - [Privacy notice](https://ridetoalps.com/datenschutz.html)

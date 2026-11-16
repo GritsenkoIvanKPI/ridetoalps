@@ -17,6 +17,7 @@
  */
 import fs from 'fs';
 import { ROUTES, SHARED_INCLUDED } from './routes.data.mjs';
+import { ARTICLES } from './blog.data.mjs';
 import { SITE, LANGS } from './i18n/config.mjs';
 
 /* Kept in step with the calculator in index.html. If these drift, the answer an
@@ -78,9 +79,17 @@ ${ROUTES.map(r =>
 `- [${r.h1}](${url(`routes/${r.slug}.html`)}): €${r.price}, ${r.km} km, about ${r.time}. ${r.region}.`
 ).join('\n')}
 
+## Guides
+
+Written for the questions that come before a route is chosen. None of them
+quotes a per-route price; that lives on the route page.
+
+${ARTICLES.map(a => `- [${a.title}](${url(`blog/${a.slug}.html`)}): ${a.description}`).join('\n')}
+
 ## Pages
 
 - [Homepage and price calculator](${SITE}/): all routes, the fleet, how booking works
+- [Guides](${url('blog.html')}): the articles above
 - [All routes](${url('routes.html')}): the ten routes side by side
 - [Impressum](${url('impressum.html')}): operator details
 - [Privacy notice](${url('datenschutz.html')})

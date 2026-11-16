@@ -11,11 +11,13 @@ import path from 'path';
 const OUT = 'deploy';
 
 import { ROUTES } from './routes.data.mjs';
+import { ARTICLES } from './blog.data.mjs';
 import { LANGS } from './i18n/config.mjs';
 
 // Every page, in every language. The legal pages are documents under German
 // law and all four versions link to the same copy, so they appear once.
-const LOCALISED = ['index.html', 'routes.html', ...ROUTES.map(r => `routes/${r.slug}.html`)];
+const LOCALISED = ['index.html', 'routes.html', ...ROUTES.map(r => `routes/${r.slug}.html`),
+                   'blog.html', ...ARTICLES.map(a => `blog/${a.slug}.html`)];
 const PAGES = [
   ...LANGS.flatMap(l => LOCALISED.map(p => (l.code === 'en' ? p : `${l.code}/${p}`))),
   'impressum.html', 'datenschutz.html', 'agb.html',
@@ -38,6 +40,7 @@ const NEVER_UPLOAD = [
   'config.example.php', '.gitignore', 'desktop.png',
   'routes.data.mjs', 'build-routes.mjs', 'build-routes-index.mjs',
   'build-i18n.mjs', 'build-sitemap.mjs', 'build.mjs', 'build-llms.mjs',
+  'build-blog.mjs', 'blog.data.mjs',
   'check-links.mjs', 'check-layout.mjs', 'check-grid.mjs',
   'Інструкція — перевірка оплат ridetoalps.docx',
   'htaccess.txt',

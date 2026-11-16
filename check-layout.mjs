@@ -16,7 +16,7 @@ const WIDTHS = [320, 390, 768, 1440];
 const b = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox'] });
 let bad = 0;
 for (const l of LANGS) {
-  for (const page of ['index.html', 'routes.html', 'routes/st-anton.html', 'routes/bormio-livigno.html']) {
+  for (const page of ['index.html', 'routes.html', 'blog.html', 'routes/st-anton.html', 'routes/bormio-livigno.html']) {
     for (const w of WIDTHS) {
       const p = await b.newPage();
       await p.setViewport({ width: w, height: 844, isMobile: w < 700, hasTouch: w < 700 });

@@ -764,6 +764,114 @@ select.control{
 .lang__menu a[aria-current="true"]{background:rgba(14,99,228,.22);color:#fff}
 .lang__menu a:not([aria-current="true"]):hover{background:rgba(255,255,255,.08);color:#fff}
 
+/* ============================================================
+   BLOG — filters, cards, article
+   ============================================================ */
+
+/* filter chips. They are buttons that hide cards client-side, not links to
+   separate pages: three articles do not justify three more URLs competing
+   with each other in search results. */
+.filters{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:34px 0 10px}
+.chip{
+  font-family:var(--font-family--heading);font-size:15px;font-weight:500;
+  min-height:44px;padding:0 18px;border-radius:999px;cursor:pointer;
+  background:var(--color--gray-5);color:var(--color--gray-1);
+  border:1px solid transparent;
+  transition:background-color .2s ease,color .2s ease,border-color .2s ease;
+}
+.chip:hover{background:var(--color--primary-wash);color:var(--color--black)}
+.chip.is-on{background:var(--color--black);color:#fff}
+.chip:focus-visible{outline:3px solid var(--color--primary-soft);outline-offset:2px}
+
+.posts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px;margin-top:34px}
+.posts__empty{text-align:center;color:var(--color--gray-2);margin-top:48px}
+
+.post{
+  display:flex;flex-direction:column;min-width:0;overflow:hidden;
+  background:var(--color--gray-5);border-radius:var(--border-radius--lg);
+  transition:transform .5s var(--ease--spring),box-shadow .35s ease;
+}
+.post:hover{transform:translateY(-5px);box-shadow:0 26px 60px -28px rgba(12,21,36,.42)}
+.post:focus-visible{outline:3px solid var(--color--primary-soft);outline-offset:3px}
+.post__media{position:relative;aspect-ratio:3/2;overflow:hidden}
+.post__media img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease--spring)}
+.post:hover .post__media img{transform:scale(1.04)}
+.post__body{display:flex;flex-direction:column;flex:1;padding:24px 24px 22px;gap:10px}
+.post__cat{
+  font-family:var(--font-family--heading);font-size:12px;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--color--primary-1);
+}
+.post__title{font-size:21px;font-weight:600;line-height:1.3;letter-spacing:-.015em;hyphens:manual}
+.post__lede{font-size:15px;line-height:1.65;color:var(--color--gray-2);flex:1}
+.post__foot{
+  display:flex;align-items:center;gap:14px;margin-top:6px;padding-top:14px;
+  border-top:1px solid rgba(12,21,36,.1);
+  font-size:14px;color:var(--color--gray-2);
+}
+.post__foot span::before{content:"·";margin-right:14px}
+
+/* article */
+.article{padding-top:52px}
+.crumb--left{justify-content:flex-start}
+.article__head{max-width:68ch;margin:0 auto;text-align:center}
+.article__head h1{margin-top:14px;font-size:clamp(2rem,4.2vw,3.4rem);letter-spacing:-.03em}
+.article__lede{margin-top:20px;font-size:20px;line-height:1.65;color:var(--color--gray-1)}
+.article__meta{
+  display:flex;justify-content:center;gap:14px;margin-top:22px;
+  font-size:15px;color:var(--color--gray-2);
+}
+.article__meta span::before{content:"·";margin-right:14px}
+.article__media{
+  margin:44px auto 0;max-width:980px;aspect-ratio:3/2;overflow:hidden;
+  border-radius:var(--border-radius--lg);
+}
+.article__media img{width:100%;height:100%;object-fit:cover}
+
+/* one measure for the body text: anything wider than about 70 characters is
+   measurably harder to read, whatever the screen allows */
+.article__body{max-width:68ch;margin:0 auto}
+.article__body h2{margin:52px 0 0;font-size:clamp(1.5rem,2.6vw,2rem);letter-spacing:-.025em}
+.article__body p{margin-top:18px;font-size:17px;line-height:1.75;color:var(--color--gray-1)}
+.article__body .rnote{margin-top:24px}
+.article__list{margin-top:18px;display:grid;gap:10px}
+.article__list li{
+  position:relative;padding-left:26px;font-size:17px;line-height:1.7;color:var(--color--gray-1);
+}
+.article__list li::before{
+  content:"";position:absolute;left:4px;top:11px;width:7px;height:7px;border-radius:50%;
+  background:var(--color--primary-1);
+}
+.article__tablewrap{margin-top:26px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.article__table{width:100%;border-collapse:collapse;font-size:16px;min-width:480px}
+.article__table th,.article__table td{
+  text-align:left;padding:13px 16px;border-bottom:1px solid rgba(12,21,36,.1);vertical-align:top;
+}
+.article__table thead th{
+  font-family:var(--font-family--heading);font-size:13px;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--color--gray-2);
+  border-bottom-color:rgba(12,21,36,.18);
+}
+.article__table tbody th{font-weight:500;color:var(--color--black)}
+.article__table td{color:var(--color--gray-1)}
+.article__faq{max-width:68ch;margin:64px auto 0}
+.article__faq h2{margin-bottom:24px;font-size:clamp(1.5rem,2.6vw,2rem);letter-spacing:-.025em}
+
+@media (max-width:1180px){
+  .posts{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:760px){
+  .posts{grid-template-columns:minmax(0,1fr);gap:20px}
+  .filters{justify-content:flex-start;gap:8px;margin-top:26px}
+  .chip{font-size:14px;padding:0 15px}
+  .article{padding-top:30px}
+  .article__head{text-align:left}
+  .article__meta{justify-content:flex-start}
+  .article__lede{font-size:18px}
+  .article__media{margin-top:30px;border-radius:var(--border-radius--md)}
+  .article__body p,.article__list li{font-size:16px}
+  .article__body h2{margin-top:40px}
+}
+
 /* breadcrumb on the hub — the route pages have one in the hero, and without
    this the hub was the only page with no trail back to the homepage */
 .crumb{display:flex;align-items:center;justify-content:center;gap:9px;

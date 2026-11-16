@@ -13,6 +13,7 @@
 import fs from 'fs';
 import { SITE, LANGS, urlFor } from './i18n/config.mjs';
 import { ROUTES } from './routes.data.mjs';
+import { ARTICLES } from './blog.data.mjs';
 
 const today = new Date().toISOString().slice(0, 10);
 
@@ -21,6 +22,8 @@ const PAGES = [
   { page: 'index.html',  priority: '1.0', freq: 'monthly' },
   { page: 'routes.html', priority: '0.9', freq: 'monthly' },
   ...ROUTES.map(r => ({ page: `routes/${r.slug}.html`, priority: '0.8', freq: 'monthly' })),
+  { page: 'blog.html', priority: '0.7', freq: 'weekly' },
+  ...ARTICLES.map(a => ({ page: `blog/${a.slug}.html`, priority: '0.6', freq: 'yearly' })),
 ];
 
 /* Not translated, so they appear once with no alternates. */

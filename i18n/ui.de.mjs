@@ -16,6 +16,7 @@ export default {
   'About': 'Über uns',
   'Reviews': 'Bewertungen',
   'FAQ': 'FAQ',
+  'Blog': 'Blog',
   'Contact': 'Kontakt',
   'Book now': 'Jetzt buchen',
   'All routes': 'Alle Strecken',

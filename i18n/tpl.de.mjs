@@ -27,6 +27,24 @@ export default {
   waFastest: (r) => `Am schnellsten für Fragen zu ${r.destShort}`,
   callNum:   (n) => `Anruf ${n}`,
 
+  /* ---------- Blog ---------- */
+  blogTitle: 'Ratgeber zu Transfer und Skireise | ridetoalps',
+  blogDesc:  'Praktische Ratgeber für den Weg vom Flughafen München in die Alpen: ' +
+             'Verkehrsmittel im Vergleich, Anreise mit Ski und die Winterregeln auf der Straße.',
+  blogH1:    'Ratgeber für die Anreise',
+  blogLede:  'Was uns vor einer Buchung gefragt wird: wie man hinkommt, wie der Flughafen ' +
+             'mit Skitaschen funktioniert und was die Straßen im Winter verlangen.',
+  blogCrumb: 'Blog',
+  readTime:  (n) => `${n} Min. Lesezeit`,
+  moreArticles: 'Mehr aus dem Blog',
+  blogCtaHead: 'Jetzt den Fahrpreis berechnen',
+  blogCtaText: 'Festpreis pro Fahrzeug, vor der Buchung vereinbart. Strecke, Datum und ' +
+               'Gruppengröße wählen — der Gesamtpreis erscheint sofort.',
+  blogCtaBtn:  'Transferpreis berechnen',
+  articleFaq:  'Fragen dazu',
+  filterLabel: 'Artikel nach Thema filtern',
+  noArticles: 'In dieser Kategorie gibt es sonst noch nichts — probieren Sie eine andere, oder lesen Sie alle.',
+
   hubTitle: 'Alle Strecken vom Flughafen München in die Alpen | ridetoalps',
   hubDesc:  'Zehn private Transferstrecken zum Festpreis vom Flughafen München nach ' +
             'Österreich, in die Schweiz und nach Italien. Preise pro Fahrzeug, Fahrzeiten und Entfernungen.',

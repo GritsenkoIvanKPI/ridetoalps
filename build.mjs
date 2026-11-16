@@ -15,6 +15,7 @@ const STEPS = [
   ['build-i18n.mjs',           'localized homepages'],
   ['build-routes.mjs',         'route landing pages'],
   ['build-routes-index.mjs',   'route hub pages'],
+  ['build-blog.mjs',           'blog index and articles'],
   ['build-sitemap.mjs',        'sitemap'],
   ['build-llms.mjs',           'llms.txt for AI assistants'],
 ];

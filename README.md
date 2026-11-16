@@ -32,11 +32,13 @@ and reaches 48 pages on the next build. A change made in `de/index.html` is lost
 |---|---|
 | `index.html` | The English homepage — markup, CSS and JS, all inline. Hand-written. |
 | `routes.data.mjs` | The ten routes: prices, distances, times and English prose. Hand-written. |
+| `blog.data.mjs` | Blog categories and articles, with the keyword map. Hand-written. |
 | `i18n/` | Translations and the localisation engine (see below) |
 | `build.mjs` | Runs every build step in the right order |
 | `build-i18n.mjs` | Localised homepages → `de/`, `ru/`, `uk/` |
 | `build-routes.mjs` | Ten route pages per language → `routes/`, `<lang>/routes/` |
 | `build-routes-index.mjs` | The routes hub per language → `routes.html`, `<lang>/routes.html` |
+| `build-blog.mjs` | Blog index and articles → `blog.html`, `blog/`, `<lang>/blog/` |
 | `build-sitemap.mjs` | `sitemap.xml`, with hreflang alternates for all 48 pages |
 | `build-llms.mjs` | `llms.txt` and `llms-full.txt` — the service, in plain text, for AI assistants |
 | `build-deploy.mjs` | Assembles `deploy/` — exactly what belongs in `public_html` |
@@ -62,6 +64,7 @@ i18n/localize.mjs      the engine: walks a finished page, translating text
 i18n/ui.<lang>.mjs     chrome and components, shared by every page
 i18n/home.<lang>.mjs   homepage content: metadata, reviews, the FAQ
 i18n/routes.<lang>.mjs route prose, keyed by slug
+i18n/blog.<lang>.mjs   blog articles, keyed by slug
 i18n/tpl.<lang>.mjs    the route-page template: headings, meta, number formats
 i18n/keep.mjs          strings left untranslated on purpose (guest names)
 i18n/check.mjs         catches stray characters and mixed apostrophe forms
@@ -151,6 +154,25 @@ practices, **100** SEO. Desktop is 100 across the board.
 `check-links.mjs` reports the three legal pages as having no hreflang alternates. That is
 deliberate — they are documents under German law and all four language versions link to
 the same copy.
+
+## The blog
+
+An index and three articles, in four languages. `blog.data.mjs` holds the
+English; each article's body is a list of `[kind, …]` blocks rather than
+markup, so the prose is translatable string by string and the build can check
+that a translation has the same structure — a dropped block would otherwise
+make one language's article quietly shorter.
+
+The filters are buttons that hide cards client-side, not links to category
+URLs. Three categories do not justify three more indexable pages competing
+with the blog index for the same queries.
+
+**Before adding an article, read the keyword map at the top of
+`blog.data.mjs`.** The ten route pages already own "Munich Airport to
+<resort> transfer" and the price. An article that also targeted those would
+not win a second listing, it would split the signal between two of our own
+pages. Each article therefore answers a question asked *before* a route is
+chosen, and each owns a different one.
 
 ## Being found
 
