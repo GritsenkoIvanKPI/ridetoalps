@@ -601,7 +601,13 @@ select.control{
 .swap--toggle[aria-pressed="true"]{color:var(--color--primary-2)}
 .swap--toggle[aria-pressed="true"] svg{transform:rotate(45deg)}
 /* .calc__row sets display:grid, which would otherwise beat the hidden attribute */
-.calc__row[hidden],.breakdown li[hidden]{display:none}
+/* The hidden attribute is enforced by a UA rule of the lowest possible
+   specificity, so any author rule that sets display quietly defeats it: the
+   element keeps the attribute, assistive technology treats it as hidden, and
+   it stays on screen regardless. This used to be patched per component — the
+   calculator rows — and the blog filter then hit the same wall, because .post
+   sets display:flex. One rule for all of them. */
+[hidden]{display:none!important}
 .calc__row--return{animation:fadeUp .45s var(--ease--spring) both}
 
 .calc__panel{
