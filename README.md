@@ -48,6 +48,7 @@ and reaches 48 pages on the next build. A change made in `de/index.html` is lost
 | `check-links.mjs` | Every internal link, asset and hreflang on all 48 pages |
 | `check-layout.mjs` | Overflow and script errors, every language × four widths |
 | `check-grid.mjs` | That every element sits on the one content column, at ten widths |
+| `check-consent.mjs` | Consent Mode v2, measured from the network rather than read from the markup |
 | `robots.txt` | Crawler access — search engines and AI assistants, named explicitly |
 | `i18n/nav.mjs` | The header: one definition, every page |
 | `serve.mjs`, `screenshot.mjs` | Dev server and Puppeteer screenshot helper |
@@ -113,6 +114,8 @@ node check-links.mjs     # every link, asset and hreflang on 51 pages, and that
                          # each homepage still links all ten routes
 node check-layout.mjs    # 4 languages × 4 widths, overflow and JS errors
 node check-grid.mjs      # every element on the one content column, 10 widths
+node check-consent.mjs   # tags load, defaults denied, cookieless ping, no cookies
+                         # before Accept. Takes a URL to test the live site.
 node i18n/check.mjs      # stray characters in the translation files
 ```
 

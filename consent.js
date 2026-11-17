@@ -66,6 +66,20 @@
   window.dataLayer = window.dataLayer || [];
   function gtag() { window.dataLayer.push(arguments); }
 
+  /* Declining sends an explicit update rather than relying on the default.
+     The state is identical either way, but saying so closes the
+     wait_for_update window immediately instead of letting it time out, and it
+     puts the visitor's actual decision in the dataLayer where a tag or an
+     audit can see it. */
+  function deny() {
+    gtag('consent', 'update', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied'
+    });
+  }
+
   var applied = false;
   function grant() {
     if (applied) return;
@@ -142,7 +156,7 @@
       write('granted'); grant(); close();
     });
     box.querySelector('.rta-consent__no').addEventListener('click', function () {
-      write('denied'); close();
+      write('denied'); deny(); close();
     });
   }
 

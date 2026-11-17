@@ -23,6 +23,16 @@
     security_storage: 'granted',
     wait_for_update: 500
   });
+  /* Both of these only take effect while ad_storage is denied, and neither
+     stores anything on the device — they are what lets Google model the
+     traffic it is not allowed to measure directly.
+       ads_data_redaction: strips ad click identifiers from the pings sent
+         while consent is withheld.
+       url_passthrough: carries gclid through internal navigations in the URL
+         instead of a cookie, so a conversion can still be attributed. */
+  gtag('set', 'ads_data_redaction', true);
+  gtag('set', 'url_passthrough', true);
+
   gtag('js', new Date());
   gtag('config', 'G-39Y7WT9DKR', { anonymize_ip: true });
   (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
