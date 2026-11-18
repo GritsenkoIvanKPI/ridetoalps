@@ -1,17 +1,17 @@
-/* ridetoalps — consent banner for Google Analytics 4 and Google Tag Manager.
+/* ridetoalps — analytics notice for Google Analytics 4 and Google Tag Manager.
  *
- * The tags themselves load from the snippet in <head>, so Google can detect
- * them. What makes that lawful is Consent Mode v2: every storage type starts
- * DENIED, which means GA4 and GTM write no cookies and send no identifiers
- * until this banner flips them to granted.
+ * This is an OPT-OUT notice, not a consent gate. Consent Mode defaults to
+ * granted in the page head, so measurement begins with the first page view and
+ * this banner offers a way to stop it. That was the operator's decision of
+ * 18 November 2026, taken against the advice that § 25 TDDDG requires consent
+ * before anything is stored on a visitor's device.
  *
- * § 25 TDDDG requires consent before anything is stored on or read from a
- * visitor's device, so the denied default is doing the legal work here — it
- * is not decoration. Deleting it, or auto-granting without a click, is what
- * would create exposure.
- *
- * The choice is kept in localStorage rather than a cookie, so declining
- * leaves nothing on the device at all.
+ * What this file must therefore get right: the wording has to describe what
+ * actually happens — the old text promised that nothing loaded until you
+ * agreed, which would now be untrue — and "turn off" has to work, both
+ * immediately and on every later visit. The decision is stored in
+ * localStorage; the head script reads it before the first hit, and this file
+ * sends the consent update for the current page.
  */
 (function () {
   'use strict';
@@ -32,25 +32,27 @@
      The privacy notice itself stays German: it is a document under German law,
      and all four versions of the site link to the same copy. */
   var TEXT = {
-    en: { body: 'We would like to measure how this site is used, with Google Analytics. ' +
-                'That sets cookies and sends data to Google. Nothing is loaded unless you agree. ' +
-                'More in our ',
-          link: 'privacy notice', yes: 'Accept', no: 'Decline',
+    en: { body: 'We measure how this site is used with Google Analytics, which sets cookies ' +
+                'and sends data to Google. Measurement starts when the page loads. You can ' +
+                'turn it off here at any time. More in our ',
+          link: 'privacy notice', yes: 'That is fine', no: 'Turn off analytics',
           label: 'Cookies and analytics' },
-    de: { body: 'Wir würden gern mit Google Analytics messen, wie diese Website genutzt wird. ' +
-                'Dabei werden Cookies gesetzt und Daten an Google übermittelt. Ohne Ihre ' +
-                'Einwilligung wird nichts geladen. Mehr dazu in unserer ',
-          link: 'Datenschutzerklärung', yes: 'Akzeptieren', no: 'Ablehnen',
+    de: { body: 'Wir messen mit Google Analytics, wie diese Website genutzt wird; dabei werden ' +
+                'Cookies gesetzt und Daten an Google übermittelt. Die Messung beginnt mit dem ' +
+                'Laden der Seite. Sie können sie hier jederzeit abschalten. Mehr dazu in unserer ',
+          link: 'Datenschutzerklärung', yes: 'Einverstanden', no: 'Analyse abschalten',
           label: 'Cookies und Analyse' },
-    ru: { body: 'Мы хотели бы измерять, как используется этот сайт, с помощью Google Analytics. ' +
-                'Это устанавливает файлы cookie и передаёт данные в Google. Без вашего согласия ' +
-                'ничего не загружается. Подробнее — в нашей ',
-          link: 'политике конфиденциальности', yes: 'Принять', no: 'Отклонить',
+    ru: { body: 'Мы измеряем, как используется этот сайт, с помощью Google Analytics: ' +
+                'устанавливаются файлы cookie и данные передаются в Google. Измерение ' +
+                'начинается при загрузке страницы. Вы можете отключить его здесь в любой ' +
+                'момент. Подробнее — в нашей ',
+          link: 'политике конфиденциальности', yes: 'Хорошо', no: 'Отключить аналитику',
           label: 'Cookie и аналитика' },
-    uk: { body: 'Ми хотіли б вимірювати, як використовується цей сайт, за допомогою Google ' +
-                'Analytics. Це встановлює файли cookie й передає дані до Google. Без вашої згоди ' +
-                'нічого не завантажується. Докладніше — у нашій ',
-          link: 'політиці конфіденційності', yes: 'Прийняти', no: 'Відхилити',
+    uk: { body: 'Ми вимірюємо, як використовується цей сайт, за допомогою Google Analytics: ' +
+                'встановлюються файли cookie й дані передаються до Google. Вимірювання ' +
+                'починається під час завантаження сторінки. Ви можете вимкнути його тут ' +
+                'будь-коли. Докладніше — у нашій ',
+          link: 'політиці конфіденційності', yes: 'Гаразд', no: 'Вимкнути аналітику',
           label: 'Cookie та аналітика' }
   };
   var T = TEXT[(document.documentElement.lang || 'en').slice(0, 2)] || TEXT.en;
@@ -173,8 +175,13 @@
   }
 
   function start() {
-    if (read() === 'granted') grant();
-    else if (read() !== 'denied') show();
+    var choice = read();
+    // The head has already applied the stored decision to the default, so this
+    // is belt and braces for the case where localStorage was readable here but
+    // not there — and it keeps the dataLayer honest for anything reading it.
+    if (choice === 'denied') deny();
+    else if (choice === 'granted') grant();
+    else show();
     wireReopen();
   }
 

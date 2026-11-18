@@ -222,6 +222,31 @@ those hours, or groups of 5–7, use the higher night / large-group rate. Groups
 travel in additional vehicles. A €30 / $35 deposit confirms a booking and is refundable up
 to 48 hours before the date.
 
+## Analytics and consent
+
+Measurement starts on the first page view. Consent Mode defaults to **granted**
+in the page head, and the banner is an **opt-out**, not a consent gate.
+
+This was the operator's explicit decision on 18 November 2026, taken after
+being advised that § 25 TDDDG requires consent before anything is stored on or
+read from a visitor's device, and that German courts have ruled against
+comparable setups. The decision and its risk sit with the operator; it is
+recorded here and in the comments of `index.html` and `consent.js` so that
+whoever changes it next knows it was deliberate.
+
+Two things follow from it that must not be broken:
+
+- **The banner's wording has to match what happens.** It previously said
+  nothing loaded until you agreed. That is no longer true, so the text in all
+  four languages now says measurement begins on load and offers to turn it off.
+- **An opt-out has to survive the visit.** The stored decision is read in the
+  page head, synchronously, before `gtag('config')` runs. `consent.js` is
+  deferred and executes after the first hit has already gone out, so it cannot
+  do this job on its own.
+
+`check-consent.mjs` asserts all of it against a real browser, including a
+simulated return visit after opting out.
+
 ## Known placeholders
 
 1. **Legal pages** — `impressum.html`, `datenschutz.html` and `agb.html` are "in
