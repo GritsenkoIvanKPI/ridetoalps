@@ -177,6 +177,11 @@
      The card appears twice on the page, so every hook is scoped to its own root.
   ------------------------------------------------------------------- */
   var DAY_RATE = 1.5, NIGHT_RATE = 1.7, DEPOSIT = 30, SEATS_PER_CAR = 7;
+  /* Booking both legs at once saves the driver a dead-heading return, so it is
+     discounted. Applied to the two legs together, after any night or
+     large-group uplift, and rounded to the same 5 euro step as everything
+     else. */
+  var RETURN_DISCOUNT = 0.10;
 
   /* '€300' in English, '300 €' in German, Russian and Ukrainian. The pattern
      comes from the page, so the rule lives next to the other translations. */
@@ -202,6 +207,7 @@
     var returnBtn = el('returnBtn'), returnRow = el('returnRow'), returnLabel = el('returnLabel'),
         retDate = el('retDate'), retTime = el('retTime'),
         rowReturn = el('rowReturn'), returnPrice = el('returnPrice'), baseLabel = el('baseLabel');
+    var rowDiscount = el('rowDiscount'), bdDiscount = el('discount');
 
     var reversed = false;
     var hasReturn = false;
@@ -235,7 +241,9 @@
 
       var out = leg(timeInp.value);
       var ret = hasReturn ? leg(retTime.value) : null;
-      var total = out.price + (ret ? ret.price : 0);
+      var gross = out.price + (ret ? ret.price : 0);
+      var discount = ret ? Math.round((gross * RETURN_DISCOUNT) / 5) * 5 : 0;
+      var total = gross - discount;
 
       var typed  = custom ? otherDest.value.trim() : '';
       var endpoint = custom ? (typed || T('Other destination')) : opt.text;
@@ -252,6 +260,8 @@
                                                : money(base) + (cars > 1 ? ' ' + T('per car') : ''));
       rowReturn.hidden = !hasReturn;
       if (ret) returnPrice.textContent = custom ? T('Quoted by hand') : money(ret.price);
+      rowDiscount.hidden = !hasReturn || custom;
+      if (ret && !custom) bdDiscount.textContent = '−' + money(discount);
       bdCars.textContent = cars + ' × ' + carFor(cars > 1 ? SEATS_PER_CAR : pax);
 
       var anyNight = out.night || (ret && ret.night);
@@ -264,7 +274,7 @@
 
       priceNote.textContent = (anyNight || isBigGroup ? T('Night / large-group rate') : T('Daytime rate'))
         + ' · ' + cars + ' ' + T(cars > 1 ? 'vehicles' : 'vehicle')
-        + (hasReturn ? ' · ' + T('return included') : '');
+        + (hasReturn ? ' · ' + T('return included') + ' −10%' : '');
 
       bdRest.textContent = custom ? '—' : money(Math.max(0, total - DEPOSIT));
     }

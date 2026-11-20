@@ -613,6 +613,12 @@ select.control{
   font-size:15px;color:var(--color--primary-1);font-weight:500;
   transition:transform .35s var(--ease--spring)}
 .swap svg{width:16px;height:16px;stroke:currentColor}
+.swap__bonus{
+  font-size:12px;font-weight:600;letter-spacing:.04em;
+  padding:3px 8px;border-radius:999px;
+  background:var(--color--primary-wash);color:var(--color--primary-1);
+}
+
 .swap:hover{transform:translateX(2px)}
 .swap:focus-visible{outline:3px solid var(--color--primary-soft);outline-offset:4px;border-radius:4px}
 
@@ -1930,6 +1936,7 @@ select.control{
                 aria-pressed="false" aria-expanded="false" aria-controls="returnRow-1">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
           <span data-el="returnLabel">Add return journey</span>
+          <span class="swap__bonus">−10%</span>
         </button>
 
         <div class="calc__row calc__row--return" id="returnRow-1" data-el="returnRow" hidden>
@@ -1963,7 +1970,7 @@ select.control{
           </div>
         </div>
 
-        <p class="calc__fineprint">Fixed rates are per vehicle for 1–4 passengers departing between 07:00 and 22:00. Departures outside those hours, or groups of 5–7, are charged at the higher night / large-group rate. Groups over 7 travel in additional vehicles. Every booking is assigned a Mercedes V-Class, or an equivalent vehicle where required.</p>
+        <p class="calc__fineprint">Fixed rates are per vehicle for 1–4 passengers departing between 07:00 and 22:00. Departures outside those hours, or groups of 5–7, are charged at the higher night / large-group rate. Groups over 7 travel in additional vehicles. Every booking is assigned a Mercedes V-Class, or an equivalent vehicle where required. Booking the outbound and return together takes 10% off the whole booking.</p>
       </div>
 
       <div class="calc__panel grain">
@@ -1981,6 +1988,7 @@ select.control{
           <li data-el="rowReturn" hidden><span>Return journey</span><b data-el="returnPrice">€300</b></li>
           <li><span>Vehicles required</span><b data-el="cars">1 × Mercedes V-Class</b></li>
           <li><span>Night / large-group rate</span><b data-el="surcharge">Not applied</b></li>
+          <li data-el="rowDiscount" hidden><span>Return discount</span><b data-el="discount">−€60</b></li>
           <li><span>Deposit to confirm</span><b>€30 or $35</b></li>
           <li><span>Payable after the ride</span><b data-el="rest">€270</b></li>
         </ul>
@@ -2644,6 +2652,7 @@ select.control{
                 aria-pressed="false" aria-expanded="false" aria-controls="returnRow-2">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
           <span data-el="returnLabel">Add return journey</span>
+          <span class="swap__bonus">−10%</span>
         </button>
 
         <div class="calc__row calc__row--return" id="returnRow-2" data-el="returnRow" hidden>
@@ -2677,7 +2686,7 @@ select.control{
           </div>
         </div>
 
-        <p class="calc__fineprint">Fixed rates are per vehicle for 1–4 passengers departing between 07:00 and 22:00. Departures outside those hours, or groups of 5–7, are charged at the higher night / large-group rate. Groups over 7 travel in additional vehicles. Every booking is assigned a Mercedes V-Class, or an equivalent vehicle where required.</p>
+        <p class="calc__fineprint">Fixed rates are per vehicle for 1–4 passengers departing between 07:00 and 22:00. Departures outside those hours, or groups of 5–7, are charged at the higher night / large-group rate. Groups over 7 travel in additional vehicles. Every booking is assigned a Mercedes V-Class, or an equivalent vehicle where required. Booking the outbound and return together takes 10% off the whole booking.</p>
       </div>
 
       <div class="calc__panel grain">
@@ -2695,6 +2704,7 @@ select.control{
           <li data-el="rowReturn" hidden><span>Return journey</span><b data-el="returnPrice">€300</b></li>
           <li><span>Vehicles required</span><b data-el="cars">1 × Mercedes V-Class</b></li>
           <li><span>Night / large-group rate</span><b data-el="surcharge">Not applied</b></li>
+          <li data-el="rowDiscount" hidden><span>Return discount</span><b data-el="discount">−€60</b></li>
           <li><span>Deposit to confirm</span><b>€30 or $35</b></li>
           <li><span>Payable after the ride</span><b data-el="rest">€270</b></li>
         </ul>
@@ -3054,6 +3064,11 @@ select.control{
      The card appears twice on the page, so every hook is scoped to its own root.
   ------------------------------------------------------------------- */
   var DAY_RATE = 1.5, NIGHT_RATE = 1.7, DEPOSIT = 30, SEATS_PER_CAR = 7;
+  /* Booking both legs at once saves the driver a dead-heading return, so it is
+     discounted. Applied to the two legs together, after any night or
+     large-group uplift, and rounded to the same 5 euro step as everything
+     else. */
+  var RETURN_DISCOUNT = 0.10;
 
   /* '€300' in English, '300 €' in German, Russian and Ukrainian. The pattern
      comes from the page, so the rule lives next to the other translations. */
@@ -3079,6 +3094,7 @@ select.control{
     var returnBtn = el('returnBtn'), returnRow = el('returnRow'), returnLabel = el('returnLabel'),
         retDate = el('retDate'), retTime = el('retTime'),
         rowReturn = el('rowReturn'), returnPrice = el('returnPrice'), baseLabel = el('baseLabel');
+    var rowDiscount = el('rowDiscount'), bdDiscount = el('discount');
 
     var reversed = false;
     var hasReturn = false;
@@ -3112,7 +3128,9 @@ select.control{
 
       var out = leg(timeInp.value);
       var ret = hasReturn ? leg(retTime.value) : null;
-      var total = out.price + (ret ? ret.price : 0);
+      var gross = out.price + (ret ? ret.price : 0);
+      var discount = ret ? Math.round((gross * RETURN_DISCOUNT) / 5) * 5 : 0;
+      var total = gross - discount;
 
       var typed  = custom ? otherDest.value.trim() : '';
       var endpoint = custom ? (typed || T('Other destination')) : opt.text;
@@ -3129,6 +3147,8 @@ select.control{
                                                : money(base) + (cars > 1 ? ' ' + T('per car') : ''));
       rowReturn.hidden = !hasReturn;
       if (ret) returnPrice.textContent = custom ? T('Quoted by hand') : money(ret.price);
+      rowDiscount.hidden = !hasReturn || custom;
+      if (ret && !custom) bdDiscount.textContent = '−' + money(discount);
       bdCars.textContent = cars + ' × ' + carFor(cars > 1 ? SEATS_PER_CAR : pax);
 
       var anyNight = out.night || (ret && ret.night);
@@ -3141,7 +3161,7 @@ select.control{
 
       priceNote.textContent = (anyNight || isBigGroup ? T('Night / large-group rate') : T('Daytime rate'))
         + ' · ' + cars + ' ' + T(cars > 1 ? 'vehicles' : 'vehicle')
-        + (hasReturn ? ' · ' + T('return included') : '');
+        + (hasReturn ? ' · ' + T('return included') + ' −10%' : '');
 
       bdRest.textContent = custom ? '—' : money(Math.max(0, total - DEPOSIT));
     }

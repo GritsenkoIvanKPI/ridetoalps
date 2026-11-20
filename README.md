@@ -219,8 +219,10 @@ anyone holding the token controls the bot.
 
 Fixed rates are per vehicle for 1–4 passengers departing 07:00–22:00. Departures outside
 those hours, or groups of 5–7, use the higher night / large-group rate. Groups over 7
-travel in additional vehicles. A €30 / $35 deposit confirms a booking and is refundable up
-to 48 hours before the date.
+travel in additional vehicles. Booking the outbound and return together takes
+**10% off the whole booking**, applied after any uplift and rounded to the
+nearest €5. A €30 / $35 deposit confirms a booking and is refundable up to
+48 hours before the date.
 
 ## Analytics and consent
 

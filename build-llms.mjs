@@ -23,6 +23,7 @@ import { SITE, LANGS } from './i18n/config.mjs';
 /* Kept in step with the calculator in index.html. If these drift, the answer an
    assistant gives stops matching the price the page shows. */
 const DAY_RATE = 1.5, NIGHT_RATE = 1.7, DEPOSIT_EUR = 30, DEPOSIT_USD = 35, SEATS_PER_CAR = 7;
+const RETURN_DISCOUNT = 0.10;
 const UPLIFT = NIGHT_RATE / DAY_RATE;
 
 const PHONE = '+1 470 752 9085';
@@ -57,6 +58,8 @@ delayed flight carries no waiting charge.
   groups of five or more, are charged at ${UPLIFT.toFixed(4).replace(/0+$/, '')}× the day rate, rounded to the
   nearest €5. With a group large enough to need a second vehicle, the uplift and
   the per-vehicle rate both apply.
+- **Return journeys**: booking both legs together takes ${RETURN_DISCOUNT * 100}% off the whole
+  booking.
 - **Deposit**: €${DEPOSIT_EUR} or $${DEPOSIT_USD} confirms a date. The balance is paid after the ride,
   in cash, by card with the driver, or online. The deposit is refunded in full
   if you cancel at least 48 hours ahead.
@@ -141,6 +144,9 @@ book. It covers 1–4 passengers on a departure between 07:00 and 22:00.
 - A return journey is priced as a second transfer, on its own departure time —
   so an evening flight home can attract the night rate even when the outbound
   did not.
+- Booking the outbound and return together takes **${RETURN_DISCOUNT * 100}% off the whole
+  booking**, applied to the two legs after any night or large-group uplift and
+  rounded to the nearest €5.
 - A deposit of €${DEPOSIT_EUR} or $${DEPOSIT_USD} confirms the date; the balance is paid after the ride.
 - Cancel 48 hours or more before the booked date and the deposit is refunded in
   full. Later than that, it is not refundable.

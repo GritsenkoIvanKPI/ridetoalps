@@ -66,14 +66,15 @@ export default {
   '1–2 bags': '1–2 чохли',
   '3–4 bags': '3–4 чохли',
   '5 or more': '5 і більше',
-  'Fixed rates are per vehicle for 1–4 passengers departing between 07:00 and 22:00. Departures outside those hours, or groups of 5–7, are charged at the higher night / large-group rate. Groups over 7 travel in additional vehicles. Every booking is assigned a Mercedes V-Class, or an equivalent vehicle where required.':
-    'Фіксовані тарифи вказані за автомобіль для 1–4 пасажирів при виїзді з 07:00 до 22:00. Виїзди поза цими годинами, а також групи з 5–7 осіб розраховуються за вищим нічним / груповим тарифом. Групи понад 7 осіб їдуть кількома автомобілями. На кожне бронювання подається Mercedes V-Class або рівноцінний автомобіль.',
+  'Fixed rates are per vehicle for 1–4 passengers departing between 07:00 and 22:00. Departures outside those hours, or groups of 5–7, are charged at the higher night / large-group rate. Groups over 7 travel in additional vehicles. Every booking is assigned a Mercedes V-Class, or an equivalent vehicle where required. Booking the outbound and return together takes 10% off the whole booking.':
+    'Фіксовані тарифи вказані за автомобіль для 1–4 пасажирів при виїзді з 07:00 до 22:00. Виїзди поза цими годинами, а також групи з 5–7 осіб розраховуються за вищим нічним / груповим тарифом. Групи понад 7 осіб їдуть кількома автомобілями. При бронюванні поїздки туди й назад разом — 10% знижки на все бронювання. На кожне бронювання подається Mercedes V-Class або рівноцінний автомобіль.',
   'Your quote': 'Ваш розрахунок',
   'total, per booking': 'усього за бронювання',
   'we reply within a couple of hours': 'відповідаємо протягом кількох годин',
   'Base route rate': 'Базова ціна маршруту',
   'Outbound journey': 'Поїздка туди',
   'Return journey': 'Зворотна поїздка',
+  'Return discount': 'Знижка за поїздку туди й назад',
   'Vehicles required': 'Потрібно автомобілів',
   '1 × Mercedes V-Class': '1 × Mercedes V-Class',
   'Night / large-group rate': 'Нічний / груповий тариф',

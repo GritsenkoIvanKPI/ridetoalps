@@ -66,14 +66,15 @@ export default {
   '1–2 bags': '1–2 чехла',
   '3–4 bags': '3–4 чехла',
   '5 or more': '5 и более',
-  'Fixed rates are per vehicle for 1–4 passengers departing between 07:00 and 22:00. Departures outside those hours, or groups of 5–7, are charged at the higher night / large-group rate. Groups over 7 travel in additional vehicles. Every booking is assigned a Mercedes V-Class, or an equivalent vehicle where required.':
-    'Фиксированные тарифы указаны за автомобиль для 1–4 пассажиров при выезде с 07:00 до 22:00. Выезды вне этого времени, а также группы из 5–7 человек рассчитываются по повышенному ночному / групповому тарифу. Группы более 7 человек едут на нескольких автомобилях. На каждую поездку подаётся Mercedes V-Class или равноценный автомобиль.',
+  'Fixed rates are per vehicle for 1–4 passengers departing between 07:00 and 22:00. Departures outside those hours, or groups of 5–7, are charged at the higher night / large-group rate. Groups over 7 travel in additional vehicles. Every booking is assigned a Mercedes V-Class, or an equivalent vehicle where required. Booking the outbound and return together takes 10% off the whole booking.':
+    'Фиксированные тарифы указаны за автомобиль для 1–4 пассажиров при выезде с 07:00 до 22:00. Выезды вне этого времени, а также группы из 5–7 человек рассчитываются по повышенному ночному / групповому тарифу. Группы более 7 человек едут на нескольких автомобилях. При бронировании поездки туда и обратно вместе — 10% скидки на всё бронирование. На каждую поездку подаётся Mercedes V-Class или равноценный автомобиль.',
   'Your quote': 'Ваш расчёт',
   'total, per booking': 'всего за бронирование',
   'we reply within a couple of hours': 'отвечаем в течение пары часов',
   'Base route rate': 'Базовая цена маршрута',
   'Outbound journey': 'Поездка туда',
   'Return journey': 'Обратная поездка',
+  'Return discount': 'Скидка за поездку туда и обратно',
   'Vehicles required': 'Требуется автомобилей',
   '1 × Mercedes V-Class': '1 × Mercedes V-Class',
   'Night / large-group rate': 'Ночной / групповой тариф',

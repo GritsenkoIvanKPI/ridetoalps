@@ -21,6 +21,8 @@ delayed flight carries no waiting charge.
   groups of five or more, are charged at 1.1333× the day rate, rounded to the
   nearest €5. With a group large enough to need a second vehicle, the uplift and
   the per-vehicle rate both apply.
+- **Return journeys**: booking both legs together takes 10% off the whole
+  booking.
 - **Deposit**: €30 or $35 confirms a date. The balance is paid after the ride,
   in cash, by card with the driver, or online. The deposit is refunded in full
   if you cancel at least 48 hours ahead.

@@ -77,14 +77,15 @@ export default {
   '1–2 bags': '1–2 Taschen',
   '3–4 bags': '3–4 Taschen',
   '5 or more': '5 oder mehr',
-  'Fixed rates are per vehicle for 1–4 passengers departing between 07:00 and 22:00. Departures outside those hours, or groups of 5–7, are charged at the higher night / large-group rate. Groups over 7 travel in additional vehicles. Every booking is assigned a Mercedes V-Class, or an equivalent vehicle where required.':
-    'Die Festpreise gelten pro Fahrzeug für 1–4 Personen bei Abfahrt zwischen 07:00 und 22:00 Uhr. Abfahrten außerhalb dieser Zeiten oder Gruppen von 5–7 Personen werden zum höheren Nacht- bzw. Gruppentarif berechnet. Gruppen über 7 Personen reisen in weiteren Fahrzeugen. Jede Buchung erhält einen Mercedes V-Klasse oder ein gleichwertiges Fahrzeug.',
+  'Fixed rates are per vehicle for 1–4 passengers departing between 07:00 and 22:00. Departures outside those hours, or groups of 5–7, are charged at the higher night / large-group rate. Groups over 7 travel in additional vehicles. Every booking is assigned a Mercedes V-Class, or an equivalent vehicle where required. Booking the outbound and return together takes 10% off the whole booking.':
+    'Die Festpreise gelten pro Fahrzeug für 1–4 Personen bei Abfahrt zwischen 07:00 und 22:00 Uhr. Abfahrten außerhalb dieser Zeiten oder Gruppen von 5–7 Personen werden zum höheren Nacht- bzw. Gruppentarif berechnet. Gruppen über 7 Personen reisen in weiteren Fahrzeugen. Wer Hin- und Rückfahrt zusammen bucht, erhält 10% auf die gesamte Buchung. Jede Buchung erhält einen Mercedes V-Klasse oder ein gleichwertiges Fahrzeug.',
   'Your quote': 'Ihr Angebot',
   'total, per booking': 'gesamt, pro Buchung',
   'we reply within a couple of hours': 'wir antworten innerhalb weniger Stunden',
   'Base route rate': 'Grundpreis der Strecke',
   'Outbound journey': 'Hinfahrt',
   'Return journey': 'Rückfahrt',
+  'Return discount': 'Rabatt Hin- und Rückfahrt',
   'Vehicles required': 'Benötigte Fahrzeuge',
   '1 × Mercedes V-Class': '1 × Mercedes V-Klasse',
   'Night / large-group rate': 'Nacht- / Gruppentarif',

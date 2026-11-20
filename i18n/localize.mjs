@@ -25,7 +25,7 @@ const TEXT_ATTRS = ['alt', 'aria-label', 'placeholder', 'title',
    bare numbers and prices, punctuation, the brand, vehicle models, phone
    numbers and e-mail addresses. */
 const NOT_TRANSLATABLE = new RegExp('^(?:' + [
-  '[\\s\\d.,:;·×€$%+\\-–—/()|©]*',          // punctuation, digits, currency marks
+  '[\\s\\d.,:;·×€$%+\\-–—−/()|©]*',         // punctuation, digits, currency marks
   '&[a-z]+;',                                // a lone entity
   'ridetoalps',
   '(?:EN|DE|RU|UK|MUC)',
