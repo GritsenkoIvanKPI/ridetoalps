@@ -1,5 +1,5 @@
 D3 — INDEXNOW, GOOGLE SEARCH CONSOLE, BING WEBMASTER TOOLS
-Знято: 2026-11-26 13:29 UTC
+Знято: 2026-11-26 14:50 UTC
 ======================================================================
 
 КЛЮЧ INDEXNOW
@@ -19,21 +19,22 @@ D3 — INDEXNOW, GOOGLE SEARCH CONSOLE, BING WEBMASTER TOOLS
 
 ПЕРЕВІРКА НА ОПУБЛІКОВАНОМУ ДОМЕНІ
 ----------------------------------------------------------------------
-  GET https://ridetoalps.com/<ключ>.txt  →  HTTP 404
-  вміст збігається з іменем файлу : ні
-
-  СТАН: файла ще немає на хостингу. Він створений у проєкті й
-  входить до складу вивантаження (build-deploy.mjs кладе його в корінь),
-  але та збірка ще не залита. Після заливки повторіть:
-      node indexnow.mjs
-  і цей самий скрипт перезапише цей файл із підтвердженням.
+  GET https://ridetoalps.com/<ключ>.txt  →  HTTP 200
+  вміст збігається з іменем файлу : так
 
 ТЕСТОВЕ НАДСИЛАННЯ
 ----------------------------------------------------------------------
-  key file at https://ridetoalps.com/<key>.txt : NOT USABLE (HTTP 404)
-  Upload the key file to the site root first, then run this again.
-  submitted 67 URLs → HTTP 403  Forbidden — the key file was not found or did not match
-  response body: {"errorCode":"UserForbiddedToAccessSite","message":"User is unauthorized to access the site. Please verify the site using the key and try again","details":null}
+  key file at https://ridetoalps.com/<key>.txt : reachable, contents match
+    api.indexnow.org   HTTP 403  Forbidden — ключ не знайдено або не збігається  {"errorCode":"UserForbiddedToAccessSite","message":"User is unauthorized to access the site. Please verify the site using the key and try again","details":null}
+    bing.com           HTTP 403  Forbidden — ключ не знайдено або не збігається  {"errorCode":"UserForbiddedToAccessSite","message":"User is unauthorized to access the site. Please verify the site using the key and try again","details":null}
+    yandex.com         HTTP 200  OK — прийнято  {
+    "success":true
+  }
+  
+  Надіслано 64 адрес.
+  Щонайменше один сервіс прийняв заявку — отже, ключ коректний.
+  Якщо інший відповідає 403, він, найімовірніше, звертався по ключ,
+  коли файла ще не було, і запамʼятав невдачу. Повторіть за добу.
 
   Коди відповіді IndexNow: 200 — прийнято; 202 — прийнято, ключ ще
   перевіряється; 403 — ключ не знайдено або не збігається.

@@ -15,7 +15,15 @@ import fs from 'fs';
 import crypto from 'crypto';
 
 const HOST = 'ridetoalps.com';
-const ENDPOINT = 'https://api.indexnow.org/indexnow';
+/* The three participating endpoints. Submitting to one is meant to be enough
+   — they share submissions — but they validate the key independently, so one
+   can accept while another refuses. Reporting each separately turns a bare
+   403 into something you can act on. */
+const ENDPOINTS = [
+  ['api.indexnow.org', 'https://api.indexnow.org/indexnow'],
+  ['bing.com',         'https://www.bing.com/indexnow'],
+  ['yandex.com',       'https://yandex.com/indexnow'],
+];
 
 let keyFile = fs.readdirSync('.').find((f) => /^[a-f0-9]{32}\.txt$/.test(f));
 
@@ -57,21 +65,34 @@ if (!probeOk) {
   console.log('Upload the key file to the site root first, then run this again.');
 }
 
-const res = await fetch(ENDPOINT, {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json; charset=utf-8' },
-  body: JSON.stringify({ host: HOST, key, keyLocation: `https://${HOST}/${keyFile}`, urlList: urls }),
-});
-
 const MEANING = {
-  200: 'OK — the URLs were accepted',
-  202: 'Accepted — URLs received, the key is still being validated',
-  400: 'Bad request — the JSON body is malformed',
-  403: 'Forbidden — the key file was not found or did not match',
-  422: 'Unprocessable — a URL does not belong to this host, or the key does not match the host',
-  429: 'Too many requests — slow down',
+  200: 'OK — прийнято',
+  202: 'Accepted — прийнято, ключ ще перевіряється',
+  400: 'Bad request — некоректний JSON',
+  403: 'Forbidden — ключ не знайдено або не збігається',
+  422: 'Unprocessable — адреса не належить цьому домену',
+  429: 'Too many requests',
 };
-console.log(`submitted ${urls.length} URLs → HTTP ${res.status}  ${MEANING[res.status] || ''}`);
-const body = (await res.text()).trim();
-if (body) console.log('response body: ' + body.slice(0, 400));
-process.exit(res.status === 200 || res.status === 202 ? 0 : 1);
+
+let anyOk = false;
+for (const [name, url] of ENDPOINTS) {
+  let status = 0, body = '';
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
+      body: JSON.stringify({ host: HOST, key, keyLocation: `https://${HOST}/${keyFile}`, urlList: urls }),
+    });
+    status = res.status;
+    body = (await res.text()).trim().slice(0, 200);
+  } catch (e) { body = e.message; }
+  if (status === 200 || status === 202) anyOk = true;
+  console.log(`  ${name.padEnd(18)} HTTP ${status}  ${MEANING[status] || ''}${body ? '  ' + body : ''}`);
+}
+console.log(`\nНадіслано ${urls.length} адрес.`);
+if (anyOk) {
+  console.log('Щонайменше один сервіс прийняв заявку — отже, ключ коректний.');
+  console.log('Якщо інший відповідає 403, він, найімовірніше, звертався по ключ,');
+  console.log('коли файла ще не було, і запамʼятав невдачу. Повторіть за добу.');
+}
+process.exit(anyOk ? 0 : 1);
