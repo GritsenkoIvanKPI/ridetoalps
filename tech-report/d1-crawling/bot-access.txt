@@ -1,0 +1,127 @@
+D1 — доступ ботів до https://ridetoalps.com/
+Знято: 2026-11-26 12:24 UTC
+Команда: curl -I -A "<user-agent>" https://ridetoalps.com/
+============================================================
+
+------------------------------------------------------------
+User-Agent: OAI-SearchBot
+------------------------------------------------------------
+HTTP/1.1 200 OK
+Server: Apache
+Cache-Control: no-cache, must-revalidate
+Vary: Accept-Encoding
+Content-Type: text/html
+
+------------------------------------------------------------
+User-Agent: ChatGPT-User
+------------------------------------------------------------
+HTTP/1.1 200 OK
+Server: Apache
+Cache-Control: no-cache, must-revalidate
+Vary: Accept-Encoding
+Content-Type: text/html
+
+------------------------------------------------------------
+User-Agent: GPTBot
+------------------------------------------------------------
+HTTP/1.1 200 OK
+Server: Apache
+Cache-Control: no-cache, must-revalidate
+Vary: Accept-Encoding
+Content-Type: text/html
+
+------------------------------------------------------------
+User-Agent: Claude-SearchBot
+------------------------------------------------------------
+HTTP/1.1 200 OK
+Server: Apache
+Cache-Control: no-cache, must-revalidate
+Vary: Accept-Encoding
+Content-Type: text/html
+
+------------------------------------------------------------
+User-Agent: ClaudeBot
+------------------------------------------------------------
+HTTP/1.1 200 OK
+Server: Apache
+Cache-Control: no-cache, must-revalidate
+Vary: Accept-Encoding
+Content-Type: text/html
+
+------------------------------------------------------------
+User-Agent: Claude-User
+------------------------------------------------------------
+HTTP/1.1 200 OK
+Server: Apache
+Cache-Control: no-cache, must-revalidate
+Vary: Accept-Encoding
+Content-Type: text/html
+
+------------------------------------------------------------
+User-Agent: PerplexityBot
+------------------------------------------------------------
+HTTP/1.1 200 OK
+Server: Apache
+Cache-Control: no-cache, must-revalidate
+Vary: Accept-Encoding
+Content-Type: text/html
+
+------------------------------------------------------------
+User-Agent: Googlebot
+------------------------------------------------------------
+HTTP/1.1 200 OK
+Server: Apache
+Cache-Control: no-cache, must-revalidate
+Vary: Accept-Encoding
+Content-Type: text/html
+
+------------------------------------------------------------
+User-Agent: Google-Extended
+------------------------------------------------------------
+HTTP/1.1 200 OK
+Server: Apache
+Cache-Control: no-cache, must-revalidate
+Vary: Accept-Encoding
+Content-Type: text/html
+
+------------------------------------------------------------
+User-Agent: Bingbot
+------------------------------------------------------------
+HTTP/1.1 200 OK
+Server: Apache
+Cache-Control: no-cache, must-revalidate
+Vary: Accept-Encoding
+Content-Type: text/html
+
+------------------------------------------------------------
+User-Agent: Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)
+------------------------------------------------------------
+HTTP/1.1 200 OK
+Server: Apache
+Cache-Control: no-cache, must-revalidate
+Vary: Accept-Encoding
+Content-Type: text/html
+
+============================================================
+Інші URL під Googlebot
+============================================================
+--- https://ridetoalps.com/routes/kitzbuehel.html
+HTTP/1.1 200 OK
+Content-Type: text/html
+
+--- https://ridetoalps.com/sitemap.xml
+HTTP/1.1 200 OK
+Content-Type: application/xml
+
+--- https://ridetoalps.com/llms.txt
+HTTP/1.1 200 OK
+Content-Type: text/plain
+
+--- https://ridetoalps.com/de/
+HTTP/1.1 200 OK
+Content-Type: text/html
+
+--- https://ridetoalps.com/blog.html
+HTTP/1.1 200 OK
+Content-Type: text/html
+

@@ -1,0 +1,91 @@
+{
+  "@context": "https://schema.org",
+  "inLanguage": "en-GB",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": "https://ridetoalps.com/routes/innsbruck.html#service",
+      "name": "Munich Airport to Innsbruck",
+      "serviceType": "Private airport transfer",
+      "provider": {
+        "@id": "https://ridetoalps.com/#business"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Innsbruck, Tyrol, Austria"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://ridetoalps.com/routes/innsbruck.html",
+        "price": "350",
+        "priceCurrency": "EUR",
+        "description": "Fixed price per vehicle for up to 4 passengers departing 07:00–22:00.",
+        "eligibleQuantity": {
+          "@type": "QuantitativeValue",
+          "minValue": 1,
+          "maxValue": 4,
+          "unitText": "passenger"
+        }
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is Innsbruck a good base for several resorts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is the best in Tyrol for it. The Olympia SkiWorld pass covers nine ski areas with free ski buses from the city, so you can stay in one hotel and ski somewhere different each day."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you collect from Innsbruck station or airport?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes — the fixed rate is the airport-to-Innsbruck run, and we will collect or drop at any address in the city including the Hauptbahnhof and Innsbruck airport."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does this route handle heavy snow?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Better than most. The A12 is a valley motorway kept clear as a national priority — there is no pass to cross. This is the route we are least likely to be delayed on."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can we stop at the Swarovski Kristallwelten on the way?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, it is right on the A12 at Wattens. A short stop is no problem — mention it when you book so the driver plans the timing."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://ridetoalps.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Routes",
+          "item": "https://ridetoalps.com/routes.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Munich Airport to Innsbruck"
+        }
+      ]
+    }
+  ]
+}

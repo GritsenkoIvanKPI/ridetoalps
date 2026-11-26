@@ -1,0 +1,150 @@
+# ridetoalps — https://ridetoalps.com
+#
+# Everything on this site is public and meant to be found: ten transfer routes
+# with fixed prices, in four languages. Search engines and AI assistants are
+# both welcome, and the named groups below say so explicitly rather than
+# relying on the default.
+#
+# A crawler obeys the FIRST group whose User-agent matches it, and it does not
+# fall through to the others — so each named group has to repeat Allow: / in
+# full. That is why this file is longer than it looks like it needs to be.
+
+# ----------------------------------------------------------------------------
+# Everyone not named below
+# ----------------------------------------------------------------------------
+User-agent: *
+Allow: /
+Disallow: /node_modules/
+Disallow: /temporary%20screenshots/
+
+# ----------------------------------------------------------------------------
+# Search engines
+# ----------------------------------------------------------------------------
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Storebot-Google
+Allow: /
+
+# Grounding and training for Gemini and AI Overviews. Absent, the default is
+# allow; named here so the intent survives anyone later adding a blanket rule.
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: msnbot
+Allow: /
+
+# Microsoft Copilot, which uses the Bing index
+User-agent: Bingbot-Extended
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Seznambot
+Allow: /
+
+# ----------------------------------------------------------------------------
+# AI assistants
+#
+# Three crawlers per vendor, doing different jobs: one builds the index, one
+# fetches a page because a user asked about it right now, and one collects
+# training data. A booking site wants all three — being quotable in an answer
+# is how a visitor finds it in the first place.
+# ----------------------------------------------------------------------------
+
+# OpenAI — ChatGPT
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic — Claude
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Meta AI
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+# Amazon, Mistral, Common Crawl, You.com, Cohere
+User-agent: Amazonbot
+Allow: /
+
+User-agent: MistralAI-User
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+# ----------------------------------------------------------------------------
+# Link previews — these fetch a single page to build a card, not to crawl
+# ----------------------------------------------------------------------------
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+User-agent: TelegramBot
+Allow: /
+
+# ----------------------------------------------------------------------------
+# Where everything is
+# ----------------------------------------------------------------------------
+# A plain-text summary of the service, its routes and its prices, for the
+# assistants that answer questions without opening a page:
+#   https://ridetoalps.com/llms.txt       short index
+#   https://ridetoalps.com/llms-full.txt  every route, rule and FAQ
+
+Sitemap: https://ridetoalps.com/sitemap.xml

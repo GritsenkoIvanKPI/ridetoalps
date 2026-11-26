@@ -30,4 +30,11 @@ deploy.zip
 
 # upload bundles — regenerate with build-deploy.mjs; never source
 update/
+update*/
 update.zip
+
+# IndexNow key. The protocol serves this file publicly from the site root, so
+# it guards nothing an attacker could not already fetch — but the client asked
+# that it not be circulated, and this repo is public. It lives on disk and in
+# the upload bundle, never here. Regenerate with: node indexnow.mjs --init
+[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f].txt

@@ -1,0 +1,157 @@
+D4 — ПОДІЇ GA4
+Джерело: http://localhost:3010
+Знято: 2026-11-26 12:35 UTC
+Property: G-39Y7WT9DKR      Google Ads: AW-18552391793
+
+Зафіксовано на двох рівнях:
+  • dataLayer — що саме сайт передає в gtag, з усіма параметрами;
+  • /collect  — що реально йде на сервери Google.
+GA4 надсилає події пакетами, тому мережевий зріз сам по собі неповний.
+==================================================================
+
+------------------------------------------------------------------
+1. Завантаження сторінки
+------------------------------------------------------------------
+  подія: quote_shown
+    route = "Munich Airport (MUC) → Kitzbühel"
+    destination = "Kitzbühel"
+    value = 300
+    currency = "EUR"
+    passengers = 3
+    vehicles = 1
+    return_journey = false
+    return_discount = 0
+    night_or_group_rate = false
+    page_path = "/"
+  подія: quote_shown
+    route = "Munich Airport (MUC) → Kitzbühel"
+    destination = "Kitzbühel"
+    value = 300
+    currency = "EUR"
+    passengers = 3
+    vehicles = 1
+    return_journey = false
+    return_discount = 0
+    night_or_group_rate = false
+    page_path = "/"
+
+------------------------------------------------------------------
+2. calc_started — перша взаємодія з калькулятором
+------------------------------------------------------------------
+  подія: calc_started
+    destination = "Kitzbühel"
+    page_path = "/"
+  подія: quote_shown
+    route = "Munich Airport (MUC) → Kitzbühel"
+    destination = "Kitzbühel"
+    value = 300
+    currency = "EUR"
+    passengers = 3
+    vehicles = 1
+    return_journey = false
+    return_discount = 0
+    night_or_group_rate = false
+    page_path = "/"
+
+------------------------------------------------------------------
+3. quote_shown — розрахунок в один бік
+------------------------------------------------------------------
+  подія: quote_shown
+    route = "Munich Airport (MUC) → Kitzbühel"
+    destination = "Kitzbühel"
+    value = 300
+    currency = "EUR"
+    passengers = 3
+    vehicles = 1
+    return_journey = false
+    return_discount = 0
+    night_or_group_rate = false
+    page_path = "/"
+
+------------------------------------------------------------------
+4. quote_shown — туди-назад, зі знижкою 10%
+------------------------------------------------------------------
+  подія: quote_shown
+    route = "Munich Airport (MUC) ⇄ Kitzbühel"
+    destination = "Kitzbühel"
+    value = 540
+    currency = "EUR"
+    passengers = 3
+    vehicles = 1
+    return_journey = true
+    return_discount = 60
+    night_or_group_rate = false
+    page_path = "/"
+
+------------------------------------------------------------------
+5. quote_shown — нічний тариф
+------------------------------------------------------------------
+  подія: quote_shown
+    route = "Munich Airport (MUC) ⇄ Kitzbühel"
+    destination = "Kitzbühel"
+    value = 575
+    currency = "EUR"
+    passengers = 3
+    vehicles = 1
+    return_journey = true
+    return_discount = 65
+    night_or_group_rate = true
+    page_path = "/"
+
+------------------------------------------------------------------
+6. whatsapp_click
+------------------------------------------------------------------
+  подія: whatsapp_click
+    link_url = "https://wa.me/19542392185"
+    link_text = "WhatsApp +1 954 239 2185"
+    page_path = "/"
+
+------------------------------------------------------------------
+7. phone_click
+------------------------------------------------------------------
+  подія: phone_click
+    link_url = "tel:+14707529085"
+    link_text = "+1 470 752 9085"
+    page_path = "/"
+
+------------------------------------------------------------------
+8. deposit_click — перехід на оплату PayPal
+------------------------------------------------------------------
+  подія: deposit_click
+    link_url = "https://www.paypal.com/ncp/payment/VRX7RQGVVUZ2Q"
+    page_path = "/"
+
+------------------------------------------------------------------
+9. Перехід з AI-асистента: ?utm_source=chatgpt.com
+------------------------------------------------------------------
+  (подій не зафіксовано)
+
+  адреса, яку отримала сторінка: ?utm_source=chatgpt.com&utm_medium=ai_referral
+  GA4 читає utm_source/utm_medium з адреси автоматично — окремого коду не потрібно.
+
+==================================================================
+ЩО ПРИЙНЯВ GOOGLE (запити до /collect)
+==================================================================
+  gtag.config                 2 запит(ів)   consent gcs=null
+  quote_shown                 21 запит(ів)   consent gcs=null
+  page_view                   4 запит(ів)   consent gcs=G111
+  calc_started                3 запит(ів)   consent gcs=null
+  whatsapp_click              3 запит(ів)   consent gcs=null
+  click_whatsapp              1 запит(ів)   consent gcs=G111
+  phone_click                 3 запит(ів)   consent gcs=null
+  click_phone                 1 запит(ів)   consent gcs=G111
+  deposit_click               2 запит(ів)   consent gcs=null
+
+==================================================================
+ПРИМІТКИ
+==================================================================
+• click_whatsapp і click_phone надходять із контейнера GTM-TC59WJXP —
+  вони налаштовані в самому GTM і дублюють наші whatsapp_click/phone_click.
+  Рекомендація: лишити одну пару, щоб не рахувати кліки двічі.
+• booking_request_submit не відтворюється автоматично: подія спрацьовує
+  лише після відповіді {ok:true} від send-form.php, тобто після реального
+  надсилання заявки в Telegram. Код наведено у звіті.
+• deposit_paid не реалізовано свідомо. Посилання PayPal веде на сайт
+  PayPal, і жодного сигналу про успішну оплату сторінка не отримує.
+  Клік — це не оплата, тому подія називається deposit_click. Для
+  deposit_paid потрібен return URL від PayPal або IPN/webhook на сервері.

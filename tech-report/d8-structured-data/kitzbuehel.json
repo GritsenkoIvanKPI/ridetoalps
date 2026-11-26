@@ -1,0 +1,99 @@
+{
+  "@context": "https://schema.org",
+  "inLanguage": "en-GB",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": "https://ridetoalps.com/routes/kitzbuehel.html#service",
+      "name": "Munich Airport to Kitzbühel",
+      "serviceType": "Private airport transfer",
+      "provider": {
+        "@id": "https://ridetoalps.com/#business"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Kitzbühel, Tyrol, Austria"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://ridetoalps.com/routes/kitzbuehel.html",
+        "price": "300",
+        "priceCurrency": "EUR",
+        "description": "Fixed price per vehicle for up to 4 passengers departing 07:00–22:00.",
+        "eligibleQuantity": {
+          "@type": "QuantitativeValue",
+          "minValue": 1,
+          "maxValue": 4,
+          "unitText": "passenger"
+        }
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How long does the drive really take in winter?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Around 1 h 50 on clear roads. On a peak Saturday in January, with changeover traffic through Wörgl and fresh snow on the final climb, 2 h 15 is more realistic. We plan for the worse case rather than the brochure figure."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you drop at the chalet or the town centre?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "At the door. Kitzbühel has a lot of narrow one-way streets in the old town — tell us the address when you book and we will work out the access rather than leaving you to drag cases across cobbles."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the Austrian vignette included?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The motorway vignette and every toll on the route are in the €300. The price you see is the price you pay."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you take us to the Hahnenkamm races?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, and we would book early. The race weekend in late January is the single busiest date of the Tyrolean year and our one-booking-per-day rule means the date goes to whoever confirms first."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What about ski and board bags?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "One bag per two people fits comfortably in a V-Class. Larger groups or unusual luggage — tell us and we will assign a car with a roof box."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://ridetoalps.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Routes",
+          "item": "https://ridetoalps.com/routes.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Munich Airport to Kitzbühel"
+        }
+      ]
+    }
+  ]
+}

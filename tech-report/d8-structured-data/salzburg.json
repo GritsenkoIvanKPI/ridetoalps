@@ -1,0 +1,91 @@
+{
+  "@context": "https://schema.org",
+  "inLanguage": "en-GB",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": "https://ridetoalps.com/routes/salzburg.html#service",
+      "name": "Munich Airport to Salzburg",
+      "serviceType": "Private airport transfer",
+      "provider": {
+        "@id": "https://ridetoalps.com/#business"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Salzburg, Salzburgerland, Austria"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://ridetoalps.com/routes/salzburg.html",
+        "price": "325",
+        "priceCurrency": "EUR",
+        "description": "Fixed price per vehicle for up to 4 passengers departing 07:00–22:00.",
+        "eligibleQuantity": {
+          "@type": "QuantitativeValue",
+          "minValue": 1,
+          "maxValue": 4,
+          "unitText": "passenger"
+        }
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why is Salzburg more expensive than Kitzbühel when it is closer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is a shorter drive but a longer day for the car — Salzburg pick-ups and drop-offs are concentrated in the city centre, where access and waiting take longer than a chalet door. The rate reflects the round trip, not just the kilometres."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you continue on to Zell am See or Saalbach?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes — those are separate routes and we price them individually. Choose \"Other destination\" in the calculator and tell us where, and we will come back with a fixed figure."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the old town accessible by car?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Partly. Much of the centre is pedestrianised and some hotels are only reachable on foot from a nearby drop-off point. We know which ones, and we will tell you before the day rather than on arrival."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the route cross a border?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, Germany into Austria at Walserberg. It is a Schengen crossing with no routine checks, though occasional spot controls happen. Bring your passport or ID card."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://ridetoalps.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Routes",
+          "item": "https://ridetoalps.com/routes.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Munich Airport to Salzburg"
+        }
+      ]
+    }
+  ]
+}

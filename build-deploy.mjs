@@ -64,6 +64,17 @@ const take = (f) => {
 PAGES.forEach(take);
 ROOT_FILES.forEach(take);
 
+/* The IndexNow key file is named after the key itself, so it cannot be a fixed
+   entry in the list above. It has to reach the site root or IndexNow rejects
+   every submission with 403. */
+const keyFiles = fs.readdirSync(".").filter(f => /^[a-f0-9]{32}\.txt$/.test(f));
+keyFiles.forEach(take);
+if (!keyFiles.length) {
+  console.warn("\n  WARNING: no IndexNow key file at the project root, so the bundle has none.");
+  console.warn("  Without it every IndexNow submission is rejected with 403.");
+  console.warn("  Create one with:  node indexnow.mjs --init\n");
+}
+
 // every local asset the pages link to, pulled straight out of the markup
 const html = PAGES.filter(p => fs.existsSync(p)).map(p => fs.readFileSync(p, 'utf8')).join('\n');
 const refs = new Set();

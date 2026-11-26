@@ -1,0 +1,147 @@
+D2 — ВМІСТ У ВИХІДНОМУ HTML (без виконання JavaScript)
+Знято: 2026-11-26 12:27 UTC
+
+Метод: curl завантажує рівно той HTML, який віддає сервер. Жоден із
+наведених нижче елементів не домальовується скриптами — усе це є у
+відповіді сервера, тому бот бачить це без рендерингу.
+================================================================
+
+================================================================
+https://ridetoalps.com/
+файл: d2-html/homepage.html    розмір: 172947 байт
+================================================================
+  title           : Munich Airport Transfers to the Alps &amp; Tyrol | ridetoalps
+  h1              : Private transfers from
+  canonical       : https://ridetoalps.com/
+  meta description: Private door-to-door transfers from Munich Airport to Kitzbühel, Innsbruck, Isch
+
+  Наявність елементів (кількість збігів у сирому HTML):
+      параграфів <p>      : 57
+      заголовків <h2>     : 11
+      питань FAQ          : 12
+      карток авто         : 5
+      цін у <option>      : 20
+      таблиця розрахунку  : 2
+      телефон +1 470…     : 2
+      e-mail              : 3
+      блоків JSON-LD      : 1
+
+  Команди із запиту:
+    grep -i "Kitzbühel" homepage.html   →  22 рядків
+    grep -i "300"       homepage.html   →  16 рядків
+
+  Ціни маршрутів, знайдені у HTML:
+    data-price="100" data-price="300" data-price="325" data-price="350" data-price="400" data-price="450" data-price="500" data-price="550" 
+
+================================================================
+https://ridetoalps.com/routes/kitzbuehel.html
+файл: d2-html/kitzbuehel.html    розмір: 60283 байт
+================================================================
+  title           : Munich Airport to Kitzbühel — private transfer from €300 | ridetoalps
+  h1              : Munich Airport to Kitzbühel
+  canonical       : https://ridetoalps.com/routes/kitzbuehel.html
+  meta description: Private door-to-door transfer from Munich Airport to Kitzbühel. 155 km, about 1 
+
+  Наявність елементів (кількість збігів у сирому HTML):
+      параграфів <p>      : 32
+      заголовків <h2>     : 12
+      питань FAQ          : 5
+      карток авто         : 5
+      цін у <option>      : 20
+      таблиця розрахунку  : 2
+      телефон +1 470…     : 2
+      e-mail              : 1
+      блоків JSON-LD      : 1
+
+  Команди із запиту:
+    grep -i "Kitzbühel" kitzbuehel.html   →  85 рядків
+    grep -i "300"       kitzbuehel.html   →  17 рядків
+
+  Ціни маршрутів, знайдені у HTML:
+    data-price="100" data-price="300" data-price="325" data-price="350" data-price="400" data-price="450" data-price="500" data-price="550" 
+
+================================================================
+https://ridetoalps.com/routes/salzburg.html
+файл: d2-html/salzburg.html    розмір: 59321 байт
+================================================================
+  title           : Munich Airport to Salzburg — private transfer from €325 | ridetoalps
+  h1              : Munich Airport to Salzburg
+  canonical       : https://ridetoalps.com/routes/salzburg.html
+  meta description: Private door-to-door transfer from Munich Airport to Salzburg. 145 km, about 1 h
+
+  Наявність елементів (кількість збігів у сирому HTML):
+      параграфів <p>      : 31
+      заголовків <h2>     : 12
+      питань FAQ          : 4
+      карток авто         : 5
+      цін у <option>      : 20
+      таблиця розрахунку  : 2
+      телефон +1 470…     : 2
+      e-mail              : 1
+      блоків JSON-LD      : 1
+
+  Команди із запиту:
+    grep -i "Kitzbühel" salzburg.html   →  10 рядків
+    grep -i "300"       salzburg.html   →  10 рядків
+
+  Ціни маршрутів, знайдені у HTML:
+    data-price="100" data-price="300" data-price="325" data-price="350" data-price="400" data-price="450" data-price="500" data-price="550" 
+
+================================================================
+https://ridetoalps.com/routes/innsbruck.html
+файл: d2-html/innsbruck.html    розмір: 59189 байт
+================================================================
+  title           : Munich Airport to Innsbruck — private transfer from €350 | ridetoalps
+  h1              : Munich Airport to Innsbruck
+  canonical       : https://ridetoalps.com/routes/innsbruck.html
+  meta description: Private door-to-door transfer from Munich Airport to Innsbruck. 160 km, about 1 
+
+  Наявність елементів (кількість збігів у сирому HTML):
+      параграфів <p>      : 31
+      заголовків <h2>     : 12
+      питань FAQ          : 4
+      карток авто         : 5
+      цін у <option>      : 20
+      таблиця розрахунку  : 2
+      телефон +1 470…     : 2
+      e-mail              : 1
+      блоків JSON-LD      : 1
+
+  Команди із запиту:
+    grep -i "Kitzbühel" innsbruck.html   →  8 рядків
+    grep -i "300"       innsbruck.html   →  10 рядків
+
+  Ціни маршрутів, знайдені у HTML:
+    data-price="100" data-price="300" data-price="325" data-price="350" data-price="400" data-price="450" data-price="500" data-price="550" 
+
+================================================================
+ВИТЯГ: ціни у <option> головної сторінки (сирий HTML)
+================================================================
+  <option value="muc-city" data-price="100">Munich city / hotel
+  <option value="kitzbuehel" data-price="300" selected>Kitzbühel
+  <option value="salzburg" data-price="325">Salzburg
+  <option value="innsbruck" data-price="350">Innsbruck
+  <option value="ischgl" data-price="400">Ischgl
+  <option value="soelden" data-price="450">Sölden
+  <option value="st-anton" data-price="500">St. Anton am Arlberg
+  <option value="st-moritz" data-price="550">St. Moritz
+  <option value="bolzano" data-price="550">Bolzano region
+  <option value="bormio" data-price="550">Bormio / Livigno
+  <option value="muc-city" data-price="100">Munich city / hotel
+  <option value="kitzbuehel" data-price="300" selected>Kitzbühel
+  <option value="salzburg" data-price="325">Salzburg
+  <option value="innsbruck" data-price="350">Innsbruck
+  <option value="ischgl" data-price="400">Ischgl
+  <option value="soelden" data-price="450">Sölden
+  <option value="st-anton" data-price="500">St. Anton am Arlberg
+  <option value="st-moritz" data-price="550">St. Moritz
+  <option value="bolzano" data-price="550">Bolzano region
+  <option value="bormio" data-price="550">Bormio / Livigno
+
+================================================================
+ВИТЯГ: перше питання FAQ зі сторінки Kitzbühel (сирий HTML)
+================================================================
+          <button class="qa__q" type="button" aria-expanded="false">How long does the drive really take in winter?
+            <span class="qa__ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span>
+          </button>
+          <div class="qa__a"><p>Around 1 h 50 on clear roads. On a peak Saturday in January, with changeover traffic through Wörgl and fresh snow on the final climb, 2 h 15 is more realistic. We plan for the worse case rather than the brochure figure.</p></div>

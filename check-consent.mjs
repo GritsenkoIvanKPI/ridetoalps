@@ -31,6 +31,16 @@ const PAGES = ['/', '/de/', '/blog.html', '/routes/kitzbuehel.html'];
 const b = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox'] });
 let problems = 0;
 
+/** Resolves as soon as `cond` holds, or after `limit` ms either way. */
+const waitFor = async (cond, limit) => {
+  const until = Date.now() + limit;
+  while (Date.now() < until) {
+    if (await cond()) return true;
+    await new Promise(r => setTimeout(r, 100));
+  }
+  return false;
+};
+
 const watch = (p, seen) => p.on('request', (r) => {
   const u = r.url();
   if (/googletagmanager\.com\/(gtm|gtag)/.test(u)) seen.scripts.add(u.includes('gtm.js') ? 'gtm' : 'gtag');
@@ -48,7 +58,12 @@ for (const page of PAGES) {
 
   // --- first visit: measurement should already be running ---
   await p.goto(BASE + page, { waitUntil: 'networkidle2', timeout: 60000 });
-  await new Promise(r => setTimeout(r, 2000));
+  /* Wait for the evidence, not for the clock. gtag loads async and sends the
+     page view a second or two later, and how long it takes depends on the
+     weight of the page it is sitting in — a fixed sleep that is comfortable on
+     one page reports a false failure on a heavier one. */
+  await waitFor(() => seen.gcs.length > 0, 15000);
+  await waitFor(async () => (await p.cookies()).some(c => /^_ga|^_gcl/.test(c.name)), 5000);
 
   if (seen.scripts.size < 2) fail(`Google scripts did not load (${[...seen.scripts].join(',') || 'none'})`);
   const first = [...new Set(seen.gcs)];
@@ -75,7 +90,9 @@ for (const page of PAGES) {
   seen.gcs.length = 0;
   await p.deleteCookie(...(await p.cookies()));
   await p.goto(BASE + page, { waitUntil: 'networkidle2', timeout: 60000 });
-  await new Promise(r => setTimeout(r, 2000));
+  /* The opposite case: here the claim is that nothing arrives, so there is
+     nothing to wait for. Give any leak a generous window to show itself. */
+  await new Promise(r => setTimeout(r, 6000));
   const back = [...new Set(seen.gcs)];
   if (back.some(g => g !== 'G100')) fail(`after opting out, the return visit signalled ${back.join(',')} — the opt-out leaks`);
   const cookies2 = (await p.cookies()).filter(c => /^_ga|^_gcl/.test(c.name));

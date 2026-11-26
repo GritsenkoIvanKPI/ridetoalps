@@ -1205,8 +1205,10 @@ select.control{
   },
   {
    "@type": [
+    "TaxiService",
     "LimousineService",
-    "LocalBusiness"
+    "LocalBusiness",
+    "Organization"
    ],
    "@id": "https://ridetoalps.com/#business",
    "name": "ridetoalps",
@@ -2280,7 +2282,7 @@ select.control{
 <section class="section-spacing--tight">
   <div class="container">
     <div class="cta grain reveal">
-      <picture><source srcset="images/cta.avif" type="image/avif"><source srcset="images/cta.webp" type="image/webp"><img src="images/cta.jpg" alt="Snowy alpine valley road at blue hour" loading="lazy" width="1376" height="768" decoding="async"></picture>
+      <picture><source sizes="100vw" srcset="images/cta-600.avif 600w, images/cta-800.avif 800w, images/cta.avif 1376w" type="image/avif"><source sizes="100vw" srcset="images/cta-600.webp 600w, images/cta-800.webp 800w, images/cta.webp 1376w" type="image/webp"><img src="images/cta.jpg" sizes="100vw" srcset="images/cta-600.jpg 600w, images/cta-800.jpg 800w, images/cta.jpg 1376w" alt="Snowy alpine valley road at blue hour" loading="lazy" width="1376" height="768"></picture>
       <div class="cta__inner">
         <h2>Your dream. Your time. Your ride.</h2>
         <p>We take one booking per day, so if your flight lands three hours late, the car is still there — no extra waiting fee, no rush to the next job.</p>
@@ -2885,6 +2887,38 @@ select.control{
     return T(s).replace(/\{(\w+)\}/g, function(_, k){ return vars[k] == null ? '' : vars[k]; });
   }
 
+  /* ---------- GA4 events ----------
+     Named exactly as the specification lists them, so a report can be read
+     against it without translation. Everything goes through gtag, which the
+     head has already defined; the guard is for the case where an ad blocker
+     has removed it, so a missing analytics script can never break a booking.
+
+     deposit_paid is deliberately absent. The PayPal link leaves the site and
+     PayPal tells us nothing on the way back, so a click is the last thing this
+     page can honestly observe — and a click is not a payment. It is reported
+     as deposit_click. Measuring deposit_paid needs a PayPal return URL or an
+     IPN/webhook that the server can verify. */
+  function gaEvent(name, params) {
+    try {
+      if (typeof gtag === 'function') gtag('event', name, params || {});
+    } catch (e) {}
+  }
+
+  /* Outbound contact clicks, caught once for the whole page rather than bound
+     per link — the footer, the hero and the contact cards all carry them. */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    if (href.indexOf('wa.me') > -1) {
+      gaEvent('whatsapp_click', { link_url: href, link_text: a.innerText.trim().slice(0, 60), page_path: location.pathname });
+    } else if (href.indexOf('tel:') === 0) {
+      gaEvent('phone_click', { link_url: href, link_text: a.innerText.trim().slice(0, 60), page_path: location.pathname });
+    } else if (href.indexOf('paypal.com') > -1) {
+      gaEvent('deposit_click', { link_url: href, page_path: location.pathname });
+    }
+  }, true);
+
   /* ---------- year ---------- */
   document.getElementById('yr').textContent = new Date().getFullYear();
 
@@ -3096,6 +3130,10 @@ select.control{
         rowReturn = el('rowReturn'), returnPrice = el('returnPrice'), baseLabel = el('baseLabel');
     var rowDiscount = el('rowDiscount'), bdDiscount = el('discount');
 
+    /* quote_shown fires on a settled quote, not on every keystroke: the
+       calculator recomputes on each input event, and an event per character
+       would bury the real ones. calc_started fires once per calculator. */
+    var started = false, quoteTimer = null;
     var reversed = false;
     var hasReturn = false;
 
@@ -3164,6 +3202,25 @@ select.control{
         + (hasReturn ? ' · ' + T('return included') + ' −10%' : '');
 
       bdRest.textContent = custom ? '—' : money(Math.max(0, total - DEPOSIT));
+
+      /* ---- GA4 ---- */
+      if (!custom) {
+        clearTimeout(quoteTimer);
+        var snapshot = {
+          route: routeLabel.textContent,
+          destination: opt.text,
+          value: total,
+          currency: 'EUR',
+          passengers: pax,
+          vehicles: cars,
+          return_journey: hasReturn,
+          return_discount: discount,
+          night_or_group_rate: !!(anyNight || isBigGroup),
+          page_path: location.pathname
+        };
+        quoteTimer = setTimeout(function () { gaEvent('quote_shown', snapshot); }, 700);
+      }
+
     }
 
     /* return journey toggle */
@@ -3201,6 +3258,23 @@ select.control{
       node.addEventListener('change', function(){ syncReturnMin(); calc(); });
       node.addEventListener('input', calc);
     });
+
+    /* the first time the visitor touches any control */
+    function markStarted() {
+      if (started) return;
+      started = true;
+      gaEvent('calc_started', {
+        destination: toSel.options[toSel.selectedIndex].text,
+        page_path: location.pathname
+      });
+    }
+    [toSel, fromSel, timeInp, paxSel, dateInp, retDate, retTime, skiSel, otherDest, returnBtn, swapBtn]
+      .forEach(function (node) {
+        if (node) node.addEventListener('change', markStarted);
+        if (node) node.addEventListener('input', markStarted);
+        if (node) node.addEventListener('click', markStarted);
+      });
+
 
     /* Reversing has to move the selects themselves, not just relabel the quote:
        the From column must always hold the origin. The nodes are reordered
@@ -3318,6 +3392,15 @@ select.control{
           var safe = function(v){ return String(v == null ? '' : v).replace(/[<>&"]/g, ''); };
           var ref  = safe(r.payload.ref);
           var pay  = r.payload.pay_url || '';
+
+          gaEvent('booking_request_submit', {
+            route: routeLabel.textContent,
+            value: priceValue.textContent,
+            booking_reference: ref,
+            return_journey: hasReturn,
+            page_path: location.pathname
+          });
+
 
           var html = F('Thank you, {name}. We have your request for <b>{route}</b> on {date} at {time}', {
             name: safe(name), route: routeLabel.textContent,

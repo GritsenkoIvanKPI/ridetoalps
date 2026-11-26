@@ -24,6 +24,7 @@ import { SITE, LANGS, byCode, urlFor } from './i18n/config.mjs';
 import { alternates } from './i18n/picker.mjs';
 import { header } from './i18n/nav.mjs';
 import { languageContext } from './build-routes.mjs';
+import { styleTag } from './inline-css.mjs';
 
 const home = fs.readFileSync('index.html', 'utf8');
 const GTAG = (() => {
@@ -106,7 +107,7 @@ function ctaBlock(b, t) {
 <section class="section-spacing--tight">
   <div class="container">
     <div class="cta grain reveal">
-      <picture><source srcset="/images/cta.avif" type="image/avif"><source srcset="/images/cta.webp" type="image/webp"><img src="/images/cta.jpg" alt="" loading="lazy" width="1376" height="768"></picture>
+      <picture><source sizes="100vw" srcset="/images/cta-600.avif 600w, /images/cta-800.avif 800w, /images/cta.avif 1376w" type="image/avif"><source sizes="100vw" srcset="/images/cta-600.webp 600w, /images/cta-800.webp 800w, /images/cta.webp 1376w" type="image/webp"><img src="/images/cta.jpg" sizes="100vw" srcset="/images/cta-600.jpg 600w, /images/cta-800.jpg 800w, /images/cta.jpg 1376w" alt="" loading="lazy" width="1376" height="768"></picture>
       <div class="cta__inner">
         <h2>${esc(t.blogCtaHead)}</h2>
         <p>${esc(t.blogCtaText)}</p>
@@ -154,7 +155,7 @@ ${alternates(url)}
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="/route.css">
+${styleTag}
 <script src="/consent.js" defer></script>
 <script type="application/ld+json">${JSON.stringify(ld)}</script>
 ${extraHead}</head>

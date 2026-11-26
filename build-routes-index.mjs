@@ -17,6 +17,7 @@ import { SITE, LANGS, urlFor } from './i18n/config.mjs';
 import { langPicker, alternates } from './i18n/picker.mjs';
 import { header } from './i18n/nav.mjs';
 import { languageContext } from './build-routes.mjs';
+import { styleTag } from './inline-css.mjs';
 
 const home = fs.readFileSync('index.html', 'utf8');
 const GTAG = (() => {
@@ -120,7 +121,7 @@ ${alternates(url)}
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="/route.css">
+${styleTag}
 <script src="/consent.js" defer></script>
 <script type="application/ld+json">${JSON.stringify(ld)}</script>
 </head>

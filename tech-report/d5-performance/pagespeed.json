@@ -1,0 +1,132 @@
+{
+  "live": [
+    {
+      "name": "homepage",
+      "url": "https://ridetoalps.com/",
+      "perf": 85,
+      "a11y": 100,
+      "bp": 75,
+      "seo": 100,
+      "lcp": 4210.1720000000005,
+      "cls": 0,
+      "tbt": 145,
+      "fcp": 1335.3793999999998,
+      "ttfb": 102.53999999999996,
+      "perfRange": [
+        79,
+        97
+      ],
+      "lcpRange": [
+        1882.05494,
+        5266.790475
+      ]
+    },
+    {
+      "name": "kitzbuehel",
+      "url": "https://ridetoalps.com/routes/kitzbuehel.html",
+      "perf": 86,
+      "a11y": 100,
+      "bp": 75,
+      "seo": 100,
+      "lcp": 4039.4147,
+      "cls": 0,
+      "tbt": 68,
+      "fcp": 1252.3337999999999,
+      "ttfb": 96.047,
+      "perfRange": [
+        81,
+        87
+      ],
+      "lcpRange": [
+        4039.303900000001,
+        5071.982174999999
+      ]
+    },
+    {
+      "name": "salzburg",
+      "url": "https://ridetoalps.com/routes/salzburg.html",
+      "perf": 81,
+      "a11y": 100,
+      "bp": 75,
+      "seo": 100,
+      "lcp": 4934.074049999999,
+      "cls": 0,
+      "tbt": 88,
+      "fcp": 1091.4928,
+      "ttfb": 96.001,
+      "perfRange": [
+        80,
+        82
+      ],
+      "lcpRange": [
+        4692.599249999999,
+        5096.60116
+      ]
+    }
+  ],
+  "local": [
+    {
+      "name": "homepage",
+      "url": "http://localhost:3010/",
+      "perf": 97,
+      "a11y": 100,
+      "bp": 79,
+      "seo": 100,
+      "lcp": 2327.4756500000003,
+      "cls": 0,
+      "tbt": 83.5,
+      "fcp": 1801.9762,
+      "ttfb": 3.27,
+      "perfRange": [
+        96,
+        98
+      ],
+      "lcpRange": [
+        2254.8747000000003,
+        2327.9826999999996
+      ]
+    },
+    {
+      "name": "kitzbuehel",
+      "url": "http://localhost:3010/routes/kitzbuehel.html",
+      "perf": 99,
+      "a11y": 100,
+      "bp": 75,
+      "seo": 100,
+      "lcp": 1652.3952,
+      "cls": 0,
+      "tbt": 86.5,
+      "fcp": 1254.6700000000003,
+      "ttfb": 2.638,
+      "perfRange": [
+        99,
+        99
+      ],
+      "lcpRange": [
+        1652.2815,
+        1652.6748000000002
+      ]
+    },
+    {
+      "name": "salzburg",
+      "url": "http://localhost:3010/routes/salzburg.html",
+      "perf": 99,
+      "a11y": 100,
+      "bp": 75,
+      "seo": 100,
+      "lcp": 1652.6574,
+      "cls": 0,
+      "tbt": 123.5,
+      "fcp": 1417.2194,
+      "ttfb": 2.6390000000000002,
+      "perfRange": [
+        98,
+        99
+      ],
+      "lcpRange": [
+        1652.2289999999998,
+        1652.78535
+      ]
+    }
+  ]
+}

@@ -26,6 +26,7 @@ import { localize } from './i18n/localize.mjs';
 import { loadMap, loadUi } from './i18n/load.mjs';
 import { langPicker, alternates } from './i18n/picker.mjs';
 import { header } from './i18n/nav.mjs';
+import { styleTag } from './inline-css.mjs';
 
 const PHONE = '+14707529085', PHONE_FMT = '+1 470 752 9085';
 const WA = '19542392185', WA_FMT = '+1 954 239 2185';
@@ -79,13 +80,32 @@ const ICONS = [
   '<path d="M5 12.5a9 9 0 0 1 14 0M8 16a5 5 0 0 1 8 0"/><circle cx="12" cy="19.5" r="1.1"/>',
 ];
 
-/** <picture> with the avif/webp variants that build-images produced. */
-function pic(jpg, alt, cls, extra = '') {
+/** <picture> with the avif/webp variants that build-images produced.
+ *
+ *  `sized` names the narrower widths that exist on disk for this image. Pass
+ *  it and the browser picks one; leave it off and every visitor downloads the
+ *  original. That matters most where a wide photograph is shown small: the CTA
+ *  band and the town photograph are both about 370px across on a 412px screen,
+ *  and the full-width file costs ~50-100KB more than the 800px one nobody can
+ *  tell apart. The last entry is the original, for desktop. */
+function pic(jpg, alt, cls, extra = '', sized = null) {
   const base = jpg.replace(/\.jpg$/, '');
-  return `<picture><source srcset="${base}.avif" type="image/avif">` +
-         `<source srcset="${base}.webp" type="image/webp">` +
-         `<img src="${jpg}" alt="${esc(alt)}"${cls ? ` class="${cls}"` : ''} ${extra}></picture>`;
+  const set = (ext) => sized
+    ? sized.widths.map((w) => `${base}-${w}.${ext} ${w}w`).join(', ') +
+      `, ${base}.${ext} ${sized.full}w`
+    : `${base}.${ext}`;
+  const sizes = sized ? ` sizes="${sized.sizes}"` : '';
+  const imgSet = sized ? ` srcset="${set('jpg')}"` : '';
+  return `<picture><source${sizes} srcset="${set('avif')}" type="image/avif">` +
+         `<source${sizes} srcset="${set('webp')}" type="image/webp">` +
+         `<img src="${jpg}"${sizes}${imgSet} alt="${esc(alt)}"${cls ? ` class="${cls}"` : ''} ${extra}></picture>`;
 }
+
+/* The two images the route pages show far smaller than they are stored.
+   .rsplit collapses to one column at 1180px, so below that the town photo
+   fills the content column and above it takes the narrower .95fr track. */
+const TOWN_SIZED = { widths: [600, 800], full: 1200, sizes: '(max-width:1180px) 100vw, 660px' };
+const CTA_SIZED  = { widths: [600, 800], full: 1376, sizes: '100vw' };
 
 /* The route hero spans the viewport, so a phone is handed a 1376px photograph
    it can only show at about 400 — and on a throttled CPU the AVIF decode of
@@ -128,7 +148,9 @@ function page(r, all, L) {
       // operator instead of ten lookalike companies
       { '@type': 'Service', '@id': SITE + url(code) + '#service',
         name: r.h1, serviceType: t.serviceType,
-        provider: { '@id': SITE + '/#business' },
+        provider: { '@id': SITE + '/#business',
+                    '@type': ['TaxiService', 'Organization'],
+                    name: 'ridetoalps', url: SITE + '/' },
         areaServed: { '@type': 'Place', name: `${r.dest}, ${r.region}` },
         offers: { '@type': 'Offer', url: SITE + url(code),
                   price: String(r.price), priceCurrency: 'EUR',
@@ -205,7 +227,7 @@ ${alternates(url)}
 <!-- imagesrcset must match the <source> in the hero exactly, or the preload
      fetches a width the picture then ignores -->
 <link rel="preload" as="image" type="image/avif" fetchpriority="high" imagesizes="${HERO_SIZES}" imagesrcset="${heroSet('/' + r.hero.replace(/\.jpg$/, ''), 'avif')}">
-<link rel="stylesheet" href="/route.css">
+${styleTag}
 <script src="/consent.js" defer></script>
 <script type="application/ld+json">${JSON.stringify(ld)}</script>
 </head>
@@ -252,7 +274,7 @@ ${calc}
 <section class="section-spacing--tight">
   <div class="container">
     <div class="cta grain reveal">
-      ${pic('/images/cta.jpg', M('Snowy alpine valley road at blue hour'), '', 'loading="lazy" width="1376" height="768"')}
+      ${pic('/images/cta.jpg', M('Snowy alpine valley road at blue hour'), '', 'loading="lazy" width="1376" height="768"', CTA_SIZED)}
       <div class="cta__inner">
         <h2>${esc(M('One booking a day, and it is yours'))}</h2>
         <p>${esc(M('We do not stack jobs. On your date the car and driver are yours alone, which is why a delayed flight costs you nothing.'))}</p>
@@ -274,7 +296,7 @@ ${calc}
         <p>${esc(r.road)}</p>
         <div class="rnote">${esc(r.roadNote)}</div>
       </div>
-      <div class="rsplit__media reveal">${pic('/' + r.town, r.townAlt, '', 'loading="lazy" width="1200" height="900"')}</div>
+      <div class="rsplit__media reveal">${pic('/' + r.town, r.townAlt, '', 'loading="lazy" width="1200" height="900"', TOWN_SIZED)}</div>
     </div>
   </div>
 </section>

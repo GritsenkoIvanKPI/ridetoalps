@@ -1,0 +1,4 @@
+homepage     9317 символів тексту, h2:11 p:57 FAQ:12 цін:20  h1="Private transfers from Munich to the Alps"
+kitzbuehel   7935 символів тексту, h2:12 p:32 FAQ:5 цін:20  h1="Munich Airport to Kitzbühel"
+salzburg     7634 символів тексту, h2:12 p:31 FAQ:4 цін:20  h1="Munich Airport to Salzburg"
+innsbruck    7568 символів тексту, h2:12 p:31 FAQ:4 цін:20  h1="Munich Airport to Innsbruck"

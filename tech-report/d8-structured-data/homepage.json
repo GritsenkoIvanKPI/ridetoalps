@@ -1,0 +1,521 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://ridetoalps.com/#website",
+      "url": "https://ridetoalps.com/",
+      "name": "ridetoalps",
+      "description": "Private transfers from Munich Airport to the Alps.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://ridetoalps.com/#business"
+      }
+    },
+    {
+      "@type": [
+        "LimousineService",
+        "LocalBusiness"
+      ],
+      "@id": "https://ridetoalps.com/#business",
+      "name": "ridetoalps",
+      "url": "https://ridetoalps.com/",
+      "description": "Licensed private transfer service running door-to-door rides between Munich Airport and the alpine valleys of Austria, Switzerland and Italy. Fixed per-vehicle prices, a €30 or $35 deposit to book, flight tracking and 24/7 contact.",
+      "image": "https://ridetoalps.com/images/og-cover.jpg",
+      "logo": "https://ridetoalps.com/icon-512.png",
+      "telephone": "+1-470-752-9085",
+      "email": "hello@ridetoalps.com",
+      "priceRange": "€100–€550",
+      "currenciesAccepted": "EUR",
+      "paymentAccepted": "Cash, Credit Card, Online payment",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "opens": "00:00",
+          "closes": "23:59"
+        }
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Munich",
+        "addressCountry": "DE"
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Munich"
+        },
+        {
+          "@type": "City",
+          "name": "Kitzbühel"
+        },
+        {
+          "@type": "City",
+          "name": "Innsbruck"
+        },
+        {
+          "@type": "City",
+          "name": "Salzburg"
+        },
+        {
+          "@type": "City",
+          "name": "Ischgl"
+        },
+        {
+          "@type": "City",
+          "name": "Sölden"
+        },
+        {
+          "@type": "City",
+          "name": "St. Anton am Arlberg"
+        },
+        {
+          "@type": "City",
+          "name": "St. Moritz"
+        },
+        {
+          "@type": "City",
+          "name": "Bolzano"
+        },
+        {
+          "@type": "City",
+          "name": "Bormio"
+        },
+        {
+          "@type": "City",
+          "name": "Livigno"
+        }
+      ],
+      "knowsLanguage": [
+        "en",
+        "de",
+        "uk",
+        "ru"
+      ],
+      "makesOffer": [
+        {
+          "@type": "Offer",
+          "name": "Munich Airport → Munich city / hotel",
+          "price": "100",
+          "priceCurrency": "EUR",
+          "description": "Fixed price per vehicle for up to 4 passengers departing 07:00–22:00.",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Private transfer Munich Airport to Munich city / hotel",
+            "serviceType": "Airport transfer",
+            "@id": "https://ridetoalps.com/routes/munich-city.html#service"
+          },
+          "url": "https://ridetoalps.com/routes/munich-city.html",
+          "eligibleQuantity": {
+            "@type": "QuantitativeValue",
+            "minValue": 1,
+            "maxValue": 4,
+            "unitText": "passenger"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Munich Airport → Kitzbühel",
+          "price": "300",
+          "priceCurrency": "EUR",
+          "description": "Fixed price per vehicle for up to 4 passengers departing 07:00–22:00.",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Private transfer Munich Airport to Kitzbühel",
+            "serviceType": "Airport transfer",
+            "@id": "https://ridetoalps.com/routes/kitzbuehel.html#service"
+          },
+          "url": "https://ridetoalps.com/routes/kitzbuehel.html",
+          "eligibleQuantity": {
+            "@type": "QuantitativeValue",
+            "minValue": 1,
+            "maxValue": 4,
+            "unitText": "passenger"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Munich Airport → Salzburg",
+          "price": "325",
+          "priceCurrency": "EUR",
+          "description": "Fixed price per vehicle for up to 4 passengers departing 07:00–22:00.",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Private transfer Munich Airport to Salzburg",
+            "serviceType": "Airport transfer",
+            "@id": "https://ridetoalps.com/routes/salzburg.html#service"
+          },
+          "url": "https://ridetoalps.com/routes/salzburg.html",
+          "eligibleQuantity": {
+            "@type": "QuantitativeValue",
+            "minValue": 1,
+            "maxValue": 4,
+            "unitText": "passenger"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Munich Airport → Innsbruck",
+          "price": "350",
+          "priceCurrency": "EUR",
+          "description": "Fixed price per vehicle for up to 4 passengers departing 07:00–22:00.",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Private transfer Munich Airport to Innsbruck",
+            "serviceType": "Airport transfer",
+            "@id": "https://ridetoalps.com/routes/innsbruck.html#service"
+          },
+          "url": "https://ridetoalps.com/routes/innsbruck.html",
+          "eligibleQuantity": {
+            "@type": "QuantitativeValue",
+            "minValue": 1,
+            "maxValue": 4,
+            "unitText": "passenger"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Munich Airport → Ischgl",
+          "price": "400",
+          "priceCurrency": "EUR",
+          "description": "Fixed price per vehicle for up to 4 passengers departing 07:00–22:00.",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Private transfer Munich Airport to Ischgl",
+            "serviceType": "Airport transfer",
+            "@id": "https://ridetoalps.com/routes/ischgl.html#service"
+          },
+          "url": "https://ridetoalps.com/routes/ischgl.html",
+          "eligibleQuantity": {
+            "@type": "QuantitativeValue",
+            "minValue": 1,
+            "maxValue": 4,
+            "unitText": "passenger"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Munich Airport → Sölden",
+          "price": "450",
+          "priceCurrency": "EUR",
+          "description": "Fixed price per vehicle for up to 4 passengers departing 07:00–22:00.",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Private transfer Munich Airport to Sölden",
+            "serviceType": "Airport transfer",
+            "@id": "https://ridetoalps.com/routes/soelden.html#service"
+          },
+          "url": "https://ridetoalps.com/routes/soelden.html",
+          "eligibleQuantity": {
+            "@type": "QuantitativeValue",
+            "minValue": 1,
+            "maxValue": 4,
+            "unitText": "passenger"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Munich Airport → St. Anton am Arlberg",
+          "price": "500",
+          "priceCurrency": "EUR",
+          "description": "Fixed price per vehicle for up to 4 passengers departing 07:00–22:00.",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Private transfer Munich Airport to St. Anton am Arlberg",
+            "serviceType": "Airport transfer",
+            "@id": "https://ridetoalps.com/routes/st-anton.html#service"
+          },
+          "url": "https://ridetoalps.com/routes/st-anton.html",
+          "eligibleQuantity": {
+            "@type": "QuantitativeValue",
+            "minValue": 1,
+            "maxValue": 4,
+            "unitText": "passenger"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Munich Airport → St. Moritz",
+          "price": "550",
+          "priceCurrency": "EUR",
+          "description": "Fixed price per vehicle for up to 4 passengers departing 07:00–22:00.",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Private transfer Munich Airport to St. Moritz",
+            "serviceType": "Airport transfer",
+            "@id": "https://ridetoalps.com/routes/st-moritz.html#service"
+          },
+          "url": "https://ridetoalps.com/routes/st-moritz.html",
+          "eligibleQuantity": {
+            "@type": "QuantitativeValue",
+            "minValue": 1,
+            "maxValue": 4,
+            "unitText": "passenger"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Munich Airport → Bolzano region",
+          "price": "550",
+          "priceCurrency": "EUR",
+          "description": "Fixed price per vehicle for up to 4 passengers departing 07:00–22:00.",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Private transfer Munich Airport to Bolzano region",
+            "serviceType": "Airport transfer",
+            "@id": "https://ridetoalps.com/routes/bolzano.html#service"
+          },
+          "url": "https://ridetoalps.com/routes/bolzano.html",
+          "eligibleQuantity": {
+            "@type": "QuantitativeValue",
+            "minValue": 1,
+            "maxValue": 4,
+            "unitText": "passenger"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Munich Airport → Bormio / Livigno",
+          "price": "550",
+          "priceCurrency": "EUR",
+          "description": "Fixed price per vehicle for up to 4 passengers departing 07:00–22:00.",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Private transfer Munich Airport to Bormio / Livigno",
+            "serviceType": "Airport transfer",
+            "@id": "https://ridetoalps.com/routes/bormio-livigno.html#service"
+          },
+          "url": "https://ridetoalps.com/routes/bormio-livigno.html",
+          "eligibleQuantity": {
+            "@type": "QuantitativeValue",
+            "minValue": 1,
+            "maxValue": 4,
+            "unitText": "passenger"
+          }
+        }
+      ],
+      "availableLanguage": [
+        {
+          "@type": "Language",
+          "name": "English",
+          "alternateName": "en"
+        },
+        {
+          "@type": "Language",
+          "name": "German",
+          "alternateName": "de"
+        },
+        {
+          "@type": "Language",
+          "name": "Russian",
+          "alternateName": "ru"
+        },
+        {
+          "@type": "Language",
+          "name": "Ukrainian",
+          "alternateName": "uk"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://ridetoalps.com/#service",
+      "name": "Munich Airport to Alps private transfer",
+      "serviceType": "Private airport transfer",
+      "provider": {
+        "@id": "https://ridetoalps.com/#business"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Bavaria, Tyrol, Salzburgerland, Engadin, South Tyrol"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Transfer routes from Munich Airport",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "name": "Munich Airport → Munich city / hotel",
+            "price": "100",
+            "priceCurrency": "EUR",
+            "url": "https://ridetoalps.com/routes/munich-city.html"
+          },
+          {
+            "@type": "Offer",
+            "name": "Munich Airport → Kitzbühel",
+            "price": "300",
+            "priceCurrency": "EUR",
+            "url": "https://ridetoalps.com/routes/kitzbuehel.html"
+          },
+          {
+            "@type": "Offer",
+            "name": "Munich Airport → Salzburg",
+            "price": "325",
+            "priceCurrency": "EUR",
+            "url": "https://ridetoalps.com/routes/salzburg.html"
+          },
+          {
+            "@type": "Offer",
+            "name": "Munich Airport → Innsbruck",
+            "price": "350",
+            "priceCurrency": "EUR",
+            "url": "https://ridetoalps.com/routes/innsbruck.html"
+          },
+          {
+            "@type": "Offer",
+            "name": "Munich Airport → Ischgl",
+            "price": "400",
+            "priceCurrency": "EUR",
+            "url": "https://ridetoalps.com/routes/ischgl.html"
+          },
+          {
+            "@type": "Offer",
+            "name": "Munich Airport → Sölden",
+            "price": "450",
+            "priceCurrency": "EUR",
+            "url": "https://ridetoalps.com/routes/soelden.html"
+          },
+          {
+            "@type": "Offer",
+            "name": "Munich Airport → St. Anton am Arlberg",
+            "price": "500",
+            "priceCurrency": "EUR",
+            "url": "https://ridetoalps.com/routes/st-anton.html"
+          },
+          {
+            "@type": "Offer",
+            "name": "Munich Airport → St. Moritz",
+            "price": "550",
+            "priceCurrency": "EUR",
+            "url": "https://ridetoalps.com/routes/st-moritz.html"
+          },
+          {
+            "@type": "Offer",
+            "name": "Munich Airport → Bolzano region",
+            "price": "550",
+            "priceCurrency": "EUR",
+            "url": "https://ridetoalps.com/routes/bolzano.html"
+          },
+          {
+            "@type": "Offer",
+            "name": "Munich Airport → Bormio / Livigno",
+            "price": "550",
+            "priceCurrency": "EUR",
+            "url": "https://ridetoalps.com/routes/bormio-livigno.html"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://ridetoalps.com/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What happens if my flight is delayed?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nothing to worry about. We track your flight and wait for the actual landing time rather than the scheduled one. There is no extra waiting fee."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does payment work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You pay a €30 or $35 deposit to confirm the booking. The balance is paid only after the ride is completed — cash or card with the driver, or online."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I cancel or move my transfer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Cancel at least 48 hours before the booked date and the deposit is refunded in full. Later than that, the deposit is non-refundable."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many passengers and how much luggage fit in one car?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A Mercedes V-Class comfortably takes 5 to 7 passengers. Larger groups travel in several cars. Per passenger we plan for one cabin bag and one standard suitcase, plus sports luggage — one ski or board bag per two people. Many of our cars carry roof boxes for long bags; tell us in advance if your luggage is unusual so we can assign the right vehicle."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where does the driver meet us at the airport?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In the arrivals hall, holding a sign with your name. You are in touch with us on WhatsApp or by phone from the moment your plane lands."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which languages do the drivers speak?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "English and German fluently. Ukrainian and Russian are available on request."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can we stop on the way for fuel, a coffee or a photo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, short stops along the route are included — just tell the driver. Additional pick-up or drop-off points are arranged and priced separately at booking."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are child seats available?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, on request when you book. Let us know the child's age and weight so we can fit the correct seat."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What about night or very early morning transfers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We drive 24/7. Departures before 07:00 or after 22:00 are charged at the night rate, which the calculator applies automatically."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can we travel with a pet?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, with advance notice so we can prepare the vehicle."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there Wi-Fi and charging in the car?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes — Wi-Fi and USB charging are available on board."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is a private operator as safe as a large company?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We are a licensed carrier with fully prepared and insured vehicles and professional drivers who know these routes and have driven them many times."
+          }
+        }
+      ]
+    }
+  ]
+}

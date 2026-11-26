@@ -1,0 +1,64 @@
+D5 — ЗОБРАЖЕННЯ ТА МОБІЛЬНА ВЕРСІЯ
+Перевірено 67 HTML-сторінок у збірці
+Знято: 2026-11-26 12:59 UTC
+======================================================================
+
+СУЧАСНІ ФОРМАТИ (WebP / AVIF)
+----------------------------------------------------------------------
+  Кожне фото віддається через <picture> з трьома варіантами. Браузер
+  бере перший, який розуміє: AVIF → WebP → JPEG як запас.
+
+  блоків <picture> з варіантом AVIF : 616
+  блоків <picture> з варіантом WebP : 616
+  блоків лише з JPEG                : 0
+
+  Приклад — герой сторінки /routes/kitzbuehel.html:
+    <picture>
+    ><source type="image/avif" sizes="100vw" srcset="/images/routes/hero-kitzbuehel-768.avif 768w, /images/routes/hero-kitzbuehel-1100.avif 1100w, /images/routes/hero-kitzbuehel.avif 1376w">
+    ><source type="image/webp" sizes="100vw" srcset="/images/routes/hero-kitzbuehel-768.webp 768w, /images/routes/hero-kitzbuehel-1100.webp 1100w, /images/routes/hero-kitzbuehel.webp 1376w">
+    ><img src="/images/routes/hero-kitzbuehel-1100.jpg" sizes="100vw" srcset="/images/routes/hero-kitzbuehel-768.jpg 768w, /images/routes/hero-kitzbuehel-1100.jpg 1100w, /images/routes/hero-kitzbuehel.jpg 1376w" alt="Mercedes V-Class on the snowy approach road into Kitzbühel" fetchpriority="high" width="1600" height="900">
+    ></picture>
+
+АДАПТИВНІ РОЗМІРИ (srcset + sizes)
+----------------------------------------------------------------------
+  <img> із srcset: 272 із 616
+
+  Телефону не віддається фото на 1376 px, яке він покаже на 412 px.
+  Кожен герой має три ширини, і браузер вибирає за sizes="100vw":
+
+  Приклад preload-а героя (він же LCP-елемент сторінки):
+    <link rel="preload" as="image" type="image/avif" fetchpriority="high" imagesizes="100vw" imagesrcset="/images/routes/hero-kitzbuehel-768.avif 768w, /images/routes/hero-kitzbuehel-1100.avif 1100w, /images/routes/hero-kitzbuehel.avif 1376w">
+
+  fetchpriority="high" + preload означають, що браузер знаходить
+  головне фото ще до того, як дочитає сторінку, а imagesrcset у preload
+  повторює srcset картинки — інакше завантажилася б не та ширина.
+
+ВІДКЛАДЕНЕ ЗАВАНТАЖЕННЯ
+----------------------------------------------------------------------
+  loading="lazy"          : 552
+  без lazy (вище згину)   : 64
+  Герой кожної сторінки свідомо завантажується одразу: lazy на LCP-
+  елементі навпаки сповільнює показ.
+
+ТЕКСТОВІ ОПИСИ (alt)
+----------------------------------------------------------------------
+  зі змістовним alt      : 564
+  декоративні (alt="")   : 52   — читалка їх пропускає, так і треба
+  БЕЗ атрибута alt       : 0
+  Жодного <img> без alt немає.
+
+РОЗМІРИ У РОЗМІТЦІ (проти стрибків верстки)
+----------------------------------------------------------------------
+  <img> без width/height : 0
+  У кожного <img> вказані width і height, тому місце під фото
+  зарезервоване заздалегідь. Це й дає CLS = 0,000 на всіх сторінках.
+
+======================================================================
+ВАГА ФАЙЛІВ — що зекономили адаптивні ширини
+======================================================================
+  герой маршруту     85 KB →   34 KB   (на телефоні)
+  фото міста        137 KB →   36 KB   (на телефоні)
+  фон CTA            89 KB →   38 KB   (на телефоні)
+
+  Для порівняння, той самий герой у JPEG: 228 KB.
+  AVIF дає 85 KB при тій самій картинці.

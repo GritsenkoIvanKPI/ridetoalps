@@ -1,0 +1,66 @@
+D1 — редиректи ridetoalps.com
+Знято: 2026-11-26 12:25 UTC
+============================================================
+
+------------------------------------------------------------
+Старт: http://ridetoalps.com/
+хопів: 1
+фінальний URL: https://ridetoalps.com/
+фінальний код: 200
+
+ланцюжок:
+   HTTP/1.1 301 Moved Permanently
+   Location: https://ridetoalps.com/
+   HTTP/1.1 200 OK
+
+------------------------------------------------------------
+Старт: http://www.ridetoalps.com/
+хопів: 1
+фінальний URL: https://www.ridetoalps.com/
+фінальний код: 200
+
+ланцюжок:
+   HTTP/1.1 301 Moved Permanently
+   Location: https://www.ridetoalps.com/
+   HTTP/1.1 200 OK
+
+------------------------------------------------------------
+Старт: https://www.ridetoalps.com/
+хопів: 0
+фінальний URL: https://www.ridetoalps.com/
+фінальний код: 200
+
+ланцюжок:
+   HTTP/1.1 200 OK
+
+------------------------------------------------------------
+Старт: https://ridetoalps.com/
+хопів: 0
+фінальний URL: https://ridetoalps.com/
+фінальний код: 200
+
+ланцюжок:
+   HTTP/1.1 200 OK
+
+------------------------------------------------------------
+Старт: http://ridetoalps.com/routes/kitzbuehel.html
+хопів: 1
+фінальний URL: https://ridetoalps.com/routes/kitzbuehel.html
+фінальний код: 200
+
+ланцюжок:
+   HTTP/1.1 301 Moved Permanently
+   Location: https://ridetoalps.com/routes/kitzbuehel.html
+   HTTP/1.1 200 OK
+
+------------------------------------------------------------
+Старт: https://ridetoalps.com/de
+хопів: 1
+фінальний URL: https://ridetoalps.com/de/
+фінальний код: 200
+
+ланцюжок:
+   HTTP/1.1 301 Moved Permanently
+   Location: https://ridetoalps.com/de/
+   HTTP/1.1 200 OK
+
