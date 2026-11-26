@@ -1,11 +1,9 @@
 ПЕРЕВІРКА ВСІХ АДРЕС ІЗ SITEMAP НА ОПУБЛІКОВАНОМУ ДОМЕНІ
-Знято: 2026-11-26 13:31 UTC
+Знято: 2026-11-26 14:17 UTC
 ==================================================================
 
 адрес у sitemap.xml: 67
-віддають 200       : 64
-НЕ віддають 200    : 3
+віддають 200       : 67
+НЕ віддають 200    : 0
 
-404   https://ridetoalps.com/blog/munich-airport-to-alps-transport-options.html
-404   https://ridetoalps.com/blog/munich-airport-ski-luggage-arrivals.html
-404   https://ridetoalps.com/blog/alpine-winter-driving-vignettes-chains.html
+Усі адреси доступні.

@@ -43,10 +43,35 @@ for (const page of PAGES) {
   if (!res.ok) { console.log(`PAGE ${res.status} ${page}`); broken++; continue; }
   const html = await res.text();
 
-  // every local reference
+  /* Every local reference, including the relative ones and the ones inside
+     CSS. Only root-absolute paths were checked before, which left two blind
+     spots that turned out to matter: a relative path resolves against the
+     page, so the same stylesheet inlined at / and at /routes/ asks for two
+     different files — that is how the webfonts came to 404 on every page
+     below the root — and url() in an inline <style> was never looked at. */
   const refs = new Set();
-  for (const m of html.matchAll(/(?:src|href)="(\/[^"#?]*)"/g)) refs.add(m[1]);
-  for (const m of html.matchAll(/srcset="(\/[^"]+)"/g)) refs.add(m[1].split(/\s|,/)[0]);
+  const add = (raw) => {
+    if (!raw) return;
+    if (/^(https?:|data:|mailto:|tel:|#|%23|\/\/)/i.test(raw)) return;
+    const clean = raw.split("#")[0].split("?")[0].trim();
+    if (!clean) return;
+    refs.add(clean.startsWith("/") ? clean : new URL(clean, "http://h" + page).pathname);
+  };
+  /* Scan the markup with script bodies removed — a quoted string inside
+     JavaScript that happens to follow href= is code, not a reference. The
+     opening tag is kept so <script src=".."> is still checked. */
+  const markup = html.replace(/(<script\b[^>]*>)[\s\S]*?<\/script>/g, "$1<\/script>");
+  for (const m of markup.matchAll(/(?:src|href)="([^"]*)"/g)) add(m[1]);
+  for (const m of markup.matchAll(/srcset="([^"]+)"/g))
+    for (const part of m[1].split(",")) add(part.trim().split(/\s+/)[0]);
+  /* url() only from CSS. Scanning the whole document also matched 'url('
+     inside script bodies, which is JavaScript, not a reference. */
+  const css = [...html.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)].map((m) => m[1]).join("\n")
+    /* Drop data: URIs whole. The grain texture is an inline SVG that contains
+       filter='url(%23n)' — a fragment pointing inside that same SVG, which
+       read from outside looks like a file called %23n that nobody has. */
+    .replace(/["']data:[^"']*["']/g, '""');
+  for (const m of css.matchAll(/url\(\s*['"]?([^'")]+)['"]?\s*\)/g)) add(m[1]);
   for (const r of refs) {
     if (/\.(php)$/.test(r)) continue;          // served by Apache, not by serve.mjs
     const s = await head(r.endsWith('/') ? r + 'index.html' : r);

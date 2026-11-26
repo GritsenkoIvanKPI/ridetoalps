@@ -1,5 +1,5 @@
 D8 — СТРУКТУРОВАНА РОЗМІТКА (JSON-LD / Schema.org)
-Знято: 2026-11-26 13:30 UTC
+Знято: 2026-11-26 14:17 UTC
 ======================================================================
 
 Розмітка розбирається як JSON, а не шукається регулярним виразом.
@@ -7,7 +7,7 @@ D8 — СТРУКТУРОВАНА РОЗМІТКА (JSON-LD / Schema.org)
 LimousineService, LocalBusiness і Organization, і це коректно.
 
 ######################################################################
-# ОПУБЛІКОВАНИЙ ДОМЕН  —  https://ridetoalps.com
+# ВКАЗАНЕ ДЖЕРЕЛО  —  https://ridetoalps.com
 ######################################################################
 
 ----------------------------------------------------------------------
@@ -16,7 +16,7 @@ LimousineService, LocalBusiness і Organization, і це коректно.
     блоків JSON-LD: 1, синтаксис коректний
     сутності верхнього рівня:
       WebSite                                             https://ridetoalps.com/#website
-      LimousineService + LocalBusiness                    https://ridetoalps.com/#business
+      TaxiService + LimousineService + LocalBusiness + Organizationhttps://ridetoalps.com/#business
       Service                                             https://ridetoalps.com/#service
       FAQPage                                             https://ridetoalps.com/#faq
     Offer: price=100 EUR
@@ -67,91 +67,8 @@ LimousineService, LocalBusiness і Organization, і це коректно.
       BreadcrumbList                                      
     BreadcrumbList: рівнів — 2
 
-  /blog/munich-airport-to-alps-transport-options.html → HTTP 404
-
-  ==================================================================
-  ЗВЕДЕННЯ ПО ДЖЕРЕЛУ
-  ==================================================================
-  ! TaxiService     НЕМАЄ ЖОДНОЇ СТОРІНКИ
-      тип послуги, який Google розуміє як перевезення
-  ! Organization    НЕМАЄ ЖОДНОЇ СТОРІНКИ
-      сам бізнес: назва, контакти, зона обслуговування
-  + LocalBusiness   homepage
-      адреса і години роботи
-  + Service         homepage, kitzbuehel, salzburg, innsbruck
-      конкретний трансфер
-  + Offer           homepage, kitzbuehel, salzburg, innsbruck
-      ціна і валюта
-  + FAQPage         homepage, kitzbuehel, salzburg, innsbruck
-      питання та відповіді
-  + BreadcrumbList  kitzbuehel, salzburg, innsbruck, blog
-      ланцюжок навігації
-  + WebSite         homepage
-      сайт як ціле
-
-######################################################################
-# ПОТОЧНА ЗБІРКА  —  http://localhost:3010
-######################################################################
-
 ----------------------------------------------------------------------
-  http://localhost:3010/
-----------------------------------------------------------------------
-    блоків JSON-LD: 1, синтаксис коректний
-    сутності верхнього рівня:
-      WebSite                                             https://ridetoalps.com/#website
-      TaxiService + LimousineService + LocalBusiness + Organizationhttps://ridetoalps.com/#business
-      Service                                             https://ridetoalps.com/#service
-      FAQPage                                             https://ridetoalps.com/#faq
-    Offer: price=100 EUR
-    FAQPage: питань — 12
-
-----------------------------------------------------------------------
-  http://localhost:3010/routes/kitzbuehel.html
-----------------------------------------------------------------------
-    блоків JSON-LD: 1, синтаксис коректний
-    сутності верхнього рівня:
-      Service                                             https://ridetoalps.com/routes/kitzbuehel.html#service
-      FAQPage                                             
-      BreadcrumbList                                      
-    Offer: price=300 EUR
-    FAQPage: питань — 5
-    BreadcrumbList: рівнів — 3
-
-----------------------------------------------------------------------
-  http://localhost:3010/routes/salzburg.html
-----------------------------------------------------------------------
-    блоків JSON-LD: 1, синтаксис коректний
-    сутності верхнього рівня:
-      Service                                             https://ridetoalps.com/routes/salzburg.html#service
-      FAQPage                                             
-      BreadcrumbList                                      
-    Offer: price=325 EUR
-    FAQPage: питань — 4
-    BreadcrumbList: рівнів — 3
-
-----------------------------------------------------------------------
-  http://localhost:3010/routes/innsbruck.html
-----------------------------------------------------------------------
-    блоків JSON-LD: 1, синтаксис коректний
-    сутності верхнього рівня:
-      Service                                             https://ridetoalps.com/routes/innsbruck.html#service
-      FAQPage                                             
-      BreadcrumbList                                      
-    Offer: price=350 EUR
-    FAQPage: питань — 4
-    BreadcrumbList: рівнів — 3
-
-----------------------------------------------------------------------
-  http://localhost:3010/blog.html
-----------------------------------------------------------------------
-    блоків JSON-LD: 1, синтаксис коректний
-    сутності верхнього рівня:
-      Blog                                                https://ridetoalps.com/blog.html#blog
-      BreadcrumbList                                      
-    BreadcrumbList: рівнів — 2
-
-----------------------------------------------------------------------
-  http://localhost:3010/blog/munich-airport-to-alps-transport-options.html
+  https://ridetoalps.com/blog/munich-airport-to-alps-transport-options.html
 ----------------------------------------------------------------------
     блоків JSON-LD: 1, синтаксис коректний
     сутності верхнього рівня:
@@ -182,7 +99,7 @@ LimousineService, LocalBusiness і Organization, і це коректно.
       сайт як ціле
 
 ======================================================================
-3 зауваження — див. вище
+Зауважень немає.
 
 Перевірити незалежно можна тут:
   https://search.google.com/test/rich-results?url=https://ridetoalps.com/
