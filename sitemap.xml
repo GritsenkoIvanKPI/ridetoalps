@@ -714,22 +714,4 @@
       <xhtml:link rel="alternate" hreflang="uk" href="https://ridetoalps.com/uk/blog/alpine-winter-driving-vignettes-chains.html"/>
       <xhtml:link rel="alternate" hreflang="x-default" href="https://ridetoalps.com/blog/alpine-winter-driving-vignettes-chains.html"/>
   </url>
-  <url>
-    <loc>https://ridetoalps.com/impressum.html</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://ridetoalps.com/datenschutz.html</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://ridetoalps.com/agb.html</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
 </urlset>

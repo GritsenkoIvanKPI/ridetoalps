@@ -26,12 +26,18 @@ const PAGES = [
   ...ARTICLES.map(a => ({ page: `blog/${a.slug}.html`, priority: '0.6', freq: 'yearly' })),
 ];
 
-/* Not translated, so they appear once with no alternates. */
-const SINGLE = [
-  { loc: '/impressum.html',   priority: '0.3', freq: 'yearly' },
-  { loc: '/datenschutz.html', priority: '0.3', freq: 'yearly' },
-  { loc: '/agb.html',         priority: '0.3', freq: 'yearly' },
-];
+/* The three German legal pages are deliberately NOT here.
+ *
+ * They carry <meta name="robots" content="noindex, follow">, which is right —
+ * an Impressum has no business in search results — but listing a noindex page
+ * in the sitemap asks Google to index exactly what the page forbids. Search
+ * Console reports that contradiction back as "Indexing blocked by noindex
+ * tag" and mails the owner about it, which is how this was noticed.
+ *
+ * They stay reachable: every footer links to them, and "follow" means the
+ * links on them still count. A sitemap is a request to index, and for these
+ * pages that request should never have been made. */
+const SINGLE = [];
 
 const HERO_IMAGES = {
   'index.html': [

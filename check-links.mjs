@@ -35,7 +35,7 @@ async function head(u) {
   return r.status;
 }
 
-let broken = 0, checked = 0, hreflangIssues = 0;
+let broken = 0, checked = 0, hreflangIssues = 0, noindexPages = 0;
 const seenAlternates = new Map();
 
 for (const page of PAGES) {
@@ -84,7 +84,12 @@ for (const page of PAGES) {
     .map(m => [m[1], m[2]]);
   const codes = alts.map(a => a[0]).sort().join(',');
   const want = [...LANGS.map(l => l.code), 'x-default'].sort().join(',');
-  if (codes !== want) { console.log(`  HREFLANG ${page}: ${codes || '(none)'}`); hreflangIssues++; }
+  /* A noindex page is not asking to rank anywhere, so it has no alternates to
+     declare and needs none. The three German legal pages are the only ones,
+     and reporting them every run buries a real hreflang fault in noise. */
+  const noindex = /<meta[^>]+name="robots"[^>]+content="[^"]*noindex/i.test(html);
+  if (codes !== want && !noindex) { console.log(`  HREFLANG ${page}: ${codes || '(none)'}`); hreflangIssues++; }
+  if (noindex) noindexPages++;
   for (const [code, href] of alts) {
     const p = href.replace('https://ridetoalps.com', '');
     const s = await head(p.endsWith('/') ? p + 'index.html' : p);
@@ -139,4 +144,4 @@ let headerDrift = 0;
   }
 }
 
-console.log(`\npages: ${PAGES.length}   references checked: ${checked}   broken: ${broken}   hreflang problems: ${hreflangIssues}   unlinked routes: ${unlinked}   header drift: ${headerDrift}`);
+console.log(`\npages: ${PAGES.length}   references checked: ${checked}   broken: ${broken}   hreflang problems: ${hreflangIssues}   noindex (by design): ${noindexPages}   unlinked routes: ${unlinked}   header drift: ${headerDrift}`);
