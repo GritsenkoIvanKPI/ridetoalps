@@ -41,7 +41,8 @@ const NEVER_UPLOAD = [
   'routes.data.mjs', 'build-routes.mjs', 'build-routes-index.mjs',
   'build-i18n.mjs', 'build-sitemap.mjs', 'build.mjs', 'build-llms.mjs',
   'build-blog.mjs', 'blog.data.mjs',
-  'check-links.mjs', 'check-layout.mjs', 'check-grid.mjs',
+  'check-links.mjs', 'check-layout.mjs', 'check-grid.mjs', 'check-consent.mjs',
+  'build-update.mjs',
   'Інструкція — перевірка оплат ridetoalps.docx',
   'htaccess.txt',
 ];

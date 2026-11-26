@@ -27,3 +27,7 @@ deploy.zip
 # client-facing operations document (payment checking): business detail,
 # kept out of this PUBLIC repo. Remove this line to publish it.
 Інструкція — перевірка оплат ridetoalps.docx
+
+# upload bundles — regenerate with build-deploy.mjs; never source
+update/
+update.zip
